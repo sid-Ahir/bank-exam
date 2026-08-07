@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16. Basel Norms, PCA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(in-range) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    16. Basel Norms, PCA
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 BASEL NORMS & INSTITUTIONAL BACKGROUND</span>
+        <p><strong>Bank for International Settlements (BIS)</strong> એ વિશ્વની સૌથી જૂની આંતરરાષ્ટ્રીય નાણાકીય સંસ્થા છે, જેની સ્થાપના વર્ષ <strong>1930</strong> માં થઈ હતી. આ સંસ્થાના મુખ્ય મથક (Headquarters) <strong>Basel, Switzerland</strong> ખાતે આવેલા છે.</p>
+        <p>બેન્કિંગ સેક્ટરમાં વૈશ્વિક સ્તરે સુરક્ષા, સ્થિરતા અને એકસમાન ધોરણો જાળવવા માટે બેઝલ શહેરમાં <strong>BCBS (Basel Committee on Banking Supervision)</strong> ની રચના વર્ષ <strong>1974</strong> માં કરવામાં આવી હતી. આ કમિટી દ્વારા બેંકોના જોખમોને પહોંચી વળવા માટે જે માર્ગદર્શિકા બહાર પાડવામાં આવે છે તેને <strong>Basel Norms</strong> કહેવામાં આવે છે.</p>
+    </div>
+
+    <h2 class="section-title">Overview of Basel Accords (બેઝલ કરારો)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Accord</th>
+                <th>Introduction Year</th>
+                <th>Adopted by India in</th>
+                <th>Core Focus / Key Features</th>
+            </tr>
+            <tr>
+                <td><strong>Basel I</strong></td>
+                <td>1988</td>
+                <td>1999</td>
+                <td>માત્ર <strong>Credit Risk</strong> પર ધ્યાન કેન્દ્રિત કરવામાં આવ્યું. ન્યૂનતમ કેપિટલ રિક્વાયરમેન્ટ (CAR/CRAR) ઓછામાં ઓછી <strong>8%</strong> નક્કી કરવામાં આવી.</td>
+            </tr>
+            <tr>
+                <td><strong>Basel II</strong></td>
+                <td>2004</td>
+                <td>2009</td>
+                <td><strong>Three Pillars</strong> પર આધારિત: (1) Minimum Capital Requirements, (2) Supervisory Review Process, (3) Market Discipline. ક્રેડિટ ર ઉપરાંત <strong>Operational Risk</strong> અને <strong>Market Risk</strong> નો સમાવેશ થયો.</td>
+            </tr>
+            <tr>
+                <td><strong>Basel III</strong></td>
+                <td>2010</td>
+                <td>Phased implementation (AIFIs target extended to March 2026)</td>
+                <td>2008 ના ફાઇનાન્શિયલ ક્રાઇસીસ પછી બેંકોને વધુ રિઝિલિયન્ટ (Resilient) બનાવવા ચાર મુખ્ય પેરામીટર્સ (Capital, Leverage, Funding, Liquidity) રજૂ થયા.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Capital Adequacy Ratio (CAR / CRAR) & Components</h2>
+    <div class="card card-important">
+        <span class="tag tag-must-remember">🔴 CAPITAL STRUCTURE & FORMULA</span>
+        <p><strong>CAR (Capital Adequacy Ratio)</strong> એટલે કે બેંક પાસે તેના જોખમી અસેટ્સ (Risk-Weighted Assets - RWA) સામે ઉપલબ્ધ પર્યાપ્ત મૂડીનું પ્રમાણ. આ રેશિયો બેંકની નાણાકીય મજબૂતાઈ દર્શાવે છે.</p>
+        <div style="background-color: #eff6ff; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: center; font-weight: 600; color: var(--primary);">
+            $$\text{CAR (CRAR)} = \frac{\text{Tier 1 Capital} + \text{Tier 2 Capital}}{\text{Risk-Weighted Assets (RWA)}} \times 100$$
+        </div>
+        <ul>
+            <li><strong>Tier 1 Capital (Core Capital):</strong> બેંકની હાઇ-ક્વાલિટી અને સૌથી સુરક્ષિત મૂડી (જેમ કે Paid-up Capital, Statutory Reserves, Equity). તેમાં CET1 (Common Equity Tier 1) નો પણ સમાવેશ થાય છે.</li>
+            <li><strong>Tier 2 Capital (Supplementary Capital):</strong> પૂરક મૂડી (જેમ કે Revaluation Reserves, Unclosed Reserves, Long-term Unsecured Loans).</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Basel III Key Parameters & Requirements</h2>
+    <div class="card card-concept">
+        <p>બેઝલ III નોર્મ્સ હેઠળ બેંકો માટે નીચે મુજબના કડક ધોરણો દાખલ કરવામાં આવ્યા:</p>
+        <ul>
+            <li><strong>Minimum Capital Requirements:</strong> કુલ કેપિટલ રેશિયો <strong>10.5%</strong> (જેમાં CET1 Capital @ 4.5% અને Tier 1 Capital @ 6% તથા Tier 2 Capital @ 2% નો સમાવેશ થાય છે).</li>
+            <li><strong>Capital Conservation Buffer (CCB):</strong> વધારાનું <strong>2.5%</strong> બફર જાળવવું ફરજિયાત છે.</li>
+            <li><strong>Leverage Ratio:</strong> ઓછામાં ઓછું <strong>3%</strong> જાળવવું જરૂરી છે (Tier 1 Capital Divided by Average Total Consolidated Assets).</li>
+            <li><strong>Liquidity Coverage Ratio (LCR):</strong> 30 દિવસના સ્ટ્રેસ પિરિયડ માટે હાઇ-ક્વાલિટી લિક્વિડ એસેટ્સ (HQLA) જાળવવા, જે ઓછામાં ઓછા <strong>100%</strong> હોવા જોઈએ.</li>
+            <li><strong>Net Stable Funding Ratio (NSFR):</strong> મધ્યમ અને લાંબા ગાળા માટે સ્થિર ફંડિંગ સુનિશ્ચિત કરવા ન્યૂનતમ <strong>100%</strong> મેન્ટેન કરવું.</li>
+        </ul>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / QUICK REVISION</span>
+        <p><strong>Basel Timeline Trick:</strong><br>
+        - Basel I = 1988 (India adopted in 1999 - gap of 11 years).<br>
+        - Basel II = 2004 (India adopted in 2009 - gap of 5 years).<br>
+        - Basel III = 2010 (Post-2008 Financial Crisis).<br>
+        - Minimum CAR across Basel I & II = 8%.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. Bank for International Settlements (BIS) ની સ્થાપના કયા વર્ષમાં થઈ હતી?</p>
+        <ul class="mcq-options">
+            <li>A. 1930</li>
+            <li>B. 1945</li>
+            <li>C. 1974</li>
+            <li>D. 1988</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. 1930</strong><br>
+            Explanation: BIS ની સ્થાપના 1930 માં થઈ હતી અને તેના હેડક્વાર્ટર Basel, Switzerland ખાતે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. Basel Committee on Banking Supervision (BCBS) ની રચના કયા વર્ષમાં કરવામાં આવી હતી?</p>
+        <ul class="mcq-options">
+            <li>A. 1930</li>
+            <li>B. 1974</li>
+            <li>C. 1988</li>
+            <li>D. 2004</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 1974</strong><br>
+            Explanation: BCBS ની રચના 1974 માં સેન્ટ્રલ બેંકના ગવર્નરો દ્વારા કરવામાં આવી હતી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. બેઝલ-I (Basel I) ધોરણો કયા વર્ષમાં રજૂ કરવામાં આવ્યા હતા?</p>
+        <ul class="mcq-options">
+            <li>A. 1974</li>
+            <li>B. 1988</li>
+            <li>C. 2004</li>
+            <li>D. 2010</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 1988</strong><br>
+            Explanation: બેઝલ-I નોર્મ્સ 1988 માં આવ્યા હતા, જેને ભારતે 1999 માં અપનાવ્યા હતા.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. ભારતે બેઝલ-II (Basel II) નોર્મ્સ કયા વર્ષથી અપનાવવાની શરૂઆત કરી?</p>
+        <ul class="mcq-options">
+            <li>A. 1999</li>
+            <li>B. 2004</li>
+            <li>C. 2009</li>
+            <li>D. 2012</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 2009</strong><br>
+            Explanation: બેઝલ-II 2004 માં રજૂ થયા હતા, પરંતુ ભારતે તેને 2009 માં અપનાવ્યા હતા.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. બેઝલ-II (Basel II) નોર્મ્સ કેટલા પિલર્સ (Pillars) પર આધારિત છે?</p>
+        <ul class="mcq-options">
+            <li>A. 2 Pillars</li>
+            <li>B. 3 Pillars</li>
+            <li>C. 4 Pillars</li>
+            <li>D. 5 Pillars</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 3 Pillars</strong><br>
+            Explanation: Basel II ના ત્રણ પિલર્સ છે: Minimum Capital Requirements, Supervisory Review Process, અને Market Discipline.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. બેઝલ-I અને બેઝલ-II અંતર્ગત ન્યૂનતમ કેપિટલ એડિક्वસી રેશિયો (CAR) કેટલો નિર્ધારિત કરવામાં આવ્યો હતો?</p>
+        <ul class="mcq-options">
+            <li>A. 4%</li>
+            <li>B. 8%</li>
+            <li>C. 10.5%</li>
+            <li>D. 12%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 8%</strong><br>
+            Explanation: બેઝલ I અને II માં મિનિમમ CAR 8% નો રાખવામાં આવ્યો હતો.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. બેઝલ-III (Basel III) નોર્મ્સ કયા વૈશ્વિક આર્થિક સંકટ પછી પ્રસ્તાવિત કરવામાં આવ્યા?</p>
+        <ul class="mcq-options">
+            <li>A. Great Depression of 1930</li>
+            <li>B. 2008 Financial Crisis / Recession</li>
+            <li>C. 1991 Indian Balance of Payments Crisis</li>
+            <li>D. 2020 Pandemic</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 2008 Financial Crisis / Recession</strong><br>
+            Explanation: 2008 ના નાણાકીય સંકટ પછી બેંકોને વધુ મજબૂત બનાવવા 2010 માં Basel III લાવવામાં આવ્યા.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. બેઝલ-III હેઠળ Capital Conservation Buffer (CCB) કેટલા ટકા જાળવવાનું કહેવાયું છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1.0%</li>
+            <li>B. 2.5%</li>
+            <li>C. 3.0%</li>
+            <li>D. 8.0%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 2.5%</strong><br>
+            Explanation: બેઝલ III માં કેપિટલ કન્ઝર્વેશન બફર 2.5% રાખવાનું ફરજિયાત છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. બેઝલ-III હેઠળ લેવरेज રેશિયો (Leverage Ratio) ઓછામાં ઓછો કેટલો હોવો જોઈએ?</p>
+        <ul class="mcq-options">
+            <li>A. 2%</li>
+            <li>B. 3%</li>
+            <li>C. 6%</li>
+            <li>D. 8%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 3%</strong><br>
+            Explanation: બેઝલ III મુજબ લેવરેજ રેશિયો ઓછામાં ઓછો 3% હોવો જરૂરી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. લિક્વિડિટી કવરેજ રેશિયો (LCR) નો હેતુ કેટલા દિવસના સ્ટ્રેસ પિરિયડ માટે હાઇ-ક્વાલિટી લિક્વિડ એસેટ્સ જાળવવાનો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 7 Days</li>
+            <li>B. 14 Days</li>
+            <li>C. 30 Days</li>
+            <li>D. 365 Days</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 30 Days</strong><br>
+            Explanation: LCR એ 30 દિવસના શોર્ટ-ટર્મ સ્ટ્રેસ પિરિયડની લિક્વિડિટી જરૂરિયાતો પૂરી કરવા માટે છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
