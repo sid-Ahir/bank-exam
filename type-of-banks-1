@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Types Of Banks</title>
+<style>
+:root {
+--primary: #2563eb;
+--primary-light: #eff6ff;
+--secondary: #0d9488;
+--accent: #d97706;
+--danger: #dc2626;
+--success: #16a34a;
+--purple: #9333ea;
+--bg-main: #f8fafc;
+--bg-card: #ffffff;
+--text-main: #1e293b;
+--text-muted: #64748b;
+--border-color: #cbd5e1;
+}
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: var(--bg-main);
+color: var(--text-main);
+line-height: 1.6;
+padding: 20px;
+}
+.container {
+max-width: 1000px;
+margin: 0 auto;
+background: var(--bg-card);
+padding: 40px;
+border-radius: 16px;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+/* Header Style - STICKY */
+.main-header {
+position: sticky;
+top: 0;
+z-index: 1000;
+background-color: var(--bg-card);
+text-align: center;
+margin-bottom: 40px;
+padding: 20px 0;
+border-bottom: 3px solid var(--primary);
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+.main-header h1 {
+font-size: 36px;
+color: var(--primary);
+font-weight: 800;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+}
+/* Headings */
+h2 {
+font-size: 26px;
+color: #1e40af;
+margin-top: 35px;
+margin-bottom: 15px;
+padding-bottom: 8px;
+border-bottom: 2px solid #e2e8f0;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+h3 {
+font-size: 21px;
+color: #0f766e;
+margin-top: 25px;
+margin-bottom: 10px;
+}
+p, li {
+font-size: 18px;
+color: var(--text-main);
+margin-bottom: 12px;
+}
+ul, ol {
+margin-left: 25px;
+margin-bottom: 15px;
+}
+/* Highlight Boxes */
+.box {
+padding: 20px;
+border-radius: 10px;
+margin: 20px 0;
+font-size: 18px;
+border-left: 6px solid;
+}
+.box-must-remember {
+background-color: #fef2f2;
+border-color: var(--danger);
+color: #991b1b;
+}
+.box-important {
+background-color: #fffbeb;
+border-color: var(--accent);
+color: #92400e;
+}
+.box-concept {
+background-color: var(--primary-light);
+border-color: var(--primary);
+color: #1e40af;
+}
+.box-trick {
+background-color: #f3e8ff;
+border-color: var(--purple);
+color: #6b21a8;
+}
+.box-trap {
+background-color: #fff1f2;
+border-color: #e11d48;
+color: #881337;
+}
+.box-example {
+background-color: #f0fdf4;
+border-color: var(--success);
+color: #166534;
+}
+/* Tables */
+.table-container {
+width: 100%;
+overflow-x: auto;
+margin: 25px 0;
+}
+table {
+width: 100%;
+border-collapse: collapse;
+background: #ffffff;
+border-radius: 8px;
+overflow: hidden;
+border: 1px solid var(--border-color);
+}
+th, td {
+padding: 14px 18px;
+font-size: 18px;
+text-align: left;
+border-bottom: 1px solid var(--border-color);
+}
+th {
+background-color: var(--primary);
+color: white;
+font-weight: 700;
+}
+tr:nth-child(even) {
+background-color: #f8fafc;
+}
+/* Question & Answer Section */
+.question-card {
+background: #ffffff;
+border: 1px solid #e2e8f0;
+border-radius: 10px;
+padding: 20px;
+margin-bottom: 20px;
+box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+border-left: 5px solid var(--secondary);
+}
+.question-title {
+font-size: 19px;
+font-weight: 700;
+color: #0f172a;
+margin-bottom: 10px;
+}
+.answer-box {
+font-size: 18px;
+color: #334155;
+background: #f0fdf4;
+padding: 12px 15px;
+border-radius: 6px;
+margin-top: 10px;
+border-left: 4px solid var(--success);
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+.container {
+padding: 15px;
+}
+.main-header h1 {
+font-size: 28px;
+}
+h2 {
+font-size: 22px;
+}
+p, li, th, td {
+font-size: 17px;
+}
+}
+@media print {
+body {
+background: white;
+padding: 0;
+}
+.container {
+box-shadow: none;
+padding: 0;
+}
+.main-header {
+position: static;
+box-shadow: none;
+}
+.box, .question-card {
+break-inside: avoid;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<!-- HEADER -->
+<div class="main-header">
+<h1>Types Of Banks</h1>
+</div>
+<!-- SECTION 1: BANKING STRUCTURE & RBI -->
+<h2>🏦 ભારતીય બેંકિંગ સિસ્ટમ અને Regulator (RBI)</h2>
+<p>ભારતની સમગ્ર financial system નો મુખ્ય <b>Regulator</b> <b>Reserve Bank of India (RBI)</b> છે. RBI એ ભારતમાં તમામ બેંકોની આકા (નિયંત્રક) તરીકે કાર્ય કરે છે. બેંકોના સંચાલન માટે મુખ્ય કાયદો <b>RBI Act of 1934</b> છે.</p>
+<div class="box box-concept">
+<b>🔵 CONCEPT: બેંકોનું વર્ગીકરણ (Classification of Banks)</b>
+
+ભારતમાં બેંકોને મુખ્યત્વે બે ભાગમાં વહેંચવામાં આવે છે:
+<ul>
+<li><b>Scheduled Banks (શેડ્યુલ્ડ બેંક)</b></li>
+<li><b>Non-Scheduled Banks (નોન-શેડ્યુલ્ડ બેંક)</b></li>
+</ul>
+</div>
+<h3>1. Scheduled Banks (શેડ્યુલ્ડ બેંકો)</h3>
+<p>આ એ બેંકો છે જે <b>RBI Act of 1934</b> ના <b>Second Schedule</b> ની લિસ્ટમાં સામેલ છે. RBI આ બેંકોના ડિપોઝિટર્સ (Depositors) ના નાણાંની સુરક્ષાની ગેરંટી લે છે.</p>
+<ul>
+<li><b>લાભો:</b> આ બેંકોને RBI તરફથી <b>Clearing House Membership</b> મળે છે, Lenders of Last Resort ની સગવડ મળે છે અને તેઓ નિયમિતપણે RBI ને પોતાની Returns/Data સબમિટ કરે છે.</li>
+<li><b>મુખ્ય શરતો:</b> શરૂઆતમાં <b>5 લાખ રૂપિયા</b> ની reserve capital તથા RBI ના મતે જનતાના deposits સુરક્ષિત રાખવાની ક્ષમતા હોવી જરૂરી છે.</li>
+</ul>
+<h3>2. Non-Scheduled Banks (નોન-શેડ્યુલ્ડ બેંકો)</h3>
+<p>આ એ બેંકો છે જે RBI Act ના Second Schedule માં સામેલ નથી. RBI આ બેંકોની કોઈ ગેરંટી લેતું નથી કારણ કે તેમની financial health ઘણી નબળી હોય છે અને તેઓ depositors ના પૈસા સુરક્ષિત રાખવા માટે સક્ષમ હોતા નથી.</p>
+<!-- SECTION 2: COMMERCIAL BANKS & PUBLIC SECTOR BANKS -->
+<h2>🏢 Commercial Banks (વાણિજ્યિક બેંકો) અને Public Sector Banks</h2>
+<p><b>Commercial Banks</b> ની સ્થાપના Profit (નફો) કમાવાના હેતુથી કરવામાં આવે છે. આ બેંકો <b>Companies Act (અગાઉ 1956, હાલમાં 2013 Act)</b> હેઠળ નોંધાયેલ હોય છે.</p>
+<div class="box box-important">
+<b>🟠 IMPORTANT: Public Sector Banks in India</b>
+
+સંદર્ભ મુજબ ભારતમાં હાલમાં કુલ <b>12 Public Sector Banks (સરકારી બેંકો)</b> કાર્યરત છે. (જેમ કે State Bank of India (SBI), Punjab National Bank (PNB), Bank of Baroda, Canara Bank વગેરે).
+</div>
+<p><b>Largest Bank in India:</b> <b>State Bank of India (SBI)</b> એ ભારતની સૌથી મોટી બેંક છે (Public Sector અથવા Overall). Imperial Bank નું નામ બદલીને <b>1st July 1955</b> ના રોજ State Bank of India રાખવામાં આવ્યું હતું.</p>
+<!-- COMPARISON TABLE: SCHEDULED VS NON-SCHEDULED -->
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>મુદ્દો (Parameter)</th>
+<th>Scheduled Banks</th>
+<th>Non-Scheduled Banks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b>RBI Act Second Schedule</b></td>
+<td>સામેલ છે (Included)</td>
+<td>સામેલ નથી (Not Included)</td>
+</tr>
+<tr>
+<td><b>Clearing House Facility</b></td>
+<td>ઉપલબ્ધ છે</td>
+<td>ઉપલબ્ધ નથી</td>
+</tr>
+<tr>
+<td><b>Risk Factor</b></td>
+<td>ઓછું જોખમી (Less Risky)</td>
+<td>વધુ જોખમી (More Risky)</td>
+</tr>
+<tr>
+<td><b>RBI Support</b></td>
+<td>Lender of last resort ની મદદ મળે છે</td>
+<td>RBI તરફથી કોઈ ખાસ સહયોગ મળતો નથી</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- SECTION 3: REGIONAL RURAL BANKS (RRBs) -->
+<h2>🌾 Regional Rural Banks (RRBs - ક્ષેત્રીય ગ્રામીણ બેંક)</h2>
+<p>ગ્રાಮೀણ અને દૂરદરાજના વિસ્તારોમાં બેંકિંગ સેવાઓ પહોંચાડવા માટે <b>2nd October 1975</b> (ગાંધી જયંતી, રાષ્ટ્રીય કટોકટી/Emergency ના સમયગાળામાં) Regional Rural Banks ની શરૂઆત કરવામાં આવી હતી. આના માટે <b>RRB Act, 1976</b> પસાર કરવામાં આવ્યો હતો.</p>
+<ul>
+<li><b>પ્રથમ RRB:</b> <b>Prathama Grameen Bank</b> (મુરાદાબાદ, ઉત્તર પ્રદેશ), જેનું Sponsor Bank <b>Syndicate Bank</b> હતું.</li>
+<li><b>ઓનરશિપ સ્ટ્રક્ચર (Ownership Structure):</b>
+<ul>
+<li>Central Government (કેન્દ્ર સરકાર): <b>50%</b></li>
+<li>State Government (રાજ્ય સરકાર): <b>15%</b></li>
+<li>Sponsor Bank (પ્રાયोजक બેંક): <b>35%</b></li>
+</ul>
+</li>
+</ul>
+<div class="box box-trick">
+<b>🧠 MEMORY TRICK: પ્રથમ 5 RRBs યાદ રાખવાની રીત</b>
+
+શરૂઆતમાં 5 RRB આવ્યા હતા: Prathama (UP), Gaur (Malda, West Bengal), Gorakhpur (UP - Sponsored by SBI), Sarva Haryana Gramin Bank (Haryana - Sponsored by PNB), અને Jaipur Nagarik Grameen Bank (Rajasthan - Sponsored by SBI).
+
+<i>આ યાદ રાખવું કે Punjab & Sind Bank એકમાત્ર Public Sector Bank છે જે કોઈપણ RRB ને sponsor કરતી નથી, જ્યારે Jammu & Kashmir Bank એકમાત્ર Private Sector Bank છે જે RRB ને sponsor કરે છે.</i>
+</div>
+<h3>One State, One RRB Policy</h3>
+<p><b>1st May 2025</b> થી <b>One State One RRB Policy</b> લાગુ કરવામાં આવી છે. આ ચોથા તબક્કાના (Fourth Phase) merger અંતર્ગત RRB ની સંખ્યા 43 થી ઘટાડીને <b>28 RRBs</b> કરી દેવામાં આવી છે, જે 26 States અને 2 UTs માં ફેલાયેલ છે.</p>
+<p>આ 28 RRBs ની કુલ 22,000+ branches છે, જેમાંથી <b>92% branches</b> Rural અને Semi-Urban વિસ્તારોમાં કાર્યરત છે.</p>
+<!-- SECTION 4: COOPERATIVE BANKS -->
+<h2>🤝 Cooperative Banks (સહકારી બેંકો)</h2>
+<p>સહકારિતાના ધોરણે (Cooperative Model) કામ કરતી આ બેંકો સ્થાનિક ગ્રામીણ અને અર્બન સ્તરે નાણાકીય સેવાઓ પૂરી પાડે છે. (દા.ત. અમૂલ જેવો સહકારી માળકો - White Revolution ના પિતા <b>Dr. Verghese Kurien</b> દ્વારા 1970 માં દૂધ અને ડેરી પ્રોડક્ટ્સ માટે શરૂ કરાયેલ ક્રાંતિ).</p>
+<ul>
+<li><b>નિયમન (Regulation):</b> Cooperative Banks એ <b>Banking Regulation Act, 1949</b> તેમજ <b>Cooperative Societies Act (1912 / 1965)</b> બંને હેઠળ નોંધાયેલ હોય છે.</li>
+<li><b>બેવડું નિયંત્રણ (Dual Regulation):</b> આ બેંકોનું <b>Supervision & Inspection</b> <b>NABARD</b> કરે છે, જ્યારે <b>Licensing, Penalties & Mergers</b> નું નિયંત્રણ <b>RBI</b> કરે છે.</li>
+<li><b>માળખું (Structure):</b>
+<ul>
+<li><b>Rural Cooperative Structure:</b> State Cooperative Banks (StCBs), District Central Cooperative Banks (DCCBs), અને Primary Agriculture Credit Societies (PACS - વિલેજ લેવલ પર).</li>
+<li><b>Urban Cooperative Banks (UCBs):</b> શહેરી વિસ્તારોમાં કાર્યરત (Scheduled અને Non-Scheduled).</li>
+</ul>
+</li>
+</ul>
+<div class="box box-trap">
+<b>🟣 EXAM TRAP: Deposit Insurance</b>
+
+सहकारी બેંકો અથવા અન્ય બેંકોમાં ડિપોઝિટર્સ માટે <b>DICGC</b> (RBI ની Subsidiary) દ્વારા પ્રતિ depositor પ્રતિ bank મહત્તમ <b>₹5 Lakh</b> સુધીનું વીમા રક્ષણ (Insurance Cover) પૂરું પાડવામાં આવે છે.
+</div>
+<!-- SECTION 5: LOCAL AREA BANKS & DEVELOPMENT BANKS -->
+<h2>🏗️ Local Area Banks (LABs) અને Development Banks</h2>
+<h3>Local Area Banks (LABs)</h3>
+<p>શરૂઆતમાં 6 LABs હતા, જે ઘટીને 3 થયા અને હાલમાં ભારતમાં માત્ર <b>2 Local Area Banks</b> બચ્યા છે:</p>
+<ol>
+<li><b>Coastal Local Area Bank</b> (વિજયવાડા, આંધ્રપ્રદેશ - 1999 માં RBI નું લાયસન્સ મેળવનાર પ્રથમ LAB)</li>
+<li><b>Krishna Bhima Samrudhi Local Area Bank</b> (હૈદરાબાદ, તેલંગાણા)</li>
+</ol>
+<p><i>Note:</i> Capital Local Area Bank હવે <b>Capital Small Finance Bank</b> (જલંધર, પંજાબ - સ્થાપના 24 April 2016) બની ગયો છે, જે ભારતનો પહેલો Small Finance Bank છે.</p>
+<h3>Development Banks (વિકાસ બેંકો)</h3>
+<p>ચોક્કસ ક્ષેત્રોના આર્થિક વિકાસ માટે આ બેંકોની સ્થાપના કરવામાં આવી છે:</p>
+<ul>
+<li><b>NABARD:</b> Agriculture અને Rural Development માટે.</li>
+<li><b>EXIM Bank:</b> Import અને Export (એક્સપોર્ટર્સ ફાઇનાન્સ) માટે.</li>
+<li><b>SIDBI:</b> MSMEs (Micro, Small & Medium Enterprises) ક્ષેત્ર માટે.</li>
+<li><b>IFCI (Industrial Finance Corporation of India):</b> 1948 માં સ્થપાયેલ સૌથી જૂની Development Financial Institutions માંની એક, જે Industrial Finance માટે કાર્ય કરે છે.</li>
+</ul>
+<!-- SECTION 6: 🔥 EXAM CAPSULE -->
+<div class="box box-must-remember">
+<b>🔥 EXAM CAPSULE (સૌથી મહત્વપૂર્ણ Facts)</b>
+
+<ul>
+<li><b>RBI Act:</b> 1934 (Second Schedule માં Scheduled Banks સામેલ).</li>
+<li><b>Total Public Sector Banks:</b> 12 બેંકો.</li>
+<li><b>Largest Bank:</b> State Bank of India (SBI - 1st July 1955).</li>
+<li><b>RRB સ્થાપના:</b> 2nd October 1975 (RRB Act 1976).</li>
+<li><b>First RRB:</b> Prathama Grameen Bank (Moradabad, UP - Sponsored by Syndicate Bank).</li>
+<li><b>RRB Ownership:</b> Central (50%) : State (15%) : Sponsor Bank (35%).</li>
+<li><b>One State One RRB Policy:</b> 1st May 2025 થી લાગુ (કુલ 28 RRBs).</li>
+<li><b>Remaining LABs:</b> માત્ર 2 (Coastal LAB અને Krishna Bhima LAB).</li>
+<li><b>Deposit Insurance:</b> ₹5 Lakh by DICGC.</li>
+</ul>
+</div>
+<!-- SECTION 7: 🎯 POSSIBLE EXAM QUESTIONS -->
+<h2>🎯 Possible Exam Questions (સંભવિત પ્રશ્નો)</h2>
+<!-- Q1 -->
+<div class="question-card">
+<div class="question-title">પ્રશ્ન 1: RBI Act 1934 ના કયા Schedule માં Scheduled Banks ની યાદી આપવામાં આવી છે?</div>
+<p>(A) First Schedule
+(B) Second Schedule
+(C) Third Schedule
+(D) Fourth Schedule</p>
+<div class="answer-box">
+<b>સાચો જવાબ: (B) Second Schedule</b>
+
+સ્પષ્ટતા: RBI Act 1934 ના Second Schedule માં સમાવિષ્ટ બેંકોને Scheduled Banks કહેવામાં આવે છે.
+</div>
+</div>
+<!-- Q2 -->
+<div class="question-card">
+<div class="question-title">પ્રશ્ન 2: ભારતની સૌથી મોટી બેંક (Largest Bank in India) કઈ છે?</div>
+<p>(A) Punjab National Bank
+(B) Reserve Bank of India
+(C) State Bank of India
+(D) HDFC Bank</p>
+<div class="answer-box">
+<b>સાચો જવાબ: (C) State Bank of India</b>
+
+સ્પષ્ટતા: State Bank of India (SBI) એ ભારતની સૌથી મોટી બેંક છે, જેની સ્થાપના 1st July 1955 ના રોજ થઈ હતી.
+</div>
+</div>
+<!-- Q3 -->
+<div class="question-card">
+<div class="question-title">પ્રશ્ન 3: Regional Rural Banks (RRBs) ની સ્થાપના કઈ તારીખે કરવામાં આવી હતી?</div>
+<p>(A) 15 August 1947
+(B) 2 October 1975
+(C) 1 July 1955
+(D) 1 April 1935</p>
+<div class="answer-box">
+<b>સાચો જવાબ: (B) 2 October 1975</b>
+
+સ્પષ્ટતા: ગાંધી જયંતીના દિવસે 2 October 1975 ના રોજ પ્રથમ RRB ની સ્થાપના થઈ હતી અને RRB Act 1976 માં પસાર થયો હતો.
+</div>
+</div>
+<!-- Q4 -->
+<div class="question-card">
+<div class="question-title">પ્રશ્ન 4: RRBs ના ઓનરશિપ સ્ટ્રક્ચરમાં કેન્દ્ર સરકાર (Central Government), રાજ્ય સરકાર (State Government) અને પ્રાયોજક બેંક (Sponsor Bank) નો હિસ્સો કેટલો હોય છે?</div>
+<p>(A) 50% : 35% : 15%
+(B) 35% : 50% : 15%
+(C) 50% : 15% : 35%
+(D) 25% : 25% : 50%</p>
+<div class="answer-box">
+<b>સાચો જવાબ: (C) 50% : 15% : 35%</b>
+
+સ્પષ્ટતા: કેન્દ્ર સરકારનો હિસ્સો 50%, રાજ્ય સરકારનો 15% અને Sponsor Bank નો હિસ્સો 35% હોય છે.
+</div>
+</div>
+<!-- Q5 -->
+<div class="question-card">
+<div class="question-title">પ્રશ્ન 5: ભારતનું પ્રથમ RRB 'Prathama Grameen Bank' કયા સ્થળે સ્થાપવામાં આવ્યું હતું?</div>
+<p>(A) જયપુર, રાજસ્થાન
+(B) મુરાદાબાદ, ઉત્તર પ્રદેશ
+(C) ભિવીઆની, હરિયાણા
+(D) માલદા, પશ્ચિમ બંગાળ</p>
+<div class="answer-box">
+<b>સાચો જવાબ: (B) મુરાદાબાદ, ઉત્તર પ્રદેશ</b>
+
+સ્પષ્ટતા: પ્રથમ RRB પ્રથમા ગ્રામીણ બેંક મુરાદાબાદ, યુપીમાં સ્થપાઈ હતી અને તેનું સ્પૉન્સર બેંક સિન્ડિકેટ બેંક હતું.
+</div>
+</div>
+<!-- Q6 -->
+<div class="question-card">
+<div class="question-title">પ્રશ્ન 6: હાલમાં ભારતમાં કેટલા Public Sector Banks કાર્યરत છે?</div>
+<p>(A) 10
+(B) 12
+(C) 14
+(D) 21</p>
+<div class="answer-box">
+<b>સાચો જવાબ: (B) 12</b>
+
+સ્પષ્ટતા: હાલમાં ભારતમાં કુલ 12 સાર્વજનિક ક્ષેત્રની (Public Sector) બેંકો છે.
+</div>
+</div>
+<!-- Q7 -->
+<div class="question-card">
+<div class="question-title">પ્રશ્ન 7: સહકારી બેંકો (Cooperative Banks) નું નિયમન કોના દ્વારા સંયુક્તપણે થાય છે?</div>
+<p>(A) માત્ર SEBI અને RBI
+(B) માત્ર NABARD
+(C) RBI અને NABARD
+(D) માત્ર Central Government</p>
+<div class="answer-box">
+<b>સાચો જવાબ: (C) RBI અને NABARD</b>
+
+સ્પષ્ટતા: સહકારી બેંકોનું સુપરવિઝન NABARD કરે છે અને લાયસન્સ/દંડ/મર્જર જેવું નિયમન RBI કરે છે.
+</div>
+</div>
+<!-- Q8 -->
+<div class="question-card">
+<div class="question-title">પ્રશ્ન 8: 'One State, One RRB Policy' કઈ તારીખથી અમલમાં આવી છે?</div>
+<p>(A) 1 January 2024
+(B) 1 May 2025
+(C) 31 March 2026
+(D) 2 October 2025</p>
+<div class="answer-box">
+<b>સાચો જવાબ: (B) 1 May 2025</b>
+
+સ્પષ્ટતા: 1st May 2025 થી વન સ્ટેટ વન આરઆરબી પોલિસી અમલમાં આવી છે, જેનાથી RRB ની સંખ્યા ઘટીને 28 થઈ ગઈ છે.
+</div>
+</div>
+<!-- Q9 -->
+<div class="question-card">
+<div class="question-title">પ્રશ્ન 9: બેંક ડિપોઝિટ્સ પર DICGC દ્વારા કેટલા રૂપિયા સુધીનું વીમા રક્ષણ મળે છે?</div>
+<p>(A) ₹1 Lakh
+(B) ₹2 Lakh
+(C) ₹5 Lakh
+(D) ₹10 Lakh</p>
+<div class="answer-box">
+<b>સાચો જવાબ: (C) ₹5 Lakh</b>
+
+સ્પષ્ટતા: DICGC (RBI ની સહાયક કંપની) દ્વારા પ્રતિ ડિપોઝિટર પ્રતિ બેંક 5 લાખ રૂપિયા સુધીનું વીમા રક્ષણ પૂરું પાડવામાં આવે છે.
+</div>
+</div>
+<!-- Q10 -->
+<div class="question-card">
+<div class="question-title">પ્રશ્ન 10: MSME ક્ષેત્રના વિકાસ માટે કઈ વિકાસ બેંક (Development Bank) કાર્યરત છે?</div>
+<p>(A) NABARD
+(B) EXIM Bank
+(C) SIDBI
+(D) IFCI</p>
+<div class="answer-box">
+<b>સાચો જવાબ: (C) SIDBI</b>
+
+સ્પષ્ટતા: Micro, Small & Medium Enterprises (MSMEs) ના વિકાસ માટે SIDBI (Small Industries Development Bank of India) કાર્ય કરે છે.
+</div>
+</div>
+</div>
+</body>
+</html>
