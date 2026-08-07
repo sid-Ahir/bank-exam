@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking History - Exam-Oriented Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #26334d;
+            --accent-gold: #f59e0b;
+            --accent-blue: #38bdf8;
+            --accent-purple: #a78bfa;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --card-border: #3b82f640;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans Gujarati', 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .sticky-header .title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            letter-spacing: 0.5px;
+        }
+
+        .sticky-header .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 90px auto 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Cover Section */
+        .cover-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover-section h1 {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .cover-section p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background-color: var(--bg-secondary);
+            color: var(--accent-blue);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Table of Contents */
+        .toc-box {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .toc-box h2 {
+            color: var(--accent-gold);
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .toc-item {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background 0.2s;
+            display: block;
+        }
+
+        .toc-item:hover {
+            background-color: var(--bg-card);
+            color: var(--accent-blue);
+        }
+
+        /* Headings */
+        h2.section-title {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin-top: 50px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 8px;
+            page-break-before: always;
+        }
+
+        h3.subsection-title {
+            font-size: 1.3rem;
+            color: var(--accent-blue);
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 14px;
+            font-size: 1.02rem;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 1.02rem;
+        }
+
+        /* Important Boxes */
+        .box {
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin: 20px 0;
+            border-left: 5px solid;
+            page-break-inside: avoid;
+        }
+
+        .box-important {
+            background-color: rgba(245, 158, 11, 0.1);
+            border-color: var(--accent-gold);
+        }
+        .box-important .box-title { color: var(--accent-gold); }
+
+        .box-exam {
+            background-color: rgba(56, 189, 248, 0.1);
+            border-color: var(--accent-blue);
+        }
+        .box-exam .box-title { color: var(--accent-blue); }
+
+        .box-memory {
+            background-color: rgba(167, 139, 250, 0.1);
+            border-color: var(--accent-purple);
+        }
+        .box-memory .box-title { color: var(--accent-purple); }
+
+        .box-caution {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+        }
+        .box-caution .box-title { color: #f87171; }
+
+        .box-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Bank Cards Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+
+        .bank-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .bank-card:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .bank-card h4 {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 6px;
+        }
+
+        .bank-card p {
+            font-size: 0.92rem;
+            margin-bottom: 8px;
+        }
+
+        /* Timeline Design */
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+            padding-left: 30px;
+            border-left: 2px solid var(--accent-blue);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-gold);
+            border: 2px solid var(--bg-primary);
+        }
+
+        .timeline-year {
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .timeline-content {
+            background-color: var(--bg-secondary);
+            padding: 14px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: var(--bg-card);
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Evolution Flow */
+        .flow-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 25px 0;
+            background-color: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .flow-step {
+            background-color: var(--bg-card);
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+            border: 1px solid var(--card-border);
+            text-align: center;
+            flex: 1;
+            min-width: 110px;
+        }
+
+        .flow-arrow {
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Question & Answer Style */
+        .qa-item {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        .qa-question {
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 6px;
+        }
+
+        .qa-answer {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Print Settings */
+        @media print {
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+            body {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            .sticky-header {
+                position: relative;
+                background: #ffffff;
+                color: #000000;
+                border-bottom: 2px solid #000;
+            }
+            .sticky-header .title {
+                color: #000000;
+            }
+            .sticky-header .subtitle {
+                color: #555;
+            }
+            .container {
+                margin-top: 20px;
+            }
+            .cover-section, .toc-box, .box, .bank-card, .timeline-content, table, .flow-container, .qa-item {
+                background-color: #f8fafc !important;
+                color: #000000 !important;
+                border-color: #cbd5e1 !important;
+                box-shadow: none !important;
+            }
+            h2.section-title, h3.subsection-title, .box-title, .timeline-year, th, .qa-question, .badge {
+                color: #1e293b !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Sticky Header -->
+    <div class="sticky-header">
+        <div class="title">BANKING HISTORY</div>
+        <div class="subtitle">Banking Awareness | Exam-Oriented Notes</div>
+    </div>
+
+    <div class="container">
+
+        <!-- Cover Section -->
+        <div class="cover-section">
+            <h1>BANKING HISTORY</h1>
+            <p>Complete Banking Awareness Notes for IBPS PO, SBI PO, Clerk & Insurance Exams</p>
+            <div class="badge-container">
+                <span class="badge">બૅન્કિંગ ઇતિહાસ (Banking History)</span>
+                <span class="badge">મહત્વપૂર્ણ પ્રશ્નો (Important Questions)</span>
+                <span class="badge">શોર્ટકટ્સ અને ટ્રીક્સ (Memory Tricks)</span>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc-box" id="toc">
+            <h2>📑 Table of Contents (અનુક્રમણિકા)</h2>
+            <div class="toc-grid">
+                <a href="#sec-1" class="toc-item">1. Banking ની શરૂઆત</a>
+                <a href="#sec-2" class="toc-item">2. Barter System (વિનિમય પ્રથા)</a>
+                <a href="#sec-3" class="toc-item">3. Evolution of Money (નાણાંનો વિકાસ)</a>
+                <a href="#sec-4" class="toc-item">4. Evolution of Banking in India</a>
+                <a href="#sec-5" class="toc-item">5. Presidency Banks (પ્રેસિડેન્સી બેન્કો)</a>
+                <a href="#sec-6" class="toc-item">6. Early Indian & Swadeshi Banks</a>
+                <a href="#sec-7" class="toc-item">7. Imperial Bank of India</a>
+                <a href="#sec-8" class="toc-item">8. Reserve Bank of India (RBI)</a>
+                <a href="#sec-9" class="toc-item">9. Nationalisation of Banks</a>
+                <a href="#sec-10" class="toc-item">10. State Bank of India (SBI)</a>
+                <a href="#sec-11" class="toc-item">11. LPG Reforms (1991)</a>
+                <a href="#sec-12" class="toc-item">12. Master Timeline</a>
+                <a href="#sec-13" class="toc-item">13. Memory Tricks & Shortcuts</a>
+                <a href="#sec-14" class="toc-item">14. Most Important Exam Questions</a>
+                <a href="#sec-15" class="toc-item">15. Rapid Revision Sheets</a>
+            </div>
+        </div>
+
+        <!-- Section 1 -->
+        <h2 id="sec-1" class="section-title">1. Banking ની શરૂઆત (Introduction to Banking)</h2>
+        <p>આધુનિક અર્થવ્યવસ્થામાં બેન્કિંગ સંસ્થા (Banking Institution) કરોડરજ્જુ સમાન છે. બેન્કિંગ એટલે નાણાંની લેવડદેવડ, થાપણો સ્વીકારવી (Accepting Deposits) અને જરૂરિયાતમંદોને ધિરાણ આપવું (Advancing Loans). પ્રાચીન સમયથી જ નાણાકીય લેવડદેવડ માટે કોઈને કોઈ વ્યવસ્થા અસ્તિત્વમાં રહી છે.</p>
+
+        <div class="box box-exam">
+            <div class="box-title">🎯 EXAM POINT</div>
+            <p>બેન્ક શબ્દની ઉત્પત્તિ જર્મન શબ્દ 'Bancus' અથવા ઇટાલિયન શબ્દ 'Banca' પરથી થઈ છે, જેનો અર્થ લાકડાનું ટેબલ કે બેન્ચ થાય છે જેના પર નાણાં ધીરનાર (Money Lenders) બેસતા.</p>
+        </div>
+
+        <!-- Section 2 -->
+        <h2 id="sec-2" class="section-title">2. Barter System (સામા અથવા વિનિમય પ્રથા)</h2>
+        <p>નાણાંની શોધ થઈ તે પહેલાં વસ્તુઓ કે સેવાઓના બદલામાં અન્ય વસ્તુઓ કે સેવાઓનું આદાન-પ્રદાન કરવામાં આવતું જેને વિનિમય પ્રથા (Barter System) કહેવામાં આવે છે.</p>
+        
+        <p><strong>ઉદાહરણ (Example):</strong> ઘઉંના બદલામાં કપડાં આપવું અથવા ચોખાના બદલામાં દૂધ મેળવવું.</p>
+
+        <h3 class="subsection-title">Barter System ની મર્યાદાઓ (Problems of Barter System)</h3>
+        <ol>
+            <li><strong>ડબલ કોઇન્સીડેન્સ ઓફ વોન્ટ્સનો અભાવ (Lack of Double Coincidence of Wants):</strong> બંને પક્ષકારોને એકબીજાની વસ્તુઓની પરસ્પર જરૂરિયાત હોવી અનિવાર્ય છે, જે મળવું મુશ્કેલ હતું.</li>
+            <li><strong>સામાન્ય માપદંડનો અભાવ (Lack of Common Measure of Value):</strong> વસ્તુનું મૂલ્ય કેવી રીતે નક્કી કરવું તે સ્પષ્ટ નહોતું (જેમ કે, 1 કિલો ઘઉં સામે કેટલા મીટર કપડાં?).</li>
+            <li><strong>મૂલ્યના સંગ્રહની મુશ્કેલી (Difficulty of Store of Value):</strong> નાશવંત વસ્તુઓ (જેમ કે અનાજ, દૂધ) લાંબો સમય સાચવી શકાતી નહીં.</li>
+            <li><strong>વિભાજનક્ષમતાનો અભાવ (Indivisibility of Goods):</strong> મોટી વસ્તુ (દા.ત. ગાય કે ઘોડો) નું વિભાજન કરવું મુશ્કેલ હતું.</li>
+        </ol>
+
+        <!-- Section 3 -->
+        <h3 class="subsection-title">3. Evolution of Money (નાણાંનો વિકાસ ક્રમ)</h3>
+        <p>વિનિમય પ્રથાની મુશ્કેલીઓ દૂર કરવા માટે નાણાંનો ક્રમિક વિકાસ થયો:</p>
+        
+        <div class="flow-container">
+            <div class="flow-step">Barter System</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">Metal Money</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">Paper Currency</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">Plastic Money</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">Digital Payments</div>
+        </div>
+
+        <!-- Section 4 -->
+        <h2 id="sec-4" class="section-title">4. Evolution of Banking in India (ભારતમાં બેન્કિંગનો ઇતિહાસ)</h2>
+        <p>ભારતમાં આધુનિક બેન્કિંગ પદ્ધતિની શરૂઆત અંગ્રેજોના શાસનકાળ દરમિયાન થઈ હતી. શરૂઆતમાં યુરોપિયન એજન્સી હાઉસ દ્વારા બેન્કોની સ્થાપના કરવામાં આવી.</p>
+
+        <div class="card-grid">
+            <div class="bank-card">
+                <h4>🏦 Bank of Hindustan</h4>
+                <p><strong>Year:</strong> 1770</p>
+                <p><strong>Associated With:</strong> Alexander & Co.</p>
+                <p><strong>Importance:</strong> ભારતમાં સ્થપાયેલી સૌપ્રથમ બેન્ક.</p>
+                <p><strong>Closed:</strong> 1832</p>
+            </div>
+            <div class="bank-card">
+                <h4>🏦 General Bank of India</h4>
+                <p><strong>Year:</strong> 1786</p>
+                <p><strong>Importance:</strong> ભારતની બીજી વહેલી વેળાસરની બેન્ક.</p>
+                <p><strong>Closed:</strong> 1791</p>
+            </div>
+        </div>
+
+        <!-- Section 5 -->
+        <h2 id="sec-5" class="section-title">5. Presidency Banks (પ્રેસિડેન્સી બેન્કો)</h2>
+        <p>બ્રિટિશ ઇસ્ટ ઇન્ડિયા કંપની દ્વારા ત્રણ મહત્વની પ્રેસિડેન્સી બેન્કોની સ્થાપના કરવામાં આવી હતી, જેમને નોટ ઇશ્યુ કરવાનો અધિકાર પણ શરૂઆતમાં પ્રાપ્ત હતો.</p>
+
+        <div class="card-grid">
+            <div class="bank-card">
+                <h4>🏦 Bank of Bengal</h4>
+                <p><strong>Year:</strong> 1806</p>
+                <p><strong>Type:</strong> Presidency Bank</p>
+                <p><strong>Importance:</strong> મૂળ નામ 'Bank of Calcutta' (1809 માં નામ બદલીને Bank of Bengal કરાયું).</p>
+            </div>
+            <div class="bank-card">
+                <h4>🏦 Bank of Bombay</h4>
+                <p><strong>Year:</strong> 1840</p>
+                <p><strong>Type:</strong> Presidency Bank</p>
+                <p><strong>Importance:</strong> બોમ્બે પ્રેસિડેન્સીની મુખ્ય નાણાકીય સંસ્થા.</p>
+            </div>
+            <div class="bank-card">
+                <h4>🏦 Bank of Madras</h4>
+                <p><strong>Year:</strong> 1843</p>
+                <p><strong>Type:</strong> Presidency Bank</p>
+                <p><strong>Importance:</strong> મద్రాસ પ્રેસિડેન્સી અંતર્ગત સ્થપાઈ.</p>
+            </div>
+        </div>
+
+        <!-- Section 6 -->
+        <h2 id="sec-6" class="section-title">6. Early Indian & Swadeshi Banks (પ્રારંભિક ભારતીય અને સ્વદેશી બેન્કો)</h2>
+        <p>ભારતીયો દ્વારા સંચાલિત અને સ્વદેશી ધોરણે સ્થપાયેલી પ્રમુખ બેન્કો:</p>
+        
+        <table>
+            <tr>
+                <th>Bank Name</th>
+                <th>Establishment Year</th>
+                <th>Key Significance / Exam Point</th>
+            </tr>
+            <tr>
+                <td>Allahabad Bank</td>
+                <td>1865</td>
+                <td>ભારતીયો દ્વારા સંચાલિત સૌપ્રથમ જૂની સંયુક્ત સ્ટોક બેન્ક (હવે Indian Bank માં વિલીન).</td>
+            </tr>
+            <tr>
+                <td>Punjab National Bank (PNB)</td>
+                <td>1894</td>
+                <td>લાલા લજપત રાયના પ્રયાસોથી લાહોરમાં સ્થપાયેલી પ્રથમ સંપૂર્ણ ભારતીય સ્વદેશી બેન્ક.</td>
+            </tr>
+            <tr>
+                <td>Bank of India (BoI)</td>
+                <td>1906</td>
+                <td>મુંબઈથી શરૂ થયેલી પ્રથમ ભારતીય બેન્ક જેણે વિદેશ (લંડન) માં શાખા ખોલી.</td>
+            </tr>
+            <tr>
+                <td>Canara Bank</td>
+                <td>1906</td>
+                <td>અમ્મેબલ સુબ્બારાઓ પઈ દ્વારા મંગલોરમાં સ્થપાઈ.</td>
+            </tr>
+            <tr>
+                <td>Bank of Baroda (BoB)</td>
+                <td>1908</td>
+                <td>મહારાજા સયાજીરાવ ગાયકવાડ III દ્વારા વડોદરામાં સ્થપાઈ.</td>
+            </tr>
+            <tr>
+                <td>Central Bank of India</td>
+                <td>1911</td>
+                <td>સંપૂર્ણપણે ભારતીયો દ્વારા સ્વામિત્વ ધરાવતી અને સંચાલિત પ્રથમ સ્વદેશી બેન્ક (સરમાં સોરાબજી પોચખાનાવાલા).</td>
+            </tr>
+        </table>
+
+        <!-- Section 7 -->
+        <h2 id="sec-7" class="section-title">7. Imperial Bank of India (ઇમ્પિરિયલ બેન્ક ઓફ ઇન્ડિયા)</h2>
+        <div class="box box-important">
+            <div class="box-title">⭐ IMPORTANT - 1921</div>
+            <p>27 જાન્યુઆરી 1921 ના રોજ ત્રણેય પ્રેસિડેન્સી બેન્કો (Bank of Bengal, Bank of Bombay, Bank of Madras) નું એકત્રીકરણ (Amalgamation) કરીને <strong>Imperial Bank of India</strong> ની રચના કરવામાં આવી.</p>
+        </div>
+        <p>આ બેન્ક અર્ધ-સેન્ટ્રલ બેન્ક તરીકે કામ કરતી હતી કારણ કે તે RBI ની સ્થાપના પહેલાં દેશની સેન્ટ્રલ બેન્ક જેવી જવાબદારીઓ નિભાવતી હતી. પાછળથી 1955 માં આ જ બેન્કનું નામ બદલીને સ્ટેટ બેન્ક ઓફ ઇન્ડિયા (SBI) કરવામાં આવ્યું.</p>
+
+        <!-- Section 8 -->
+        <h2 id="sec-8" class="section-title">8. Reserve Bank of India (RBI)</h2>
+        <p>ભારતની મધ્યસ્થ બેન્ક (Central Bank of India) ની સ્થાપના અંગેની ભલામણ <strong>Hilton Young Commission</strong> (Royal Commission on Indian Currency and Finance) દ્વારા 1926 માં કરવામાં આવી હતી.</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">1934</div>
+                <div class="timeline-content">RBI Act, 1934 પસાર કરવામાં આવ્યો.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1st April 1935</div>
+                <div class="timeline-content">RBI ની સત્તાવાર સ્થાપના (પ્રથમ વડા/Governor: Sir Osborne Smith).</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1st January 1949</div>
+                <div class="timeline-content">RBI નું રાષ્ટ્રીયકરણ (Nationalisation) કરવામાં આવ્યું અને તે ભારત સરકારની સંપૂર્ણ સ્વામિત્વવાળી બેન્ક બની.</div>
+            </div>
+        </div>
+
+        <!-- Section 9 -->
+        <h2 id="sec-9" class="section-title">9. Nationalisation of Banks (બેન્કોનું રાષ્ટ્રીયકરણ)</h2>
+        <p>દેશના આર્થિક વિકાસને વેગ આપવા અને ગ્રામીણ વિસ્તારો સુધી બેન્કિંગ સેવાઓ પહોંચાડવા માટે બેન્કોનું રાષ્ટ્રીયકરણ કરવામાં આવ્યું.</p>
+
+        <h3 class="subsection-title">પ્રથમ તબક્કો (19 જુલાઈ 1969)</h3>
+        <p>વડાપ્રધાન ઇન્દિરા ગાંધી દ્વારા કુલ <strong>14 મોટી વેપારી બેન્કો</strong>નું રાષ્ટ્રીયકરણ કરાયું. શરત: જે બેન્કોની ડિપોઝિટ (થાપણો) <strong>Rs. 50 કરોડ</strong> કે તેથી વધુ હતી.</p>
+
+        <h3 class="subsection-title">બીજો તબક્કો (15 એપ્રિલ 1980)</h3>
+        <p>કુલ <strong>6 વધુ વેપારી બેન્કો</strong>નું રાષ્ટ્રીયકરણ કરાયું. શરત: જે બેન્કોની ડિપોઝિટ <strong>Rs. 200 કરોડ</strong> કે તેથી વધુ હતી.</p>
+
+        <div class="box box-memory">
+            <div class="box-title">🧠 MEMORY TRICK - Nationalisation</div>
+            <p>1969 માં 14 બેન્કો (50+ કરોડ) | 1980 માં 6 બેન્કો (200+ કરોડ). કુલ રાષ્ટ્રીયકૃત બેન્કો 20 થઈ (પાછળથી વિલીનીકરણ દ્વારા સંખ્યા ઘટી છે).</p>
+        </div>
+
+        <!-- Section 10 -->
+        <h2 id="sec-10" class="section-title">10. State Bank of India (SBI)</h2>
+        <p>ઓલ ઇન્ડિયા રૂરલ ક્રેડિટ સર્વે કમિટી (All India Rural Credit Survey Committee) ની ભલામણ અનુસાર, <strong>1 જુલાઈ 1955</strong> ના રોજ સ્ટેટ બેન્ક ઓફ ઇન્ડિયા એક્ટ, 1955 હેઠળ ઇમ્પિરિયલ બેન્ક ઓફ ઇન્ડિયાનું રાષ્ટ્રીયકરણ કરીને <strong>SBI</strong> ની રચના કરવામાં આવી.</p>
+
+        <!-- Section 11 -->
+        <h2 id="sec-11" class="section-title">11. LPG Reforms (1991)</h2>
+        <p>વર્ષ 1991 માં ભારતમાં ગંભીર આર્થિક સંકટ સમયે નાણાપ્રધાન ડૉ. મનમોહન સિંહ અને વડાપ્રધાન પી. વી. નરસિમ્હા રાવ દ્વારા <strong>LPG Reforms (Liberalisation, Privatisation, Globalisation)</strong> દાખલ કરવામાં આવ્યા, જેનાથી ભારતીય બેન્કિંગ સેક્ટરમાં આમૂલ પરિવર્તન આવ્યા અને ખાનગી ક્ષેત્રની નવી બેન્કો (New Generation Private Banks) માટે દરવાજા ખૂલ્યા.</p>
+
+        <!-- Section 12 -->
+        <h2 id="sec-12" class="section-title">12. Master Timeline (સંપૂર્ણ માસ્ટર ટાઇમલાઇન)</h2>
+        <table>
+            <tr>
+                <th>Year / Date</th>
+                <th>Event / Milestone</th>
+                <th>Why Important? (મહત્વ)</th>
+            </tr>
+            <tr>
+                <td>1770</td>
+                <td>Bank of Hindustan</td>
+                <td>ભારતમાં પ્રથમ બેન્કની શરૂઆત.</td>
+            </tr>
+            <tr>
+                <td>1806</td>
+                <td>Bank of Bengal</td>
+                <td>પ્રથમ પ્રેસિડેન્સી બેન્ક.</td>
+            </tr>
+            <tr>
+                <td>1865</td>
+                <td>Allahabad Bank</td>
+                <td>જૂની સંયુક્ત સ્ટોક બેન્ક.</td>
+            </tr>
+            <tr>
+                <td>1894</td>
+                <td>Punjab National Bank</td>
+                <td>પ્રથમ સંપૂર્ણ ભારતીય સ્વદેશી બેન્ક.</td>
+            </tr>
+            <tr>
+                <td>1921</td>
+                <td>Imperial Bank of India</td>
+                <td>ત્રણ પ્રેસિડેન્સી બેન્કોનું વિલીનીકરણ.</td>
+            </tr>
+            <tr>
+                <td>1934</td>
+                <td>RBI Act, 1934</td>
+                <td>રિઝર્વ બેન્કનો કાયદો.</td>
+            </tr>
+            <tr>
+                <td>1 April 1935</td>
+                <td>RBI Establishment</td>
+                <td>દેશની મધ્યસ્થ બેન્કની સ્થાપના.</td>
+            </tr>
+            <tr>
+                <td>1 Jan 1949</td>
+                <td>RBI Nationalisation</td>
+                <td>RBI નું સરકારીકરણ.</td>
+            </tr>
+            <tr>
+                <td>1 July 1955</td>
+                <td>SBI Act / Establishment</td>
+                <td>ઇમ્પિરિયલ બેન્કમાંથી SBI બની.</td>
+            </tr>
+            <tr>
+                <td>19 July 1969</td>
+                <td>1st Phase Nationalisation</td>
+                <td>14 બેન્કોનું રાષ્ટ્રીયકરણ (50+ કરોડ).</td>
+            </tr>
+            <tr>
+                <td>15 April 1980</td>
+                <td>2nd Phase Nationalisation</td>
+                <td>6 બેન્કોનું રાષ્ટ્રીયકરણ (200+ કરોડ).</td>
+            </tr>
+            <tr>
+                <td>1991</td>
+                <td>LPG Reforms</td>
+                <td>આર્થિક સુધારા અને ખાનગી બેન્કોનો પ્રવેશ.</td>
+            </tr>
+        </table>
+
+        <!-- Section 13 -->
+        <h2 id="sec-13" class="section-title">13. Memory Tricks & Shortcuts (શોર્ટકટ્સ અને ટ્રીક્સ)</h2>
+        <div class="box box-memory">
+            <div class="box-title">🧠 MEMORY TRICK - Presidency Banks</div>
+            <p><strong>B</strong>engal (1806) → <strong>B</strong>ombay (1840) → <strong>M</strong>adras (1843)</p>
+            <p>મૂળાક્ષરો યાદ રાખો: <strong>B-B-M</strong> (Bengal, Bombay, Madras) અને ત્રણેય મળીને 1921 માં <strong>Imperial Bank</strong> બની.</p>
+        </div>
+
+        <!-- Section 14 -->
+        <h2 id="sec-14" class="section-title">14. Most Important Exam Questions (મહત્વપૂર્ણ પરીક્ષા પ્રશ્નો)</h2>
+
+        <div class="qa-item">
+            <div class="qa-question">Q. ભારતમાં સ્થપાયેલી સૌપ્રથમ બેન્ક કઈ હતી?</div>
+            <div class="qa-answer">Ans. Bank of Hindustan (1770)</div>
+        </div>
+
+        <div class="qa-item">
+            <div class="qa-question">Q. પંજાબ નેશનલ બેન્ક (PNB) ની સ્થાપના કયા વર્ષમાં થઈ હતી?</div>
+            <div class="qa-answer">Ans. 1894 (લાહોર ખાતે)</div>
+        </div>
+
+        <div class="qa-item">
+            <div class="qa-question">Q. RBI ની સ્થાપના કઈ કમિટીની ભલામણથી થઈ હતી?</div>
+            <div class="qa-answer">Ans. Hilton Young Commission (Royal Commission)</div>
+        </div>
+
+        <div class="qa-item">
+            <div class="qa-question">Q. RBI ની સ્થાપના ક્યારે થઈ હતી?</div>
+            <div class="qa-answer">Ans. 1 April 1935 (RBI Act 1934 મુજબ)</div>
+        </div>
+
+        <div class="qa-item">
+            <div class="qa-question">Q. સ્ટેટ બેન્ક ઓફ ઇન્ડિયા (SBI) ની સ્થાપના ક્યારે થઈ?</div>
+            <div class="qa-answer">Ans. 1 July 1955</div>
+        </div>
+
+        <div class="qa-item">
+            <div class="qa-question">Q. પ્રથમ તબક્કામાં કેટલી બેન્કોનું રાષ્ટ્રીયકરણ કરવામાં આવ્યું હતું?</div>
+            <div class="qa-answer">Ans. 14 બેન્કો (19 જુલાઈ 1969)</div>
+        </div>
+
+        <div class="qa-item">
+            <div class="qa-question">Q. બીજા તબક્કામાં કેટલી બેન્કોનું રાષ્ટ્રીયકરણ થયું અને ક્યારે?</div>
+            <div class="qa-answer">Ans. 6 બેન્કો (15 એપ્રિલ 1980)</div>
+        </div>
+
+        <!-- Section 15 -->
+        <h2 id="sec-15" class="section-title">15. Rapid Revision Sheets (ઝડપી રિવિઝન શીટ્સ)</h2>
+        
+        <h3 class="subsection-title">⚡ 30-Second Revision</h3>
+        <ul>
+            <li>પ્રથમ બેન્ક: Bank of Hindustan (1770)</li>
+            <li>પ્રથમ સ્વદેશી બેન્ક: PNB (1894)</li>
+            <li>Imperial Bank: 1921 (Bengal + Bombay + Madras)</li>
+            <li>RBI સ્થાપના: 1 April 1935</li>
+            <li>SBI સ્થાપના: 1 July 1955</li>
+            <li>રાષ્ટ્રીયકરણ: 1969 (14 બેન્કો) & 1980 (6 બેન્કો)</li>
+        </ul>
+
+        <h3 class="subsection-title">⚡ 2-Minute Revision</h3>
+        <p>બૅન્કિંગ ઇતિહાસની શરૂઆત Barter System થી થઈ જેમાં બેય પક્ષની જરૂરિયાત મેળ ખાવાની સમસ્યા હતી. ત્યારબાદ ધાતુ અને કાગળના નાણાં આવ્યા. ભારતમાં અંગ્રેજ કાળમાં Bank of Hindustan થી શરૂઆત થઈ. ત્રણેય પ્રેસિડેન્સી બેન્કો ભેગી થઈને 1921 માં Imperial Bank બની જે પાછળથી 1955 માં SBI બની. હિલ્ટન યંગ કમિશનની ભલામણથી 1935 માં RBI અસ્તિત્વમાં આવી. દેશના આર્થિક ઉત્થાન માટે 1969 અને 1980 માં બેન્કોનું રાષ્ટ્રીયકરણ કરાયું અને 1991 ના LPG સુધારાઓએ બેન્કિંગ ક્ષેત્રને વૈશ્વિક સ્તરે વિસ્તૃત કર્યું.</p>
+
+    </div>
+
+</body>
+</html>
