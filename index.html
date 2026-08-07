@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sid Ahir - Banking Prep</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f4f4f9;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            background-color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            overflow-x: hidden;
+        }
+
+        /* --- Warning Popup Overlay --- */
+        #popup-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        .popup-box {
+            background: #fff;
+            color: #333;
+            padding: 25px;
+            border-radius: 12px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .popup-box h2 {
+            color: #900;
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .popup-box p {
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .copyright-box {
+            background: #fdf5e6;
+            border: 1px solid #eaddcf;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .agree-btn {
+            background: #59498d;
+            color: #fff;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* --- Header / Profile Section --- */
+        
+        /* અહી મેં બ્લેક/ડાર્ક કલર કર્યો છે. જો આછો ઓરેન્જ જોઈતો હોય તો આ કાઢીને લખજો: background: linear-gradient(180deg, #ffb347, #ff7b00); */
+        .header-bg {
+            background: linear-gradient(180deg, #1e1e2f, #000000);
+            padding: 30px 20px 20px 20px;
+            text-align: center;
+            color: #fff;
+        }
+        
+        /* ફોટાની સાઈઝ નાની-મોટી કરવા માટે નીચે width અને height ના આંકડા બદલવા */
+        .profile-pic {
+            width: 140px;  /* <-- અહીંથી પહોળાઈ બદલો */
+            height: 140px; /* <-- અહીંથી લંબાઈ બદલો */
+            border-radius: 50%;
+            border: 3px solid #fff;
+            object-fit: cover;
+            margin-bottom: 10px;
+            animation: neonBlink 1.2s infinite alternate;
+        }
+
+        @keyframes neonBlink {
+            from {
+                box-shadow: 0 0 5px #d400ff, 0 0 10px #d400ff;
+            }
+            to {
+                box-shadow: 0 0 15px #a600ff, 0 0 30px #a600ff, 0 0 45px #a600ff;
+            }
+        }
+
+        .name-box {
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: underline;
+            margin-bottom: 5px;
+        }
+        .quote {
+            font-size: 13px;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        /* 3 New Top Buttons for Exams */
+        .top-action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: nowrap;
+        }
+        .action-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .action-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* --- Main Content Area --- */
+        .main-content {
+            padding: 0;
+        }
+
+        /* --- Menu Tabs (5 સરખા નાના બટન્સ) --- */
+        .button-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 1px;
+            padding: 10px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+        .nav-btn {
+            background: #e9e4f5;
+            color: #59498d;
+            border: 1px solid #c2b5e3;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            white-space: wrap;
+            transition: all 0.2s ease;
+        }
+        .nav-btn:hover, .nav-btn:active {
+            background: #59498d;
+            color: #fff;
+        }
+
+        /* --- Sections (Tabs Content) --- */
+        .tab-section {
+            display: none;
+            background: #fff;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .tab-header h3 {
+            color: #59498d;
+            font-size: 18px;
+        }
+        .back-btn {
+            background: #f4f4f9;
+            border: 1px solid #ddd;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .topic-list {
+            list-style: none;
+        }
+        .topic-list li {
+            background: #f9f9fc;
+            border: 1px solid #eee;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* --- Live Timer Box Design --- */
+        .live-timer-box {
+            background: linear-gradient(135deg, #59498d, #3c2f63);
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .live-timer-box h4 {
+            color: #ffd700;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+        .time-display {
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* --- Task Tracker --- */
+        .task-container {
+            padding: 20px;
+            background: #fff;
+        }
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .task-header h3 {
+            color: #333;
+            font-size: 18px;
+        }
+        .task-header input[type="date"] {
+            background: #f4f4f9;
+            color: #333;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            border-radius: 5px;
+            outline: none;
+            font-family: inherit;
+        }
+        .task-item {
+            background: #f9f9fc;
+            border: 1px solid #eee;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #555;
+        }
+        .task-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #59498d;
+        }
+    </style>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <div class="app-container" id="app">
+        <!-- WARNING POPUP -->
+        <div id="popup-overlay">
+            <div class="popup-box">
+                <h2>⚠️ Notice — Please Read</h2>
+                <p>This practice tool is created and maintained by <strong id="author-name">Sid Ahir</strong> for the banking & competitive exam community. It is provided free for personal practice use.</p>
+                <div class="copyright-box">
+                    © Sid Ahir. All rights reserved.<br><br>
+                    Unauthorized redistribution, resale, or rebranding of this file (including removing or altering the channel name/link) is prohibited without written permission.<br><br>
+                    Official Telegram: <a href="https://t.me/Sid_Ahir_6" id="tg-link" style="color: #6a11cb;">https://t.me/Sid_Ahir_6</a>
+                </div>
+                <button class="agree-btn" onclick="agreeAndStart()">I Agree — Continue to Practice</button>
+            </div>
+        </div>
+
+        <!-- HEADER -->
+        <div class="header-bg">
+            <img src="https://i.ibb.co/HL4hBwQ7/Screenshot-2026-08-06-16-21-28-251-com-google-android-apps-photos-edit.jpg" alt="Profile" class="profile-pic">
+            <div class="name-box" id="display-name">✨ Sid Ahir ✨</div>
+            <div class="quote">Be Positive ✨ Never Give Up</div>
+            
+            <!-- 3 New Top Buttons for Exams -->
+            <div class="top-action-buttons">
+                <button class="action-btn" onclick="showTab('tab-ibps-clerk')">🎯 IBPS Clerk</button>
+                <button class="action-btn" onclick="showTab('tab-rrb-po')">🎯 RRB PO</button>
+                <button class="action-btn" onclick="showTab('tab-rrb-clerk')">🎯 RRB Clerk</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- HOME MENU BUTTONS (5 સરખા બટન્સ) -->
+            <div id="home-menu">
+                <div class="button-grid">
+                    <button class="nav-btn" onclick="showTab('tab-banking-awareness')">Banking Awareness</button>
+                    <button class="nav-btn" onclick="showTab('tab-static-ga')">Static GA</button>
+                    <button class="nav-btn" onclick="showTab('tab-banking-terms')">Banking Terms</button>
+                    <button class="nav-btn" onclick="showTab('tab-daily-current')">Daily Current</button>
+                    <a href="https://t.me/Sid_Ahir_6" target="_blank" style="text-decoration: none;">
+                        <button class="nav-btn">Join Us</button>
+                    </a>
+                </div>
+
+                <!-- TASK TRACKER (Today's Focus) -->
+                <div class="task-container">
+                    <div class="task-header">
+                        <h3>Today's Focus</h3>
+                        <input type="date" id="task-date">
+                    </div>
+                    <div id="task-list">
+                        <!-- Tasks will be injected by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXAM COUNTDOWN TABS -->
+            <div id="tab-ibps-clerk" class="tab-section">
+                <div class="tab-header">
+                    <h3>IBPS Clerk Timer</h3>
+                    <button class="back-btn" onclick="goHome()">Back</button>
+                </div>
+                <div class="live-timer-box">
+                    <h4>🔥 Prelims (10 Oct 2026)</h4>
+                    <div class="time-display" id="live-clerk-pre">Calculating...</div>
+                </div>
+                <div class="live-timer-box">
+                    <h4>🏆 Mains (27 Dec 2026)</h4>
+                    <div class="time-display" id="live-clerk-main">Calculating...</div>
+                </div>
+            </div>
+
+            <div id="tab-rrb-po" class="tab-section">
+                <div class="tab-header">
+                    <h3>IBPS RRB PO Timer</h3>
+                    <button class="back-btn" onclick="goHome()">Back</button>
+                </div>
+                <div class="live-timer-box">
+                    <h4>🔥 Prelims (21 Nov 2026)</h4>
+                    <div class="time-display" id="live-rrbpo-pre">Calculating...</div>
+                </div>
+                <div class="live-timer-box">
+                    <h4>🏆 Mains (20 Dec 2026)</h4>
+                    <div class="time-display" id="live-rrbpo-main">Calculating...</div>
+                </div>
+            </div>
+
+            <div id="tab-rrb-clerk" class="tab-section">
+                <div class="tab-header">
+                    <h3>IBPS RRB Clerk Timer</h3>
+                    <button class="back-btn" onclick="goHome()">Back</button>
+                </div>
+                <div class="live-timer-box">
+                    <h4>🔥 Prelims (6 Dec 2026)</h4>
+                    <div class="time-display" id="live-rrbclerk-pre">Calculating...</div>
+                </div>
+                <div class="live-timer-box">
+                    <h4>🏆 Mains (30 Jan 2027)</h4>
+                    <div class="time-display" id="live-rrbclerk-main">Calculating...</div>
+                </div>
+            </div>
+
+
+            <!-- SUBJECT TABS CONTENT -->
+            <!-- 1. Banking Awareness -->
+            <div id="tab-banking-awareness" class="tab-section">
+                <div class="tab-header">
+                    <h3>Banking Awareness</h3>
+                    <button class="back-btn" onclick="goHome()">Back</button>
+                </div>
+                <ul class="topic-list">
+                    <li>1. Banking History</li>
+                    <li>2. Nationalisation & Merger</li>
+                    <li>3. Type of Banks - 1</li>
+                    <li>4. Type of Banks - 2</li>
+                    <li>5. RBI - 1</li>
+                    <li>6. RBI - 2</li>
+                    <li>7. Monetary Policy RBI - 3</li>
+                    <li>8. Monetary Policy Committee RBI - 4</li>
+                    <li>9. Inflation - CPI & WPI</li>
+                    <li>10. Money Market</li>
+                    <li>11. TBill, CMBs, CPs</li>
+                    <li>12. Capital Market</li>
+                    <li>13. Priority Sector Lending (PSL)</li>
+                    <li>14. Negotiable Instruments</li>
+                    <li>15. NPA, ARC, NARCL</li>
+                    <li>16. Basel Norms, PCA</li>
+                    <li>17. PCA Framework</li>
+                    <li>18. BANKS V/S NBFCs</li>
+                    <li>19. Type of NBFCs</li>
+                    <li>20. Type of Money & Cheques</li>
+                    <li>21. Type of Bank Account</li>
+                    <li>22. UPI Limits, AePS</li>
+                </ul>
+            </div>
+
+            <!-- 2. Static GA -->
+            <div id="tab-static-ga" class="tab-section">
+                <div class="tab-header">
+                    <h3>Static GA</h3>
+                    <button class="back-btn" onclick="goHome()">Back</button>
+                </div>
+                <ul class="topic-list">
+                    <li>1. Class - 1</li>
+                    <li>2. Class - 2</li>
+                    <li>3. Class - 3</li>
+                    <li>4. Class - 4</li>
+                </ul>
+            </div>
+
+            <!-- 3. Banking Terms -->
+            <div id="tab-banking-terms" class="tab-section">
+                <div class="tab-header">
+                    <h3>Banking Terms</h3>
+                    <button class="back-btn" onclick="goHome()">Back</button>
+                </div>
+                <ul class="topic-list">
+                    <li>1. Type of share capital</li>
+                    <li>2. IPO Vs FPO Vs Rights issue</li>
+                    <li>3. Nostro - Vostro - LORO</li>
+                    <li>4. Money market & capital market</li>
+                    <li>5. Payment system</li>
+                </ul>
+            </div>
+
+            <!-- 4. Daily Current -->
+            <div id="tab-daily-current" class="tab-section">
+                <div class="tab-header">
+                    <h3>Daily Current</h3>
+                    <button class="back-btn" onclick="goHome()">Back</button>
+                </div>
+                <ul class="topic-list">
+                    <li>📁 March to June (Combined PDFs)</li>
+                    <li>📅 July (1 to 31 Days)</li>
+                    <li>📅 August (1 to 31 Days)</li>
+                    <li>📅 September (1 to 30 Days)</li>
+                    <li>📅 October (1 to 31 Days)</li>
+                    <li>📅 November (1 to 30 Days)</li>
+                    <li>📅 December (1 to 31 Days)</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    // --- 1. ANTI-TAMPERING SECURITY CODE ---
+    setInterval(() => {
+        const author = document.getElementById("author-name");
+        const tg = document.getElementById("tg-link");
+        const dName = document.getElementById("display-name");
+        
+        if (!author || author.innerText !== "Sid Ahir" || 
+            !tg || !tg.href.includes("t.me/Sid_Ahir_6") || 
+            !dName || !dName.innerText.includes("Sid Ahir")) {
+            document.body.innerHTML = "<div style='color:red; text-align:center; margin-top:50px; font-size:24px; font-weight:bold;'>Security Alert: Original author name or link has been modified. File is locked.</div>";
+            document.body.style.background = "#fff";
+        }
+    }, 2000);
+
+    // --- 2. POPUP LOGIC ---
+    function agreeAndStart() {
+        document.getElementById('popup-overlay').style.display = 'none';
+    }
+
+    // --- 3. LIVE EXAM TIMER LOGIC (Days & Hours) ---
+    const examDates = {
+        "live-clerk-pre": new Date("October 10, 2026 00:00:00").getTime(),
+        "live-clerk-main": new Date("December 27, 2026 00:00:00").getTime(),
+        "live-rrbpo-pre": new Date("November 21, 2026 00:00:00").getTime(),
+        "live-rrbpo-main": new Date("December 20, 2026 00:00:00").getTime(),
+        "live-rrbclerk-pre": new Date("December 6, 2026 00:00:00").getTime(),
+        "live-rrbclerk-main": new Date("January 30, 2027 00:00:00").getTime()
+    };
+
+    function updateLiveTimers() {
+        const now = new Date().getTime();
+        for (const [id, targetDate] of Object.entries(examDates)) {
+            const distance = targetDate - now;
+            const elem = document.getElementById(id);
+            if (distance < 0) {
+                elem.innerText = "Exam Completed ✅";
+            } else {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                elem.innerText = `${days} Days : ${hours} Hrs Left`;
+            }
+        }
+    }
+    updateLiveTimers();
+    setInterval(updateLiveTimers, 1000);
+
+    // --- 4. TAB NAVIGATION LOGIC ---
+    const allTabs = document.querySelectorAll('.tab-section');
+    const homeMenu = document.getElementById('home-menu');
+
+    function showTab(tabId) {
+        homeMenu.style.display = 'none';
+        allTabs.forEach(tab => tab.style.display = 'none');
+        document.getElementById(tabId).style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    function goHome() {
+        allTabs.forEach(tab => tab.style.display = 'none');
+        homeMenu.style.display = 'block';
+    }
+
+    // --- 5. TASK TRACKER & FIREWORKS ---
+    const taskList = [
+        "Mock Test", "Arithmetic 20", "Current Affair", 
+        "Simplification 20", "DI 5", "12 Baje 12 puzzle", 
+        "Super Mock", "Gym / Meditation"
+    ];
+    
+    const datePicker = document.getElementById('task-date');
+    const taskContainer = document.getElementById('task-list');
+
+    // આજની તારીખ (ભારતના સમય મુજબ)
+    let localDate = new Date();
+    localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
+    const today = localDate.toISOString().split('T')[0];
+    datePicker.value = today;
+
+    window.sessionData = {}; // જો ફોન બ્લોક કરે તો ડેટા સાચવવાની બીજી રીત
+
+    function loadTasks(date) {
+        taskContainer.innerHTML = ""; 
+        let savedData = {};
+        
+        try {
+            savedData = JSON.parse(localStorage.getItem(`tasks_${date}`)) || {};
+        } catch(e) {
+            savedData = window.sessionData[date] || {};
+        }
+
+        taskList.forEach((task, index) => {
+            const isChecked = savedData[index] ? 'checked' : '';
+            const taskDiv = document.createElement('div');
+            taskDiv.className = 'task-item';
+            taskDiv.innerHTML = `
+                <input type="checkbox" id="task-${index}" ${isChecked} onchange="saveTask('${date}', ${index}, this.checked)">
+                <label for="task-${index}">${task}</label>
+            `;
+            taskContainer.appendChild(taskDiv);
+        });
+    }
+
+    window.saveTask = function(date, index, isChecked) {
+        let savedData = {};
+        try {
+            // ફોનમાં સેવ કરવાની કોશિશ
+            savedData = JSON.parse(localStorage.getItem(`tasks_${date}`)) || {};
+            savedData[index] = isChecked;
+            localStorage.setItem(`tasks_${date}`, JSON.stringify(savedData));
+        } catch (error) {
+            // જો ફોન એરર આપે તો પણ ચાલતું રહે એના માટે
+            if (!window.sessionData[date]) window.sessionData[date] = {};
+            window.sessionData[date][index] = isChecked;
+            savedData = window.sessionData[date];
+        }
+
+        // ૮ ખાના ચેક કરો
+        let allDone = true;
+        for (let i = 0; i < taskList.length; i++) {
+            if (!savedData[i]) {
+                allDone = false;
+                break;
+            }
+        }
+
+        // ફટાકડા ફોડો
+        if (allDone) {
+            try {
+                const fireworkSound = new Audio('https://cdn.pixabay.com/audio/2022/10/24/audio_3d10006323.mp3'); 
+                fireworkSound.play().catch(e => console.log("Audio blocked by phone"));
+                
+                if (typeof confetti !== "undefined") {
+                    var duration = 3 * 1000; 
+                    var animationEnd = Date.now() + duration;
+                    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10000 };
+                    
+                    var interval = setInterval(function() {
+                        var timeLeft = animationEnd - Date.now();
+                        if (timeLeft <= 0) return clearInterval(interval);
+                        var particleCount = 50 * (timeLeft / duration);
+                        confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random() * (0.3 - 0.1) + 0.1, y: Math.random() - 0.2 }}));
+                        confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random() * (0.9 - 0.7) + 0.7, y: Math.random() - 0.2 }}));
+                    }, 250);
+                } else {
+                    alert("ઇન્ટરનેટ ચાલુ છે? ફટાકડાની લિંક હજુ લોડ નથી થઈ.");
+                }
+            } catch(e) {}
+        }
+    }
+
+    datePicker.addEventListener('change', (e) => {
+        loadTasks(e.target.value);
+    });
+
+    loadTasks(today);
+
+</script>
+    
+</body>
+</html>
