@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static GA- 2</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    Static GA-2
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 INTRODUCTORY OVERVIEW</span>
+        <p>આ સ્ટડી નોટ્સ બેન્કિંગ અને સ્પર્ધાત્મક પરીક્ષાઓ (Banking & Competitive Exams) માટે અતિમહત્વપૂર્ણ કરંટ અફેર્સ બેઝ્ડ સ્ટેટિક જીએ (Static GA) કવર કરે છે. આમાં સોલાર પાર્ક, ડેમ્સ, નેશનલ પાર્ક્સ, પાવર સ્ટેશન્સ અને સરકારી યોજનાઓની વિસ્તૃત માહિતી આપવામાં આવી છે.</p>
+    </div>
+
+    <h2 class="section-title">🔥 EXAM CAPSULE (મહત્વપૂર્ણ સોલાર પાર્ક અને ડેમ્સ)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Infrastructure / Project</th>
+                <th>Location / State</th>
+                <th>Key Facts / Capacity</th>
+            </tr>
+            <tr>
+                <td><strong>Bhadla Solar Park</strong></td>
+                <td>Jodhpur District, Rajasthan</td>
+                <td>ભારતનો સૌથી મોટો સોલાર પાર્ક (ક્ષમતા: 2245 MW, વિસ્તાર: 14000 એકર).</td>
+            </tr>
+            <tr>
+                <td><strong>Pavagada Solar Park</strong> (Shakti Sthala)</td>
+                <td>Tumakuru, Karnataka</td>
+                <td>પ્લગ-એન્ડ-પ્લે લેન્ડ લીઝ મોડેલ પર આધારિત સોલાર પાર્ક (2000 MW).</td>
+            </tr>
+            <tr>
+                <td><strong>Omkareshwar Floating Solar Project</strong></td>
+                <td>Narmada River, Madhya Pradesh</td>
+                <td>વિશ્વનો સૌથી મોટો ફ્લોટિંગ સોલાર એનર્જી પ્રોજેક્ટ (600 MW).</td>
+            </tr>
+            <tr>
+                <td><strong>Chenab Rail Arch Bridge</strong></td>
+                <td>Jammu & Kashmir (USBRL Project)</td>
+                <td>નદીના પટથી 359 મીટર ઊંચો વિશ્વનો સૌથી ઊંચો રેલવે આર્ચ બ્રિજ.</td>
+            </tr>
+            <tr>
+                <td><strong>Atal Setu</strong> (Mumbai Trans Harbour Link)</td>
+                <td>Maharashtra (Sewri to Chirle)</td>
+                <td>ભારતનો સૌથી લાંબો દરિયાઈ પુલ (Length: 21.8 km).</td>
+            </tr>
+            <tr>
+                <td><strong>Statue of Unity</strong></td>
+                <td>Kevadia, Gujarat (Narmada River)</td>
+                <td>વિશ્વની સૌથી ઊંચી પ્રતિમા (Height: 182 meters), સરદાર વલ્લભભાઈ પટેલને સમર્પિત.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">⭐ IMPORTANT FACTS (ડેમ્સ, નદીઓ અને નેશનલ પાર્ક્સ)</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 DAMS, RIVERS & PARKS</span>
+        <ul>
+            <li><strong>Tehri Dam:</strong> ભારતનો સૌથી ઊંચો ડેમ (Highest Dam), ઉત્તરાખંડમાં <strong>Bhagirathi River</strong> પર આવેલો છે (ઊંચાઈ: 260.5 meters).</li>
+            <li><strong>Hirakud Dam:</strong> વિશ્વનો સૌથી લાંબો અર્થન ડેમ (Longest Earthen Dam), ઓરિસ્સામાં <strong>Mahanadi River</strong> પર આવેલો છે (લંબાઈ: 25.8 km).</li>
+            <li><strong>Sardar Sarovar Dam:</strong> ગુજરાતમાં નર્મદા નદી પર સ્થિત મુખ્ય ડેમ.</li>
+            <li><strong>Nagjuna Sagar Dam:</strong> કૃષ્ણા નદી પર આંધ્રપ્રદેશ અને તેલંગાણાની સરહદે આવેલો ડેમ.</li>
+            <li><strong>Kudankulam Nuclear Power Plant:</strong> તમિલનાડુમાં આવેલો ભારતનો સૌથી મોટો ન્યુક્લિયર પાવર પ્લાન્ટ (રશિયાના સહયોગથી).</li>
+            <li><strong>Keibul Lamjao National Park:</strong> મણિપુરની લોકટક લૅક પર આવેલો વિશ્વનો એકમાત્ર <strong>Floating National Park</strong>.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">📊 IMPORTANT DATA (આસામના નેશનલ પાર્ક્સ અને સ્મોલ સેવિંગ્સ)</h2>
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 ASSAM NATIONAL PARKS & SCHEMES</span>
+        <p>આસામ રાજ્યમાં કુલ <strong>8 નેશનલ પાર્ક્સ</strong> આવેલા છે:</p>
+        <ol>
+            <li><strong>Kaziranga National Park</strong> (એક સિંગડાવાળા ગેંડા માટે વિશ્વપ્રસિદ્ધ).</li>
+            <li><strong>Manas National Park</strong></li>
+            <li><strong>Nameri National Park</strong></li>
+            <li><strong>Dibru-Saikhowa National Park</strong></li>
+            <li><strong>Orang National Park</strong></li>
+            <li><strong>Raimona National Park</strong></li>
+            <li><strong>Dehing Patkai National Park</strong></li>
+            <li><strong>Sikna Jalahau / Aflong area parks</strong></li>
+        </ol>
+        <p><strong>Small Savings Schemes Interest Rates:</strong><br>
+        - Public Provident Fund (PPF): <strong>7.1%</strong> (Maturity: 15 Years)<br>
+        - Kisan Vikas Patra (KVP): Maturity period <strong>115 Months</strong></p>
+    </div>
+
+    <h2 class="section-title">🧠 MEMORY TRICKS</h2>
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 TRICKS FOR REVISION</span>
+        <p>
+        - <strong>Tehri Dam / Bhagirathi:</strong> 'તેરી ડૅન' સાંભળીને લોકો ભાગવા (Bhagirathi) લાગે છે.<br>
+        - <strong>Hirakud / Mahanadi:</strong> જો હીરો (Heera) મળી જાય તો માણસ મહાન (Mahanadi) બની જાય!<br>
+        - <strong>Nagarjuna Sagar / Krishna:</strong> જ્યાં અર્જુન હોય ત્યાં કૃષ્ણ (Krishna) ભગવાન હોય જ!<br>
+        - <strong>Kaziranga / Assam:</strong> આસામમાં ગેંડાનો સામનો કરવો 'આસાન' નથી.
+        </p>
+    </div>
+
+    <div class="card card-trap">
+        <span class="tag tag-exam-trap">🟣 EXAM TRAP</span>
+        <p><strong>Largest vs First Nuclear Plant:</strong> ભારતમાં સૌથી પહેલો ન્યુક્લિયર પાવર પ્લાન્ટ <strong>Tarapur (Maharashtra)</strong> છે (1969), જ્યારે ભારતનો સૌથી મોટો (Largest) ન્યુક્લિયર પાવર પ્લાન્ટ <strong>Kudankulam (Tamil Nadu)</strong> છે. બંનેને ભેગા કરવા નહીં.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. ભારતનો સૌથી મોટો સોલાર પાર્ક (Largest Solar Park) કયા રાજ્યમાં આવેલો છે?</p>
+        <ul class="mcq-options">
+            <li>A. Gujarat</li>
+            <li>B. Rajasthan (Bhadla)</li>
+            <li>C. Karnataka</li>
+            <li>D. Madhya Pradesh</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Rajasthan (Bhadla)</strong><br>
+            Explanation: જોધપુર, રાજસ્થાન સ્થિત ભાદલા સોલાર પાર્ક ભારતનો સૌથી મોટો સોલાર પાર્ક છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. વિશ્વનો સૌથી મોટો ફ્લોટિંગ સોલાર એનર્જી પ્રોજેક્ટ કઈ નદી પર બનાવવામાં આવ્યો છે?</p>
+        <ul class="mcq-options">
+            <li>A. Ganga River</li>
+            <li>B. Narmada River (Omkareshwar)</li>
+            <li>C. Brahmaputra River</li>
+            <li>D. Mahanadi River</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Narmada River (Omkareshwar)</strong><br>
+            Explanation: મધ્યપ્રદેશમાં ઓમકારેશ્વર ડેમ ખાતે નર્મદા નદી પર વિશ્વનો સૌથી મોટો ફ્લોટિંગ સોલાર પ્રોજેક્ટ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. ભારતનો સૌથી ઊંચો ડેમ (Highest Dam) કયો છે અને તે કઈ નદી પર છે?</p>
+        <ul class="mcq-options">
+            <li>A. Hirakud Dam - Mahanadi</li>
+            <li>B. Tehri Dam - Bhagirathi (Uttarakhand)</li>
+            <li>C. Sardar Sarovar - Narmada</li>
+            <li>D. Bhakra Nangal - Sutlej</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Tehri Dam - Bhagirathi (Uttarakhand)</strong><br>
+            Explanation: ટેરી ડેમ ઉત્તરાખંડમાં ભાગીરથી નદી પર આવેલો ભારતનો સૌથી ઊંચો ડેમ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. વિશ્વનો સૌથી લાંબો અર્થન ડેમ (Longest Earthen Dam) કયો છે?</p>
+        <ul class="mcq-options">
+            <li>A. Hirakud Dam (Odisha)</li>
+            <li>B. Sardar Sarovar Dam</li>
+            <li>C. Nagarjuna Sagar</li>
+            <li>D. Tungabhadra Dam</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Hirakud Dam (Odisha)</strong><br>
+            Explanation: ઓરિસ્સામાં મહાનદી પર બનેલો હીરાકુડ ડેમ વિશ્વનો સૌથી લાંબો માટીનો (Earthen) ડેમ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. વિશ્વનો એકમાત્ર ફ્લોટિંગ નેશનલ પાર્ક (Keibul Lamjao National Park) કઈ લેક પર આવેલો છે?</p>
+        <ul class="mcq-options">
+            <li>A. Chilika Lake</li>
+            <li>B. Loktak Lake (Manipur)</li>
+            <li>C. Dal Lake</li>
+            <li>D. Wular Lake</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Loktak Lake (Manipur)</strong><br>
+            Explanation: મણિપુરની લોકટક ઝીલ પર કેબુલ લમઝાઓ નેશનલ પાર્ક આવેલો છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. ભારતનું સૌથી મોટું ન્યુક્લિયર પાવર પ્લાન્ટ (Largest Nuclear Power Plant) કયા રાજ્યમાં છે?</p>
+        <ul class="mcq-options">
+            <li>A. Maharashtra (Tarapur)</li>
+            <li>B. Tamil Nadu (Kudankulam)</li>
+            <li>C. Gujarat (Kakrapar)</li>
+            <li>D. Uttar Pradesh (Narora)</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Tamil Nadu (Kudankulam)</strong><br>
+            Explanation: તમિલનાડુમાં આવેલો કુંદનકુલમ ન્યુક્લિયર પાવર પ્લાન્ટ ભારતનો સૌથી મોટો પ્લાન્ટ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. ભારતનો સૌથી પહેલો ન્યુક્લિયર પાવર પ્લાન્ટ કયો છે?</p>
+        <ul class="mcq-options">
+            <li>A. Tarapur Atomic Power Station, Maharashtra</li>
+            <li>B. Kudankulam</li>
+            <li>C. Kaiga</li>
+            <li>D. Kalpakkam</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Tarapur Atomic Power Station, Maharashtra</strong><br>
+            Explanation: મહારાષ્ટ્ર સ્થિત તારાપુર એ ભારતનો સૌથી પ્રથમ ન્યુક્લિયર પાવર પ્લાન્ટ છે (1969).
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. નાગાર્જુન સાગર ડેમ કઈ નદી પર બાંધવામાં આવ્યો છે?</p>
+        <ul class="mcq-options">
+            <li>A. Godavari</li>
+            <li>B. Krishna River</li>
+            <li>C. Kaveri</li>
+            <li>D. Narmada</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Krishna River</strong><br>
+            Explanation: નાગાર્જુન સાગર ડેમ કૃષ્ણા નદી પર આંધ્રપ્રદેશ અને તેલંગાણાની સરહદે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. પબ્લિક પ્રોવિડન્ટ ફંડ (PPF) પર વર્તમાન વ્યાજદર કેટલો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 6.8%</li>
+            <li>B. 7.1%</li>
+            <li>C. 7.5%</li>
+            <li>D. 8.0%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 7.1%</strong><br>
+            Explanation: પીપીએફ (PPF) યોજના પર સરકાર દ્વારા 7.1% નો વ્યાજદર આપવામાં આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. હોર્નબિલ ફેસ્ટિવલ (Hornbill Festival) કયા રાજ્યમાં ઉજવવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Assam</li>
+            <li>B. Nagaland</li>
+            <li>C. Mizoram</li>
+            <li>D. Manipur</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Nagaland</strong><br>
+            Explanation: 'તહેવારોના તહેવાર' તરીકે ઓળખાતો હોર્નબિલ ફેસ્ટિવલ નાગાલેન્ડમાં 1 થી 10 ડિસેમ્બર દરમિયાન ઉજવાય છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
