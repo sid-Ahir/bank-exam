@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO Vs FPO Vs Rights issue</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    IPO Vs FPO Vs Rights issue
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 CAPITAL MARKET & MARKETS CLASSIFICATION</span>
+        <p><strong>Capital Market</strong> (કેપિટલ માર્કેટ) એ દીર્ઘગાળાના ભંડોળ (Long-term Funds) માટેની બજાર છે, જેને મુખ્યત્વે બે ભાગમાં વહેંચવામાં આવે છે:</p>
+        <ul>
+            <li><strong>Primary Market (પ્રાથમિક બજાર):</strong> જ્યાં કંપનીઓ દ્વારા પહેલીવાર કે ત્યારબાદ નવા શેર્સ (New Shares) જારી કરવામાં આવે છે.</li>
+            <li><strong>Secondary Market (માધ્યમિક બજાર):</strong> જ્યાં અગાઉ જારી થયેલા શેર્સનું ટ્રેડિંગ (खरीद-વેચાણ) થાય છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Detailed Comparison: IPO vs FPO vs Rights Issue</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameters</th>
+                <th>IPO (Initial Public Offering)</th>
+                <th>FPO (Follow on Public Offer)</th>
+                <th>Rights Issue</th>
+            </tr>
+            <tr>
+                <td><strong>Definition</strong></td>
+                <td>જ્યારે કોઈ ખાનગી કંપની <strong>પ્રથમ વખત</strong> પબ્લિકમાં પોતાના નવા શેર્સ ઓફર કરે છે.</td>
+                <td>IPO આવ્યા પછી કંપની દ્વારા ભવિષ્યમાં બીજી, ત્રીજી કે અન્ય વાર નવા શેર્સ પબ્લિકમાં લાવવામાં આવે છે.</td>
+                <td>કંપની દ્વારા નવા શેર્સ પબ્લિકને બદલે માત્ર પોતાના <strong>Existing Shareholder (પહેલેથી હાજર શેરહોલ્ડર્સ)</strong> ને જ ઓફર કરવામાં આવે છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Timing / Sequence</strong></td>
+                <td>હંમેશા સૌથી પહેલી પ્રોસેસ (First Time Ever).</td>
+                <td>IPO પછી ગમે ત્યારે (Second time onwards).</td>
+                <td>IPO અથવા FPO પછી જ્યારે પણ વધુ મૂડીની જરૂર પડે ત્યારે.</td>
+            </tr>
+            <tr>
+                <td><strong>Target Audience</strong></td>
+                <td>સામાન્ય જનતા / પબ્લિક (General Public).</td>
+                <td>સામાન્ય જનતા / પબ્લિક (General Public).</td>
+                <td>માત્ર હાલના શેરહોલ્ડર્સ (Existing Shareholders).</td>
+            </tr>
+            <tr>
+                <td><strong>Regulatory Requirement</strong></td>
+                <td>SEBI ની મંજૂરી માટે Red Herring Prospectus (DRHP) સબમિટ કરવું પડે છે.</td>
+                <td>SEBI ના માર્ગદર્શિકા મુજબ દસ્તાવેજો રજૂ કરવા પડે છે.</td>
+                <td>કંપનીના હાલના રોકાણકારોને જ પ્રાયોરિટી આપવામાં આવે છે.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Primary Market Features</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 PRIMARY MARKET CONCEPTS</span>
+        <ul>
+            <li><strong>New Issuance:</strong> Primary Market માં હંમેશા નવા શેર્સ (New Shares) જ કંપની દ્વારા જારી કરવામાં આવે છે.</li>
+            <li><strong>SEBI Approval:</strong> કોઈપણ કંપની સીધી પબ્લિકમાં જઈને શેર્સ વેચી શકતી નથી; તેના માટે સેબી (SEBI) ની મંજૂરી અને નિયમોનું પાલન કરવું અનિવાર્ય છે.</li>
+            <li><strong>Fund Raising:</strong> કંપનીઓ બિઝનેસના એક્સપન્શન (Expansion), નવી બ્રાન્ચો ખોલવા અથવા દેવું ચૂકવવા માટે આ માધ્યમો દ્વારા ફંડ એકત્ર કરે છે.</li>
+        </ul>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / REVISION BOX</span>
+        <p><strong>Quick Difference Summary:</strong><br>
+        - First time public entry = <strong>IPO</strong><br>
+        - Subsequent public offerings = <strong>FPO</strong><br>
+        - Offering to family/existing holders = <strong>Rights Issue</strong><br>
+        - All three deal with <strong>New Shares</strong> and are part of the <strong>Primary Market</strong>.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. IPO નું પૂરું નામ (Full Form) શું છે?</p>
+        <ul class="mcq-options">
+            <li>A. Indian Public Output</li>
+            <li>B. Initial Public Offering</li>
+            <li>C. Internal Private Organization</li>
+            <li>D. Initial Private Output</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Initial Public Offering</strong><br>
+            Explanation: IPO એટલે Initial Public Offering, જે કંપની દ્વારા પહેલીવાર પબ્લિકમાં શેર લાવવાની પ્રક્રિયા છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. FPO નું પૂરું નામ (Full Form) શું છે?</p>
+        <ul class="mcq-options">
+            <li>A. Financial Private Organization</li>
+            <li>B. Follow on Public Offer</li>
+            <li>C. Fixed Public Output</li>
+            <li>D. First Public Offering</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Follow on Public Offer</strong><br>
+            Explanation: FPO એટલે Follow on Public Offer, જે IPO પછી કંપની દ્વારા ફરીથી પબ્લિકમાં નવા શેર્સ લાવવાની પદ્ધતિ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. જ્યારે કોઈ કંપની પોતાના પહેલેથી હાજર શેરહોલ્ડર્સને જ નવા શેર્સ ખરીદવાનો અધિકાર આપે છે, તેને શું કહેવાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. IPO</li>
+            <li>B. FPO</li>
+            <li>C. Rights Issue</li>
+            <li>D. Secondary Trading</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Rights Issue</strong><br>
+            Explanation: રાઇટ્સ ઇશ્યૂમાં નવા શેર્સ માત્ર અગાઉથી હાજર શેરધારકોને જ ઓફર કરવામાં આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. IPO, FPO અને Rights Issue ત્રણેય કઈ માર્કેટના ભાગ છે?</p>
+        <ul class="mcq-options">
+            <li>A. Secondary Market</li>
+            <li>B. Primary Market</li>
+            <li>C. Money Market</li>
+            <li>D. Derivative Market</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Primary Market</strong><br>
+            Explanation: નવા શેર્સનું પ્રથમવાર કે ત્યારબાદ જારી થવું એ પ્રાઇમરી માર્કેટ (Primary Market) અંતર્ગત આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. કંપની દ્વારા પબ્લિકમાં શેર ઇશ્યૂ કરવા માટે કઈ સંસ્થાની મંજૂરી અને નિયમોનું પાલન કરવું પડે છે?</p>
+        <ul class="mcq-options">
+            <li>A. RBI</li>
+            <li>B. SEBI</li>
+            <li>C. NABARD</li>
+            <li>D. IRDAI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. SEBI</strong><br>
+            Explanation: કેપિટલ માર્કેટ અને પબ્લિક ઇશ્યૂનું નિયમન સેબી (SEBI) દ્વારા થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. કઈ પ્રક્રિયા માત્ર જીવનમાં (કંપનીના અસ્તિત્વમાં) એક જ વાર થઈ શકે છે?</p>
+        <ul class="mcq-options">
+            <li>A. IPO</li>
+            <li>B. FPO</li>
+            <li>C. Rights Issue</li>
+            <li>D. Secondary Market sale</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. IPO</strong><br>
+            Explanation: Initial Public Offering એ કંપની દ્વારા પબ્લિકમાં લાવવામાં આવતો પ્રથમ અને એકમાત્ર મૂળ પ્રસ્તાવ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. FPO લાવવા માટેની શરત શું હોઈ શકે?</p>
+        <ul class="mcq-options">
+            <li>A. Company must be issuing shares for the very first time</li>
+            <li>B. Company must have already issued an IPO in the past</li>
+            <li>C. Company must be a bank only</li>
+            <li>D. Company must not have any shareholders</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Company must have already issued an IPO in the past</strong><br>
+            Explanation: FPO લાવવા માટે કંપની અગાઉ ઓછામાં ઓછું એકવાર IPO લાવી ચૂકી હોવી જોઈએ.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. પ્રાઇમરી માર્કેટ (Primary Market) નું મુખ્ય લક્ષણ નીચેનામાંથી કયું છે?</p>
+        <ul class="mcq-options">
+            <li>A. Trading of old existing shares between investors</li>
+            <li>B. Issuance of completely new shares by the company</li>
+            <li>C. Lending short term money to banks</li>
+            <li>D. Foreign currency exchange</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Issuance of completely new shares by the company</strong><br>
+            Explanation: પ્રાઇમરી માર્કેટમાં હંમેશા કંપની દ્વારા તદ્દન નવા શેર્સ જારી થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. સેબી (SEBI) સમક્ષ કંપની દ્વારા પ્રાઇમરી ઇશ્યૂ માટે રજૂ કરવામાં આવતા ડ્રાફ્ટ દસ્તાવેજને શું કહે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Red Herring Prospectus (DRHP)</li>
+            <li>B. Balance Sheet</li>
+            <li>C. Tax Return</li>
+            <li>D. Audit Report</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Red Herring Prospectus (DRHP)</strong><br>
+            Explanation: IPO કે પ્રાઇમરી ઇશ્યૂ માટે સેબીમાં સબમિટ થતો ડ્રાફ્ટ ડેટા DRHP (Draft Red Herring Prospectus) કહેવાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. જો કોઈ કંપનીને પોતાના વર્તમાન શેરધારકો પાસેથી વધારાની ઇક્વિટી મૂડી (Equity Capital) એકત્ર કરવી હોય, તો તે કયો વિકલ્પ પસંદ કરશે?</p>
+        <ul class="mcq-options">
+            <li>A. Rights Issue</li>
+            <li>B. Bank Overdraft</li>
+            <li>C. Foreign Direct Investment only</li>
+            <li>D. Treasury Bill purchase</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Rights Issue</strong><br>
+            Explanation: વર્તમાન શેરધારકો પાસેથી મૂડી મેળવવા માટે રાઇટ્સ ઇશ્યૂ શ્રેષ્ઠ માર્ગ છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
