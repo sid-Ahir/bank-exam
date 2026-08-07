@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>બેંકિંગ અવેરનેસ: ઇતિહાસ અને વિકાસ | માસ્ટર નોટ્સ</title>
+    <style>
+        :root {
+            --bg-deep: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #334155;
+            --accent-gold: #b45309;
+            --accent-blue: #0369a1;
+            --accent-green: #15803d;
+            --accent-orange: #c2410c;
+            --accent-purple: #7e22ce;
+            --accent-red: #b91c1c;
+            --accent-yellow: #a16207;
+            --border-color: #cbd5e1;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.8;
+            font-size: 1.125rem;
+            padding-bottom: 80px;
+        }
+
+        /* Sticky Header - Only Nationalisation and Merger */
+        header.sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--accent-gold);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .header-title h1 {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Sections & Typography */
+        section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px;
+        }
+
+        h2.section-title {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin: 25px 0 12px 0;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 18px;
+            color: var(--text-muted);
+            font-size: 1.125rem;
+        }
+
+        ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 1.125rem;
+        }
+
+        /* Custom Cards & Boxes */
+        .card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .box-blue { border-left: 6px solid var(--accent-blue); }
+        .box-green { border-left: 6px solid var(--accent-green); }
+        .box-orange { border-left: 6px solid var(--accent-orange); }
+        .box-purple { border-left: 6px solid var(--accent-purple); }
+        .box-red { border-left: 6px solid var(--accent-red); }
+        .box-yellow { border-left: 6px solid var(--accent-yellow); }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .badge-blue { background: #e0f2fe; color: var(--accent-blue); }
+        .badge-green { background: #dcfce7; color: var(--accent-green); }
+        .badge-orange { background: #ffedd5; color: var(--accent-orange); }
+        .badge-purple { background: #f3e8ff; color: var(--accent-purple); }
+        .badge-red { background: #fee2e2; color: var(--accent-red); }
+        .badge-yellow { background: #fef9c3; color: var(--accent-yellow); }
+
+        /* Tables */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        th, td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.05rem;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        tr:hover {
+            background-color: var(--bg-card-hover);
+        }
+
+        /* Timelines & Flowcharts */
+        .timeline {
+            position: relative;
+            padding-left: 35px;
+            margin: 25px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            bottom: 5px;
+            width: 4px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 8px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            border: 3px solid var(--bg-deep);
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            color: var(--accent-gold);
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .flow-node {
+            background: #ffffff;
+            border: 2px solid var(--border-color);
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--text-main);
+            box-shadow: var(--shadow);
+            min-width: 280px;
+            font-size: 1.1rem;
+        }
+
+        .flow-arrow {
+            color: var(--accent-gold);
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            header.sticky-header {
+                display: none;
+            }
+            .card, table {
+                background: #ffffff;
+                border: 1px solid #ccc;
+                box-shadow: none;
+            }
+            th {
+                background-color: #f1f5f9;
+                color: #000;
+            }
+            p, td, th, li {
+                color: #111;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- STICKY HEADER - Nationalisation and Merger Only -->
+    <header class="sticky-header">
+        <div class="header-title">
+            <h1>Nationalisation & Merger (રાષ્ટ્રીયકરણ અને વિલીનીકરણ)</h1>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. INTRODUCTION TO BANKING -->
+        <section>
+            <h2 class="section-title">🏛️ 1. બેંકિંગની પ્રસ્તાવના (Introduction to Banking)</h2>
+            <div class="card box-blue">
+                <span class="badge badge-blue">સંકલ્પના (Concept)</span>
+                <p>બેંકિંગ સંસ્થાઓનો ઉદ્ભવ સામાજિક અને વેપારી જરૂરિયાતોમાંથી થયો છે. ઔપચારિક બેંકિંગ સિસ્ટમની શરૂઆત થઈ તે પહેલાં, સમાજ નાણાકીય જરૂરિયાતો માટે અનૌપચારિક ધિરાણકારો પર આધાર રાખતો હતો, જેને સ્થાનિક ભાષામાં <strong>સાહુકાર</strong> અથવા મહાજન કહેવામાં આવતા.</p>
+                <p><strong>સામાન્ય લોકોને પડતી મુશ્કેલીઓ:</strong> સાહુકારો પાસેથી લોન લેતા સામાન્ય નાગરિકો, ખેડૂતો અને નાના વેપારીઓનું ભારે શોષણ થતું હતું. ઊંચા વ્યાજદર અને દેવાના બોજને કારણે એકવાર લોન લેનાર પરિવાર પેઢીઓ સુધી દેવાના ચક્રમાં ફસાયેલો રહેતો, અને પોતાની જમીન કે ઢોર-ઢાંખર ગુમાવતો.</p>
+                <p><strong>યોગ્ય નાણાકીય સંસ્થાઓની જરૂરિયાત:</strong> સામાન્ય જનતાને સાહુકારોના શોષણથી બચાવવા, બચત સુરક્ષિત રાખવા અને વેપારી પ્રવૃત્તિઓને વ્યવસ્થિત રીતે ભંડોળ પૂરું પાડવા માટે <strong>બેંકો</strong> જેવી સંગઠિત સંસ્થાઓનો વિકાસ થયો.</p>
+            </div>
+        </section>
+
+        <!-- 2. EVOLUTION OF MONEY -->
+        <section>
+            <h2 class="section-title">💸 2. નાણાંનો વિકાસ (Evolution of Money)</h2>
+            <div class="card box-green">
+                <span class="badge badge-green">વિકાસ ક્રમ (Timeline)</span>
+                <div class="flowchart">
+                    <div class="flow-node">સાટા પદ્ધતિ (Barter System - વસ્તુ સામે વસ્તુ)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">ધાતુ ચલણ (Metal Currency - સોનું, ચાંદી, તાંબુ)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">કાગળનું ચલણ (Paper Currency - નોટ્સ)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">પ્લાસ્ટિક મની (Plastic Money - ડેબિટ/ક્રેડિટ કાર્ડ)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">ડિજિટલ મની (Digital Money - UPI, વોલેટ્સ, નેટબેંકિંગ)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">ક્રિપ્ટોકરન્સી (Cryptocurrency - ડિજિટલ એસેટ્સ)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. BARTER SYSTEM -->
+        <section>
+            <h2 class="section-title">🌾 3. સાટા પદ્ધતિ (Barter System)</h2>
+            <div class="card box-purple">
+                <span class="badge badge-purple">સંકલ્પના બૉક્સ</span>
+                <h3>વ્યાખ્યા (Definition)</h3>
+                <p><strong>સાટા પદ્ધતિ = નાણાંના ઉપયોગ વગર એક વસ્તુના બદલામાં બીજી વસ્તુની સીધી આપ-લે કરવી.</strong></p>
+                
+                <h3>વ્યાખ્યાન આધારિત ઉદાહરણો</h3>
+                <p>ઘઉંના બદલામાં કપડાં મેળવવા, ઘઉંના બદલામાં ચોખા, શાકભાજીના બદલામાં વાસણો અથવા અન્ય ખાધ્ય ચીજવસ્તુઓની સીધી અદલાબદલી કરવી.</p>
+
+                <h3>સાટા પદ્ધતિની મુખ્ય સમસ્યાઓ</h3>
+                <p>1. <strong>ઈચ્છાઓનો બેવડો સંજોગ (Double Coincidence of Wants):</strong> બંને પક્ષકારો પાસે એવી વસ્તુ હોવી જોઈએ જે બીજાને જોઈએ છે.</p>
+                <p>2. <strong>યોગ્ય વ્યક્તિ શોધવામાં મુશ્કેલી:</strong> સમય અને પ્રયત્નોનો બગાડ થતો.</p>
+                <p>3. <strong>મૂલ્યના માપદંડનો અભાવ:</strong> એક ગાય એટલે કેટલા કિલો ઘઉં? તે નક્કી કરવું મુશ્કેલ હતું.</p>
+                <p>4. <strong>વિનિમય દર નક્કી કરવામાં મુશ્કેલી:</strong> મૂલ્યાંકન બાબતે સતત વિવાદો થતા.</p>
+                <p>5. <strong>નાશવંત વસ્તુઓનો સંગ્રહ:</strong> દૂધ કે શાકભાજી જેવી ચીજો લાંબો સમય સાચવી શકાતી નહીં.</p>
+            </div>
+        </section>
+
+        <!-- 4. WHY BANKS WERE NEEDED -->
+        <section>
+            <h2 class="section-title">⚖️ 4. બેંકોની જરૂરિયાત કેમ પડી?</h2>
+            <div class="card box-orange">
+                <span class="badge badge-orange">પરીક્ષા લક્ષી પ્રશ્ન</span>
+                <h3>«ઔપચારિક બેંકિંગ સંસ્થાઓ શા માટે ઊભી થઈ?»</h3>
+                <p>અનૌપચારિક સાહુકાર પ્રથાએ અર્થવ્યવસ્થામાં ગંભીર અસંતુલન ઊભું કર્યું હતું. ખેરાત કે નબળા વર્ષોમાં મોંઘા વ્યાજે લોન લેનાર ખેડૂતો દેવાના ભારે બોજમાં ફસાઈ જતા. ધીરાણને વ્યવસ્થિત કરવા, બચતો સુરક્ષિત રીતે એકત્રિત કરવા અને યોગ્ય વ્યાજદરે કૃષિ તેમજ ઉદ્યોગોને નાણાં પૂરા પાડવા માટે બેંકિંગ પદ્ધતિ અનિવાર્ય બની ગઈ.</p>
+            </div>
+        </section>
+
+        <!-- 5. EVOLUTION OF BANKING IN INDIA -->
+        <section>
+            <h2 class="section-title">📜 5. ભારતમાં બેંકિંગનો ઇતિહાસ (ટાઈમલાઈન)</h2>
+            <div class="card box-blue">
+                <span class="badge badge-blue">ઐતિહાસિક પાયો</span>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1770 — બેંક ઓફ હિન્દુસ્તાન (Bank of Hindustan)</div>
+                        <p>બ્રિટિશ શાસન દરમિયાન એલેક્ઝાન્ડર એન્ડ કંપની દ્વારા યુરોપિયન પદ્ધતિ પર સ્થપાઈ. આશરે 1832 માં તેની કામગીરી બંધ થઈ. ભારતમાં આધુનિક બેંકિંગનો પ્રારંભિક પાયો.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1786 — જનરલ બેંક ઓફ ઇન્ડિયા (General Bank of India)</div>
+                        <p>બ્રિટિશ વેપારી વિસ્તરણના પ્રારંભિક સમયગાળામાં સ્થપાયેલી અન્ય પ્રારંભિક સંયુક્ત-સ્ટોક બેંક.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. OTHER EARLY BANKS -->
+        <section>
+            <h2 class="section-title">🏦 6. અન્ય પ્રારંભિક અને મહત્વની બેંકો</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>વર્ષ</th>
+                            <th>બેંકનું નામ</th>
+                            <th>મહત્વ / સ્થિતિ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1806</td>
+                            <td>બેંક ઓફ બંગાળ</td>
+                            <td>પ્રથમ પ્રેસિડેન્સી બેંક (શરૂઆતમાં બેંક ઓફ કલકત્તા, 1809 માં નામ બદલાયું)</td>
+                        </tr>
+                        <tr>
+                            <td>1840</td>
+                            <td>બેંક ઓફ બોમ્બે</td>
+                            <td>પશ્ચિમી વેપારને વેગ આપવા સ્થપાયેલી બીજી પ્રેસિડેન્સી બેંક</td>
+                        </tr>
+                        <tr>
+                            <td>1843</td>
+                            <td>બેંક ઓફ મદ્રાસ</td>
+                            <td>દક્ષિણ ભારતના વેપાર માટે સ્થપાયેલી ત્રીજી પ્રેસિડેન્સી બેંક</td>
+                        </tr>
+                        <tr>
+                            <td>1865</td>
+                            <td>અલ્લાહાબાદ બેંક</td>
+                            <td>વાણિજ્યિક જરૂરિયાતો સંતોષતી સૌથી જૂની પબ્લિક સેક્ટર બેંક</td>
+                        </tr>
+                        <tr>
+                            <td>1881</td>
+                            <td>અવધ કોમર્શિયલ બેંક</td>
+                            <td>ભારતીય બોર્ડ સંચાલનવાળી પ્રથમ વ્યાપારી બેંક</td>
+                        </tr>
+                        <tr>
+                            <td>1894</td>
+                            <td>પંજાબ નેશનલ બેંક (PNB)</td>
+                            <td>રાષ્ટ્રવાદી નેતાઓ દ્વારા સ્થપાયેલી પ્રથમ સંપૂર્ણ ભારતીય બેંક</td>
+                        </tr>
+                        <tr>
+                            <td>1906</td>
+                            <td>બેંક ઓફ ઇન્ડિયા અને કેનેરા બેંક</td>
+                            <td>સ્વદેશી ચળવળના સમયગાળા દરમિયાન ઉભરી આવેલી બેંકો</td>
+                        </tr>
+                        <tr>
+                            <td>1908</td>
+                            <td>બેંક ઓફ બરોડા</td>
+                            <td>મહારાજા સયાજીરાવ ગાયકવાડ III દ્વારા વડોદરામાં સ્થપાઈ</td>
+                        </tr>
+                        <tr>
+                            <td>1911</td>
+                            <td>સેન્ટ્રલ બેંક ઓફ ઇન્ડિયા</td>
+                            <td>શરૂઆતથી જ સંપૂર્ણપણે ભારતીય માલિકીની અને સંચાલિત વ્યાપારી બેંક</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 7. PRESIDENCY BANKS -->
+        <section>
+            <h2 class="section-title">🚢 7. પ્રેસિડેન્સી બેંકો અને વેપારી માર્ગો</h2>
+            <div class="card box-green">
+                <span class="badge badge-green">વિગતવાર સંકલ્પના</span>
+                <p>બ્રિટિશ ઈસ્ટ ઇન્ડિયા કંપની દ્વારા વહીવટી નાણાં વ્યવહાર, ચલણ છાપવા અને મુખ્ય દરિયાકાંઠાના મથકો દ્વારા આંતરરાષ્ટ્રીય વેપાર સંભાળવા માટે ત્રણ મોટી પ્રેસિડેન્સી બેંકો સ્થાપવામાં આવી હતી:</p>
+                <p><strong>1. બેંક ઓફ બંગાળ (1806) — કલકત્તા / બંગાળની ખાડી</strong></p>
+                <p><strong>2. બેંક ઓફ બોમ્બે (1840) — મુંબઈ / અરબી સમુદ્ર</strong></p>
+                <p><strong>3. બેંક ઓફ મદ્રાસ (1843) — મદ્રાસ / દક્ષિણ દ્વીપકલ્પ</strong></p>
+                <p>આ બંદરો બ્રિટનમાં કાચો માલ (કપાસ, શણ, ગળી) મોકલવા અને તૈયાર માલ આયાત કરવા માટે મહત્વપૂર્ણ દરિયાઈ માર્ગો હતા. તેમની વ્યૂહાત્મક સ્થિતિને કારણે, એકત્રીકરણ પહેલાં તેમની પાસે વિશેષ દરજ્જો અને અર્ધ-કેન્દ્રીય બેંકિંગ સત્તાઓ (જેટલી નોટો છાપવાની સત્તા) હતી.</p>
+            </div>
+        </section>
+
+        <!-- 8. SWADESHI MOVEMENT & INDIAN BANKS -->
+        <section>
+            <h2 class="section-title">🇮🇳 8. સ્વદેશી ચળવળ અને ભારતીય બેંકો</h2>
+            <div class="card box-red">
+                <span class="badge badge-red">પરીક્ષા માટે અત્યંત મહત્વનું</span>
+                <p><strong>1905 સ્વદેશી ચળવળ:</strong> લોર્ડ કર્ઝન દ્વારા બંગાળના ભાગલા ("ભાગલા પાડો અને રાજ કરો" ની નીતિ) ના વિરોધમાં શરૂ થઈ. ભારતીયોએ બ્રિટિશ માલનો બહિષ્કાર કર્યો અને સ્વદેશી ચીજવસ્તુઓને પ્રોત્સાહન આપ્યું.</p>
+                <p>આ રાષ્ટ્રવાદી જાગૃતિએ દેશી ઉદ્યોગસાહસિકો અને નેતાઓને સ્વાવલંબી ભારતીય નાણાકીય સંસ્થાઓ સ્થાપવા પ્રેરણા આપી:</p>
+                <ul>
+                    <li><strong>1906:</strong> બેંક ઓફ ઇન્ડિયા અને કેનેરા બેંક</li>
+                    <li><strong>1908:</strong> બેંક ઓફ બરોડા</li>
+                    <li><strong>1911:</strong> સેન્ટ્રલ બેંક ઓફ ઇન્ડિયા</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 9. PUNJAB NATIONAL BANK -->
+        <section>
+            <h2 class="section-title">🏦 9. પંજાબ નેશનલ બેંક (PNB)</h2>
+            <div class="card box-yellow">
+                <span class="badge badge-yellow">પ્રીમિયમ ફેક્ટ કાર્ડ</span>
+                <p><strong>સ્થાપના વર્ષ:</strong> 1894</p>
+                <p><strong>મહત્વ:</strong> સંપૂર્ણપણે ભારતીયો દ્વારા ભારતીય મૂડીથી સંચાલિત પ્રથમ સ્વદેશી બેંક.</p>
+                <p><strong>સ્થાપકો:</strong> રાષ્ટ્રવાદી નેતાઓ <strong>લાલા લજપત રાય</strong> અને <strong>દયાલ સિંહ મજીઠિયા</strong>.</p>
+                <p><strong>મુખ્ય મથક:</strong> નવી દિલ્હી</p>
+                <p><strong>સ્થાપના દિવસ:</strong> 12 એપ્રિલ</p>
+                <p><em>વ્યાખ્યાન નોંધ:</em> બ્રિટિશ શાસન દરમિયાન નાણાકીય સ્વનિર્ભરતા તરફનું એક ઐતિહાસિક પગલું.</p>
+            </div>
+        </section>
+
+        <!-- 10. IMPERIAL BANK OF INDIA -->
+        <section>
+            <h2 class="section-title">🔥 10. ઇમ્પીરીયલ બેંક ઓફ ઇન્ડિયા અને મર્જર ફ્લોચાર્ટ</h2>
+            <div class="card box-orange">
+                <span class="badge badge-orange">ઉચ્ચ પરીક્ષા અગ્રતા</span>
+                <p><strong>27 જાન્યુઆરી 1921</strong> ના રોજ, ત્રણેય પ્રેસિડેન્સી બેંકોનું વિલીનીકરણ કરીને એક શક્તિશાળી સંસ્થા બનાવવામાં આવી: <strong>ઇમ્પીરીયલ બેંક ઓફ ઇન્ડિયા (Imperial Bank of India)</strong>.</p>
+                
+                <div class="flowchart" style="margin-top: 25px;">
+                    <div class="flow-node">બેંક ઓફ બંગાળ (1806)</div>
+                    <div class="flow-arrow">+</div>
+                    <div class="flow-node">બેંક ઓફ બોમ્બે (1840)</div>
+                    <div class="flow-arrow">+</div>
+                    <div class="flow-node">બેંક ઓફ મદ્રાસ (1843)</div>
+                    <div class="flow-arrow">↓ (27 જાન્યુઆરી 1921 ના રોજ વિલીનીકરણ)</div>
+                    <div class="flow-node" style="background: #fef3c7; border-color: var(--accent-gold);">ઇમ્પીરીયલ બેંક ઓફ ઇન્ડિયા</div>
+                    <div class="flow-arrow">↓ (1 જુલાઈ 1955 ના રોજ રાષ્ટ્રીયકરણ)</div>
+                    <div class="flow-node" style="background: #dcfce7; border-color: var(--accent-green);">સ્ટેટ બેંક ઓફ ઇન્ડિયા (SBI)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. STATE BANK OF INDIA (SBI) -->
+        <section>
+            <h2 class="section-title">🏦 11. સ્ટેટ બેંક ઓફ ઇન્ડિયા (SBI)</h2>
+            <div class="card box-green">
+                <span class="badge badge-green">SBI ક્વિક ફેક્ટ</span>
+                <p><strong>તારીખ:</strong> 1 જુલાઈ 1955</p>
+                <p>ઓલ ઇન્ડિયા રૂરલ ક્રેડિટ સર્વે કમિટીની ભલામણોના આધારે, ઇમ્પીરીયલ બેંક ઓફ ઇન્ડિયાનું રાષ્ટ્રીયકરણ કરવામાં આવ્યું અને સ્ટેટ બેંક ઓફ ઇન્ડિયા એક્ટ, 1955 હેઠળ તેને <strong>સ્ટેટ બેંક ઓફ ઇન્ડિયા (SBI)</strong> માં રૂપાંતરિત કરવામાં આવી.</p>
+                <p>"સ્ટેટ" શબ્દ રાષ્ટ્રીય જાહેર માલિકી દર્શાવતો હતો, જેણે સંસ્થાનવાદી "ઇમ્પીરીયલ" નામની જગ્યા લીધી.</p>
+            </div>
+        </section>
+
+        <!-- 12. ROYAL COMMISSION -->
+        <section>
+            <h2 class="section-title">📜 12. રોયલ કમિશન — 1926 (હિલ્ટન યંગ કમિશન)</h2>
+            <div class="card box-purple">
+                <span class="badge badge-purple">પરીક્ષા લિંક</span>
+                <p><strong>વર્ષ:</strong> 1926</p>
+                <p><strong>કમિશન:</strong> ભારતીય ચલણ અને નાણાકીય બાબતો પરનું રોયલ કમિશન (જે <strong>હિલ્ટન યંગ કમિશન</strong> તરીકે ઓળખાય છે).</p>
+                <p><strong>મુખ્ય ભલામણ:</strong> નાણાકીય નીતિ, ચલણ બહાર પાડવા અને બેંકિંગ સ્થિરતાનું નિયમન કરવા માટે ભારત માટે એક કેન્દ્રીય બેંકની રચના કરવાની ભારપૂર્વક ભલામણ કરી, જેનાથી રિઝર્વ બેંક ઓફ ઇન્ડિયાની સ્થાપનાનો રસ્તો સાફ થયો.</p>
+            </div>
+        </section>
+
+        <!-- 13. BUSINESS CYCLE -->
+        <section>
+            <h2 class="section-title">📉 13. બિઝનેસ સાયકલ (Business Cycle)</h2>
+            <div class="card box-blue">
+                <span class="badge badge-blue">સૈદ્ધાંતિક માળખું</span>
+                <p>મૂડીવાદી અને મિશ્ર અર્થવ્યવસ્થાઓમાં અનુભવાતી આર્થિક વધઘટ એક ચોક્કસ તરંગ જેવા પેટર્નને અનુસરે છે જેને બિઝનેસ સાયકલ કહેવામાં આવે છે:</p>
+                <div class="flowchart">
+                    <div class="flow-node">એક્સપન્શન - Expansion (આર્થિક પ્રવૃત્તિઓમાં વૃદ્ધિ)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">બૂમ - Boom (ટોચનું સ્તર / પૂર્ણ ક્ષમતાનો ઉપયોગ)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">કોન્ટ્રાક્શન - Contraction (આર્થિક પ્રવૃત્તિ ઘટવાની શરૂઆત)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">મંદી - Recession (પ્રવૃત્તિઓ સામાન્ય સ્તરથી નીચે જવી)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">ડિપ્રેશન - Depression (અત્યંત નીચું સ્તર / કટોકટી)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">રિકવરી - Recovery (અર્થવ્યવસ્થામાં ઉપર તરફ સુધારો)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. GREAT DEPRESSION -->
+        <section>
+            <h2 class="section-title">📉 14. મહામંદી (The Great Depression - 1929–1930)</h2>
+            <div class="card box-red">
+                <span class="badge badge-red">ઐતિહાસિક કટોકટી</span>
+                <p><strong>સમયગાળો:</strong> ઓક્ટોબર <strong>1929</strong> માં યુએસ સ્ટોક માર્કેટ ક્રેશ થવાથી શરૂ થઈ, જેની ગંભીર વૈશ્વિક આર્થિક અસરો આશરે <strong>1930</strong> ની આસપાસ ટોચ પર પહોંચી અને લગભગ એક દાયકા સુધી ચાલી.</p>
+                <p><strong>વ્યાખ્યાનમાં જણાવેલ મુખ્ય અસરો:</strong></p>
+                <ul>
+                    <li>વિશ્વભરમાં, ખાસ કરીને યુનાઇટેડ સ્ટેટ્સમાં <strong>5,000 થી વધુ બેંકો નાદાર</strong> થઈ ગઈ.</li>
+                    <li>બેરોજગારી વધીને <strong>26%</strong> થી વધુ થઈ ગઈ.</li>
+                    <li>ઔદ્યોગિક ઉત્પાદન, વૈશ્વિક વેપાર અને કોમોડિટીના ભાવમાં મોટો ઘટાડો થયો.</li>
+                    <li>આનાથી છેલ્લી આશાના ધિરાણકર્તા (Lender of Last Resort) તરીકે સેન્ટ્રલ બેંક (RBI) ની તાકીદની જરૂરિયાત સાબિત થઈ.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 15. RESERVE BANK OF INDIA -->
+        <section>
+            <h2 class="section-title">🏦 15. રિઝર્વ બેંક ઓફ ઇન્ડિયા (RBI)</h2>
+            <div class="card box-green">
+                <span class="badge badge-green">મુખ્ય બેંકિંગ સીમાચિહ્ન</span>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1926</div>
+                        <p>હિલ્ટન યંગ કમિશનની ભલામણો.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1934</div>
+                        <p>રિઝર્વ બેંક ઓફ ઇન્ડિયા એક્ટ, 1934 પસાર થયો.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1 એપ્રિલ 1935</div>
+                        <p>કેન્દ્રીય બેંક તરીકે RBI ની સત્તાવાર સ્થાપના.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1937</div>
+                        <p>મુખ્ય મથક કલકત્તાથી કાયમી ધોરણે <strong>મુંબઈ, મહારાષ્ટ્ર</strong> ખસેડવામાં આવ્યું.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1 જાન્યુઆરી 1949</div>
+                        <p>RBI નું રાષ્ટ્રીયકરણ (ખાનગી શેરધારકોમાંથી ભારત સરકારની માલિકીમાં રૂપાંતર).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 16. PRE-INDEPENDENCE VS POST-INDEPENDENCE -->
+        <section>
+            <h2 class="section-title">🇮🇳 15. આઝાદી પહેલાં અને પછીની બેંકિંગ</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>સમયગાળો</th>
+                            <th>ટાઈમલાઈન</th>
+                            <th>મુખ્ય માળખાકીય વિકાસ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>આઝાદી પહેલાં (Pre-Independence)</td>
+                            <td>1770 – 1947</td>
+                            <td>બ્રિટિશ શાસન હેઠળ ઉદ્ભવ, પ્રેસિડેન્સી બેંકો, સ્વદેશી બેંકોનો ઉદય, ઇમ્પીરીયલ બેંકની રચના, RBI ની સ્થાપના (1935).</td>
+                        </tr>
+                        <tr>
+                            <td>આઝાદી પછી (Post-Independence)</td>
+                            <td>1947 – વર્તમાન</td>
+                            <td>RBI નું રાષ્ટ્રીયકરણ (1949), SBI ની રચના (1955), મોટા બેંક રાષ્ટ્રીયકરણ મોજા (1969 અને 1980), LPG આર્થિક સુધારા (1991), અને આધુનિક ડિજિટલ બેંકિંગ.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 17. POST-INDEPENDENCE EVOLUTION -->
+        <section>
+            <h2 class="section-title">🏛️ 17. આઝાદી પછીના બેંકિંગ તબક્કા</h2>
+            <div class="card box-blue">
+                <span class="badge badge-blue">તબક્કાવાર વિકાસ</span>
+                <p><strong>તબક્કો 1 — રાષ્ટ્રીયકરણ પહેલાનો સમયગાળો (1947–1969):</strong> નવસંસ્થિત રાષ્ટ્રની નાણાકીય સત્તાને મજબૂત કરવા અને ગ્રામીણ બેંકિંગને ઔપચારિક માળખામાં લાવવા પર ધ્યાન (RBI રાષ્ટ્રીયકરણ 1949, SBI રચના 1955).</p>
+                <p><strong>તબક્કો 2 — રાષ્ટ્રીયકરણનો સમયગાળો (1969 અને 1980):</strong> કૃષિ, નાના ઉદ્યોગો અને ગ્રામીણ વિસ્તારો તરફ ધિરાણ વાળવા માટે સીધી સરકારી દખલગીરી.</p>
+                <p><strong>તબક્કો 3 — રાષ્ટ્રીયકરણ પછી / સુધારણા યુગ (1991 પછી):</strong> LPG સુધારાઓ બાદ બજાર-સંચાલિત આર્થિક નીતિઓનું એકીકરણ.</p>
+            </div>
+        </section>
+
+        <!-- 18. NATIONALISATION (1969 & 1980) -->
+        <section>
+            <h2 class="section-title">💰 18. 1969 અને 1980 બેંક રાષ્ટ્રીયકરણ</h2>
+            <div class="card box-orange">
+                <span class="badge badge-orange">મહત્વની તારીખો</span>
+                <p><strong>19 જુલાઈ 1969:</strong> વડાપ્રધાન ઈન્દિરા ગાંધી હેઠળ પ્રાથમિક ક્ષેત્રો તરફ ધિરાણ પહોંચાડવા માટે 14 મોટી વ્યાપારી બેંકો (રૂા. 50 કરોડથી વધુ થાપણો ધરાવતી)નું રાષ્ટ્રીયકરણ કરવામાં આવ્યું.</p>
+                <p><strong>1980:</strong> વધુ 6 વ્યાપારી બેંકોનું રાષ્ટ્રીયકરણ કરવામાં આવ્યું (રૂા. 200 કરોડથી વધુ થાપણો ધરાવતી).</p>
+                <p><em>નોંધ:</em> વિગતવાર બેંક યાદીઓ અને માપદંડો આગામી વ્યાખ્યાનમાં નિર્ધારિત છે.</p>
+            </div>
+        </section>
+
+        <!-- 19. 1991 LPG REFORMS -->
+        <section>
+            <h2 class="section-title">🌐 19. 1991 ના LPG સુધારા અને નરસિમ્હમ સમિતિ</h2>
+            <div class="card box-purple">
+                <span class="badge badge-purple">આર્થિક પરિવર્તન બિંદુ</span>
+                <p>1991 માં ગંભીર બેલેન્સ ઓફ પેમેન્ટ્સ (भुगतान संतुलन) કટોકટીનો સામનો કરતા, વડાપ્રધાન પી.વી. નરસિમ્હ રાવ અને નાણાપ્રધાન <strong>ડૉ. મનમોહન સિંહ</strong> હેઠળ ભારતે <strong>એમ. નરસિમ્હમ સમિતિ</strong>ની ભલામણોથી માળખાકીય આર્થિક સુધારા રજૂ કર્યા.</p>
+                
+                <h3>L — ઉદારીકરણ (Liberalisation)</h3>
+                <p>બિનજરૂરી સરકારી નિયંત્રણો દૂર કરવા, લાયસન્સ રાજમાં છૂટછાટ આપવી, ખાનગી અને વિદેશી બેંકોને મુક્તપણે કામ કરવાની મંજૂરી આપવી.</p>
+
+                <h3>P — ખાનગીકરણ (Privatisation)</h3>
+                <p>સાહસોમાં ખાનગી ક્ષેત્રની ભાગીદારીને પ્રોત્સાહન આપીને અને કાર્યક્ષમતા વધારીને સરકારી બોજ ઘટાડવો (ઉદાહરણો: મારુતિ સુઝુકી, હીરો હોન્ડા જેવી ઓટોમોટિવ ભાગીદારી).</p>
+
+                <h3>G — વૈશ્વિકીકરણ (Globalisation)</h3>
+                <p>અંતિમ આંતરરાષ્ટ્રીય વેપાર, વિદેશી પ્રત્યક્ષ રોકાણ (FDI) અને સીમાપાર નાણાકીય પ્રવાહો દ્વારા ભારતીય અર્થવ્યવસ્થાને વિશ્વ બજારો સાથે જોડવી.</p>
+            </div>
+        </section>
+
+        <!-- 20. GEOGRAPHICAL & TRADE EXPLANATION -->
+        <section>
+            <h2 class="section-title">🗺️ 20. ભૌગોલિક અને વેપારી પૃષ્ઠભૂમિ</h2>
+            <div class="card box-green">
+                <span class="badge badge-green">વેપાર અને બંદર ગતિશીલતા</span>
+                <p>ભારતીય બેંકિંગ કેન્દ્રોનો ઐતિહાસિક વિકાસ દરિયાઈ ભૂગોળ અને સંસ્થાનવાદી વેપાર માર્ગો દ્વારા ભારે પ્રભાવિત હતો:</p>
+                <ul>
+                    <li><strong>કલકત્તા (પૂર્વ / બંગાળની ખાડી):</strong> શણ, ચા અને પૂર્વીય ખનિજ વેપારનું કેન્દ્ર.</li>
+                    <li><strong>બોમ્બે (પશ્ચિમ / અરબી સમુદ્ર):</strong> કપાસની નિકાસ અને યુરોપ સાથે પશ્ચિમી દરિયાઈ વાણિજ્યનું પ્રવેશદ્વાર.</li>
+                    <li><strong>મદ્રાસ (દક્ષિણ / હિંદ મહાસાગર):</strong> દક્ષિણી મસાલા અને કાપડ વેપાર નેટવર્કનું કેન્દ્ર.</li>
+                </ul>
+                <p>બ્રિટિશ વહીવટી અને વેપારી હિતોએ આ બંદર શહેરોની આસપાસ બેંકિંગ ઇન્ફ્રાસ્ટ્રક્ચર કેન્દ્રિત કર્યું હતું.</p>
+            </div>
+        </section>
+
+        <!-- 21. MEMORY TRICKS -->
+        <section>
+            <h2 class="section-title">🧠 21. યાદ રાખવાની ટ્રીક્સ અને ન્મોનિક્સ</h2>
+            <div class="card box-purple">
+                <span class="badge badge-purple">પરીક્ષા ટ્રીક્સ</span>
+                <p><strong>પ્રેસિડેન્સી બેંકો યાદ રાખવા માટે: B-B-M</strong></p>
+                <p>👉 <strong>B</strong>ank of Bengal | <strong>B</strong>ank of Bombay | <strong>B</strong>ank of Madras (1921 માં ભેગી થઈને ઇમ્પીરીયલ બેંક બની).</p>
+                <p><strong>RBI ટાઈમલાઈન ક્રમ: 1926 → 1934 → 1935 → 1937 → 1949</strong></p>
+                <p>👉 <strong>H</strong>ilton Young Commission → <strong>R</strong>BI Act → <strong>E</strong>stablishment (સ્થાપના) → <strong>H</strong>Q Mumbai → <strong>N</strong>ationalisation (રાષ્ટ્રીયકરણ).</p>
+            </div>
+        </section>
+
+        <!-- 22. MASTER TIMELINE TABLE -->
+        <section>
+            <h2 class="section-title">📊 22. મુખ્ય ઘટનાઓનું માસ્ટર ટાઈમલાઈન ટેબલ</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>વર્ષ / તારીખ</th>
+                            <th>ઘટના</th>
+                            <th>સંસ્થા / વ્યક્તિ</th>
+                            <th>મહત્વ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1770</td>
+                            <td>બેંક ઓફ હિન્દુસ્તાન</td>
+                            <td>એલેક્ઝાન્ડર એન્ડ કંપની</td>
+                            <td>પ્રારંભિક બેંકિંગ પાયો (બ્રિટિશ યુગ)</td>
+                        </tr>
+                        <tr>
+                            <td>1786</td>
+                            <td>જનરલ બેંક ઓફ ઇન્ડિયા</td>
+                            <td>જોઇન્ટ સ્ટોક</td>
+                            <td>પ્રારંભિક વ્યાપારી બેંકિંગ પ્રયાસ</td>
+                        </tr>
+                        <tr>
+                            <td>1806</td>
+                            <td>બેંક ઓફ બંગાળ</td>
+                            <td>પ્રેસિડેન્સી બેંક</td>
+                            <td>પૂર્વમાં પ્રથમ પ્રેસિડેન્સી બેંક</td>
+                        </tr>
+                        <tr>
+                            <td>1832</td>
+                            <td>બેંક ઓફ હિન્દુસ્તાન બંધ</td>
+                            <td>—</td>
+                            <td>પ્રારંભિક બ્રિટિશ બેંકિંગ પ્રયોગનો અંત</td>
+                        </tr>
+                        <tr>
+                            <td>1840</td>
+                            <td>બેંક ઓફ બોમ્બે</td>
+                            <td>પ્રેસિડેન્સી બેંક</td>
+                            <td>પશ્ચિમી વાણિજ્યિક કેન્દ્ર</td>
+                        </tr>
+                        <tr>
+                            <td>1843</td>
+                            <td>બેંક ઓફ મદ્રાસ</td>
+                            <td>પ્રેસિડેન્સી બેંક</td>
+                            <td>દક્ષિણી વાણિજ્યિક કેન્દ્ર</td>
+                        </tr>
+                        <tr>
+                            <td>1865</td>
+                            <td>અલ્લાહાબાદ બેંક</td>
+                            <td>પબ્લિક સેક્ટર</td>
+                            <td>સૌથી જૂની હયાત સંયુક્ત સ્ટોક બેંક</td>
+                        </tr>
+                        <tr>
+                            <td>1881</td>
+                            <td>અવધ કોમર્શિયલ બેંક</td>
+                            <td>ભારતીય બોર્ડ</td>
+                            <td>ભારતીય સંચાલનવાળી પ્રથમ વ્યાપારી બેંક</td>
+                        </tr>
+                        <tr>
+                            <td>1894</td>
+                            <td>પંજાબ નેશનલ બેંક</td>
+                            <td>લાલા લજપત રાય</td>
+                            <td>પ્રથમ સંપૂર્ણ ભારતીય બેંક</td>
+                        </tr>
+                        <tr>
+                            <td>1905</td>
+                            <td>સ્વદેશી ચળવળ</td>
+                            <td>લોર્ડ કર્ઝન / રાષ્ટ્રવાદીઓ</td>
+                            <td>દેશી બેંકિંગ લહેરને વેગ મળ્યો</td>
+                        </tr>
+                        <tr>
+                            <td>1906</td>
+                            <td>બેંક ઓફ ઇન્ડિયા અને કેનેરા બેંક</td>
+                            <td>સ્વદેશી સ્થાપકો</td>
+                            <td>મૂળ બેંકોનો વિસ્તાર</td>
+                        </tr>
+                        <tr>
+                            <td>1908</td>
+                            <td>બેંક ઓફ બરોડા</td>
+                            <td>વડોદરાના મહારાજા</td>
+                            <td>મુખ્ય પબ્લિક સેક્ટર બેંકની રચના</td>
+                        </tr>
+                        <tr>
+                            <td>1911</td>
+                            <td>સેન્ટ્રલ બેંક ઓફ ઇન્ડિયા</td>
+                            <td>સરોજી પોચખાનવાલા</td>
+                            <td>સંપૂર્ણ ભારતીય માલિકીની વ્યાપારી બેંક</td>
+                        </tr>
+                        <tr>
+                            <td>1921</td>
+                            <td>ઇમ્પીરીયલ બેંક ઓફ ઇન્ડિયા</td>
+                            <td>3 પ્રેસિડેન્સી બેંકોનું વિલીનીકરણ</td>
+                            <td>SBI ની પૂર્વસૂચક બેંક</td>
+                        </tr>
+                        <tr>
+                            <td>1926</td>
+                            <td>હિલ્ટન યંગ કમિશન</td>
+                            <td>રોયલ કમિશન</td>
+                            <td>સેન્ટ્રલ બેંક રચવાની ભલામણ</td>
+                        </tr>
+                        <tr>
+                            <td>1929–1930</td>
+                            <td>મહામંદી (Great Depression)</td>
+                            <td>વૈશ્વિક નાણાકીય બજારો</td>
+                            <td>વિશ્વવ્યાપી બેંક પતન</td>
+                        </tr>
+                        <tr>
+                            <td>1934</td>
+                            <td>RBI એક્ટ પસાર થયો</td>
+                            <td>ધારાસભા</td>
+                            <td>સેન્ટ્રલ બેંક માટે કાનૂની માળખું</td>
+                        </tr>
+                        <tr>
+                            <td>1935</td>
+                            <td>RBI ની સ્થાપના</td>
+                            <td>રિઝર્વ બેંક ઓફ ઇન્ડિયા</td>
+                            <td>સેન્ટ્રલ બેંકિંગની શરૂઆત (1 એપ્રિલ)</td>
+                        </tr>
+                        <tr>
+                            <td>1937</td>
+                            <td>RBI નું મુખ્ય મથક ખસેડાયું</td>
+                            <td>કલકત્તાથી મુંબઈ</td>
+                            <td>કાયમી મુખ્ય મથક સ્થળાંતર</td>
+                        </tr>
+                        <tr>
+                            <td>1947</td>
+                            <td>ભારતની આઝાદી</td>
+                            <td>સ્વતંત્ર ભારત</td>
+                            <td>સાર્વભૌમ આર્થિક નીતિનો નવો યુગ</td>
+                        </tr>
+                        <tr>
+                            <td>1949</td>
+                            <td>RBI નું રાષ્ટ્રીયકરણ</td>
+                            <td>ભારત સરકાર</td>
+                            <td>સેન્ટ્રલ બેંકની રાજ્ય માલિકી (1 જાન્યુઆરી)</td>
+                        </tr>
+                        <tr>
+                            <td>1955</td>
+                            <td>સ્ટેટ બેંક ઓફ ઇન્ડિયા એક્ટ</td>
+                            <td>ઇમ્પીરીયલ બેંક → SBI</td>
+                            <td>દેશની સૌથી મોટી પબ્લિક બેંકની રચના (1 જુલાઈ)</td>
+                        </tr>
+                        <tr>
+                            <td>1969</td>
+                            <td>પ્રથમ રાષ્ટ્રીયકરણ</td>
+                            <td>14 મોટી બેંકો</td>
+                            <td>ગ્રામીણ નાણાકીય પહોંચ ઊંડી બની (19 જુલાઈ)</td>
+                        </tr>
+                        <tr>
+                            <td>1980</td>
+                            <td>બીજું રાષ્ટ્રીયકરણ</td>
+                            <td>6 વધારાની બેંકો</td>
+                            <td>ધિરાણ ફાળવણી પર વધુ સરકારી નિયંત્રણ</td>
+                        </tr>
+                        <tr>
+                            <td>1991</td>
+                            <td>LPG સુધારા</td>
+                            <td>નરસિમ્હમ સમિતિ / સરકાર</td>
+                            <td>ઉદારીકરણ, ખાનગીકરણ, વૈશ્વિકીકરણ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 23. HOMEWORK & NEXT CLASS PLAN -->
+        <section>
+            <h2 class="section-title">❓ 23. હોમવર્ક વિભાગ અને આગામી વર્ગનું આયોજન</h2>
+            <div class="card box-yellow">
+                <span class="badge badge-yellow">સ્વ-મૂલ્યાંકન</span>
+                <h3>હોમવર્ક પ્રશ્ન 1</h3>
+                <p>બેંક ઓફ બંગાળ + બેંક ઓફ બોમ્બે + બેંક ઓફ મદ્રાસ ભેગી થઈને કઈ બેંક બનાવી અને કયા વર્ષે?</p>
+                
+                <h3>હોમવર્ક પ્રશ્ન 2</h3>
+                <p>રિઝર્વ બેંક ઓફ ઇન્ડિયાની સ્થાપના ક્યારે થઈ અને તેનું વર્તમાન મુખ્ય મથક ક્યાં આવેલું છે?</p>
+                <p><em>સૂચના:</em> વ્યાખ્યાનમાં જણાવ્યા મુજબ કોમેન્ટ બોક્સમાં જવાબ આપો.</p>
+
+                <h3 style="margin-top: 25px;">📌 આગામી વ્યાખ્યાન / વર્ગ યોજના</h3>
+                <ul>
+                    <li>વિગતવાર રાષ્ટ્રીયકરણના માપદંડો અને બેંકોની યાદી</li>
+                    <li>બેંકોનું વિલીનીકરણ અને વર્તમાન કાર્યરત પબ્લિક સેક્ટર બેંકો</li>
+                    <li>પરીક્ષા લક્ષી હેતુલક્ષી પ્રશ્નો અને પ્રેક્ટિસ સેટ્સ</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 24. QUICK REVISION & ONE-LINERS -->
+        <section>
+            <h2 class="section-title">📖 24. ઝડપી રિવીઝન અને ટોપ વન-લાઇનર્સ</h2>
+            <div class="card box-green">
+                <span class="badge badge-green">⚡ 60-સેકન્ડ રિવીઝન</span>
+                <p><strong>ટોપ 5 મુખ્ય બાબતો:</strong></p>
+                <ol>
+                    <li>સાટા પદ્ધતિ ઇચ્છાઓના બેવડા સંજોગો પર આધારિત હતી; આ અક્ષમતા દૂર કરવા નાણાં વિકસિત થયા.</li>
+                    <li>ત્રણેય પ્રેસિડેન્સી બેંકો (1806, 1840, 1843) નું 27 જાન્યુઆરી 1921 ના રોજ <strong>ઇમ્પીરીયલ બેંક ઓફ ઇન્ડિયા</strong> માં વિલીનીકરણ થયું, જે 1955 માં SBI બની.</li>
+                    <li>પંજાબ નેશનલ બેંક (1894) એ લાલા લજપત રાય અને દયાલ સિંહ મજીઠિયા દ્વારા સ્થાપિત પ્રથમ સંપૂર્ણ ભારતીય સંચાલિત બેંક હતી.</li>
+                    <li>હિલ્ટન યંગ કમિશને (1926) RBI ની રચનાની ભલામણ કરી હતી, જેની સ્થાપના 1 એપ્રિલ 1935 ના રોજ RBI એક્ટ, 1934 હેઠળ થઈ.</li>
+                    <li>1991 ના આર્થિક સુધારાઓ (LPG) એ નરસિમ્હમ સમિતિ હેઠળ ભારતીય બેંકિંગમાં ક્રાંતિ લાવી.</li>
+                </ol>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>
