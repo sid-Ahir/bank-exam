@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type Of Banks 2 - Exam Notes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --highlight: #fef3c7;     /* Light Yellow */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h1.main-title {
+            font-size: 36px;
+            color: var(--primary);
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* English Terms formatting */
+        .en-term {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 20px; border-radius: 0; }
+            h1.main-title { font-size: 28px; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1 class="main-title">Type Of Banks 2</h1>
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 BACKGROUND & CONCEPT</span>
+        <p>વર્ષ 2013-14 માં ભારતમાં <strong>Financial Inclusion</strong> (વિત્તીય સમાવેશન) લાવવા માટે એક મોટો પ્રયાસ કરવામાં આવ્યો. ગરીબ વર્ગ, ખેડૂતો, મજૂરો અને માઇગ્રન્ટ વર્કર્સ બેન્કિંગ સિસ્ટમ સાથે જોડાઈ શકે તે માટે <strong>Differentiated Banks</strong> અથવા <strong>Niche Banks</strong> નો કોન્સેપ્ટ લાવવામાં આવ્યો.</p>
+        <p>આ બેંકો <strong>Universal Banks</strong> (જેમ કે SBI, ICICI) કરતાં અલગ છે, કારણ કે તેમનો ઉદ્દેશ્ય અમુક ચોક્કસ અને નાના ગ્રાહકોને (Small value/ticket size customers) ટાર્ગેટ કરવાનો છે.</p>
+    </div>
+
+    <h2 class="section-title">Important Committees</h2>
+    
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT</span>
+        <p>આ બેંકોની સ્થાપના માટે મુખ્યત્વે બે કમિટીઓના Recommendations લેવામાં આવ્યા હતા:</p>
+        <ul>
+            <li><strong>Small Finance Bank (SFB):</strong> Usha Thorat Committee ના recommendation પર.</li>
+            <li><strong>Payment Bank (PB):</strong> Nachiket Mor Committee ના recommendation પર (Licensing અને In-principle approval માટે).</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Registration & Licensing (સ્વરૂપ અને કાયદો)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameters</th>
+                <th>Small Finance Bank (SFB)</th>
+                <th>Payment Bank (PB)</th>
+            </tr>
+            <tr>
+                <td><strong>Registered Under</strong></td>
+                <td>Companies Act, 2013 (As a Public Limited Company)</td>
+                <td>Companies Act, 2013 (As a Public Limited Company)</td>
+            </tr>
+            <tr>
+                <td><strong>Licensed Under</strong></td>
+                <td>Section 22 of Banking Regulation (BR) Act, 1949</td>
+                <td>Section 22 of Banking Regulation (BR) Act, 1949</td>
+            </tr>
+            <tr>
+                <td><strong>Minimum Capital Requirement</strong></td>
+                <td>₹200 Crore (શરૂઆતમાં ₹100 Crore હતું. 5 વર્ષમાં ₹300 Crore કરવાનું રહેશે)</td>
+                <td>₹100 Crore</td>
+            </tr>
+            <tr>
+                <td><strong>FDI (Foreign Direct Investment)</strong></td>
+                <td>74% Allowed</td>
+                <td>74% Allowed</td>
+            </tr>
+            <tr>
+                <td><strong>FPI (Foreign Portfolio Investor)</strong></td>
+                <td>Max 24% Allowed</td>
+                <td>Max 24% Allowed</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Eligibility Criteria (કોણ ખોલી શકે?)</h2>
+
+    <div class="card card-concept">
+        <h3 class="sub-title">1. Small Finance Bank (SFB)</h3>
+        <ul>
+            <li>Resident Individuals</li>
+            <li>Private Companies</li>
+            <li>Societies / Cooperative Societies</li>
+            <li>NBFCs (Non-Banking Financial Companies)</li>
+            <li>Micro Finance Institutions (MFIs)</li>
+            <li><strong>Local Area Banks (LABs)</strong> (નોંધ: ભારતની પ્રથમ SFB એક Local Area Bank માંથી જ બની હતી).</li>
+        </ul>
+
+        <h3 class="sub-title">2. Payment Bank (PB)</h3>
+        <ul>
+            <li>Resident Individuals</li>
+            <li>NBFCs</li>
+            <li>Telecom Companies (e.g., Jio, Airtel)</li>
+            <li>PPI (Prepaid Payment Instrument) Providers (e.g., Paytm)</li>
+            <li>Public Sector Banks</li>
+            <li>Government Entities (e.g., India Post Payment Bank)</li>
+            <li>Supermarket Chains (e.g., Amazon)</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Features & Comparison (કાર્યો અને મર્યાદાઓ)</h2>
+
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Small Finance Bank (SFB)</th>
+                <th>Payment Bank (PB)</th>
+            </tr>
+            <tr>
+                <td><strong>Deposits Accepted</strong></td>
+                <td>બધા જ પ્રકારના (Demand Deposits + Time Deposits/FD/RD)</td>
+                <td>માત્ર <strong>Demand Deposits</strong> (Current & Savings Account)</td>
+            </tr>
+            <tr>
+                <td><strong>Deposit Limit</strong></td>
+                <td>No Restriction (કોઈ મર્યાદા નથી)</td>
+                <td>Maximum <strong>₹2 Lakhs</strong> per borrower (શરૂઆતમાં ₹1 Lakh હતી)</td>
+            </tr>
+            <tr>
+                <td><strong>Loans (Credit)</strong></td>
+                <td>લોન આપી શકે છે.</td>
+                <td><strong>લોન આપી શકતા નથી.</strong> (કોઈ જ પ્રકારનું Credit નહિ)</td>
+            </tr>
+            <tr>
+                <td><strong>Cards Issued</strong></td>
+                <td>Debit Cards અને Credit Cards બંને ઇશ્યૂ કરી શકે છે.</td>
+                <td>માત્ર <strong>Debit Cards</strong> ઇશ્યૂ કરી શકે છે. (Credit Card નહિ)</td>
+            </tr>
+            <tr>
+                <td><strong>PSL Target</strong></td>
+                <td><strong>75%</strong> of ANBC (Adjusted Net Bank Credit)</td>
+                <td><strong>NO PSL Target</strong> (કારણ કે લોન આપતા જ નથી)</td>
+            </tr>
+            <tr>
+                <td><strong>Banking Type</strong></td>
+                <td>Normal / Development Banking</td>
+                <td><strong>Narrow Banking</strong> (Less risky banking, રોકાણ માત્ર Govt Securities માં)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-exam-trap">🧠 MEMORY TRICK & CONCEPT</span>
+        <p><strong>Narrow Banking એટલે શું?</strong><br>
+        જ્યારે કોઈ બેંક પોતાનું રિસ્ક ઘટાડી દે છે, તેને Narrow Banking કહેવાય. Payment Banks લોન આપી શકતા નથી, તેથી તેમનું રિસ્ક ઝીરો થઈ જાય છે. તેઓ લોકોના પૈસા માત્ર સુરક્ષિત <strong>Government Securities</strong> માં જ ઇન્વેસ્ટ કરે છે. આથી, Payment Banks = Narrow Banking.</p>
+    </div>
+
+    <h2 class="section-title">Small Finance Bank (SFB) - Detailed Guidelines</h2>
+
+    <div class="card card-concept">
+        <ul>
+            <li><strong>Loan Size Requirement:</strong> SFB દ્વારા આપવામાં આવતી કુલ લોનમાંથી <strong>50% લોન ₹25 Lakh થી ઓછી રકમની</strong> હોવી જોઈએ (Micro Loans ને પ્રોત્સાહન આપવા માટે).</li>
+            <li><strong>Maximum Loan Size:</strong>
+                <ul>
+                    <li>Single Borrower: Capital Funds ના <strong>10%</strong> થી વધુ નહિ.</li>
+                    <li>Group Borrower: Capital Funds ના <strong>15%</strong> થી વધુ નહિ.</li>
+                </ul>
+            </li>
+            <li><strong>Capital Adequacy Ratio (CAR/CRAR):</strong> RWA (Risk Weighted Assets) ના ઓછામાં ઓછા <strong>15%</strong> હોવા જોઈએ.</li>
+            <li><strong>Branch Expansion:</strong> SFB એ પોતાની કુલ બ્રાન્ચમાંથી <strong>25% (1/4) બ્રાન્ચ Unbanked Areas</strong> (જ્યાં અગાઉ કોઈ બેંક ન હોય) માં ખોલવી ફરજિયાત છે.</li>
+        </ul>
+    </div>
+
+    <h3 class="sub-title">Promoter's Contribution (SFB માટે)</h3>
+    <div class="card card-important">
+        <ul>
+            <li>Promoter નું <strong>Minimum Initial Contribution</strong> (Paid-up Capital માં) ઓછામાં ઓછું <strong>40%</strong> હોવું જોઈએ.</li>
+            <li>જો contribution 40% કરતા વધુ હોય, તો તેને <strong>આગામી 5 વર્ષમાં</strong> ઘટાડીને 40% પર લાવવાનું રહેશે.</li>
+            <li>ભવિષ્યમાં આ હિસ્સો ધીમે ધીમે ઘટાડીને <strong>26%</strong> સુધી લાવી શકાય છે.</li>
+            <li>Shareholder Voting Power મહત્તમ <strong>10%</strong> સુધી સીમિત હોય છે (જે પાછળથી 26% સુધી વધી શકે).</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">First Banks & Current Statistics</h2>
+    <div class="card card-important">
+        <span class="tag tag-quick-revision">🟢 QUICK REVISION</span>
+        <ul>
+            <li><strong>First Small Finance Bank (SFB):</strong> <strong>Capital Small Finance Bank</strong> (હેડક્વાર્ટર: Jalandhar, Punjab). સ્થાપના: 24th April 2016.</li>
+            <li><strong>First Payment Bank:</strong> <strong>Airtel Payment Bank</strong> (હેડક્વાર્ટર: New Delhi). સ્થાપના: Jan 2017.</li>
+            <li><strong>Largest SFB in India:</strong> <strong>AU Small Finance Bank</strong> (હેડક્વાર્ટર: Jaipur, Rajasthan). Fincare SFB ને AU SFB સાથે મર્જ કરવામાં આવી છે.</li>
+            <li><strong>Total SFBs currently (As of April 2024):</strong> <strong>11</strong> (પહેલા 12 હતી, મર્જર પછી 11).</li>
+            <li><strong>Total Payment Banks currently:</strong> <strong>6</strong> (Airtel, Fino, NSDL, Jio, Paytm, India Post Payment Bank).</li>
+        </ul>
+    </div>
+
+    <div class="card card-trap">
+        <span class="tag tag-exam-trap">🟣 EXAM TRAP</span>
+        <p><strong>PSL (Priority Sector Lending) Targets:</strong> <br>
+        PSL ટાર્ગેટ મોટાભાગની બેંકો (Public, Private, Foreign, RRB, SFB) ને લાગુ પડે છે. પરંતુ <strong>Payment Banks</strong> અને <strong>Local Area Banks</strong> ને PSL ટાર્ગેટ લાગુ પડતા <strong>નથી</strong>.</p>
+    </div>
+
+    <h2 class="section-title">Transition to Universal Bank</h2>
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 CONCEPT</span>
+        <p><strong>Universal Bank</strong> એટલે એવી બેંક જે તમામ પ્રકારની સર્વિસ આપે (Wholesale Banking, Retail Banking, Wealth Management, Insurance, Investment, Mutual Funds). ઉદાહરણ: SBI, HDFC, ICICI.</p>
+        <p>જો કોઈ Small Finance Bank ને Universal Bank માં રૂપાંતરિત (Transition) થવું હોય, તો તેના માટે નીચેના <strong>Criteria</strong> પૂરા કરવા જરૂરી છે:</p>
+        <ul>
+            <li><strong>Minimum Net Worth:</strong> ₹1000 Crore હોવી જોઈએ.</li>
+            <li><strong>Performance:</strong> છેલ્લા 5 વર્ષની Satisfactory Performance હોવી જોઈએ.</li>
+            <li><strong>Listing:</strong> Stock Exchange પર Listed હોવી જોઈએ (IPO આવેલો હોવો જોઈએ).</li>
+            <li><strong>Gross NPA (GNPA):</strong> Less than or equal to <strong>3%</strong>.</li>
+            <li><strong>Net NPA (NNPA):</strong> Less than or equal to <strong>1%</strong>.</li>
+            <li><strong>Capital Adequacy Ratio (CAR):</strong> 15% કે તેથી વધુ હોવો જોઈએ.</li>
+        </ul>
+        <p><strong>Note:</strong> AU SFB અને Ujjivan SFB એ Universal Bank License માટે અપ્લાય કરેલું છે. આ માટે <strong>MK Jain Committee</strong> રિવ્યૂ કરી રહી છે.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. Small Finance Banks (SFBs) કઈ કમિટીના Recommendation પર સ્થાપવામાં આવી હતી?</p>
+        <ul class="mcq-options">
+            <li>A. Nachiket Mor Committee</li>
+            <li>B. Usha Thorat Committee</li>
+            <li>C. MK Jain Committee</li>
+            <li>D. Narsimham Committee</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Usha Thorat Committee</strong> <br>
+            Explanation: SFB અને સમગ્ર Differentiated Banks માટે Usha Thorat Committee એ માર્ગદર્શન આપ્યું હતું. જ્યારે Payment Banks ના લાયસન્સિંગ માટે Nachiket Mor Committee હતી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. નીચેનામાંથી કઈ બેંક ક્રેડિટ કાર્ડ (Credit Card) ઇશ્યૂ કરી શકતી નથી?</p>
+        <ul class="mcq-options">
+            <li>A. Public Sector Banks</li>
+            <li>B. Small Finance Banks</li>
+            <li>C. Payment Banks</li>
+            <li>D. Regional Rural Banks (RRBs)</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Payment Banks</strong> <br>
+            Explanation: Payment Banks ગ્રાહકોને કોઈપણ પ્રકારની લોન (Credit) આપી શકતી નથી, તેથી તેઓ Credit Cards પણ ઇશ્યૂ કરી શકતી નથી. માત્ર Debit Cards ઇશ્યૂ કરી શકે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. Payment Banks માટે Deposit સ્વીકારવાની વર્તમાન Maximum Limit (પ્રતિ ગ્રાહક) કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹1 Lakh</li>
+            <li>B. ₹2 Lakhs</li>
+            <li>C. ₹5 Lakhs</li>
+            <li>D. No Limit</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. ₹2 Lakhs</strong> <br>
+            Explanation: શરૂઆતમાં આ લિમિટ 1 લાખ રૂપિયા હતી, જેને રિઝર્વ બેંક દ્વારા વધારીને ₹2 Lakhs કરવામાં આવી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. Small Finance Bank ની સ્થાપના માટે Minimum Paid-up Capital Requirement કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹100 Crore</li>
+            <li>B. ₹200 Crore</li>
+            <li>C. ₹300 Crore</li>
+            <li>D. ₹500 Crore</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. ₹200 Crore</strong> <br>
+            Explanation: SFB માટે હાલમાં requirement ₹200 Crore છે (જે 5 વર્ષમાં ₹300 Cr કરવાની રહેશે). Payment Bank માટે આ requirement ₹100 Crore છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. Small Finance Banks એ પોતાની કુલ બ્રાન્ચમાંથી કેટલા ટકા બ્રાન્ચ Unbanked Areas માં ખોલવી ફરજિયાત છે?</p>
+        <ul class="mcq-options">
+            <li>A. 15%</li>
+            <li>B. 20%</li>
+            <li>C. 25%</li>
+            <li>D. 50%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 25%</strong> <br>
+            Explanation: નાણાકીય સમાવેશન વધારવા માટે SFB ને તેમની કુલ બ્રાન્ચ પૈકી 25% (અથવા 1/4) બ્રાન્ચ Unbanked Areas માં ખોલવી અનિવાર્ય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. નીચેનામાંથી કોને Priority Sector Lending (PSL) Targets લાગુ પડતા નથી?</p>
+        <ul class="mcq-options">
+            <li>A. Regional Rural Banks (RRB)</li>
+            <li>B. Small Finance Banks (SFB)</li>
+            <li>C. Urban Cooperative Banks</li>
+            <li>D. Payment Banks</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: D. Payment Banks</strong> <br>
+            Explanation: Payment Banks ને લોન આપવાની સત્તા નથી, તેથી તેમને Priority Sector Lending (PSL) ના ટાર્ગેટ પણ લાગુ પડતા નથી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. ભારતની સૌથી પહેલી Small Finance Bank (SFB) કઈ છે?</p>
+        <ul class="mcq-options">
+            <li>A. AU Small Finance Bank</li>
+            <li>B. Equitas Small Finance Bank</li>
+            <li>C. Capital Small Finance Bank</li>
+            <li>D. Ujjivan Small Finance Bank</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Capital Small Finance Bank</strong> <br>
+            Explanation: તે 2016 માં પંજાબના જાલંધરમાં શરૂ થઈ હતી, અને અગાઉ તે એક Local Area Bank હતી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. SFB ને Universal Bank માં રૂપાંતરિત થવા માટે Minimum Net Worth કેટલી હોવી જોઈએ?</p>
+        <ul class="mcq-options">
+            <li>A. ₹200 Crore</li>
+            <li>B. ₹500 Crore</li>
+            <li>C. ₹1000 Crore</li>
+            <li>D. ₹2000 Crore</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹1000 Crore</strong> <br>
+            Explanation: Universal Bank માં transition માટે Minimum Net Worth ₹1000 Crore અને 5 વર્ષનો સંતોષકારક ટ્રેક રેકોર્ડ જરૂરી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. Payment Banks અને Small Finance Banks માં Foreign Direct Investment (FDI) ની મર્યાદા કેટલા ટકા છે?</p>
+        <ul class="mcq-options">
+            <li>A. 49%</li>
+            <li>B. 51%</li>
+            <li>C. 74%</li>
+            <li>D. 100%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 74%</strong> <br>
+            Explanation: ખાનગી ક્ષેત્રની બેંકોની જેમ જ SFB અને PB માં 74% સુધી FDI ની મંજૂરી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. SFB માટે Priority Sector Lending (PSL) ટાર્ગેટ ANBC ના કેટલા ટકા હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 40%</li>
+            <li>B. 50%</li>
+            <li>C. 75%</li>
+            <li>D. 100%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 75%</strong> <br>
+            Explanation: SFB નો મુખ્ય ઉદ્દેશ્ય નાના અને નબળા વર્ગને લોન આપવાનો છે, તેથી તેમનો PSL ટાર્ગેટ સામાન્ય બેંકો (40%) કરતા વધુ એટલે કે 75% રાખવામાં આવ્યો છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q11. SFB ના કિસ્સામાં પ્રમોટર (Promoter) નું પ્રારંભિક લઘુત્તમ યોગદાન (Minimum Initial Contribution) કેટલું હોવું જોઈએ?</p>
+        <ul class="mcq-options">
+            <li>A. 20%</li>
+            <li>B. 26%</li>
+            <li>C. 40%</li>
+            <li>D. 50%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 40%</strong> <br>
+            Explanation: શરૂઆતમાં પ્રમોટરનો હિસ્સો ઓછામાં ઓછો 40% હોવો જોઈએ, જે ભવિષ્યમાં ઘટાડી શકાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q12. "Narrow Banking" નો કોન્સેપ્ટ મુખ્યત્વે કઈ બેંકો દ્વારા અનુસરવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Universal Banks</li>
+            <li>B. Payment Banks</li>
+            <li>C. Small Finance Banks</li>
+            <li>D. Regional Rural Banks</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Payment Banks</strong> <br>
+            Explanation: Payment Banks લોન આપતા નથી અને ગ્રાહકોની થાપણો Government Securities માં જ રોકે છે જેથી Risk નહિવત રહે, જેને Narrow Banking કહેવાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q13. SFB અને PB ની નોંધણી (Registration) કયા કાયદા હેઠળ થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. RBI Act, 1934</li>
+            <li>B. Banking Regulation Act, 1949</li>
+            <li>C. Companies Act, 2013</li>
+            <li>D. Payment and Settlement Systems Act, 2007</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Companies Act, 2013</strong> <br>
+            Explanation: આ બેંકોનું 'Registration' Companies Act 2013 હેઠળ થાય છે, પરંતુ 'Licensing' Banking Regulation Act 1949 ના Section 22 હેઠળ મળે છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
