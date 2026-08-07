@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18. BANKS V/S NBFCs</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    18. BANKS V/S NBFCs
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 BANKS VS NBFCs OVERVIEW & REGISTRATION</span>
+        <p><strong>Banks</strong> અને <strong>NBFCs (Non-Banking Financial Companies)</strong> બંને નાણાકીય સંસ્થાઓ છે, પરંતુ તેમના કાર્યો, કાયદાકીય માળખા અને નિયમોમાં મહત્વપૂર્ણ તફાવત છે.</p>
+        <ul>
+            <li><strong>NBFC (Non-Banking Financial Company):</strong> આ કંપનીઓ પોતાના નામમાં 'Bank' શબ્દનો ઉપયોગ કરી શકતી નથી. તે <strong>Companies Act, 2013</strong> (અથવા અગાઉના 1956 Act) હેઠળ નોંધાયેલી (Incorporate and Registered) હોય છે.</li>
+            <li><strong>Banks:</strong> આ બેન્કિંગ સંસ્થાઓ છે જે ભારતમાં <strong>Banking Regulation Act, 1949</strong> તથા <strong>RBI Act, 1934</strong> ના નિયમો હેઠળ લાઇસન્સ પ્રાપ્ત અને રજિસ્ટર્ડ હોય છે.</li>
+            <li><strong>Regulator:</strong> બેંકો અને એનબીએફસી બંનેનું નિયમન (Regulation) <strong>Reserve Bank of India (RBI)</strong> દ્વારા જ કરવામાં આવે છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Major Differences: Banks vs NBFCs</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameters</th>
+                <th>Banks (બેંકો)</th>
+                <th>NBFCs (એનબીએફસી)</th>
+            </tr>
+            <tr>
+                <td><strong>Governing Act</strong></td>
+                <td>Banking Regulation Act, 1949 & RBI Act, 1934</td>
+                <td>Companies Act, 2013 & RBI Act, 1934 (Section 45 IA)</td>
+            </tr>
+            <tr>
+                <td><strong>Deposit Acceptance</strong></td>
+                <td>બધા જ પ્રકારના ડિપોઝિટ્સ સ્વીકારી શકે છે (<strong>Demand Deposits</strong> - Savings & Current Accounts + Time Deposits).</td>
+                <td>ડિપોઝિટ સ્વીકારતી NBFCs માત્ર <strong>Time Deposits</strong> (Fixed Deposits - FD & Recurring Deposits - RD) જ સ્વીકારી શકે છે. <strong>Demand Deposits (Savings/Current) સ્વીકારી શકતી નથી.</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Deposit Tenure (NBFC)</strong></td>
+                <td>-</td>
+                <td>ન્યૂનતમ 12 મહિનાથી મહત્તમ 60 મહિના (1 Year to 5 Years).</td>
+            </tr>
+            <tr>
+                <td><strong>Deposit Insurance (DICGC)</strong></td>
+                <td>બેંકોના થાપણદારોને DICGC દ્વારા મહત્તમ <strong>₹5 Lakhs</strong> સુધીનું વીમા કવચ મળે છે.</td>
+                <td>એનબીએફસીના ડિપોઝિટ્સ પર DICGC નું વીમા કવચ મળતું નથી (<strong>No DICGC Insurance</strong>).</td>
+            </tr>
+            <tr>
+                <td><strong>Payment & Settlement System</strong></td>
+                <td>ચૅક્સ (Cheques) ઇશ્યૂ કરી શકે છે તથા <strong>NEFT, RTGS, UPI</strong> જેવા પેમેન્ટ સિસ્ટમનો સીધો ભાગ છે.</td>
+                <td>ચૅક્સ ઇશ્યૂ કરી શકતી નથી અને પેમેન્ટ એન્ડ સેલમેન્ટ સિસ્ટમનો સીધો ભાગ બની શકતી નથી.</td>
+            </tr>
+            <tr>
+                <td><strong>CRR & SLR Requirement</strong></td>
+                <td><strong>CRR અને SLR</strong> ફરજિયાતપણે જાળવવા પડે છે.</td>
+                <td>સામાન્ય રીતે CRR અને SLR જાળવવાની જરૂર નથી હોતી (પરંતુ પબ્લિક ડિપોઝિટના 15% લિક્વિડ એસેટ્સમાં રાખવા પડે છે).</td>
+            </tr>
+            <tr>
+                <td><strong>Examples</strong></td>
+                <td>SBI, PNB, HDFC Bank, ICICI Bank</td>
+                <td>Bajaj Finance, Muthoot Finance, LIC Housing Finance</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Key Regulatory and Legal Provisions</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT REGULATORY FACTS</span>
+        <ul>
+            <li><strong>NBFC Registration:</strong> NBFCs ને બિઝનેસ શરૂ કરવા માટે RBI પાસેથી <strong>Certificate of Registration (COR)</strong> મેળવવું પડે છે, જે <strong>RBI Act, 1934 ના Section 45-IA</strong> હેઠળ આપવામાં આવે છે.</li>
+            <li><strong>Bank Licensing:</strong> બેંકોને લાઇસન્સ <strong>Banking Regulation Act, 1949 ના Section 22</strong> હેઠળ મળે છે.</li>
+            <li><strong>Foreign Investment (FDI):</strong> બેંકોની સરખામણીમાં NBFCs માં વિદેશી રોકાણ (FDI) વધુ લવચીક (Flexible) હોય છે.</li>
+            <li><strong>Financial Inclusion:</strong> બેંકોની પહોંચ જ્યાં સુધી સીધી ન હોય ત્યાં સુધી દૂરદરાજના વિસ્તારોમાં નાણાકીય સમાવેશન (Financial Inclusion) માટે NBFCs મહત્વપૂર્ણ ભૂમિકા ભજવે છે.</li>
+        </ul>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / REVISION BOX</span>
+        <p><strong>Banks vs NBFC Quick Difference:</strong><br>
+        - Can accept Savings/Current Account (Demand Deposits)? <strong>Yes -> Banks | No -> NBFCs</strong>.<br>
+        - Can issue Cheques / Join Payment Systems? <strong>Yes -> Banks | No -> NBFCs</strong>.<br>
+        - Covered under DICGC Insurance? <strong>Yes -> Banks | No -> NBFCs</strong>.<br>
+        - Governed under BR Act, 1949? <strong>Banks</strong> | Governed under Companies Act, 2013? <strong>NBFCs</strong>.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. એનબીએફસી (NBFCs) નું રજીસ્ટ્રેશન કયા કાયદા હેઠળ થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Banking Regulation Act, 1949</li>
+            <li>B. Companies Act, 2013</li>
+            <li>C. RBI Act, 1934</li>
+            <li>D. SEBI Act, 1992</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Companies Act, 2013</strong><br>
+            Explanation: NBFCs એ કંપનીઓ છે જે Companies Act, 2013 હેઠળ રજિસ્ટર્ડ હોય છે અને RBI Act ના સેક્શન 45-IA હેઠળ COR મેળવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. ભારતમાં બેંકોને લાઇસન્સ અને નિયમન કયા કાયદા હેઠળ મળે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Banking Regulation Act, 1949</li>
+            <li>B. Companies Act, 2013</li>
+            <li>C. Cooperative Societies Act</li>
+            <li>D. Negotiable Instruments Act, 1881</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Banking Regulation Act, 1949</strong><br>
+            Explanation: બેંકોનું લાયસન્સિંગ અને નિયમન બેન્કિંગ રેગ્યુલેશન એક્ટ, 1949 (ખાસ કરીને સેક્શન 22) હેઠળ થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. નીચેનામાંથી કઈ સેવા એનબીએફસી (NBFCs) દ્વારા પૂરી પાડી શકાતી નથી?</p>
+        <ul class="mcq-options">
+            <li>A. Providing Loans</li>
+            <li>B. Accepting Time Deposits (FD/RD)</li>
+            <li>C. Accepting Demand Deposits (Savings & Current Account)</li>
+            <li>D. Financial Services</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Accepting Demand Deposits (Savings & Current Account)</strong><br>
+            Explanation: NBFCs ડિમાન્ડ ડિપોઝિટ્સ (સેવિંગ કે કરંટ અકાઉન્ટ) સ્વીકારી શકતી નથી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. એનબીએફસી (NBFCs) દ્વારા સ્વીકારવામાં આવતા ટાઈમ ડિપોઝિટ્સ (Time Deposits) નો સામાન્ય સમયગાળો કેટલો હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1 to 3 Months</li>
+            <li>B. 12 Months to 60 Months</li>
+            <li>C. Exactly 10 Years</li>
+            <li>D. No time limit</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 12 Months to 60 Months</strong><br>
+            Explanation: NBFCs માટે ટાઈમ ડિપોઝિટનો ટેન્યોર મિનિમમ 12 મહિનાથી મેક્સિમમ 60 મહિના (1 થી 5 વર્ષ) સુધીનો હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. બેંક થાપણદારોને DICGC દ્વારા મળતું વીમા કવચ શું એનબીએફસીના થાપણદારોને મળે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Yes, fully covered</li>
+            <li>B. No, DICGC insurance is not available for NBFC deposits</li>
+            <li>C. Only for FD above 5 Lakhs</li>
+            <li>D. Covered under SEBI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. No, DICGC insurance is not available for NBFC deposits</strong><br>
+            Explanation: DICGC નું વીમા કવચ માત્ર બેંકોના થાપણો માટે છે, NBFCs માટે ઉપલબ્ધ નથી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. નીચેનામાંથી કઈ સંસ્થા પેમેન્ટ એન્ડ સેટલમેન્ટ સિસ્ટમનો સીધો ભાગ બની શકે છે અને ચૅક્સ ઇશ્યૂ કરી શકે છે?</p>
+        <ul class="mcq-options">
+            <li>A. NBFCs</li>
+            <li>B. Commercial Banks</li>
+            <li>C. Mutual Funds</li>
+            <li>D. Insurance Companies</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Commercial Banks</strong><br>
+            Explanation: માત્ર બેંકો જ ચૅક્સ ઇશ્યૂ કરી શકે છે અને પેમેન્ટ સિસ્ટમનો ભાગ બને છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. RBI Act, 1934 ના કયા સેક્શન હેઠળ NBFCs ને રજીસ્ટ્રેશન/સર્ટિફિકેટ મેળવવું પડે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Section 17</li>
+            <li>B. Section 22</li>
+            <li>C. Section 45-IA</li>
+            <li>D. Section 138</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Section 45-IA</strong><br>
+            Explanation: RBI Act 1934 ના સેક્શન 45-IA હેઠળ NBFCs એ COR મેળવવું અનિવાર્ય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. નીચેનામાંથી કઈ કંપની એનબીએફસી (NBFC) નું ઉદાહરણ છે?</p>
+        <ul class="mcq-options">
+            <li>A. State Bank of India</li>
+            <li>B. Punjab National Bank</li>
+            <li>C. Bajaj Finance / Muthoot Finance</li>
+            <li>D. Bank of Baroda</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Bajaj Finance / Muthoot Finance</strong><br>
+            Explanation: Bajaj Finance અને Muthoot Finance એ પ્રમુખ NBFCs છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. શું એનબીએફસી (NBFCs) ને CRR અને SLR જાળવવું ફરજિયાત છે?</p>
+        <ul class="mcq-options">
+            <li>A. Yes, exactly like banks</li>
+            <li>B. No, CRR and SLR are generally not required to be maintained by NBFCs</li>
+            <li>C. Only SLR is mandatory</li>
+            <li>D. Only CRR is mandatory</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. No, CRR and SLR are generally not required to be maintained by NBFCs</strong><br>
+            Explanation: બેંકોની જેમ NBFCs ને સીઆરઆર અને એસએલઆર મેન્ટેન કરવાની જરૂર હોતી નથી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. બેંકો અને એનબીએફસી બંનેનું સર્વોચ્ચ નિયમનકાર (Regulator) કોણ છે?</p>
+        <ul class="mcq-options">
+            <li>A. SEBI</li>
+            <li>B. NABARD</li>
+            <li>C. Reserve Bank of India (RBI)</li>
+            <li>D. Ministry of Corporate Affairs</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Reserve Bank of India (RBI)</strong><br>
+            Explanation: બેંકો અને એનબીએફસી બંને પર રિઝર્વ બેંક ઓફ ઇન્ડિયા (RBI) નું નિયંત્રણ અને નિરીક્ષણ રહે છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
