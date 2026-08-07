@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12. Capital Market</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    12. Capital Market
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 CAPITAL MARKET BASIC CONCEPT</span>
+        <p><strong>Capital Market</strong> (કેપિટલ માર્કેટ) એ એવી નાણાકીય બજાર છે જ્યાં <strong>Long-term Funds</strong> (દીર્ઘગાળાના ભંડોળ) એટલે કે ૧ વર્ષ કે તેથી વધુ સમય માટેના લોન, ફંડ્સ અથવા રોકાણની બોરોઈંગ અને લેન્ડિંગ (Borrowing and Lending) પ્રક્રિયા થાય છે.</p>
+        <p>કેપિટલ માર્કેટને મુખ્યત્વે ઇશ્યૂઅન્સ (Issuance) ના આધારે બે ભાગમાં વહેંચવામાં આવે છે:</p>
+        <ul>
+            <li><strong>Primary Market (પ્રાથમિક બજાર):</strong> જ્યાં કંપનીઓ પહેલીવાર નવા શેર્સ અથવા સિક્યોરિટીઝ જારી કરે છે (જેવા કે IPO, FPO, Rights Issue).</li>
+            <li><strong>Secondary Market (માધ્યમિક બજાર):</strong> જ્યાં પહેલેથી જારી થયેલા જૂના અને અસ્તિત્વ ધરાવતા (Existing) શેર્સનું ટ્રેડિંગ થાય છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Types of Capital Markets (आधारित वर्गीकरण)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Market Type</th>
+                <th>Description / Trading Details</th>
+            </tr>
+            <tr>
+                <td><strong>Equity Market</strong></td>
+                <td>કંપનીઓની ઓનરશિપ દર્શાવતા શેર્સ અને ઇક્વિટીનું ખરીદ-વેચાણ.</td>
+            </tr>
+            <tr>
+                <td><strong>Debt Market</strong></td>
+                <td>કર્જ કે લોન આધારિત ઇન્સ્ટ્રુમેન્ટ્સ જેવા કે Government Bonds, Corporate Bonds અને Debentures નું ટ્રેડિંગ.</td>
+            </tr>
+            <tr>
+                <td><strong>Commodity Market</strong></td>
+                <td>ભૌતિક કોમોડિટીઝ (જેવા કે Soyabean, Wheat, Mustard, Paddy) ની ફિઝિકલ બાઈંગ અને સેલિંગ.</td>
+            </tr>
+            <tr>
+                <td><strong>Derivative Market</strong></td>
+                <td>કોમોડિટી કે અન્ય એસેટમાંથી ડિરાઈવ થતા કોન્ટ્રેક્ટ્સ (જેવા કે Futures અને Options) નું ટ્રેડિંગ, જેનો ઉપયોગ રિસ્ક હેજિંગ (Hedging) માટે થાય છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Foreign Exchange Market</strong></td>
+                <td>વિદેશી કરન્સીઝ (Forex) ના વ્યાપાર અને ટ્રેડિંગ માટેની માર્કેટ.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Equity vs Debt Instruments</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT CONCEPTS</span>
+        <ul>
+            <li><strong>Equity (ઇક્વિટી / શેર્સ):</strong> આ કંપનીમાં <strong>Ownership</strong> (માલિકી) દર્શાવે છે. શેરહોલ્ડર્સ કંપનીના નફા-નુકસાનના ભાગીદાર બને છે.</li>
+            <li><strong>Debt (ડેબ્ટ / ઉધાર):</strong> આ એક પ્રકારનું <strong>Loan</strong> (કરજ) છે. જેમાં નિશ્ચિત વ્યાજ (Interest) ચૂકવવામાં આવે છે અને કંપનીની માલિકી મળતી નથી.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Types of Shares</h2>
+    <div class="card card-concept">
+        <h3 class="sub-title">1. Ordinary Shares (Equity Shares)</h3>
+        <p>આ સામાન્ય શેરહોલ્ડર્સ છે જે કંપનીના સાચા માલિકો ગણાય છે. તેમને કંપનીના સંચાલનમાં વોટિંગ રાઇટ્સ (Voting Rights) મળે છે, પરંતુ ડિવિડન્ડ કે પ્રોફિટ વિતરણમાં તેમને સૌથી છેલ્લે પ્રાધાન્ય મળે છે.</p>
+
+        <h3 class="sub-title">2. Preference Shares</h3>
+        <p>આ એવા શેર્સ છે જેને ઓર્ડિનરી શેર્સની સરખામણીમાં ડિવિડન્ડ (Dividend) ચૂકવતી વખતે અને કંપની બંધ થાય ત્યારે મૂડી પરત મેળવતી વખતે <strong>પ્રાધાન્ય (Preference)</strong> મળે છે.</p>
+        <ul>
+            <li><strong>Cumulative vs Non-Cumulative:</strong> ક્યુમ્યુલેટિવમાં પાછળનું ડિવિડન્ડ બાકી હોય તો આગળ એડ થઈને મળે છે, જ્યારે નોન-ક્યુમ્યુલેટિવમાં તેમ હોતું નથી.</li>
+            <li><strong>Redeemable vs Non-Redeemable:</strong> નિશ્ચિત મુદત પછી પાછા ખરીદી શકાય તેવા કે નહીં.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Comparison: Bonds vs Debentures</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameters</th>
+                <th>Bonds</th>
+                <th>Debentures</th>
+            </tr>
+            <tr>
+                <td><strong>Collateral / Security</strong></td>
+                <td>સામાન્ય રીતે <strong>Secured</strong> હોય છે (ફિઝિકલ એસેટ્સ અથવા કોલેટરલ સામે જારી થાય છે).</td>
+                <td>સામાન્ય રીતે <strong>Unsecured</strong> હોય છે (કોઈ જ કોલેટરલ વગર પ્રતિષ્ઠાના આધારે).</td>
+            </tr>
+            <tr>
+                <td><strong>Tenure</strong></td>
+                <td>મુખ્યત્વે <strong>Long-term</strong> (લાંબા ગાળાના, 5 થી 50 વર્ષ).</td>
+                <td>મુખ્યત્વે <strong>Short to Medium term</strong> (ટૂંકાથી મધ્યમ ગાળાના).</td>
+            </tr>
+            <tr>
+                <td><strong>Risk & Returns</strong></td>
+                <td>લો રિસ્ક, તેથી રિટર્ન પણ પ્રમાણમાં ઓછું હોય છે.</td>
+                <td>હાઈ રિસ્ક (કોલેટરલ ન હોવાથી), તેથી રિટર્ન (Interest) પણ વધુ હોય છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Issuer</strong></td>
+                <td>સરકાર, મ્યુનિસિપાલિટી અથવા મોટી કોર્પોરેટ કંપનીઓ.</td>
+                <td>મુખ્યત્વે પ્રાઇવેટ કોર્પોરેટ કંપનીઓ.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Other Capital Market Instruments</h2>
+    
+    <div class="card card-concept">
+        <ul>
+            <li><strong>Mutual Funds (મ્યુચ્યુઅલ ફંડ્સ):</strong> નાના રોકાણકારો પાસેથી નાણાં એકત્ર કરીને (Pooled Investment) શેરબજાર અને ડેટ માર્કેટમાં વૈવિધ્યસભર પોર્ટફોલિયોમાં રોકાણ કરવાની પદ્ધતિ (જેમ કે Equity-oriented અથવા Hybrid funds).</li>
+            <li><strong>Exchange Traded Funds (ETFs):</strong> મ્યુચ્યુઅલ ફંડ જેવું જ પૂલ્ડ રોકાણ, પરંતુ તેનો વેપાર સ્ટોક એક્સચેન્જ (Stock Exchanges) પર શેર્સની જેમ લાઈવ ટ્રેડ થાય છે.</li>
+            <li><strong>Derivatives (ડેરિવેટિવ્ઝ):</strong> જેની કિંમત અંડરલાઇંગ એસેટ (જેમ કે ગોડ, કોમોડિટી, કરન્સી) પર આધારિત હોય છે. જેમ કે <strong>Futures</strong> અને <strong>Options</strong>. આનો ઉપયોગ મુખ્યત્વે <strong>Hedging</strong> (રિસ્ક સામે રક્ષણ) માટે થાય છે.</li>
+        </ul>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / REVISION BOX</span>
+        <p><strong>Market Quick Check:</strong><br>
+        - Short-term Funds (< 1 Year) = Money Market (Regulated by RBI).<br>
+        - Long-term Funds (> 1 Year) = Capital Market (Regulated by SEBI).<br>
+        - New Shares Issuance = Primary Market (IPO, FPO).<br>
+        - Existing Shares Trading = Secondary Market (BSE, NSE).<br>
+        - Unsecured Debt = Debentures | Secured/Collateral Debt = Bonds.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. કેપિટલ માર્કેટ (Capital Market) માં સામાન્ય રીતે કયા સમયગાળાના ભંડોળ (Funds) નો વેપાર થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Less than 91 Days</li>
+            <li>B. Up to 1 Year</li>
+            <li>C. More than 1 Year (Long-term)</li>
+            <li>D. Exactly 24 Hours</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. More than 1 Year (Long-term)</strong><br>
+            Explanation: કેપિટલ માર્કેટમાં એક વર્ષ કે તેથી વધુ સમયગાળા (Long-term) ના ફંડ્સની લેણદેણ થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. કેપિટલ માર્કેટનું નિયમન (Regulation) કઈ સંસ્થા દ્વારા કરવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Reserve Bank of India (RBI)</li>
+            <li>B. SEBI</li>
+            <li>C. NABARD</li>
+            <li>D. IRDAI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. SEBI</strong><br>
+            Explanation: કેપિટલ માર્કેટ અને સિક્યોરિટીઝ એક્સચેન્જનું નિયમન સેબી (Securities and Exchange Board of India) કરે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. જ્યારે કોઈ કંપની પ્રથમ વખત જાહેર જનતા માટે નવા શેર્સ જારી કરે છે, ત્યારે તેને કઈ માર્કેટ કહેવાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Secondary Market</li>
+            <li>B. Primary Market</li>
+            <li>C. Money Market</li>
+            <li>D. Derivative Market</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Primary Market</strong><br>
+            Explanation: પ્રથમવાર નવા શેર્સ ઇશ્યૂ થવાનું સ્થળ પ્રાઇમરી માર્કેટ (જેમ કે IPO) છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. કંપનીમાં માલિકી હક (Ownership) કોના દ્વારા દર્શાવવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Debentures</li>
+            <li>B. Bonds</li>
+            <li>C. Equity Shares</li>
+            <li>D. Treasury Bills</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Equity Shares</strong><br>
+            Explanation: ઇક્વિટી શેર્સ કંપનીમાં માલિકી (Ownership) પ્રદાન કરે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. નીચેનામાંથી કયા ઇન્સ્ટ્રુમેન્ટ સામાન્ય રીતે અનસિક્યોર્ડ (Unsecured) હોય છે અને ઊંચું વળતર આપે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Debentures</li>
+            <li>B. Secured Bonds</li>
+            <li>C. Treasury Bills</li>
+            <li>D. Cash Management Bills</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Debentures</strong><br>
+            Explanation: ડિબેન્ચર્સ સામાન્ય રીતે બિનસુરક્ષિત (Unsecured) હોય છે, તેથી તેમાં જોખમ અને વળતર વધુ હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. પ્રીફરન્સ શેરહોલ્ડર્સને ઓર્ડિનરી શેરહોલ્ડર્સની સરખામણીમાં કઈ બાબતમાં અગ્રતા (Preference) મળે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Voting Rights માં</li>
+            <li>B. ડિવિડન્ડ મેળવવામાં અને મૂડી પરત મેળવવામાં</li>
+            <li>C. કંપનીનું સંચાલન કરવામાં</li>
+            <li>D. દૈનિક નિર્ણયો લેવામાં</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. ડિવિડન્ડ મેળવવામાં અને મૂડી પરત મેળવવામાં</strong><br>
+            Explanation: પ્રીફરન્સ શેરધારકોને ડિવિડન્ડ અને લિક્વિડેશન વખતે મૂડી પરત મેળવવામાં અગ્રતા મળે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. જે ઇન્સ્ટ્રુમેન્ટ્સની કિંમત અન્ય કોઈ અંડરલાઇંગ એસેટ પર નિર્ભર હોય છે, તેને શું કહે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Derivatives</li>
+            <li>B. Mutual Funds</li>
+            <li>C. Debentures</li>
+            <li>D. Savings Accounts</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Derivatives</strong><br>
+            Explanation: ડેરિવેટિવ્ઝ (જેવા કે Futures અને Options) ની કિંમત અંડરલાઇંગ એસેટમાંથી મેળવવામાં આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. મ્યુચ્યુઅલ ફંડ્સમાં ઘણા રોકાણકારો દ્વારા નાણાં એકત્ર કરીને રોકાણ કરવાની પદ્ધતિને શું કહે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Direct Lending</li>
+            <li>B. Pooled Investment</li>
+            <li>C. Single Holding</li>
+            <li>D. Fixed Deposit</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Pooled Investment</strong><br>
+            Explanation: મ્યુચ્યુઅલ ફંડ એ પૂલ્ડ ઇન્વેસ્ટમેન્ટ (Pooled Investment) નું ઉત્તમ ઉદાહરણ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. એવા ફંડ્સ કે જે મ્યુચ્યુઅલ ફંડ જેવા જ હોય પરંતુ તેમનું ટ્રેડિંગ સ્ટોક એક્સચેન્જ પર શેર્સની જેમ થતું હોય, તેને શું કહેવાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. ETFs (Exchange Traded Funds)</li>
+            <li>B. Treasury Bills</li>
+            <li>C. Commercial Papers</li>
+            <li>D. Call Money</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. ETFs (Exchange Traded Funds)</strong><br>
+            Explanation: ETF એક્સચેન્જ પર શેર્સની જેમ ખરીદી અને વેચી શકાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. જો કોઈ રોકાણકાર ભવિષ્યના પ્રાઇસ ફ્લક્ચ્યુએશન સામે રક્ષણ (Hedging) મેળવવા માંગતો હોય, તો તે કયા બજારનો ઉપયોગ કરે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Money Market</li>
+            <li>B. Derivative Market</li>
+            <li>C. Savings Account</li>
+            <li>D. Primary Issuance Market</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Derivative Market</strong><br>
+            Explanation: ડેરિવેટિવ્ઝ માર્કેટનો મુખ્ય હેતુ પ્રાઇસ રિસ્ક સામે હેજિંગ (Hedging) કરવાનું છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
