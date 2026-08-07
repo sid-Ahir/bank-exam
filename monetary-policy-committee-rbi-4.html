@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8. Monetary Policy Committee RBI - 4</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    8. Monetary Policy Committee RBI - 4
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 OMO (OPEN MARKET OPERATIONS) CONCEPT</span>
+        <p><strong>Open Market Operations (OMOs)</strong> એ RBI નું એક એવું ક્વોન્ટિટેટિવ ટૂલ છે જેના દ્વારા બજારમાં <strong>Money Supply</strong> (નાણાંનો પ્રવાહ) નિયંત્રિત કરવામાં આવે છે. આ પ્રક્રિયામાં RBI ખુલ્લા બજારમાં <strong>Government Securities (G-Secs)</strong> ની ખરીદી કે વેચાણ કરે છે:</p>
+        <ul>
+            <li><strong>Inflation / Liquidity Surplus (ફુગાવો / વધુ નાણાં):</strong> જ્યારે બજારમાં નાણાંનો પ્રવાહ વધારે હોય અને ફુગાવો વધતો હોય, ત્યારે RBI બજારમાં <strong>Government Securities વેચે છે (Sell)</strong>. તેના બદલે બેંકો પાસેથી નાણાં RBI પાસે આવે છે, જેથી લિક્વિડિટી અબ્ઝોર્બ (Absorb) થાય છે અને Money Supplyઘટે છે.</li>
+            <li><strong>Deficit / Liquidity Deficit (મંદી / નાણાંની અછત):</strong> જ્યારે બજારમાં નાણાંની તંગી હોય, ત્યારે RBI બેંકો પાસેથી <strong>Government Securities ખરીદે છે (Purchase)</strong>. તેના બદલે બેંકોને નાણાં મળે છે (Money Injection), જેથી બજારમાં લિક્વિડિટી વધે છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Market Stabilization Scheme (MSS)</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT CONCEPT</span>
+        <p>અર્થવ્યવસ્થામાં ખૂબ જ વધુ પડતી લિક્વિડિટી (Excess Liquidity) ને શોષી લેવા અને બજારને સ્થિર (Stabilize) રાખવા માટે RBI અને Government of India દ્વારા સંયુક્તપણે <strong>Market Stabilization Scheme (MSS)</strong> નો ઉપયોગ કરવામાં આવે છે. આના દ્વારા વધારાના બોન્ડ્સ અથવા સિક્યોરિટીઝ ઇશ્યૂ કરીને બજારમાંથી વધારાના નાણાં પાછા ખેંચવામાં આવે છે.</p>
+    </div>
+
+    <h2 class="section-title">Qualitative Credit Control Tools (ગુણાત્મક શાખ નિયંત્રણ)</h2>
+    <div class="card card-concept">
+        <p>ક્વોન્ટિટેટિવ ટૂલ્સ ઉપરાંત RBI કેટલાક ડાયરેક્ટ અથવા ક્વોલિટેટિવ મેજર્સનો ઉપયોગ કરે છે:</p>
+        <ul>
+            <li><strong>Rationing of Credit:</strong> ચોક્કસ ક્ષેત્રો માટે ક્રેડિટ અથવા લોનની મર્યાદા (Limit) નક્કી કરવી.</li>
+            <li><strong>Margin Requirements (Loan to Value Ratio - LTV):</strong> કાર કે મિલકત લોન વખતે બેંક દ્વારા ફાઇનાન્સ કરાતી રકમ અને બોરોઅર દ્વારા અપાતી ડાઉન પેમેન્ટ/માર્જિન રકમ વચ્ચેનો રેશિયો. ઉદાહરણ તરીકે, જો LTV 80% હોય, તો 20% માર્જિન બોરોઅરે આપવું પડે છે.</li>
+            <li><strong>Moral Suasion:</strong> બેંકોને સલાહ-સૂચન કે નૈતિક દબાણ દ્વારા ક્રેડિટ પોલિસીનું પાલન કરાવવું.</li>
+            <li><strong>Direct Action:</strong> RBI ના નિયમો ન માનતી બેંકો સામે કડક કાયદાકીય અથવા સીધા પગલાં લેવા.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Monetary Policy Committee (MPC) - गठन एवं संरचना</h2>
+    
+    <div class="card card-important">
+        <span class="tag tag-must-remember">🔴 MUST REMEMBER</span>
+        <p>માજી RBI गवर्नर <strong>Urjit Patel Committee</strong> ના રેકોમેન્ડેશન પર મોદ્રિક નીતિના નિર્ણયો લેવા માટે <strong>Monetary Policy Committee (MPC)</strong> ની રચના કરવામાં આવી હતી.</p>
+        <ul>
+            <li><strong>Legal Provision:</strong> <strong>Finance Act, 2016</strong> દ્વારા <strong>RBI Act, 1934</strong> માં સુધારો કરીને <strong>Section 45 ZB</strong> ઉમેરવામાં આવ્યો, જેના હેઠળ MPC ની રચના ફરજિયાત બની.</li>
+            <li><strong>Meetings:</strong> MPC ની બેઠક વર્ષમાં ઓછામાં ઓછી <strong>4 Times a Year</strong> (ક્વાર્ટરલી / બાય-મંથલી) મળવી અનિવાર્ય છે.</li>
+            <li><strong>Total Members:</strong> MPC માં કુલ <strong>6 Members</strong> હોય છે.</li>
+            <li><strong>Tenure:</strong> સભ્યોનો કાર્યકાળ <strong>4 Years</strong> નો હોય છે અને તેઓ રી-અપોઇન્ટમેન્ટ (Re-appointment) માટે પાત્ર નથી હોતા.</li>
+            <li><strong>Quorum:</strong> બેઠક ચાલુ રાખવા માટે ઓછામાં ઓછા <strong>4 Members</strong> ની હાજરી જરૂરી છે.</li>
+            <li><strong>Casting Vote:</strong> જો મતો સમાન પડે (Tie થાય), તો RBI ના ગવર્નર પાસે <strong>Casting Vote</strong> (નિર્ણાયક મત) નો અધિકાર હોય છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Composition of Monetary Policy Committee (MPC Members)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Member Type</th>
+                <th>Count</th>
+                <th>Details / Names</th>
+            </tr>
+            <tr>
+                <td><strong>Internal Members (Official)</strong></td>
+                <td>3</td>
+                <td>
+                    1. <strong>Governor of RBI</strong> (Ex-officio Chairperson - Sanjay Malhotra)<br>
+                    2. <strong>Deputy Governor in charge of Monetary Policy</strong> (M. Rajeshwar Rao / Poonam Gupta)<br>
+                    3. <strong>Executive Director of RBI</strong> (Rajeev Ranjan)
+                </td>
+            </tr>
+            <tr>
+                <td><strong>External Members (Non-Official)</strong></td>
+                <td>3</td>
+                <td>
+                    Nominated by Government of India (Search-cum-Selection Committee દ્વારા):<br>
+                    1. <strong>Ram Singh</strong> (Director, Delhi School of Economics)<br>
+                    2. <strong>Saugata Bhattacharya</strong> (Economist)<br>
+                    3. <strong>Nagesh Kumar</strong> (Director & Chief Executive, ISID)
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Current Policy Rates & Economic Projections (As of April 2025/2026 data)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Policy Instrument / Ratio</th>
+                <th>Current Rate</th>
+            </tr>
+            <tr>
+                <td><strong>Repo Rate</strong></td>
+                <td>6.00%</td>
+            </tr>
+            <tr>
+                <td><strong>Reverse Repo Rate (RRR)</strong></td>
+                <td>3.35%</td>
+            </tr>
+            <tr>
+                <td><strong>Standing Deposit Facility (SDF)</strong></td>
+                <td>5.75%</td>
+            </tr>
+            <tr>
+                <td><strong>Marginal Standing Facility (MSF)</strong></td>
+                <td>6.25%</td>
+            </tr>
+            <tr>
+                <td><strong>Bank Rate</strong></td>
+                <td>6.25%</td>
+            </tr>
+            <tr>
+                <td><strong>Cash Reserve Ratio (CRR)</strong></td>
+                <td>4.00%</td>
+            </tr>
+            <tr>
+                <td><strong>Statutory Liquidity Ratio (SLR)</strong></td>
+                <td>18.00%</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / REVISION BOX</span>
+        <p><strong>MPC Structure Summary:</strong><br>
+        6 Members = 3 RBI (Internal) + 3 Government Nominated (External).<br>
+        Chairperson = RBI Governor (Sanjay Malhotra).<br>
+        Tenure = 4 Years (No Re-appointment).<br>
+        Act = Section 45 ZB of RBI Act, 1934 (Added via Finance Act, 2016).</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. Open Market Operations (OMOs) ના સંદર્ભમાં, જ્યારે બજારમાં લિક્વિડિટી સરપ્લસ (વધુ નાણાં) હોય ત્યારે RBI શું કરે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Government Securities ખરીદે છે (Purchase)</li>
+            <li>B. Government Securities વેચે છે (Sell)</li>
+            <li>C. CRR ઘટાડે છે</li>
+            <li>D. બેંકોને ફ્રી લોન આપે છે</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Government Securities વેચે છે (Sell)</strong><br>
+            Explanation: સરપ્લસ લિક્વિડિટી શોષવા માટે RBI બજારમાં સિક્યોરિટીઝ વેચે છે, જેથી બેંકો પાસેથી નાણાં RBI પાસે આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. Monetary Policy Committee (MPC) ની રચના કઈ કમિટીના ભલામણ આધારે કરવામાં આવી હતી?</p>
+        <ul class="mcq-options">
+            <li>A. Urjit Patel Committee</li>
+            <li>B. Narsimham Committee</li>
+            <li>C. Hilton Young Committee</li>
+            <li>D. Nachiket Mor Committee</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Urjit Patel Committee</strong><br>
+            Explanation: ઉર્જિત પટેલ કમિટીના રેકોમેન્ડેશનથી મોદ્રિક નીતિ સમિતિ (MPC) ની સ્થાપના કરવામાં આવી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. RBI Act, 1934 માં કયા સેક્શન હેઠળ Monetary Policy Committee (MPC) ની જોગવાઈ ઉમેરવામાં આવી?</p>
+        <ul class="mcq-options">
+            <li>A. Section 22</li>
+            <li>B. Section 42</li>
+            <li>C. Section 45 ZB</li>
+            <li>D. Section 51</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Section 45 ZB</strong><br>
+            Explanation: Finance Act, 2016 દ્વારા RBI Act ના સેક્શન 45 ZB માં MPC ની રચનાનો સમાવેશ કરાયો.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. Monetary Policy Committee (MPC) માં કુલ કેટલા સભ્યો હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 4</li>
+            <li>B. 5</li>
+            <li>C. 6</li>
+            <li>D. 7</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 6</strong><br>
+            Explanation: MPC માં 3 સભ્યો RBI તરફથી અને 3 સભ્યો ભારત સરકાર દ્વારા નામાંકિત મળીને કુલ 6 સભ્યો હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. MPC ના સભ્યોનો કાર્યકાળ (Tenure) કેટલા વર્ષનો હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 3 Years</li>
+            <li>B. 4 Years</li>
+            <li>C. 5 Years</li>
+            <li>D. 2 Years</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 4 Years</strong><br>
+            Explanation: MPC સભ્યોનો કાર્યકાળ 4 વર્ષનો હોય છે અને તેઓ પુનઃનિમણૂક (Re-appointment) માટે પાત્ર નથી હોતા.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. MPC ની બેઠક યોજવા માટે લઘુત્તમ ગણપૂર્તિ (Quorum) કેટલા સભ્યોની હોવી જરૂરી છે?</p>
+        <ul class="mcq-options">
+            <li>A. 2 Members</li>
+            <li>B. 3 Members</li>
+            <li>C. 4 Members</li>
+            <li>D. 6 Members</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 4 Members</strong><br>
+            Explanation: બેઠક ચાલુ રાખવા માટે ઓછામાં ઓછા 4 સભ્યોની હાજરી (Quorum) અનિવાર્ય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. MPC ની બેઠકમાં જો ટાઈ (Tie) પડે, તો કોની પાસે નિર્ણાયક મત (Casting Vote) નો અધિકાર હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Finance Minister</li>
+            <li>B. RBI Governor</li>
+            <li>C. Prime Minister</li>
+            <li>D. External Member Senior-most</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. RBI Governor</strong><br>
+            Explanation: મતો સમાન પડે ત્યારે RBI ના ગવર્નર પાસે કાસ્ટિંગ વોટ (નિર્ણાયક મત) ની સત્તા હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. નીચેનામાંથી કયા સભ્ય MPC માં RBI તરફથી આંતરિક સભ્ય (Internal Member) તરીકે સામેલ છે?</p>
+        <ul class="mcq-options">
+            <li>A. Ram Singh</li>
+            <li>B. Saugata Bhattacharya</li>
+            <li>C. Rajeev Ranjan</li>
+            <li>D. Nagesh Kumar</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Rajeev Ranjan</strong><br>
+            Explanation: રાજೀವ રંજન (Executive Director, RBI) એ RBI ના આંતરિક સભ્ય છે, જ્યારે બાકીના ત્રણેય સરકાર દ્વારા નિયુક્ત બાહ્ય સભ્યો છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. બજારમાં અસ્થિરતા ઘટાડવા અને લિક્વિડિટી મેનેજ કરવા માટે RBI અને સરકાર દ્વારા કઈ સંયુક્ત યોજના ચલાવાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Market Stabilization Scheme (MSS)</li>
+            <li>B. Pradhan Mantri Jan Dhan Yojana</li>
+            <li>C. Stand Up India</li>
+            <li>D. Mudra Scheme</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Market Stabilization Scheme (MSS)</strong><br>
+            Explanation: વધારાની લિક્વિડિટી શોષવા માટે MSS યોજનાનો ઉપયોગ થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. વર્તમાન સમયમાં Repo Rate નો દર કેટલો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 5.75%</li>
+            <li>B. 6.00%</li>
+            <li>C. 6.25%</li>
+            <li>D. 3.35%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 6.00%</strong><br>
+            Explanation: લેક્ચર ડેટા મુજબ વર્તમાન રેપો રેટ 6.00% છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
