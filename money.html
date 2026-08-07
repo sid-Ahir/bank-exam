@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static GA- 2</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    Static GA - 2
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 INTRODUCTORY OVERVIEW</span>
+        <p>આ સ્ટડી નોટ્સ બેન્કિંગ અને સ્પર્ધાત્મક પરીક્ષાઓ (Banking & Competitive Exams) માટે અતિમહત્વપૂર્ણ કરંટ અફેર્સ બેઝ્ડ સ્ટેટિક જીએ (Static GA) કવર કરે છે. આમાં મની માર્કેટ ઇન્સ્ટ્રુમેન્ટ્સ, ટ્રેઝરી બિલ્સ, વેઝ એન્ડ મીન્સ એડવાન્સીસ (WMA), સર્ટિફિકેટ ઓફ ડિપોઝિટ અને કોમર્શિયલ પેપર્સની વિસ્તૃત માહિતી આપવામાં આવી છે.</p>
+    </div>
+
+    <h2 class="section-title">🔥 EXAM CAPSULE (મહત્વપૂર્ણ મની માર્કેટ ઇન્સ્ટ્રુમેન્ટ્સ)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Instrument Name</th>
+                <th>Issuer</th>
+                <th>Maturity Period</th>
+                <th>Key Features / Limits</th>
+            </tr>
+            <tr>
+                <td><strong>Treasury Bills (T-Bills)</strong></td>
+                <td>RBI on behalf of Central Government</td>
+                <td>91 Days, 182 Days, 364 Days</td>
+                <td>Zero Coupon Bonds; Issued at a deep discount, redeemed at face value. Min amount: ₹25,000. Eligible for SLR.</td>
+            </tr>
+            <tr>
+                <td><strong>Cash Management Bills (CMBs)</strong></td>
+                <td>RBI on behalf of Central Government</td>
+                <td>Less than 91 Days</td>
+                <td>Ultra short-term instrument to meet temporary mismatches in government receipts and expenditure. Eligible for SLR.</td>
+            </tr>
+            <tr>
+                <td><strong>Ways and Means Advances (WMA)</strong></td>
+                <td>RBI</td>
+                <td>Up to 90 Days</td>
+                <td>Temporary overdraft facility for Central and State Governments. Interest = Repo Rate (Normal) or Repo + 2% (Overdraft).</td>
+            </tr>
+            <tr>
+                <td><strong>Certificate of Deposit (CD)</strong></td>
+                <td>Scheduled Commercial Banks & Selected Financial Institutions</td>
+                <td>Banks: 7 Days to 1 Year<br>FIs: 1 Year to 3 Years</td>
+                <td>Min amount: ₹5 Lakhs and multiples. Freely negotiable. No loans allowed against CDs. Cooperative/RRBs cannot issue.</td>
+            </tr>
+            <tr>
+                <td><strong>Commercial Paper (CP)</strong></td>
+                <td>Large Corporates, Primary Dealers & AIFIs</td>
+                <td>7 Days to 1 Year (364 Days)</td>
+                <td>Unsecured promissory note introduced in 1990 on Vaghul Committee recommendation. Min amount: ₹5 Lakhs. Issued in Demat form.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">⭐ IMPORTANT FACTS (મની માર્કેટ અને કોલ મની)</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 MONEY MARKET & CALL MONEY FACTS</span>
+        <ul>
+            <li><strong>Money Market Definition:</strong> ટૂંકાગાળાના ભંડોળ (Short-term Funds with maturity up to 1 Year / 364 Days) માટેનું બજાર, જેનું નિયમન <strong>RBI</strong> દ્વારા થાય છે.</li>
+            <li><strong>Call Money Market (Inter-bank Market):</strong> 
+                <ul>
+                    <li><strong>Call Money:</strong> Overnight / 1 Day borrowing.</li>
+                    <li><strong>Notice Money:</strong> 2 Days up to 14 Days.</li>
+                    <li><strong>Term Money:</strong> More than 14 Days up to 364 Days.</li>
+                </ul>
+            </li>
+            <li><strong>Call Money Rate:</strong> તે માર્કેટ ડિટરમાઇન્ડ (Market-determined) હોય છે અને ફિક્સ હોતો નથી.</li>
+            <li><strong>Commercial Bills / Trade Bills:</strong> સેલર અને બાયર વચ્ચેના વ્યાપારી લેવડદેવડ માટેનું ઇન્સ્ટ્રુમેન્ટ, જેને બેંક દ્વારા ડિસ્કાઉન્ટ (Discount) કરાવી શકાય છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">📊 IMPORTANT DATA (મહત્વપૂર્ણ રેશિયો, મર્યાદાઓ અને આંકડા)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Details / Limits</th>
+            </tr>
+            <tr>
+                <td><strong>T-Bill Multiples</strong></td>
+                <td>મિનિમમ ₹25,000 અને ત્યારબાદ ₹25,000 ના ગુણાકારમાં (Multiples).</td>
+            </tr>
+            <tr>
+                <td><strong>Certificate of Deposit & Commercial Paper Min Amount</strong></td>
+                <td>મિનિમમ <strong>₹5 Lakhs</strong> અને તેના મલ્ટિપલ્સમાં.</td>
+            </tr>
+            <tr>
+                <td><strong>WMA Overdraft Penalty</strong></td>
+                <td>90 દિવસથી વધુ સમય થવા પર <strong>Repo Rate + 2%</strong> પેનલ્ટી વ્યાજ.</td>
+            </tr>
+            <tr>
+                <td><strong>Call Money Tenure</strong></td>
+                <td>ઓવરનાઈટ (Overnight / 1 Day).</td>
+            </tr>
+            <tr>
+                <td><strong>Notice Money Tenure</strong></td>
+                <td>2 થી 14 દિવસ.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICKS</span>
+        <p><strong>Money Market Instruments Trick:</strong><br>
+        - T-Bills: 3 maturities (91, 182, 364) - ડબલ થતા જાય છે!<br>
+        - CMBs: Ultra short (< 91 Days).<br>
+        - CD & CP: Minimum amount ₹5 Lakhs, max tenure 1 Year (Banks for CD, Corporates for CP).</p>
+    </div>
+
+    <div class="card card-trap">
+        <span class="tag tag-exam-trap">🟣 EXAM TRAP</span>
+        <p><strong>Issuing Authority Trap:</strong> ટ્રેઝરી બિલ્સ (T-Bills) માત્ર કેન્દ્ર સરકાર વતી <strong>RBI</strong> દ્વારા જારી કરવામાં આવે છે. કોઈ પણ રાજ્ય સરકાર (State Government) T-Bills જારી કરી શકતી નથી.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. સરકારી આવક અને ખર્ચ વચ્ચેના અસ્થાયી મિસમેચને પહોંચી વળવા માટે 91 દિવસથી ઓછા સમયની કઈ સિક્યોરિટી જારી થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Treasury Bills</li>
+            <li>B. Cash Management Bills (CMBs)</li>
+            <li>C. Commercial Papers</li>
+            <li>D. Equity Shares</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Cash Management Bills (CMBs)</strong><br>
+            Explanation: 91 દિવસથી ઓછા સમયની અતિ-ટૂંકાગાળાની જરૂરિયાતો માટે Cash Management Bills (CMBs) વપરાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. વેઝ એન્ડ મીન્સ એડવાન્સીઝ (WMA) જો 90 દિવસની મર્યાદા વટાવી જાય, તો તે શું બની જાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Treasury Bill</li>
+            <li>B. Overdraft Facility with Repo + 2% penalty</li>
+            <li>C. Certificate of Deposit</li>
+            <li>D. Commercial Paper</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Overdraft Facility with Repo + 2% penalty</strong><br>
+            Explanation: 90 દિવસથી વધુ સમય સુધી ડબ્લ્યુએમએ અનપેઇડ રહે તો તે ઓવરડ્રાફ્ટ બની જાય છે અને રેપો રેટ પર 2% પેનલ્ટી લાગે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. સર્ટિફિકેટ ઓફ ડિપોઝિટ (CD) અને કોમર્શિયલ પેપર (CP) માટેનું લઘુત્તમ રોકાણ મૂલ્ય (Minimum Amount) કેટલું છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹25,000</li>
+            <li>B. ₹1 Lakh</li>
+            <li>C. ₹5 Lakhs</li>
+            <li>D. ₹1 Crore</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹5 Lakhs</strong><br>
+            Explanation: સીડી (CD) અને સીપી (CP) બંને માટે ન્યૂનતમ મર્યાદા ₹5 Lakhs અને તેના મલ્ટિપલ્સમાં છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. કયા ઇન્સ્ટ્રુમેન્ટને 'ઝીરો કૂપન બોન્ડ' (Zero Coupon Bonds) તરીકે પણ ઓળખવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Treasury Bills</li>
+            <li>B. Commercial Papers</li>
+            <li>C. Certificate of Deposit</li>
+            <li>D. Equity Shares</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Treasury Bills</strong><br>
+            Explanation: T-Bills પર અલગથી કોઈ વ્યાજદર (Coupon) હોતો નથી, તે ડિસ્કાઉન્ટ પર વેચાય છે તેથી તેને ઝીરો કૂપન બોન્ડ કહે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. કોલ મની (Call Money) માં બોરોઇંગનો સમયગાળો સામાન્ય રીતે કેટલો હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Overnight / 1 Day</li>
+            <li>B. 2 to 14 Days</li>
+            <li>C. 1 Year</li>
+            <li>D. 5 Years</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Overnight / 1 Day</strong><br>
+            Explanation: કૉલ મની ઓવરનાઈટ અથવા 1 દિવસ માટેની ઇન્ટર-બેંક બોરોઇંગ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. નોટિસ મની (Notice Money) નો સમયગાળો કેટલો હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1 Day</li>
+            <li>B. 2 to 14 Days</li>
+            <li>C. 15 to 364 Days</li>
+            <li>D. More than 1 Year</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 2 to 14 Days</strong><br>
+            Explanation: નોટિસ મની 2 થી 14 દિવસ સુધીના સમયગાળા માટે હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. કોમર્શિયલ પેપર (CP) કઈ સમિતિની ભલામણ આધારે ભારતમાં દાખલ થયા હતા?</p>
+        <ul class="mcq-options">
+            <li>A. Vaghul Committee (1990)</li>
+            <li>B. Narasimham Committee</li>
+            <li>C. Usha Thorat Committee</li>
+            <li>D. Nachiket Mor Committee</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Vaghul Committee (1990)</strong><br>
+            Explanation: વર્ષ 1990 માં વાઘુલ કમિટીના રેકોમેન્ડેશનથી કોમર્શિયલ પેપર્સ આવ્યા હતા.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. ટ્રેઝરી બિલ (T-Bills) ની ત્રણ પ્રમાણભૂત મેચ્યોરિટી ડેટ્સ કઈ છે?</p>
+        <ul class="mcq-options">
+            <li>A. 30, 60, 90 Days</li>
+            <li>B. 91, 182, 364 Days</li>
+            <li>C. 1, 2, 3 Years</li>
+            <li>D. 7, 14, 28 Days</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 91, 182, 364 Days</strong><br>
+            Explanation: T-Bills ના ત્રણ પ્રકાર 91 Days, 182 Days અને 364 Days છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. કોલ મની માર્કેટ (Call Money Market) નો રેટ કઈ રીતે નક્કી થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Fixed by RBI annually</li>
+            <li>B. Market-determined based on demand and supply</li>
+            <li>C. Fixed by SEBI</li>
+            <li>D. Fixed by Ministry of Finance</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Market-determined based on demand and supply</strong><br>
+            Explanation: કૉલ મની રેટ માર્કેટમાં ડિમાન્ડ અને સપ્લાયના આધારે નક્કી થાય છે (બજાર આધારિત).
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. કયા મની માર્કેટ ઇન્સ્ટ્રુમેન્ટ સામે બેંકો દ્વારા લોન આપવાની મનાઈ ફરમાવવામાં આવી છે?</p>
+        <ul class="mcq-options">
+            <li>A. Certificate of Deposit (CD)</li>
+            <li>B. Treasury Bills</li>
+            <li>C. Commercial Papers</li>
+            <li>D. Government Securities</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Certificate of Deposit (CD)</strong><br>
+            Explanation: સર્ટિફિકેટ ઓફ ડિપોઝિટ (CD) સામે બેંકો લોન આપી શકતી નથી.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
