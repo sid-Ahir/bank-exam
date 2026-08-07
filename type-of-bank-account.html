@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type Of Bank Account</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    Type Of Bank Account
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 BANK DEPOSITS CONCEPT</span>
+        <p>બેંક ડિપોઝિટ્સ (Bank Deposits) મુખ્યત્વે બે ભાગમાં વહેંચાયેલા છે: <strong>Demand Deposits</strong> (માગણી થાપણો - ગ્રાહકની માગણી પર ગમે ત્યારે ઉપાડી શકાય, જેમ કે Saving Account અને Current Account) અને <strong>Term Deposits</strong> (ટર્મ ડિપોઝિટ્સ - ચોક્કસ મુદત માટે જમા થતી રકમ, જેમ કે Fixed Deposits - FD અને Recurring Deposits - RD).</p>
+    </div>
+
+    <h2 class="section-title">Saving Account vs Current Account</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameters</th>
+                <th>Saving Account (બચત ખાતું)</th>
+                <th>Current Account (ચાલુ ખાતું)</th>
+            </tr>
+            <tr>
+                <td><strong>Target Users</strong></td>
+                <td>ব্যક્તિઓ અને બચતકારો (Individuals & Savers)</td>
+                <td>વ્યવસાયીઓ, કંપનીઓ, ફ્રીલાન્સર્સ (Businesses & Firms)</td>
+            </tr>
+            <tr>
+                <td><strong>Transactions</strong></td>
+                <td>મર્યાદિત ફ્રિક્વન્સી અને વિડ્રોઅલ લિમિટ હોય છે.</td>
+                <td>અમર્યાદિત અને ફ્લેક્સિબલ ટ્રાન્ઝેક્શન્સ (Unlimited Transactions).</td>
+            </tr>
+            <tr>
+                <td><strong>Interest Rate</strong></td>
+                <td>સામાન્ય રીતે 2.5% થી 4% પ્રતિ વર્ષ વ્યાજ મળે છે.</td>
+                <td>કોઈ વ્યાજ મળતું નથી (<strong>0% Interest</strong>).</td>
+            </tr>
+            <tr>
+                <td><strong>Overdraft Facility</strong></td>
+                <td>સામાન્ય રીતે ઉપલબ્ધ નથી (સિવાય કે જનધન યોજના).</td>
+                <td>ઓવરડ્રાફ્ટ (OD) અને કેશ ક્રેડિટ (CC) ની સુવિધા મળે છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Average Monthly Balance</strong></td>
+                <td>ઘણા પબ્લિક સેક્ટર બેંકોમાં ઝીરો, પ્રાઇવેટ બેંકોમાં મધ્યમ.</td>
+                <td>સામાન્ય રીતે ઊંચું AMB જાળવવું પડે છે.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Term Deposits (FD & RD)</h2>
+    <div class="card card-important">
+        <span class="tag tag-must-remember">🔴 TERM DEPOSIT LIMITS & TENURES</span>
+        <ul>
+            <li><strong>Fixed Deposit (FD):</strong> એકસાથે મોટી રકમ (Lump-sum Amount) ચોક્કસ મુદત માટે જમા થાય છે. મિનિમમ ટેન્યોર <strong>7 Days</strong> થી મહત્તમ <strong>10 Years</strong> સુધીનો હોય છે.</li>
+            <li><strong>Recurring Deposit (RD):</strong> દર મહિને કિશ્તોમાં (Monthly Installments) નિશ્ચિત રકમ જમા થાય છે. મિનિમમ ટેન્યોર <strong>6 Months</strong> થી મહત્તમ <strong>10 Years</strong> સુધીનો હોય છે.</li>
+            <li><strong>Bulk Deposit Limit:</strong> 
+                <ul>
+                    <li>Schedule Commercial Banks અને Small Finance Banks માટે: <strong>₹3 Crores and above</strong>.</li>
+                    <li>RRBs અને Local Area Banks માટે: <strong>₹1 Crore and above</strong>.</li>
+                </ul>
+            </li>
+            <li><strong>Loan against FD:</strong> એફડી વેલ્યુના મહત્તમ <strong>90%</strong> સુધીની રકમનું લોન મેળવી શકાય છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">BSBDA (Basic Savings Bank Deposit Account)</h2>
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 FINANCIAL INCLUSION ACCOUNT</span>
+        <p><strong>BSBDA</strong> એ એક 'નો-ફ્રિલ્સ' (No-Frills / ઝીરો બેલેન્સ) અકાઉન્ટ છે જે નાણાકીય સમાવેશન (Financial Inclusion) માટે ખોલવામાં આવે છે (જેમ કે જનધન યોજના અકાઉન્ટ). આ ખાતા માટેની મહત્વપૂર્ણ મર્યાદાઓ:</p>
+        <ul>
+            <li><strong>Total Credits in a Financial Year:</strong> મહત્તમ <strong>₹1 Lakh</strong> થી વધુ નહીં.</li>
+            <li><strong>Total Debits / Withdrawals in a Month:</strong> મહત્તમ <strong>₹10,000</strong> થી વધુ નહીં.</li>
+            <li><strong>Free Withdrawals:</strong> મહિનામાં મહત્તમ <strong>4</strong> વાર.</li>
+            <li><strong>Account Balance:</strong> કોઈપણ સમયે ખાતામાં મહત્તમ બેલેન્સ <strong>₹50,000</strong> થી વધુ હોવું જોઈએ નહીં.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">NRI Accounts (Non-Resident Indian Accounts)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Account Type</th>
+                <th>Currency & Maintenance</th>
+                <th>Repatriability & Tax Status</th>
+            </tr>
+            <tr>
+                <td><strong>NRE Account</strong> (Non-Resident External)</td>
+                <td>ભારતીય રૂપિયામાં (INR) મેન્ટેન થાય છે (પરંતુ વિદેશી કમાણી જમા થાય છે).</td>
+                <td><strong>Fully Repatriable</strong> (પૂરેપૂરી રકમ વિદેશ મોકલી શકાય) અને સંપૂર્ણપણે <strong>Tax-Free</strong>.</td>
+            </tr>
+            <tr>
+                <td><strong>NRO Account</strong> (Non-Resident Ordinary)</td>
+                <td>ભારતીય રૂપિયામાં (INR) મેન્ટેન થાય છે (ભારતમાં થતી આવક જેમ કે રેન્ટ, ડિવિડન્ડ માટે).</td>
+                <td><strong>Partially Repatriable</strong> (મહત્તમ <strong>$1 Million</strong> પ્રતિ નાણાકીય વર્ષ) અને <strong>Taxable</strong> (30% TDS + Surcharge).</td>
+            </tr>
+            <tr>
+                <td><strong>FCNR Account</strong> (Foreign Currency Non-Resident)</td>
+                <td>વિદેશી કરન્સી (જેવા કે USD, GBP, EUR) માં જ ફિક્સ્ડ ડિપોઝિટ સ્વરૂપે રહે છે (ટેન્યોર: 1 થી 5 વર્ષ).</td>
+                <td><strong>Fully Repatriable</strong> અને <strong>Tax-Free</strong> (એક્સચેન્જ રેટ રિસ્ક ન રહે).</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / REVISION BOX</span>
+        <p><strong>Account Limits Quick Summary:</strong><br>
+        - FD Max Tenure = 10 Years | Min Tenure = 7 Days.<br>
+        - RD Max Tenure = 10 Years | Min Tenure = 6 Months.<br>
+        - BSBDA Annual Credit Limit = ₹1 Lakh.<br>
+        - BSBDA Monthly Debit Limit = ₹10,000.<br>
+        - BSBDA Max Balance Limit = ₹50,000.<br>
+        - NRO Repatriation Limit = $1 Million / Financial Year.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. બેંકના કરન્ટ અકાઉન્ટ (Current Account) પર સામાન્ય રીતે કેટલું વ્યાજ (Interest Rate) ચૂકવવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. 2.5%</li>
+            <li>B. 4.0%</li>
+            <li>C. 0% (No Interest)</li>
+            <li>D. 6.0%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 0% (No Interest)</strong><br>
+            Explanation: ચાલુ ખાતા (Current Account) પર બેંક દ્વારા કોઈ જ વ્યાજ ચૂકવવામાં આવતું નથી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. ફિક્સ્ડ ડિપોઝિટ (FD) નો ન્યૂનતમ ટેન્યોર (Minimum Tenure) કેટલો હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1 Day</li>
+            <li>B. 7 Days</li>
+            <li>C. 30 Days</li>
+            <li>D. 6 Months</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 7 Days</strong><br>
+            Explanation: એફડી (FD) નો ન્યૂનતમ સમયગાળો 7 દિવસ અને મહત્તમ 10 વર્ષ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. રિઅકરિંગ ડિપોઝિટ (RD) નો ન્યૂનતમ ટેન્યોર (Minimum Tenure) કેટલો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 7 Days</li>
+            <li>B. 1 Month</li>
+            <li>C. 6 Months</li>
+            <li>D. 1 Year</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 6 Months</strong><br>
+            Explanation: આરડી (RD) માટે ન્યૂનતમ ટેન્યોર 6 મહિના છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. BSBDA અકાઉન્ટમાં નાણાકીય વર્ષ દરમિયાન કુલ ક્રેડિટ (Total Credits) ની મહત્તમ મર્યાદા કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹50,000</li>
+            <li>B. ₹1 Lakh</li>
+            <li>C. ₹2 Lakhs</li>
+            <li>D. No limit</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. ₹1 Lakh</strong><br>
+            Explanation: BSBDA માં વાર્ષિક કુલ ક્રેડિટ ₹1 Lakh થી વધુ હોઈ શકે નહીં.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. BSBDA અકાઉન્ટમાં કોઈપણ સમયે મહત્તમ બેલેન્સ કેટલું રહી શકે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹10,000</li>
+            <li>B. ₹25,000</li>
+            <li>C. ₹50,000</li>
+            <li>D. ₹1 Lakh</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹50,000</strong><br>
+            Explanation: BSBDA માં કોઈપણ પોઈન્ટ ઓફ ટાઈમ પર બેલેન્સ ₹50,000 ની મર્યાદામાં હોવું જોઈએ.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. શેડ્યુલ કમર્શિયલ બેંકો માટે બલ્ક ડિપોઝિટ (Bulk Deposit) ની નવી મર્યાદા કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹1 Crore and above</li>
+            <li>B. ₹2 Crores and above</li>
+            <li>C. ₹3 Crores and above</li>
+            <li>D. ₹5 Crores and above</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹3 Crores and above</strong><br>
+            Explanation: શેડ્યુલ કમર્શિયલ બેંકો અને સ્મોલ ફાઇનાન્સ બેંકો માટે બલ્ક ડિપોઝિટ લિમિટ ₹3 Crores અને તેથી વધુ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. કયા NRI અકાઉન્ટમાં જમા રકમ સંપૂર્ણપણે ટેક્સ-ફ્રી અને ફ્રીલી રિપેટ્રિએબલ હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. NRO Account</li>
+            <li>B. NRE Account</li>
+            <li>C. Resident Saving Account</li>
+            <li>D. Current Account</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. NRE Account</strong><br>
+            Explanation: NRE અકાઉન્ટમાં રહેલા નાણાં ટેક્સ-ફ્રી અને પૂરેપૂરા રિપેટ્રિએબલ હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. NRO અકાઉન્ટમાંથી નાણાં વિદેશ મોકલવા માટે (Repatriation Limit) પ્રતિ નાણાકીય વર્ષ મહત્તમ મર્યાદા કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. $10,000</li>
+            <li>B. $100,000</li>
+            <li>C. $1 Million</li>
+            <li>D. $10 Million</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. $1 Million</strong><br>
+            Explanation: NRO અકાઉન્ટ આંશિક રીતે રિપેટ્રિએબલ છે જેમાં પ્રતિ નાણાકીય વર્ષ મહત્તમ $1 Million ની મર્યાદા છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. FCNR અકાઉન્ટનો મહત્તમ ટેન્યોર (Maximum Tenure) કેટલો હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1 Year</li>
+            <li>B. 3 Years</li>
+            <li>C. 5 Years</li>
+            <li>D. 10 Years</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 5 Years</strong><br>
+            Explanation: FCNR (Foreign Currency Non-Resident) અકાઉન્ટનો સમયગાળો 1 થી 5 વર્ષ સુધીનો હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. BSBDA અકાઉન્ટમાં એક મહિનામાં મહત્તમ કેટલા ફ્રી વિડ્રોઅલ્સ (Free Withdrawals) ની મંજૂરી છે?</p>
+        <ul class="mcq-options">
+            <li>A. 2 Withdrawals</li>
+            <li>B. 4 Withdrawals</li>
+            <li>C. 10 Withdrawals</li>
+            <li>D. Unlimited</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 4 Withdrawals</strong><br>
+            Explanation: BSBDA અકાઉન્ટમાં મહિનામાં મહત્તમ 4 ફ્રી વિડ્રોઅલ્સ (ATM અને બ્રાન્ચ બંને મળીને) ની છૂટ મળે છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
