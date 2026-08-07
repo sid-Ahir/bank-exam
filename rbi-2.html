@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBI -2</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    RBI -2
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 MINIMUM RESERVE SYSTEM (MRS)</span>
+        <p>વર્ષ 1956 માં રજૂ કરાયેલ અને <strong>1957</strong> થી અમલમાં આવેલ <strong>Minimum Reserve System (MRS)</strong> હેઠળ RBI દ્વારા ચલણી નોટો (Currency Notes) છાપવામાં આવે છે. દેશમાં બેફામ નોટ છાપવાથી અર્થવ્યવસ્થા કોલેપ્સ (જેમ કે જિમ્બાબ્વેમાં થયું હતું) ન થાય તે માટે આ બેકબુક સિસ્ટમ રાખવામાં આવી છે.</p>
+        <p>MRS અંતર્ગત કુલ <strong>₹200 Crore</strong> નું ન્યૂનતમ રિઝર્વ રાખવું ફરજિયાત છે:</p>
+        <ul>
+            <li><strong>Gold Reserves:</strong> ₹115 Crore (સોનાનું પ્રમાણ વધુ રાખવામાં આવે છે કારણ કે તેની વૈશ્વિક અસ્તિ અને સ્થિરતા વધુ છે).</li>
+            <li><strong>Foreign Exchange Reserves:</strong> ₹85 Crore (વિદેશી મુદ્રા ભંડાર).</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Currency Notes & Coinage System</h2>
+    
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT RULES</span>
+        <ul>
+            <li><strong>RBI Notes Issuance:</strong> RBI દ્વારા ₹1 ની નોટ સિવાયના તમામ પ્રકારના કરન્સી નોટ્સ ઇશ્યૂ કરવામાં આવે છે.</li>
+            <li><strong>₹1 Note & Coins:</strong> ₹1 ની નોટ અને તમામ પ્રકારના સિક્કાઓ <strong>Government of India</strong> દ્વારા બહાર પાડવામાં આવે છે.</li>
+            <li><strong>Coinage Act:</strong> 
+                <ul>
+                    <li>ઇન્ડિયન કોઇનેજ એક્ટ <strong>1906</strong> મુજબ સિક્કાઓ ₹1000 સુધીના ડિનોમિનેશનમાં બહાર પાડી શકાતા.</li>
+                    <li>હાલનો લાગુ કાયદો: <strong>Coinage Act of 2011</strong> (સિક્કા ટંકશાળ માટે).</li>
+                </ul>
+            </li>
+            <li><strong>RBI Act 1934:</strong> આ કાયદા મુજબ કરન્સી નોટ વધુમાં વધુ કેટલા ડિનોમિનેશનમાં હોઈ શકે તેની જોગવાઈ છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Signatures on Currency Notes & Coins</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Currency Type</th>
+                <th>Signatory Authority</th>
+                <th>Current Official</th>
+            </tr>
+            <tr>
+                <td><strong>₹1 Note</strong></td>
+                <td>Finance Secretary, Ministry of Finance</td>
+                <td><strong>Ajay Seth</strong> (Finance Secretary)</td>
+            </tr>
+            <tr>
+                <td><strong>Other Notes (₹10 to ₹2000)</strong></td>
+                <td>Governor, Reserve Bank of India (RBI)</td>
+                <td><strong>Sanjay Malhotra</strong> (26th RBI Governor)</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Bank Note Presses in India (નોટ મુદ્રણ પ્રેસ)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Press Location</th>
+                <th>Under Whose Control?</th>
+                <th>Managing Organization</th>
+            </tr>
+            <tr>
+                <td><strong>Mysore</strong> (Karnataka) & <strong>Salboni</strong> (West Bengal)</td>
+                <td>RBI Owned</td>
+                <td><strong>BRBNMPL</strong> (Bharatiya Reserve Bank Note Mudran Private Limited) - Est. 1995</td>
+            </tr>
+            <tr>
+                <td><strong>Nashik</strong> (Maharashtra) & <strong>Dewas</strong> (Madhya Pradesh)</td>
+                <td>Government of India Owned</td>
+                <td><strong>SPMCIL</strong> (Security Printing and Minting Corporation of India Limited)</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Coin Minting Locations (સિક્કા ટંકશાળ)</h2>
+    <div class="card card-concept">
+        <p>ભારતમાં ચાર જગ્યાએ સિક્કા બનાવવામાં (Minting) આવે છે, જે <strong>SPMCIL</strong> ના અંડરમાં કામ કરે છે:</p>
+        <ul>
+            <li><strong>Noida</strong> (Uttar Pradesh) - ઉત્તર ભારત</li>
+            <li><strong>Hyderabad</strong> (Telangana) - દક્ષિણ ભારત</li>
+            <li><strong>Kolkata</strong> (West Bengal) - પૂર્વ ભારત</li>
+            <li><strong>Mumbai</strong> (Maharashtra) - પશ્ચિમ ભારત</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Denominations, Motifs & Features of Bank Notes</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Note Value</th>
+                <th>Color</th>
+                <th>Motif / Image (પાછળનું ચિત્ર)</th>
+            </tr>
+            <tr>
+                <td><strong>₹10</strong></td>
+                <td>Chocolate Brown</td>
+                <td>Konark Sun Temple (કોણાર્ક સૂર્ય મંદિર, ઓરિસ્સા)</td>
+            </tr>
+            <tr>
+                <td><strong>₹20</strong></td>
+                <td>Greenish Yellow</td>
+                <td>Ellora Caves (અલોરાની ગુફાઓ, મહારાષ્ટ્ર)</td>
+            </tr>
+            <tr>
+                <td><strong>₹50</strong></td>
+                <td>Fluorescent Blue</td>
+                <td>Hampi with Chariot (હમ્પી, કર્ણાટક)</td>
+            </tr>
+            <tr>
+                <td><strong>₹100</strong></td>
+                <td>Lavender</td>
+                <td>Rani ki Vav (રાણીની વાવ, ગુજરાત)</td>
+            </tr>
+            <tr>
+                <td><strong>₹200</strong></td>
+                <td>Bright Yellow</td>
+                <td>Sanchi Stupa (સાંચીનો સ્તૂપ)</td>
+            </tr>
+            <tr>
+                <td><strong>₹500</strong></td>
+                <td>Stone Grey</td>
+                <td>Red Fort (લાલ કિલ્લો, દિલ્હી)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card card-important">
+        <span class="tag tag-must-remember">🔴 LANGUAGE PANEL FACTS</span>
+        <ul>
+            <li><strong>Material Used:</strong> 100% Cotton based fabric (કપાસ આધારિત).</li>
+            <li><strong>Language Panel:</strong> બેંક નોટની પાછળની બાજુએ ભાષા પેનલ પર કુલ <strong>15 Languages</strong> હોય છે.</li>
+            <li><strong>Front Side Languages:</strong> આગળની બાજુ હિન્દી અને અંગ્રેજી મળીને <strong>2 Languages</strong> હોય છે.</li>
+            <li><strong>Total Languages on a Note:</strong> કુલ મળીને <strong>17 Languages</strong> નોટ પર સમાવિષ્ટ હોય છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Fully Owned Subsidiaries of RBI (આરબીઆઈની 5 મુખ્ય સહાયક કંપનીઓ)</h2>
+    
+    <div class="card card-concept">
+        <ol>
+            <li><strong>DICGC (Deposit Insurance and Credit Guarantee Corporation):</strong> 
+                <ul>
+                    <li>સ્થાપના: 15th July 1978 (Headquarters: Mumbai). Act: 1961.</li>
+                    <li>કાર્ય: બેંકના થાપણદારો (Depositors) ને બેંક નાદારી કે ફેલ જાય ત્યારે મહત્તમ <strong>₹5 Lakhs</strong> સુધીનું વીમા કવચ (Insurance Cover) પૂરું પાડે છે (જેમાં અગાઉ ₹1 Lakh હતું).</li>
+                </ul>
+            </li>
+            <li><strong>BRBNMPL (Bharatiya Reserve Bank Note Mudran Private Limited):</strong> સ્થાપના 1995, બેંક નોટ પ્રિન્ટિંગનું કામ સંભાળે છે. (Chairman: T. Rabi Shankar).</li>
+            <li><strong>REBIT (Reserve Bank Information Technology Private Limited):</strong> મુંબઈ ખાતે હેડક્વાર્ટર, સાયબર સુરક્ષા અને IT સિસ્ટમ સંભાળે છે.</li>
+            <li><strong>IFTAS (Indian Financial Technology and Allied Services):</strong> મુંબઈ, ફાઇનાન્સિયલ ટેકનોલોજી અને પેમેન્ટ સોલ્યુશન્સ પૂરું પાડે છે.</li>
+            <li><strong>RBIH (Reserve Bank Innovation Hub):</strong> બેંગલુરુ ખાતે સ્થિત, નવા ડિજિટલ ફાઇનાન્સિયલ સોલ્યુશન્સ અને ઇનોવેશન માટે કાર્ય કરે છે (CEO: Rajesh Bansal, Head of Board: Kris Gopalakrishnan).</li>
+        </ol>
+    </div>
+
+    <div class="card card-important">
+        <span class="tag tag-exam-trap">🟣 EXAM TRAP / NOTE</span>
+        <p><strong>NHB (National Housing Bank)</strong> અને <strong>NABARD</strong> અગાઉ RBI ની સહાયક સંસ્થાઓ હતી, પરંતુ વર્તમાન સમયમાં તે સંપૂર્ણપણે <strong>Government of India (GOI)</strong> ની સંપૂર્ણ માલિકીની (Wholly Owned) સંસ્થાઓ છે.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. Minimum Reserve System (MRS) હેઠળ RBI દ્વારા કેટલા રૂપિયાનું ન્યૂનતમ રિઝર્વ રાખવું ફરજિયાત છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹100 Crore</li>
+            <li>B. ₹200 Crore</li>
+            <li>C. ₹500 Crore</li>
+            <li>D. ₹1000 Crore</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. ₹200 Crore</strong><br>
+            Explanation: MRS અંતર્ગત ₹200 કરોડનું રિઝર્વ રાખવામાં આવે છે, જેમાં ₹115 કરોડ સોનું (Gold) અને ₹85 કરોડ વિદેશી મુદ્રા ભંડાર હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. ₹1 ની નોટ પર કોની સહી (Signature) હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Governor, RBI</li>
+            <li>B. Finance Secretary, Ministry of Finance</li>
+            <li>C. Prime Minister</li>
+            <li>D. Revenue Secretary</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Finance Secretary, Ministry of Finance</strong><br>
+            Explanation: ₹1 ની નોટ અને સિક્કાઓ ભારત સરકાર દ્વારા બહાર પાડવામાં આવે છે, અને ₹1 ની નોટ પર નાણા સચિવ (Finance Secretary) ની સહી હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. નીચેનામાંથી કઈ બેંક નોટ પ્રેસ RBI ની હોલી ઓન્ડ સબસીડરી (BRBNMPL) હેઠળ આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Nashik</li>
+            <li>B. Dewas</li>
+            <li>C. Mysore</li>
+            <li>D. Mumbai</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Mysore</strong><br>
+            Explanation: Mysore (Karnataka) અને Salboni (West Bengal) એ RBI ની BRBNMPL હેઠળ આવે છે, જ્યારે Nashik અને Dewas એ SPMCIL (Government of India) હેઠળ આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. DICGC દ્વારા બેંક થાપણદારોને મહત્તમ કેટલા રૂપિયા સુધીનું વીમા કવચ (Insurance Cover) આપવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹1 Lakh</li>
+            <li>B. ₹2 Lakhs</li>
+            <li>C. ₹5 Lakhs</li>
+            <li>D. ₹10 Lakhs</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹5 Lakhs</strong><br>
+            Explanation: 2020 પછી DICGC દ્વારા થાપણદારોને મહત્તમ ₹5 Lakhs (પ્રિન્સિપલ + વ્યાજ સહિત) સુધીનું વીમા કવચ મળે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. ₹100 ની નોટની પાછળ કયું પ્રખ્યાત સ્મારક (Motif) દર્શાવવામાં આવ્યું છે?</p>
+        <ul class="mcq-options">
+            <li>A. Konark Sun Temple</li>
+            <li>B. Rani ki Vav</li>
+            <li>C. Hampi</li>
+            <li>D. Red Fort</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Rani ki Vav</strong><br>
+            Explanation: ₹100 ની નોટ પર ગુજરાતની પ્રખ્યાત 'રાણીની વાવ' (Rani ki Vav) નું ચિત્ર છાપવામાં આવ્યું છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. બેંક નોટની પાછળના લેંગ્વેજ પેનલમાં કુલ કેટલી ભાષાઓ મુદ્રિત હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 14</li>
+            <li>B. 15</li>
+            <li>C. 17</li>
+            <li>D. 22</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 15</strong><br>
+            Explanation: લેંગ્વેજ પેનલ પર 15 ભાષાઓ હોય છે. આગળની બાજુ 2 (હિન્દી અને અંગ્રેજી) મળીને કુલ નોટ પર 17 ભાષાઓ હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. ભારતમાં સિક્કાઓ ટંકશાળ (Coin Minting) કરવાનું કાર્ય કઈ સંસ્થા કરે છે?</p>
+        <ul class="mcq-options">
+            <li>A. RBI</li>
+            <li>B. SPMCIL</li>
+            <li>C. SBI</li>
+            <li>D. SEBI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. SPMCIL</strong><br>
+            Explanation: Security Printing and Minting Corporation of India Limited (SPMCIL) દ્વારા સિક્કાઓની ટંકશાળ અને સરકારી સિક્યોરિટીઝનું કામ થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. RBI Innovation Hub (RBIH) ના હેડક્વાર્ટર કયા શહેરમાં આવેલા છે?</p>
+        <ul class="mcq-options">
+            <li>A. Mumbai</li>
+            <li>B. New Delhi</li>
+            <li>C. Bengaluru</li>
+            <li>D. Chennai</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Bengaluru</strong><br>
+            Explanation: RBI Innovation Hub (RBIH) ના મુખ્ય મથક બેંગલુરુ (Karnataka) ખાતે આવેલા છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. કરન્સી નોટો બનાવવા માટે મુખ્યત્વે કયા ફેબ્રિક કે સામગ્રીનો ઉપયોગ થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 100% Pure Paper</li>
+            <li>B. 100% Cotton based fabric</li>
+            <li>C. Plastic Polymer</li>
+            <li>D. Silk Blend</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 100% Cotton based fabric</strong><br>
+            Explanation: RBI ના નિયમો અનુસાર બેંક નોટો 100% કપાસ આધારિત ફેબ્રિક (Cotton based fabric) થી બને છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. DICGC ની સ્થાપના કયા વર્ષમાં થઈ હતી?</p>
+        <ul class="mcq-options">
+            <li>A. 1935</li>
+            <li>B. 1949</li>
+            <li>C. 1961</li>
+            <li>D. 1978</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: D. 1978</strong><br>
+            Explanation: DICGC ની સ્થાપના 15 જુલાઈ 1978 ના રોજ કરવામાં આવી હતી (જ્યારે તેનો કાયદો 1961 નો છે).
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
