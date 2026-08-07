@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priority Sector Lending (PSL)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    Priority Sector Lending (PSL)
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 PSL CONCEPT & INTRODUCTION</span>
+        <p><strong>Priority Sector Lending (PSL)</strong> એટલે કે પ્રાથમિક ક્ષેત્રને ધિરાણ આપવું. Reserve Bank of India (RBI) દ્વારા બેંકોને એવા સેક્ટર્સને લોન આપવા માટે આદેશિત કરવામાં આવે છે જેમને અર્થવ્યવસ્થામાં વિશેષ પ્રાથમિકતાની જરૂર હોય છે પરંતુ સામાન્ય સંજોગોમાં તેમને પૂરતું ધિરાણ મળતું નથી.</p>
+        <p>આવા સેક્ટર્સની ક્રેડિટ જરૂરિયાતો (Credit Needs) ને પૂર્ણ કરવા માટે બેંકોએ તેમના કુલ લોન પોર્ટફોલિયોમાંથી ચોક્કસ ટકાવારી હિસ્સો આ પ્રાઇઓરિટી સેક્ટર્સમાં આપવો ફરજિયાત છે.</p>
+    </div>
+
+    <h2 class="section-title">Eight Core Sectors under Priority Sector Lending (PSL)</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT SECTORS</span>
+        <p>આરબીઆઈ દ્વારા પીસીએલ (PSL) હેઠળ નીચે મુજબના <strong>8 મુખ્ય સેક્ટર્સ</strong> નક્કી કરવામાં આવ્યા છે:</p>
+        <ol>
+            <li><strong>Agriculture (કૃષિ અને સંબંધિત ક્ષેત્ર)</strong></li>
+            <li><strong>Micro, Small and Medium Enterprises (MSME)</strong></li>
+            <li><strong>Export Credit (નિકાસ ધિરાણ)</strong></li>
+            <li><strong>Education (શિક્ષણ લોન)</strong></li>
+            <li><strong>Housing (હાઉસિંગ લોન)</strong></li>
+            <li><strong>Social Infrastructure (સામાજિક માળખાગત સુવિધાઓ - શાળાઓ, હોસ્પિટલ, ડ્રિંકિંગ વોટર)</strong></li>
+            <li><strong>Renewable Energy (અક્ષય ઊર્જા - સોલાર પ્રોજેક્ટ વગેરે)</strong></li>
+            <li><strong>Others (અન્ય - વીરન સેક્શન, SHGs, JLGs, વગેરે)</strong></li>
+        </ol>
+    </div>
+
+    <h2 class="section-title">PSL Targets for Different Bank Categories</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Bank Category</th>
+                <th>Total PSL Target (as % of ANBC or CBOE, whichever is higher)</th>
+                <th>Agriculture Target</th>
+                <th>Micro Enterprises</th>
+                <th>Weaker Sections</th>
+            </tr>
+            <tr>
+                <td><strong>Domestic Commercial Banks (Public & Private)</strong></td>
+                <td><strong>40%</strong></td>
+                <td>18% (Sub-target: 10% for Small & Marginal Farmers)</td>
+                <td>7.5%</td>
+                <td>12%</td>
+            </tr>
+            <tr>
+                <td><strong>Foreign Banks (20 Branches and Above)</strong></td>
+                <td><strong>40%</strong></td>
+                <td>18%</td>
+                <td>7.5%</td>
+                <td>12%</td>
+            </tr>
+            <tr>
+                <td><strong>Foreign Banks (Less than 20 Branches)</strong></td>
+                <td><strong>40%</strong> (Total)</td>
+                <td>- (Up to 32% in Export Credit)</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><strong>Regional Rural Banks (RRBs)</strong></td>
+                <td><strong>75%</strong></td>
+                <td>18% (10% Small & Marginal Farmers)</td>
+                <td>7.5%</td>
+                <td>15%</td>
+            </tr>
+            <tr>
+                <td><strong>Small Finance Banks (SFBs)</strong></td>
+                <td><strong>60%</strong> (Effective from FY 26 / April 2025)</td>
+                <td>18% (10% Small & Marginal)</td>
+                <td>7.5%</td>
+                <td>12%</td>
+            </tr>
+            <tr>
+                <td><strong>Urban Cooperative Banks (UCBs)</strong></td>
+                <td><strong>60%</strong> (Effective from April 2025)</td>
+                <td>-</td>
+                <td>7.5%</td>
+                <td>12%</td>
+            </tr>
+            <tr>
+                <td><strong>Payment Banks</strong></td>
+                <td><strong>No PSL Target</strong> (કારણ કે લોન આપતા નથી)</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Key Definitions and Calculations</h2>
+    <div class="card card-concept">
+        <ul>
+            <li><strong>ANBC (Adjusted Net Bank Credit):</strong> બેંક દ્વારા ભારતમાં આપવામાં આવેલ નેટ ક્રેડિટ જેમાં ચોક્કસ એડજસ્ટમેન્ટ અને રોકાણો ધ્યાનમાં લેવાય છે.</li>
+            <li><strong>CBOE (Credit Equivalent of Off-Balance Sheet Exposures):</strong> બેંક ગેરંટી અને લેટર ઓફ ક્રેડિટ જેવા બેલેન્સ શીટની બહારના જોખમો.</li>
+            <li><strong>Calculation Rule:</strong> પ્રાઇઓરિટી સેક્ટર લेंडિંગ ટાર્ગેટ માટે <strong>ANBC અને CBOE માંથી જે પણ વધુ (Higher) હોય</strong> તેના આધારે ટકાવારી ગણવામાં આવે છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Updated Limits and Allocations under PSL</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Sector / Category</th>
+                <th>Updated Limit / Details</th>
+            </tr>
+            <tr>
+                <td><strong>Education Loan Limit</strong></td>
+                <td>વધારીને પ્રતિ વ્યક્તિ <strong>₹25 Lakhs</strong> કરવામાં આવી છે (અગાઉ ₹20 Lakhs હતી).</td>
+            </tr>
+            <tr>
+                <td><strong>Renewable Energy Project Limit</strong></td>
+                <td>પ્રતિ પ્રોજેક્ટ <strong>₹35 Crore</strong> સુધીની મર્યાદા (અગાઉ ₹30 Crore હતી).</td>
+            </tr>
+            <tr>
+                <td><strong>Household Renewable Energy</strong></td>
+                <td>પ્રતિ વ્યક્તિ <strong>₹10 Lakhs</strong>.</td>
+            </tr>
+            <tr>
+                <td><strong>Social Infrastructure (Schools / Drinking Water)</strong></td>
+                <td>પ્રતિ બોરોઅર <strong>₹8 Crore</strong> સુધી.</td>
+            </tr>
+            <tr>
+                <td><strong>Health Care Facilities (Hospitals)</strong></td>
+                <td>પ્રતિ બોરોઅર <strong>₹12 Crore</strong> સુધી.</td>
+            </tr>
+            <tr>
+                <td><strong>Distressed Farmers Debt Repayment</strong></td>
+                <td>પ્રતિ બોરોઅર <strong>₹1 Lakh</strong>.</td>
+            </tr>
+            <tr>
+                <td><strong>Artisans / Village & Cottage Industries</strong></td>
+                <td>વધારીને પ્રતિ બોરોઅર <strong>₹2 Lakhs</strong> કરવામાં આવ્યા છે (અગાઉ ₹1 Lakh હતા).</td>
+            </tr>
+            <tr>
+                <td><strong>Individual Women Beneficiaries</strong></td>
+                <td>પ્રતિ બોરોઅર <strong>₹2 Lakhs</strong> (UCBs માટે કોઈ ઉપરની મર્યાદા નથી).</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Housing Loans PSL Criteria (City Size Based)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>City Population Range</th>
+                <th>Max Loan Limit for PSL Count</th>
+                <th>Max Cost of Dwelling Unit</th>
+            </tr>
+            <tr>
+                <td><strong>50 Lakhs and Above</strong></td>
+                <td>Up to ₹50 Lakhs</td>
+                <td>Up to ₹63 Lakhs</td>
+            </tr>
+            <tr>
+                <td><strong>10 Lakhs to 50 Lakhs</strong></td>
+                <td>Up to ₹45 Lakhs</td>
+                <td>Up to ₹57 Lakhs</td>
+            </tr>
+            <tr>
+                <td><strong>Below 10 Lakhs</strong></td>
+                <td>Up to ₹35 Lakhs</td>
+                <td>Up to ₹44 Lakhs</td>
+            </tr>
+        </table>
+    </div>
+
+    <h3 class="sub-title">Housing Repairs Loan Limits</h3>
+    <div class="card card-concept">
+        <p>ક્ષતિગ્રસ્ત મકાનોના સમારકામ (Repairs to Damaged Dwelling Units) માટે પીએસએલ (PSL) હેઠળ મર્યાદા:</p>
+        <ul>
+            <li>50 Lakhs અને તેથી વધુ વસ્તીવાળા શહેરો: <strong>₹15 Lakhs</strong></li>
+            <li>10 Lakhs થી 50 Lakhs વસ્તીવાળા શહેરો: <strong>₹12 Lakhs</strong></li>
+            <li>10 Lakhs થી ઓછી વસ્તીવાળા કેન્દ્રો: <strong>₹10 Lakhs</strong></li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Penalties for PSL Shortfall (RIDF Contribution)</h2>
+    <div class="card card-important">
+        <span class="tag tag-exam-trap">🟣 EXAM TRAP / PENALTY SYSTEM</span>
+        <p>જો કોઈ બેંક પોતાનું પ્રાઇઓરિટી સેક્ટર લेंडિંગ ટાર્ગેટ પૂરું ન કરી શકે (Shortfall રહે), તો તેણે તે રકમ નાબાર્ડ (NABARD) હેઠળના <strong>Rural Infrastructure Development Fund (RIDF)</strong> માં જમા કરાવવી પડે છે. તેના પર મળતું વ્યાજદર શોર્ટફોલના પ્રમાણમાં ઘટે છે:</p>
+        <ul>
+            <li><strong>Shortfall < 5%:</strong> Bank Rate - 2%</li>
+            <li><strong>Shortfall 5% to 10%:</strong> Bank Rate - 3%</li>
+            <li><strong>Shortfall > 10%:</strong> Bank Rate - 4%</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. ઘરેલું વાણિજ્યિક બેંકો (Domestic Commercial Banks) માટે પ્રાઇઓરિટી સેક્ટર લेंडिंग (PSL) નો કુલ ટાર્ગેટ કેટલો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 30% of ANBC</li>
+            <li>B. 40% of ANBC</li>
+            <li>C. 60% of ANBC</li>
+            <li>D. 75% of ANBC</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 40% of ANBC</strong><br>
+            Explanation: ડોમેસ્ટિક કમર્શિયલ બેંકોએ તેમના એએનબીસી (ANBC) અથવા સીબીઓએ (CBOE) ના 40% હિસ્સા સુધી પ્રાઇઓરિટી સેક્ટરમાં ધિરાણ આપવું પડે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. પ્રાદેશિક ગ્રામીણ બેંકો (RRBs) માટે કુલ પીએસએલ (PSL) ટાર્ગેટ કેટલો નક્કી કરવામાં આવ્યો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 40%</li>
+            <li>B. 60%</li>
+            <li>C. 75%</li>
+            <li>D. 90%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 75%</strong><br>
+            Explanation: આરઆરબી (RRBs) માટે પીએસએલ ટાર્ગેટ 75% છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. સ્મોલ ફાઇનાન્સ બેંકો (SFBs) અને અર્બન કોઓપરેટિવ બેંકો (UCBs) માટે હાલમાં કુલ પીએસએલ ટાર્ગેટ કેટલો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 40%</li>
+            <li>B. 60%</li>
+            <li>C. 75%</li>
+            <li>D. 50%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 60%</strong><br>
+            Explanation: સુધારેલા નિયમો અનુસાર SFB અને UCBs માટે કુલ PSL ટાર્ગેટ 60% છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. શિક્ષણ લોન (Education Loan) ની પ્રાઇઓરિટી સેક્ટર લेंडिंग હેઠળની મહત્તમ મર્યાદા વધારીને કેટલી કરવામાં આવી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹10 Lakhs</li>
+            <li>B. ₹20 Lakhs</li>
+            <li>C. ₹25 Lakhs</li>
+            <li>D. ₹50 Lakhs</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹25 Lakhs</strong><br>
+            Explanation: શિક્ષણ લોન માટે પ્રતિ વ્યક્તિ લિમિટ વધારીને ₹25 Lakhs કરવામાં આવી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. અક્ષય ઊર્જા (Renewable Energy) પ્રોજેક્ટ્સ માટે પીએસએલ હેઠળ પ્રતિ પ્રોજેક્ટ મહત્તમ મર્યાદા કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹10 Crore</li>
+            <li>B. ₹20 Crore</li>
+            <li>C. ₹35 Crore</li>
+            <li>D. ₹50 Crore</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹35 Crore</strong><br>
+            Explanation: રિન્યુએબલ એનર્જી પ્રોજેક્ટ્સ માટે મહત્તમ મર્યાદા ₹35 Crore છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. કૃષિ ક્ષેત્ર (Agriculture) માટે કુલ પીએસએલ ટાર્ગેટમાં નાના અને સીમાંત ખેડૂતો (Small & Marginal Farmers) માટેનો સબ-ટાર્ગેટ કેટલો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 7.5%</li>
+            <li>B. 10%</li>
+            <li>C. 12%</li>
+            <li>D. 18%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 10%</strong><br>
+            Explanation: કુલ 18% કૃષિ ટાર્ગેટમાંથી 10% હિસ્સો નાના અને સીમાંત ખેડૂતો માટે ફાળવવો ફરજિયાત છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. સોશિયલ ઇન્ફ્રાસ્ટ્રક્ચર (જેવા કે શાળાઓ અને પીવાના પાણીની સુવિધા) હેઠળ પ્રતિ બોરોઅર મહત્તમ મર્યાદા કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹5 Crore</li>
+            <li>B. ₹8 Crore</li>
+            <li>C. ₹12 Crore</li>
+            <li>D. ₹15 Crore</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. ₹8 Crore</strong><br>
+            Explanation: સોશિયલ ઇન્ફ્રાસ્ટ્રક્ચર માટે પ્રતિ બોરોઅર મહત્તમ મર્યાદા ₹8 Crore છે (જ્યારે હેલ્થકેર/હોસ્પિટલ માટે ₹12 Crore છે).
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. હેલ્થકેર ફેસિલિટીઝ (હોસ્પિટલ્સ) ની સ્થાપના માટે પ્રાઇઓરિટી સેક્ટર લेंडिंग હેઠળ મહત્તમ મર્યાદા કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹8 Crore</li>
+            <li>B. ₹10 Crore</li>
+            <li>C. ₹12 Crore</li>
+            <li>D. ₹20 Crore</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹12 Crore</strong><br>
+            Explanation: હોસ્પિટલો કે હેલ્થકેર ફેસિલિટીઝ માટે પીએસએલ લિમિટ પ્રતિ બોરોઅર ₹12 Crore છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. કારીગરો (Artisans) અને ગામડા/કુટીર ઉદ્યોગો માટે લોનની મર્યાદા વધારીને કેટલી કરવામાં આવી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹1 Lakh</li>
+            <li>B. ₹2 Lakhs</li>
+            <li>C. ₹5 Lakhs</li>
+            <li>D. ₹10 Lakhs</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. ₹2 Lakhs</strong><br>
+            Explanation: કારીગરો તથા વિલેજ અને કોટેજ ઇન્ડસ્ટ્રીઝ માટેની મર્યાદા વધારીને ₹2 Lakhs પ્રતિ બોરોઅર કરવામાં આવી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. પીએસએલ (PSL) ટાર્ગેટમાં શોર્ટફોલ રહેવાના કિસ્સામાં બેંકોએ નાણાં કઈ સંસ્થાના ફંડમાં જમા કરાવવા પડે છે?</p>
+        <ul class="mcq-options">
+            <li>A. SIDBI (Under SIDBI Fund)</li>
+            <li>B. NABARD (Under RIDF)</li>
+            <li>C. NHB (Under Housing Fund)</li>
+            <li>D. EXIM Bank</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. NABARD (Under RIDF)</strong><br>
+            Explanation: પીએસએલ શોર્ટફોલની રકમ નાબાર્ડના રૂરલ ઇન્ફ્રાસ્ટ્રક્ચર ડેવલપમેન્ટ ફંડ (RIDF) માં જમા કરાવવામાં આવે છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
