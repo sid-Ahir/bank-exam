@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11. TBill, CMBs, CPs</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    11. TBill, CMBs, CPs
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 MONEY MARKET INSTRUMENTS OVERVIEW</span>
+        <p>મની માર્કેટ (Money Market) ના સાધનો એવા ફાઈનાન્સિયલ ઇન્સ્ટ્રુમેન્ટ્સ છે જે ટૂંકાગાળાની (Short-term / Less than 1 Year) નાણાકીય જરૂરિયાતોને સંતોષવા માટે વપરાય છે. આ સત્રોમાં ટ્રેઝરી બિલ્સ, કેશ મેનેજમેન્ટ બિલ્સ, કોમર્શિયલ પેપર્સ અને સર્ટિફિકેટ ઓફ ડિપોઝિટ જેવા મહત્વપૂર્ણ સાધનોનો સમાવેશ થાય છે.</p>
+    </div>
+
+    <h2 class="section-title">Treasury Bills (T-Bills) - મુખ્ય વિશેષતાઓ</h2>
+    <div class="card card-important">
+        <span class="tag tag-must-remember">🔴 MUST REMEMBER FACTS</span>
+        <ul>
+            <li><strong>Issued By:</strong> <strong>Reserve Bank of India (RBI)</strong> દ્વારા માત્ર <strong>Central Government</strong> વતી જારી કરવામાં આવે છે.</li>
+            <li><strong>State Government Eligibility:</strong> ❌ કોઈ પણ State Government ટ્રેઝરી બિલ (T-Bills) ઇશ્યૂ કરી શકતી નથી.</li>
+            <li><strong>Nature of Instrument:</strong> આ એક પ્રકારના <strong>Zero Coupon Bonds</strong> છે, જેનો અર્થ એ છે કે તેના પર કોઈ અલગથી Interest Rate (કૂપન) ચૂકવવામાં આવતો નથી.</li>
+            <li><strong>Discount Pricing:</strong> T-Bills હંમેશાં તેમના <strong>Face Value</strong> થી ડીપ ડિસ્કાઉન્ટ પર જારી થાય છે અને મેચ્યોરિટી પર પૂરી ફેસ વેલ્યુ (Face Value) પર રિડીમ થાય છે. ખરીદ કિંમત અને ફેસ વેલ્યુ વચ્ચેનો તફાવત એ જ રોકાણકારનો નફો/વળતર છે.</li>
+            <li><strong>Minimum Investment Amount:</strong> ₹25,000 અને ત્યારબાદ તેના મલ્ટિપલ્સમાં (Multiples of ₹25,000).</li>
+            <li><strong>Risk Factor:</strong> આ એક અત્યંત સુરક્ષિત અને <strong>Risk-free Investment</strong> છે.</li>
+            <li><strong>SLR & Repo Eligibility:</strong> બેંકો દ્વારા T-Bills નો ઉપયોગ <strong>SLR (Statutory Liquidity Ratio)</strong> જરૂરિયાતો પૂર્ણ કરવા માટે અને RBI પાસેથી Repo Rate પર લોન લેતી વખતે કોલેટરલ તરીકે થઈ શકે છે.</li>
+        </ul>
+    </div>
+
+    <h3 class="sub-title">Types of Treasury Bills (ટેન્યોર આધારિત પ્રકારો)</h3>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Type / Tenure</th>
+                <th>Maturity Period</th>
+            </tr>
+            <tr>
+                <td><strong>91-Day T-Bill</strong></td>
+                <td>91 Days (ત્રણ મહિના)</td>
+            </tr>
+            <tr>
+                <td><strong>182-Day T-Bill</strong></td>
+                <td>182 Days (છ મહિના)</td>
+            </tr>
+            <tr>
+                <td><strong>364-Day T-Bill</strong></td>
+                <td>364 Days (એક વર્ષ)</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Cash Management Bills (CMBs)</h2>
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 CONCEPT</span>
+        <p><strong>Cash Management Bills (CMBs)</strong> ની શરૂઆત વર્ષ <strong>2010</strong> માં કરવામાં આવી હતી. સરકારની અતિ-ટૂંકાગાળાની (Ultra Short-term) રોકડ પ્રવાહની અછત કે ખર્ચ અને આવક વચ્ચેના મિસમેચને પહોંચી વળવા માટે આ સાધન લાવવામાં આવ્યું હતું.</p>
+        <ul>
+            <li><strong>Maturity:</strong> <strong>Less than 91 Days</strong> (91 દિવસથી ઓછા સમય માટે).</li>
+            <li><strong>Eligibility:</strong> T-Bills ની જેમ જ CMBs પણ બેંકો દ્વારા SLR જરૂરિયાતો માટે ઉપયોગમાં લેવા માટે પાત્ર છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Ways and Means Advances (WMA)</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT FACTS</span>
+        <p><strong>Ways and Means Advances (WMA)</strong> એ સરકાર (Central અને State બંને) માટે RBI દ્વારા પૂરી પાડવામાં આવતી ટૂંકાગાળાની ઓવરડ્રાફ્ટ કે એડવાન્સ સુવિધા છે:</p>
+        <ul>
+            <li><strong>Purpose:</strong> સરકારના ખર્ચ અને અપેક્ષિત આવક (Expected Receipts) વચ્ચે ઊભા થતા ટાઈમિંગ મિસમેચને દૂર કરવા.</li>
+            <li><strong>Legal Basis:</strong> Section 17(5) of RBI Act, 1934.</li>
+            <li><strong>Types:</strong>
+                <ul>
+                    <li><strong>Special WMA (Special Drawing Facility):</strong> સરકાર દ્વારા સરકારી સિક્યોરિટીઝ કોલેટરલ તરીકે મૂકીને મેળવાતી સુવિધા.</li>
+                    <li><strong>Normal WMA:</strong> મર્યાદા વટાવી જવા પર રેપો રેટ અને 90 દિવસની મર્યાદા લાગુ પડે છે.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Certificate of Deposit (CD)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameters</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td><strong>Issued By</strong></td>
+                <td>Schedule Commercial Banks અને चुनिंदा All India Financial Institutions (AIFIs). <strong>(Cooperative Banks અને RRBs ને CD ઇશ્યૂ કરવાની મંજૂરી નથી).</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Target Issuance</strong></td>
+                <td>Individuals, Corporations, Trusts, Funds અને <strong>NRIs</strong> (Non-Resident Indians) ને જારી કરી શકાય છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Maturity Period</strong></td>
+                <td>
+                    - Banks: 7 Days to 1 Year.<br>
+                    - Financial Institutions (AIFIs): 1 Year to 3 Years.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Denominations</strong></td>
+                <td>Minimum ₹1 Lakh અને તેના મલ્ટિપલ્સમાં (તાજેતરના પ્રવાહ મુજબ કેટલાક કિસ્સાઓમાં ₹5 Lakhs પણ હોઈ શકે).</td>
+            </tr>
+            <tr>
+                <td><strong>Loan Restriction</strong></td>
+                <td>Banks are <strong>NOT allowed</strong> to provide loans against Certificates of Deposit.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Commercial Paper (CP)</h2>
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 CONCEPT & GUIDELINES</span>
+        <p><strong>Commercial Paper (CP)</strong> એ મોટા અને ઉચ્ચ શાખ ધરાવતા કોર્પોરેશનો (Large Corporates), પ્રાઇમરી ડીલર્સ (Primary Dealers) અને AIFIs દ્વારા ટૂંકાગાળાનું ફંડ મેળવવા માટે જારી કરાતું <strong>Unsecured Promissory Note</strong> છે.</p>
+        <ul>
+            <li><strong>Introduction:</strong> વર્ષ <strong>1990</strong> માં <strong>Vaghul Committee</strong> ના રેકોમેન્ડેશન પર ભારતમાં દાખલ કરાયું.</li>
+            <li><strong>Nature:</strong> તે બિનસુરક્ષિત (Unsecured) હોય છે કારણ કે તે મોટી અને પ્રતિષ્ઠિત કંપનીઓ દ્વારા જારી થાય છે.</li>
+            <li><strong>Regulation:</strong> FIMMDA ના સંકલન સાથે RBI દ્વારા નિયંત્રિત થાય છે.</li>
+            <li><strong>Minimum Amount:</strong> Minimum <strong>₹5 Lakhs</strong> અને તેના મલ્ટિપલ્સમાં.</li>
+            <li><strong>Tenure:</strong> Minimum 7 Days થી Maximum 1 Year.</li>
+            <li><strong>Format:</strong> વર્તમાન સમયમાં આ સંપૂર્ણપણે <strong>Demat (Dematerialized / Digital)</strong> સ્વરૂપમાં ઇશ્યૂ થાય છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Commercial Bills / Trade Bills</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT TRADING CONCEPT</span>
+        <ul>
+            <li><strong>Definition:</strong> વેપારીઓ (Sellers / Drawers અને Buyers / Drawees) વચ્ચેના વ્યવહારો માટે ઊભું થતું નેગોશીએબલ ટ્રેડ ઇન્સ્ટ્રુમેન્ટ છે.</li>
+            <li><strong>Discounting Mechanism:</strong> સેલર બેંક પાસે જઈને આ બિલને ડિસ્કાઉન્ટ (Discount) કરાવીને તાત્કાલિક નાણાં મેળવી શકે છે. જો બેંક તેને સ્વીકારે તો તે <strong>Trade Bill</strong> બને છે, અને જરૂર પડ્યે બેંક તેને RBI પાસે રી-ડિસ્કાઉન્ટ (Rediscount) પણ કરાવી શકે છે.</li>
+            <li><strong>Tenure:</strong> સામાન્ય રીતે <strong>90 Days</strong> સુધીનો સમયગાળો હોય છે.</li>
+        </ul>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / QUICK REVISION</span>
+        <p><strong>Money Market Instruments Summary:</strong><br>
+        - T-Bills: Central Govt only, Zero Coupon, Min ₹25,000, 3 tenures (91, 182, 364 Days).<br>
+        - CMBs: Ultra short-term (< 91 Days).<br>
+        - CD: Banks & AIFIs (No RRB/Cooperative), Min ₹1 Lakh, 7 Days - 3 Years.<br>
+        - CP: Large Corporates, Unsecured, Min ₹5 Lakhs, Demat form.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. નીચેનામાંથી કઈ સંસ્થા ભારતમાં ટ્રેઝરી બિલ્સ (T-Bills) જારી કરી શકે છે?</p>
+        <ul class="mcq-options">
+            <li>A. State Governments only</li>
+            <li>B. Reserve Bank of India on behalf of Central Government</li>
+            <li>C. Commercial Banks</li>
+            <li>D. SEBI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Reserve Bank of India on behalf of Central Government</strong><br>
+            Explanation: T-Bills માત્ર RBI દ્વારા કેન્દ્ર સરકાર વતી જ ઇશ્યૂ કરવામાં આવે છે. રાજ્ય સરકારો તે જારી કરી શકતી નથી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. ટ્રેઝરી બિલ્સ (T-Bills) સામાન્ય રીતે કયા સ્વરૂપે વેચવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. At a premium with high interest</li>
+            <li>B. As Zero Coupon Bonds at a deep discount</li>
+            <li>C. By charging high coupon rates annually</li>
+            <li>D. As equity shares</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. As Zero Coupon Bonds at a deep discount</strong><br>
+            Explanation: T-Bills પર કોઈ વ્યાજદર હોતો નથી, તે ડિસ્કાઉન્ટ પર વેચાય છે અને મેચ્યોરિટી પર ફેસ વેલ્યુ ચૂકવાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. ટ્રેઝરી બિલ્સ (T-Bills) ખરીદવા માટેનું લઘુત્તમ રોકાણ મૂલ્ય (Minimum Amount) કેટલું છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹10,000</li>
+            <li>B. ₹25,000</li>
+            <li>C. ₹1 Lakh</li>
+            <li>D. ₹5 Lakhs</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. ₹25,000</strong><br>
+            Explanation: T-Bills માટે મિનિમમ અમાઉન્ટ ₹25,000 અને ત્યારબાદ તેના મલ્ટિપલ્સમાં હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. ટ્રેઝરી બિલના પ્રચલિત ટેન્યોરમાં નીચેનામાંથી કયા સમયગાળાનો સમાવેશ થતો નથી?</p>
+        <ul class="mcq-options">
+            <li>A. 91 Days</li>
+            <li>B. 182 Days</li>
+            <li>C. 270 Days</li>
+            <li>D. 364 Days</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 270 Days</strong><br>
+            Explanation: T-Bills ના ત્રણ જ પ્રકાર છે: 91 Days, 182 Days અને 364 Days. 270 Days તેમાં નથી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. Cash Management Bills (CMBs) ની મહત્તમ મુદત કેટલી હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Less than 91 Days</li>
+            <li>B. Exactly 182 Days</li>
+            <li>C. 1 Year</li>
+            <li>D. 3 Years</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Less than 91 Days</strong><br>
+            Explanation: CMBs એ 91 દિવસથી ઓછા સમય માટેની અતિ-ટૂંકાગાળાની સિક્યોરિટી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. નીચેનામાંથી કઈ સંસ્થા Certificate of Deposit (CD) જારી કરી શકતી નથી?</p>
+        <ul class="mcq-options">
+            <li>A. Schedule Commercial Banks</li>
+            <li>B. Regional Rural Banks (RRBs) & Cooperative Banks</li>
+            <li>C. All India Financial Institutions (AIFIs)</li>
+            <li>D. Selected Financial Institutions</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Regional Rural Banks (RRBs) & Cooperative Banks</strong><br>
+            Explanation: આરઆરબી (RRBs) અને સહકારી બેંકોને સીડી (CD) જારી કરવાની મંજૂરી નથી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. Commercial Paper (CP) કોના દ્વારા જારી કરવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Individuals only</li>
+            <li>B. Large Corporates, Primary Dealers & AIFIs</li>
+            <li>C. State Governments</li>
+            <li>D. Small retail vendors</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Large Corporates, Primary Dealers & AIFIs</strong><br>
+            Explanation: કોમર્શિયલ પેપર મોટી અને પ્રતિષ્ઠિત કંપનીઓ (Large Corporates) દ્વારા ફંડ મેળવવા જારી થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. ભારતમાં Commercial Paper (CP) ની શરૂઆત કઈ કમિટીના ભલામણ આધારે થઈ હતી?</p>
+        <ul class="mcq-options">
+            <li>A. Vaghul Committee</li>
+            <li>B. Narasimham Committee</li>
+            <li>C. Urjit Patel Committee</li>
+            <li>D. Usha Thorat Committee</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Vaghul Committee</strong><br>
+            Explanation: વર્ષ 1990 માં વાઘુલ કમિટી (Vaghul Committee) ના રેકોમેન્ડેશનથી CPs દાખલ થયા હતા.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. Commercial Paper (CP) માટેનું લઘુત્તમ જારી મૂલ્ય (Minimum Amount) કેટલું છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹25,000</li>
+            <li>B. ₹1 Lakh</li>
+            <li>C. ₹5 Lakhs</li>
+            <li>D. ₹1 Crore</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹5 Lakhs</strong><br>
+            Explanation: CP માટે મિનિમમ અમાઉન્ટ ₹5 Lakhs અને તેના મલ્ટિપલ્સમાં હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. બેંકો દ્વારા કયા સાધન સામે ગ્રાહકોને લોન આપવાની મનાઈ ફરમાવવામાં આવી છે?</p>
+        <ul class="mcq-options">
+            <li>A. Certificate of Deposit (CD)</li>
+            <li>B. Government Securities</li>
+            <li>C. Treasury Bills</li>
+            <li>D. Equity Shares</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Certificate of Deposit (CD)</strong><br>
+            Explanation: નિયમો અનુસાર બેંકો સર્ટિફિકેટ ઓફ ડિપોઝિટ (CD) સામે લોન આપી શકતી નથી.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
