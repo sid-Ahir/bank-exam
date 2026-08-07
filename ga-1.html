@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static GA -1</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    Static GA -1
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 INTRODUCTORY OVERVIEW</span>
+        <p>આ સ્ટડી નોટ્સ બેન્કિંગ અને સ્પર્ધાત્મક પરીક્ષાઓ (Banking & Competitive Exams) માટે અતિમહત્વપૂર્ણ કરંટ અફેર્સ બેઝ્ડ સ્ટેટિક જીએ (Static GA) કવર કરે છે. આમાં આંતરરાષ્ટ્રીય સંગઠનો, વૈશ્વિક રેન્કિંગ્સ, મહત્વના ઉત્સવો, સંરક્ષણ પ્રોજેક્ટ્સ અને સરકારી યોજનાઓની વિસ્તૃત માહિતી આપવામાં આવી છે.</p>
+    </div>
+
+    <h2 class="section-title">🔥 EXAM CAPSULE (મહત્વપૂર્ણ વૈશ્વિક સંસ્થાઓ અને મુખ્યાલયો)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Organization / Scheme</th>
+                <th>Established Year</th>
+                <th>Headquarters</th>
+                <th>Key Facts / Personnel</th>
+            </tr>
+            <tr>
+                <td><strong>SWIFT</strong> (Society for Worldwide Interbank Financial Telecommunication)</td>
+                <td>1973</td>
+                <td>La Hulpe, Belgium</td>
+                <td>આંતરરાષ્ટ્રીય નાણાકીય લેણદેણ માટે સુરક્ષિત મેસેજિંગ નેટવર્ક પૂરું પાડે છે.</td>
+            </tr>
+            <tr>
+                <td><strong>FATF</strong> (Financial Action Task Force)</td>
+                <td>1989 (India joined: 2010)</td>
+                <td>Paris, France</td>
+                <td>મની લોન્ડરિંગ અને ટેરર ફાઇનાન્સિંગ અટકાવવા માટે કાર્ય કરે છે. પ્રમુખ: Elisa de Anda.</td>
+            </tr>
+            <tr>
+                <td><strong>ADB</strong> (Asian Development Bank)</td>
+                <td>1966</td>
+                <td>Mandaluyong, Philippines</td>
+                <td>મેમ્બર દેશો: 69 (લેટેસ્ટ: Israel). President: Masato Kanda.</td>
+            </tr>
+            <tr>
+                <td><strong>ISA</strong> (International Solar Alliance)</td>
+                <td>2015 (COP21)</td>
+                <td>Gurugram, Haryana</td>
+                <td>ভারত અને France નો સંયુક્ત પહેલ. Director General: Ashish Khanna.</td>
+            </tr>
+            <tr>
+                <td><strong>UNCTAD</strong> (United Nations Trade and Development)</td>
+                <td>1964</td>
+                <td>Geneva, Switzerland</td>
+                <td>હેડ: Rebeca Grynspan. વર્લ્ડ ઇન્વેસ્ટમેન્ટ રિપોર્ટ પ્રકાશિત કરે છે.</td>
+            </tr>
+            <tr>
+                <td><strong>NATO</strong> (North Atlantic Treaty Organization)</td>
+                <td>1949 (Washington Treaty)</td>
+                <td>Brussels, Belgium</td>
+                <td>સેક્રેટરી જનરલ: Mark Rutte. મેમ્બર્સ: 32 (31st: Finland, 32nd: Sweden). 36th Summit 2026: Ankara, Turkey.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">⭐ IMPORTANT FACTS (ગ્લોબલ ઇન્ડેક્સ, ઉત્સવો અને શહેરો)</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 GLOBAL INDICES & FESTIVALS</span>
+        <ul>
+            <li><strong>Global Liveability Index (EIU):</strong> ડેનમાર્કની રાજધાની <strong>Copenhagen</strong> સતત બીજા વર્ષે વિશ્વનું સૌથી રહેવાલાયક (Most Liveable) શહેર બન્યું છે. ભારતીય શહેરોના રેન્ક: New Delhi (120), Mumbai (121), Chennai (123), Bengaluru (127).</li>
+            <li><strong>Harela Festival:</strong> ઉત્તરાખંડના કુમાઉ ક્ષેત્ર (Kumaon Region) માં શિવ-પાર્વતીની આરાધના સાથે ઉજવાતો વસંત/હરિયાળી ઉત્સવ.</li>
+            <li><strong>FDI Inflows (UNCTAD Report):</strong> ભારતના એફડીઆઈ ઇનફ્લોસમાં <strong>44%</strong> નો વધારો થઈને <strong>39 Billion USD</strong> થયા છે. ગ્લોબલ એફડીઆઈ 1.6 Trillion USD (6% વૃદ્ધિ) નોંધાયું છે.</li>
+            <li><strong>Pandwani Folk Music:</strong> છત્તીસગઢની પ્રસિદ્ધ મહાભારત કથા આધારિત લોકશૈલી. પ્રખ્યાત કલાકાર: તીજન બાઈ (પદ્મશ્રી 1987, પદ્મ વિભૂષણ 2019). મુખ્ય શૈલીઓ: Vedamati અને Kapalis.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">📊 IMPORTANT DATA (બંદરો, રેલવે અને આર્થિક ડેટા)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Details / Limits</th>
+            </tr>
+            <tr>
+                <td><strong>Longest & Shortest Borders</strong></td>
+                <td>સૌથી લાંબી આંતરરાષ્ટ્રીય સરહદ: <strong>Bangladesh</strong> (4,096 km). સૌથી ટૂંકી સરહદ: <strong>Afghanistan</strong> (106 km).</td>
+            </tr>
+            <tr>
+                <td><strong>Major Indian Ports</strong></td>
+                <td>- <strong>Mundra Port (Gujarat):</strong> ભારતનું સૌથી મોટું ખાનગી માલિકીનું (Private-owned) બંદર.<br>- <strong>Jawaharlal Nehru Port (Nhava Sheva, Mumbai):</strong> ભારતનું સૌથી મોટું કન્ટેનર બંદર.<br>- <strong>Kochi Port (Kerala):</strong> ઇન્ટરનેશનલ કન્ટેનર ટ્રાન્સશિપમેન્ટ ટર્મિનલ.</td>
+            </tr>
+            <tr>
+                <td><strong>Railway Zones</strong></td>
+                <td>ભારતનું 18મું રેલવે ઝોન: <strong>South Coast Railway (SCoR)</strong> - Headquartered at Visakhapatnam, Andhra Pradesh.</td>
+            </tr>
+            <tr>
+                <td><strong>Small Savings Schemes</strong></td>
+                <td>- <strong>PPF (Public Provident Fund):</strong> 15 Years maturity, Interest Rate: 7.1%.<br>- <strong>SSY, SCSS, NSC, KVP (Kisan Vikas Patra - 115 Months maturity).</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">🛡️ DEFENCE & TECHNOLOGY INITIATIVES</h2>
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 DEFENCE PROJECTS & TECH</span>
+        <ul>
+            <li><strong>Project 17A (Frigates):</strong> કુલ 7 શિપમાંથી 6ઠ્ઠી શિપ <strong>INS Mahendragiri</strong> વિશાખાપટ્ટનમ ખાતે લોન્ચ થઈ. 
+                <ul>
+                    <li>Mazagon Dock Shipbuilders (MDL - Mumbai) દ્વારા નિર્મિત 4 શિપ: Taragiri, Nilgiri, Udayagiri, Mahendragiri.</li>
+                    <li>Garden Reach Shipbuilders (GRSE - Kolkata) દ્વારા નિર્મિત 3 શિપ: Himgiri, Dunagiri, Vindhyagiri.</li>
+                </ul>
+            </li>
+            <li><strong>Super Pressure Balloon Technology:</strong> આ ટેક્નોલોજી મેળવનાર ભારત વિશ્વનો <strong>5મો દેશ</strong> બન્યો (અન્ય 4: US, France, Japan, China).</li>
+            <li><strong>PM SVANidhi Scheme:</strong> મિનિસ્ટ્રી ઓફ હાઉસિંગ એન્ડ અર્બન અફેર્સ દ્વારા સંચાલિત. હવે તેને લંબાવીને <strong>31st March 2030</strong> સુધી કરવામાં આવી છે (Outlay: ₹7,332 Crores).</li>
+            <li><strong>Project Udayak:</strong> બોર્ડર રોડ ઓર્ગેનાઇઝેશન (BRO) દ્વારા ઇન્ડો-મ્યાનમાર બોર્ડર અને અરુણાચલ પ્રદેશમાં કનેક્ટિવિટી માટે (37મો રેઝિંગ ડે પૂર્ણ).</li>
+        </ul>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICKS</span>
+        <p><strong>International HQs Tricks:</strong><br>
+        - NATO / Brussels: NATO ના સભ્યો ખૂબ જ جلદી <strong>റൂસ (Rusha/Rudge)</strong> જાય છે, તેથી હેડક્વાર્ટર બ્રુસેલ્સ (બેલ્જિયમ) છે.<br>
+        - UNCTAD / Geneva: ટ્રેડ અને ડેવલપમેન્ટમાં યુદ્ધ કે આફત <strong>જાનલેવા (Geneva)</strong> સાબિત થઈ શકે છે.<br>
+        - ZSI & BSI / Kolkata: પ્લાન્ટ અને એનિમલ સર્વે માટે અંગ્રેજોના સમયથી કોલકાતા મુખ્ય કેન્દ્ર રહ્યું છે.</p>
+    </div>
+
+    <div class="card card-trap">
+        <span class="tag tag-exam-trap">🟣 EXAM TRAP</span>
+        <p><strong>Confusing Identifiers:</strong> WPI (Wholesale Price Index) નો બેઝ યર 2011-2012 છે, જે ટૂંક સમયમાં બદલીને 2022-2023 કરવામાં આવશે અને 5 વર્ષ પછી PPI (Producer Price Index) દ્વારા રિપ્લેસ થશે. તેને CPI સાથે ગૂંચવવો નહીં (CPI નો બેઝ યર 2012 છે).</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. SWIFT (Society for Worldwide Interbank Financial Telecommunication) ના મુખ્યાલય (Headquarters) કયા દેશમાં આવેલા છે?</p>
+        <ul class="mcq-options">
+            <li>A. Paris, France</li>
+            <li>B. La Hulpe, Belgium</li>
+            <li>C. Geneva, Switzerland</li>
+            <li>D. Mandaluyong, Philippines</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. La Hulpe, Belgium</strong><br>
+            Explanation: SWIFT ની સ્થાપના 1973 માં થઈ હતી અને તેનું મુખ્યાલય લા હુલપે, બેલ્જિયમ ખાતે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. આંતરરાષ્ટ્રીય સ્તરે મની લોન્ડરિંગ અટકાવતી સંસ્થા FATF માં કુલ કેટલા સભ્યો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 32 Members</li>
+            <li>B. 40 Members</li>
+            <li>C. 69 Members</li>
+            <li>D. 193 Members</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 40 Members</strong><br>
+            Explanation: ફાઈનાન્શિયલ એક્શન ટાસ્ક ફોર્સ (FATF) માં કુલ 40 સભ્ય દેશો છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. એશિયન ડેવલપમેન્ટ બેંક (ADB) ની સ્થાપના કયા વર્ષમાં થઈ હતી અને તેનું મુખ્યાલય ક્યાં છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1945, Washington DC</li>
+            <li>B. 1966, Mandaluyong, Philippines</li>
+            <li>C. 1989, Paris</li>
+            <li>D. 1930, Basel</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 1966, Mandaluyong, Philippines</strong><br>
+            Explanation: એશિયન ડેવલપમેન્ટ બેંક (ADB) ની સ્થાપના 1966 માં થઈ હતી અને તેનું મુખ્યાલય ફિલિપાઇન્સમાં છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. ધ ઇકોનોમિસ્ટ ઇન્ટેલિજન્સ યુનિટ (EIU) ના ગ્લોબલ લાઈવએબિલિટી ઇન્ડેક્સ 2026 માં કયું શહેર મોખરે (Top) રહ્યું છે?</p>
+        <ul class="mcq-options">
+            <li>A. Vienna</li>
+            <li>B. Copenhagen</li>
+            <li>C. Zurich</li>
+            <li>D. Melbourne</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Copenhagen</strong><br>
+            Explanation: ડેનમાર્કની રાજધાની કોપનહેગન સળંગ બીજા વર્ષે મોખરે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. 'હરેલા ઉત્સવ' (Harela Festival) કયા રાજ્યમાં મુખ્યત્વે ઉજવવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Chhattisgarh</li>
+            <li>B. Uttarakhand</li>
+            <li>C. Kerala</li>
+            <li>D. Gujarat</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Uttarakhand</strong><br>
+            Explanation: હરેલા ઉત્સવ ઉત્તરાખંડના કુમાઉ ક્ષેત્રમાં ઉજવાતો પ્રમુખ તહેવાર છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. ઇન્ટરનેશનલ સોલાર એલિયન્સ (ISA) ની સ્થાપના કઈ કોપ (COP) બેઠક દરમિયાન થઈ હતી?</p>
+        <ul class="mcq-options">
+            <li>A. COP 21 (2015)</li>
+            <li>B. COP 26 (2021)</li>
+            <li>C. COP 28 (2023)</li>
+            <li>D. COP 15 (2009)</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. COP 21 (2015)</strong><br>
+            Explanation: પેરિસમાં યોજાયેલ COP 21 (2015) માં ભારત અને ફ્રાન્સ દ્વારા ISA ની શરૂઆત થઈ હતી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. નેટો (NATO) ના સભ્ય દેશોની સંખ્યા હાલમાં કેટલી છે અને 32મો સભ્ય દેશ કયો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 30, Finland</li>
+            <li>B. 32, Sweden</li>
+            <li>C. 32, Ukraine</li>
+            <li>D. 35, Japan</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 32, Sweden</strong><br>
+            Explanation: નેટોમાં કુલ 32 સભ્યો છે, જેમાં 31મો ફિનલેન્ડ અને 32મો સ્વીડન છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. ભારતનું સૌથી મોટું ખાનગી માલિકીનું બંદર (Largest Privately Owned Port) કયું છે?</p>
+        <ul class="mcq-options">
+            <li>A. Mundra Port (Gujarat)</li>
+            <li>B. Jawaharlal Nehru Port (Mumbai)</li>
+            <li>C. Chennai Port</li>
+            <li>D. Kochi Port</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Mundra Port (Gujarat)</strong><br>
+            Explanation: અદાણી ગ્રુપનું મુન્દ્રા પોર્ટ (ગુજરાત) ભારતનું સૌથી મોટું પ્રાઇવેટ ઓન્ડ બંદર છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. પબ્લિક પ્રોવિડન્ટ ફંડ (PPF) નો લોક-ઇન / મેચ્યોરિટી પિરિયડ કેટલા વર્ષનો હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 5 Years</li>
+            <li>B. 10 Years</li>
+            <li>C. 15 Years</li>
+            <li>D. 21 Years</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 15 Years</strong><br>
+            Explanation: PPF નો મેચ્યોરિટી પિરિયડ 15 વર્ષનો હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. પ્રખ્યાત લોકકલા 'પાંડવાણી' (Pandwani) કયા રાજ્ય સાથે સંકળાયેલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. Madhya Pradesh</li>
+            <li>B. Chhattisgarh</li>
+            <li>C. Odisha</li>
+            <li>D. Rajasthan</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Chhattisgarh</strong><br>
+            Explanation: પાંડવાણી એ છત્તીસગઢની મહાભારત ગાથા આધારિત લોકકલા છે, જેને તીજન બાઈએ વિશ્વપ્રસિદ્ધ બનાવી છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
