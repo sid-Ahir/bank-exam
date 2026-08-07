@@ -300,6 +300,22 @@
     color: inherit !important;
     display: block !important;
 }
+        .header-bg {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #1a1a1a;
+    padding: 15px 0;
+}
+.header-bg img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #59498d;
+    display: block;
+    margin: 0 auto 10px;
+}
+
  </style>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
@@ -322,17 +338,17 @@
 
         <!-- HEADER -->
         <div class="header-bg">
-            <img src="https://i.ibb.co/HL4hBwQ7/Screenshot-2026-08-06-16-21-28-251-com-google-android-apps-photos-edit.jpg" alt="Profile" class="profile-pic">
-            <div class="name-box" id="display-name">✨ Sid Ahir ✨</div>
-            <div class="quote">Be Positive ✨ Never Give Up</div>
-            
-            <!-- 3 New Top Buttons for Exams -->
-            <div class="top-action-buttons">
-                <button class="action-btn" onclick="showTab('tab-ibps-clerk')">🎯 IBPS Clerk</button>
-                <button class="action-btn" onclick="showTab('tab-rrb-po')">🎯 RRB PO</button>
-                <button class="action-btn" onclick="showTab('tab-rrb-clerk')">🎯 RRB Clerk</button>
-            </div>
-        </div>
+    <img src="https://i.ibb.co/HL4hBwQ7/Screenshot-2026-08-06-16-21-28-251-com-google-android-apps-photos-edit.jpg" alt="Sid Ahir">
+    <div class="name-box" id="display-name">✨ Sid Ahir ✨</div>
+    <div class="quote">Be Positive ✨ Never Give Up</div>
+    
+    <div class="top-action-buttons">
+        <button class="action-btn" onclick="showTab('tab-ibps-clerk')">🎯 IBPS Clerk</button>
+        <button class="action-btn" onclick="showTab('tab-rrb-po')">🎯 RRB PO</button>
+        <button class="action-btn" onclick="showTab('tab-rrb-clerk')">🎯 RRB Clerk</button>
+    </div>
+</div>
+
 
         <div class="main-content">
             <!-- HOME MENU BUTTONS (5 સરખા બટન્સ) -->
