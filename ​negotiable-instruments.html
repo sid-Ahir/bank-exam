@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negotiable Instruments</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    Negotiable Instruments
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 NEGOTIABLE INSTRUMENTS CONCEPT</span>
+        <p><strong>Negotiable Instruments</strong> એટલે એવા દસ્તાવેજો અથવા સાધનો જે ખૂબ જ ફ્લેક્સિબલ અને ફ્રીલી ટ્રાન્સફરેબલ (Free Transferable) હોય છે, એટલે કે જેને એક પક્ષકારથી બીજા પક્ષકાર તરફ સરળતાથી ટ્રાન્સફર કે એન્ડોર્સ (Endorse) કરી શકાય છે.</p>
+        <p>ભારતમાં આ સાધનો માટેનો મુખ્ય કાયદો <strong>Negotiable Instruments Act, 1881</strong> છે, જે <strong>1st March 1881</strong> થી અમલમાં આવ્યો હતો. આ એક્ટમાં કુલ 17 ચેપ્ટર્સ અને 147-148 ની આસપાસ સેક્શન્સ આવેલા છે.</p>
+    </div>
+
+    <h2 class="section-title">Important Sections under Negotiable Instruments Act, 1881</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Section</th>
+                <th>Particulars / Definition</th>
+            </tr>
+            <tr>
+                <td><strong>Section 4</strong></td>
+                <td><strong>Promissory Note (પ્રોમિસરી નોટ)</strong> ની વ્યાખ્યા.</td>
+            </tr>
+            <tr>
+                <td><strong>Section 5</strong></td>
+                <td><strong>Bills of Exchange (બિલ્સ ઓફ એક્સચેન્જ)</strong> ની વ્યાખ્યા.</td>
+            </tr>
+            <tr>
+                <td><strong>Section 6</strong></td>
+                <td><strong>Cheque (ચેક)</strong> ની વ્યાખ્યા.</td>
+            </tr>
+            <tr>
+                <td><strong>Section 7</strong></td>
+                <td><strong>Drawer (ડ્રોઅર) અને Drawee (ડ્રોઈ)</strong> વિશે જોગવાઈ.</td>
+            </tr>
+            <tr>
+                <td><strong>Section 8</strong></td>
+                <td><strong>Holder (હોલ્ડર / પેઈ)</strong> વિશે જોગવાઈ.</td>
+            </tr>
+            <tr>
+                <td><strong>Section 13</strong></td>
+                <td><strong>Negotiable Instruments</strong> ની સામાન્ય વ્યાખ્યા.</td>
+            </tr>
+            <tr>
+                <td><strong>Section 25</strong></td>
+                <td><strong>Bank Holidays (બેંક રજાઓ)</strong> વિશે જોગવાઈ.</td>
+            </tr>
+            <tr>
+                <td><strong>Section 31</strong></td>
+                <td>ખાતામાં પૂરતું બેલેન્સ હોય ત્યારે બેંકની જવાબદારી કે તેણે ચેક <strong>Honour (ઓનર)</strong> કરવો જ પડે.</td>
+            </tr>
+            <tr>
+                <td><strong>Section 85A</strong></td>
+                <td><strong>Demand Draft (ડિમાન્ડ ડ્રાફ્ટ)</strong> સંબંધિત જોગવાઈ.</td>
+            </tr>
+            <tr>
+                <td><strong>Section 138</strong></td>
+                <td>ચેક બાઉન્સ થવા બાબતે (<strong>Dishonour of Cheque</strong>) શિક્ષાત્મક જોગવાઈ.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Key Instruments and Their Parties</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Instrument Name</th>
+                <th>Act Section</th>
+                <th>Number of Parties</th>
+                <th>Core Parties Involved</th>
+            </tr>
+            <tr>
+                <td><strong>Promissory Note</strong></td>
+                <td>Section 4</td>
+                <td><strong>2 Parties</strong></td>
+                <td>1. Maker / Drawer (બનાવનાર)<br>2. Payee (પ્રાપ્ત કરનાર)</td>
+            </tr>
+            <tr>
+                <td><strong>Bills of Exchange</strong></td>
+                <td>Section 5</td>
+                <td><strong>3 Parties</strong></td>
+                <td>1. Drawer (ઓર્ડર આપનાર)<br>2. Drawee (ચૂકવણી કરનાર)<br>3. Payee (નાણાં મેળવનાર)</td>
+            </tr>
+            <tr>
+                <td><strong>Cheque</strong></td>
+                <td>Section 6</td>
+                <td><strong>3 Parties</strong></td>
+                <td>1. Drawer (ખાતાધારક)<br>2. Drawee (હંમેશા <strong>Bank</strong>)<br>3. Payee (નાણાં મેળવનાર વ્યક્તિ)</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Detailed Instrument Breakdown</h2>
+
+    <div class="card card-important">
+        <h3 class="sub-title">1. Promissory Note (પ્રોમિસરી નોટ)</h3>
+        <p>આ એક લેખિત દસ્તાવેજ છે જેમાં કોઈ ચોક્કસ વ્યક્તિ દ્વારા ચોક્કસ રકમ નિર્ધારિત તારીખે કે માંગણી પર (On Demand) બીજી વ્યક્તિને કે તેના ઓર્ડર મુજબ ચૂકવવાની બિનશરતી (Unconditional) લેખિત પ્રતિજ્ઞા કે વાયદો આપવામાં આવે છે. આમાં ડ્યુઅલી સાઇન અને સ્ટેમ્પ્ડ હોવું અનિવાર્ય છે.</p>
+
+        <h3 class="sub-title">2. Bills of Exchange (બિલ્સ ઓફ એક્સચેન્જ)</h3>
+        - આ એક લેખિત ઓર્ડર છે જે ડ્રોઅર (Drawer) દ્વારા ડ્રોઈ (Drawee) ને આપવામાં આવે છે કે તે નિર્ધારિત રકમ નિશ્ચિત સમય પછી ચોક્કસ વ્યક્તિ (Payee) ને ચૂકવી આપે.<br>
+        - <strong>Bill Discounting:</strong> જો સેલરને સમય પહેલાં નાણાંની જરૂર હોય, તો તે બેંક પાસે જઈને બિલ ડિસ્કાઉન્ટ (Discount) કરાવી શકે છે. બેંક જરૂર પડ્યે તેને RBI પાસે <strong>Rediscount</strong> પણ કરાવી શકે છે.
+
+        <h3 class="sub-title">3. Cheque (ચેક)</h3>
+        - ચેક હંમેશાં સ્પેસિફાઈડ બેંક પર જ ડ્રો કરવામાં આવે છે અને તે ક્યારેય <strong>On Demand</strong> સિવાયની શરત પર હોતો નથી.<br>
+        - <strong>Validity:</strong> ચેક ઇશ્યૂ થયા તારીખથી <strong>3 Months</strong> (ત્રણ મહિના) સુધી વેલિડ રહે છે.<br>
+        - <strong>Crossed Cheque:</strong> ચેક પર ડાબી બાજુ બે સમાંતર રેખાઓ (Transverse Parallel Lines) દોરવાથી તે ક્રોસ ચેક બને છે, જેના નાણાં સીધા બેંક એકાઉન્ટમાં જમા થાય છે (Account Payee Only), કેશ કાઉન્ટરથી ઉપાડી શકાતા નથી.<br>
+        - <strong>Demand Draft (DD):</strong> આ એક પ્રીપેડ ઇન્સ્ટ્રુમેન્ટ (Prepaid Instrument) છે જેમાં ગ્રાહક અગાઉથી બેંકને રકમ ચૂકવીને ડ્રાફ્ટ બનાવડાવે છે, જેથી ચેક બાઉન્સ થવાની શક્યતા શૂન્ય થઈ જાય છે.
+    </div>
+
+    <h2 class="section-title">Important Rules & Exam Traps</h2>
+    <div class="card card-trap">
+        <span class="tag tag-exam-trap">🟣 EXAM TRAPS & RULES</span>
+        <ul>
+            <li><strong>Bank Holidays Maturity:</strong> જો પ્રમિસરી નોટ કે બિલ ઓફ એક્સચેન્જની મેચ્યોરિટી ડેટ કોઈ પબ્લિક હોલિડે (Public Holiday) પર આવે, તો તેની પાકતી મુદત તે દિવસના <strong>અગાઉના કામકાજના દિવસે (Preceding Working Day)</strong> ગણવામાં આવે છે.</li>
+            <li><strong>Drawee in Cheque:</strong> ચેકના કિસ્સામાં 'Drawee' હંમેશાં <strong>સંબંધિત બેંક (Bank)</strong> જ હોય છે.</li>
+            <li><strong>Dishonour Penalty:</strong> ખાતામાં અપૂરતા બેલેન્સને કારણે ચેક બાઉન્સ થવા પર Section 138 હેઠળ કાનૂની કાર્યવાહી અને દંડ થઈ શકે છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. Negotiable Instruments Act કયા વર્ષમાં પસાર થયો હતો અને કઈ તારીખથી અમલમાં આવ્યો?</p>
+        <ul class="mcq-options">
+            <li>A. 1881, 1st January 1881</li>
+            <li>B. 1881, 1st March 1881</li>
+            <li>C. 1934, 1st April 1935</li>
+            <li>D. 1949, 1st July 1949</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 1881, 1st March 1881</strong><br>
+            Explanation: નેગોશીએબલ ઇન્સ્ટ્રુમેન્ટ એક્ટ 1881 માં બન્યો અને 1 માર્ચ 1881 થી અમલમાં આવ્યો.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. Negotiable Instruments Act ના કયા સેક્શનમાં 'Cheque' (ચેક) ની વ્યાખ્યા આપવામાં આવી છે?</p>
+        <ul class="mcq-options">
+            <li>A. Section 4</li>
+            <li>B. Section 5</li>
+            <li>C. Section 6</li>
+            <li>D. Section 13</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Section 6</strong><br>
+            Explanation: સેક્શન 4 માં પ્રોમિસરી નોટ, સેક્શન 5 માં બિલ ઓફ એક્સચેન્જ અને સેક્શન 6 માં ચેકનો ઉલ્લેખ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. Promissory Note (પ્રોમિસરી નોટ) માં સામાન્ય રીતે કેટલી પક્ષકાર (Parties) હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1 Party</li>
+            <li>B. 2 Parties</li>
+            <li>C. 3 Parties</li>
+            <li>D. 4 Parties</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 2 Parties</strong><br>
+            Explanation: પ્રોમિસરી નોટમાં ડ્રોઅર (મેકર) અને પેઈ એમ બે જ પક્ષકારો હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. Bills of Exchange (બિલ્સ ઓફ એક્સચેન્જ) માં કુલ કેટલા પક્ષકારો સામેલ હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1 Party</li>
+            <li>B. 2 Parties</li>
+            <li>C. 3 Parties</li>
+            <li>D. 4 Parties</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 3 Parties</strong><br>
+            Explanation: બિલ્સ ઓફ એક્સચેન્જ અને ચેક બંનેમાં 3 પક્ષકારો (Drawer, Drawee, Payee) હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. ચેકના કિસ્સામાં 'Drawee' (ચૂકવણી કરનાર) હંમેશા કોણ હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. The Customer (Drawer)</li>
+            <li>B. The Bank</li>
+            <li>C. The Endorsee</li>
+            <li>D. The RBI Governor</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. The Bank</strong><br>
+            Explanation: ચેક પર ચૂકવણી કરવાની જવાબદારી બેંકની હોવાથી ડ્રોઈ હંમેશા બેંક જ હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. સામાન્ય સંજોગોમાં ઇશ્યૂ થયા તારીખથી ચેક (Cheque) ની વેલિડિટી (Validity) કેટલા સમય સુધીની હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1 Month</li>
+            <li>B. 3 Months</li>
+            <li>C. 6 Months</li>
+            <li>D. 1 Year</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 3 Months</strong><br>
+            Explanation: RBI ના નિયમ મુજબ ચેક ઇશ્યૂ થયાની તારીખથી 3 મહિના સુધી વેલિડ રહે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. ચેક બાઉન્સ થવા બાબતે (Dishonour of Cheque due to insufficient balance) કઈ કાનૂની જોગવાઈ લાગુ પડે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Section 45 ZB</li>
+            <li>B. Section 138</li>
+            <li>C. Section 25</li>
+            <li>D. Section 85A</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Section 138</strong><br>
+            Explanation: અપૂરતા બેલેન્સને કારણે ચેક બાઉન્સ થવા પર નેગોશીએબલ ઇન્સ્ટ્રુમેન્ટ એક્ટના સેક્શન 138 હેઠળ દંડ અને શિક્ષાની જોગવાઈ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. બેંક રજાઓ (Bank Holidays) વિશે નેગોશીએબલ ઇન્સ્ટ્રુમેન્ટ એક્ટના કયા સેક્શનમાં જણાવવામાં આવ્યું છે?</p>
+        <ul class="mcq-options">
+            <li>A. Section 13</li>
+            <li>B. Section 25</li>
+            <li>C. Section 31</li>
+            <li>D. Section 138</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Section 25</strong><br>
+            Explanation: બેંક હોલિડેઝ અને પબ્લિક હોલિડેઝ પર મેચ્યોરિટી ડેટ અંગે સેક્શન 25 માં માર્ગદર્શિકા છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. માંગણી પર (On Demand) ચૂકવવાની શરતવાળા પ્રમિસરી નોટ કે બિલ કયા સેક્શન હેઠળ ગણવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Section 4 & 5</li>
+            <li>B. Section 13</li>
+            <li>C. Section 85A</li>
+            <li>D. Section 31</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Section 4 & 5</strong><br>
+            Explanation: સેક્શન 4 (Promissory Note) અને સેક્શન 5 (Bills of Exchange) માં આ શરતો સમાવિષ્ટ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. ડિમાન્ડ ડ્રાફ્ટ (Demand Draft) સંબંધિત જોગવાઈ કયા સેક્શનમાં આપવામાં આવી છે?</p>
+        <ul class="mcq-options">
+            <li>A. Section 85A</li>
+            <li>B. Section 138</li>
+            <li>C. Section 6</li>
+            <li>D. Section 7</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Section 85A</strong><br>
+            Explanation: ડિમાન્ડ ડ્રાફ્ટની સુરક્ષા અને ચૂકવણી અંગે સેક્શન 85A માં જોગવાઈ છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
