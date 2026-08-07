@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Limits, AePS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    UPI Limits, AePS
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 DIGITAL PAYMENTS & UPI OVERVIEW</span>
+        <p>ભારતમાં ડિજિટલ પેમેન્ટ સિસ્ટમ્સ (Digital Payment Systems) એ નાણાકીય લેવડદેવડને અત્યંત સરળ અને ઝડપી બનાવી દીધી છે. <strong>UPI (Unified Payments Interface)</strong> એ ભારતની સૌથી લોકપ્રિય રીઅલ-ટાઇમ પેમેન્ટ સિસ્ટમ છે, જે નેશનલ પેમેન્ટ્સ કોર્પોરેશન ઓફ ઇન્ડિયા (NPCI) દ્વારા વિકસાવવામાં આવી છે.</p>
+        <p>વિવિધ પ્રકારના યુઝર્સ અને જરૂરિયાતો (જેમ કે ફીચર ફોન યુઝર્સ, વિદેશી પ્રવાસીઓ, અથવા બાયોમેટ્રિક યુઝર્સ) માટે વિવિધ ટેક્નોલોજી અને લિમિટ્સ નિર્ધારિત કરવામાં આવી છે.</p>
+    </div>
+
+    <h2 class="section-title">UPI Features for Feature Phones & Offline Modes</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Technology / Service</th>
+                <th>Target User / Purpose</th>
+                <th>Key Features / Limits</th>
+            </tr>
+            <tr>
+                <td><strong>UPI 123Pay</strong></td>
+                <td>ફીચર ફોન (Feature Phones) યુઝર્સ માટે, જ્યાં ઇન્ટરનેટ કનેક્ટિવિટી ન હોય.</td>
+                <td>આઈવીઆર (IVR) ટેક્નોલોજી, મિસ-કોલ અને સાઉન્ડ બેઝ્ડ પેમેન્ટ. Per Transaction Limit: <strong>₹10,000</strong>.</td>
+            </tr>
+            <tr>
+                <td><strong>UPI Light</strong></td>
+                <td>સ્માર્ટફોન યુઝર્સ માટે સ્મોલ વેલ્યુ ઓફલાઇન પેમેન્ટ.</td>
+                <td>પીન વગર (Without PIN) પેમેન્ટ. Per Transaction Limit: <strong>₹1,000</strong>. Wallet Balance Limit: મહત્તમ <strong>₹5,000</strong>. Daily Spend Limit: <strong>₹4,000</strong>.</td>
+            </tr>
+            <tr>
+                <td><strong>UPI Light X</strong></td>
+                <td>નિયર ફિલ્ડ કમ્યુનિકેશન (NFC) બેઝ્ડ સંપૂર્ણપણે ઓફલાઇન પેમેન્ટ.</td>
+                <td>Per Transaction Limit: <strong>₹500</strong>. Wallet Balance: <strong>₹2,000</strong>. Daily Spend Limit: <strong>₹4,000</strong>.</td>
+            </tr>
+            <tr>
+                <td><strong>USSD (*99# / NUUP)</strong></td>
+                <td>ઇન્ટરનેટ વગરના મોબાઇલ ફોન યુઝર્સ માટે.</td>
+                <td>Per Transaction Limit: <strong>₹5,000</strong>.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">UPI Transaction Limits for Special Categories</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Category / Purpose</th>
+                <th>Per Transaction Limit</th>
+                <th>Maximum / Daily / Monthly Limit</th>
+            </tr>
+            <tr>
+                <td><strong>Capital Market, Insurance & Travel</strong></td>
+                <td>₹5,00,000</td>
+                <td>₹10,00,000 per 24 Hours</td>
+            </tr>
+            <tr>
+                <td><strong>IPO Application (ASBA) & Tax Payment</strong></td>
+                <td>₹5,00,000</td>
+                <td>₹5,00,000 per 24 Hours</td>
+            </tr>
+            <tr>
+                <td><strong>Credit Card Payment & Jewellery Purchase</strong></td>
+                <td>₹5,00,000</td>
+                <td>₹6,00,000 per 24 Hours</td>
+            </tr>
+            <tr>
+                <td><strong>Loan / EMI Collection & Hospitals / Education</strong></td>
+                <td>₹5,00,000</td>
+                <td>₹1,00,000 to ₹10,00,000 (As applicable)</td>
+            </tr>
+            <tr>
+                <td><strong>UPI One World (For Foreign Tourists)</strong></td>
+                <td>₹25,000</td>
+                <td>Monthly Limit: <strong>₹50,000</strong> (विना भारतीय बैंक खाता और नंबर)</td>
+            </tr>
+            <tr>
+                <td><strong>UPI Circle (Delegated Payments)</strong></td>
+                <td>₹5,000</td>
+                <td>First 24 Hours limit: ₹5,000 | Monthly Limit per Secondary User: <strong>₹15,000</strong> (Max 5 Secondary Users)</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">AePS (Aadhaar Enabled Payment System)</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 AADHAAR ENABLED PAYMENT SYSTEM (AePS)</span>
+        <ul>
+            <li><strong>Concept:</strong> બેંક ખાતા સાથે આધાર નંબર લિંક કરીને બાયોમેટ્રિક ઓથેન્ટિકેશન (Fingerprint / Face ID) દ્વારા નાણાકીય લેવડદેવડ કરવાની સિસ્ટમ.</li>
+            <li><strong>Usage:</strong> માઇક્રો એટીએમ (Micro ATMs) અથવા બિઝનેસ કોરેસ્પોન્ડન્ટ્સ (Business Correspondents - BCs) દ્વારા કેશ વિડ્રોઅલ અને બેલેન્સ ઇન્ક્વાયરી માટે ઉપયોગી.</li>
+            <li><strong>Cash Withdrawal Limit:</strong> જનરલી પ્રતિ ટ્રાન્ઝેક્શન <strong>₹10,000</strong> સુધીની મર્યાદા.</li>
+            <li><strong>Two-Factor Authentication:</strong> ₹5,000 થી વધુના ઉપાડ માટે બાયોમેટ્રિક સાથે આધાર લિંકબ્ડ મોબાઈલ પર આવતો <strong>OTP</strong> પણ ફરજિયાત છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Core Payment Infrastructure (NEFT, RTGS, IMPS)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>System</th>
+                <th>Minimum Limit</th>
+                <th>Maximum Limit</th>
+                <th>Settlement Mechanism & Timing</th>
+            </tr>
+            <tr>
+                <td><strong>RTGS</strong> (Real Time Gross Settlement)</td>
+                <td>₹2,00,000</td>
+                <td>No Upper Limit</td>
+                <td>Real-time basis પર સિંગલ ટ્રાન્ઝેક્શન સેટલ થાય છે. 24x7x365 ઉપલબ્ધ.</td>
+            </tr>
+            <tr>
+                <td><strong>NEFT</strong> (National Electronic Funds Transfer)</td>
+                <td>No Minimum Limit</td>
+                <td>No Upper Limit</td>
+                <td>બેચ (Batches) આધારિત સેટલમેન્ટ (દર 30 મિનિટે એક બેંચ, દિવસના કુલ <strong>48 Batches</strong>). 24x7x365 ઉપલબ્ધ.</td>
+            </tr>
+            <tr>
+                <td><strong>IMPS</strong> (Immediate Payment Service)</td>
+                <td>No Minimum Limit</td>
+                <td><strong>₹5,000,00 (₹5 Lakhs)</strong></td>
+                <td>ઇન્સ્ટન્ટ 24x7x365 ફંડ ટ્રાન્સફર (ઓપરેટેડ બાય NPCI).</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICKS & QUICK REVISION</span>
+        <p><strong>Payment Systems Summary:</strong><br>
+        - Feature phone without internet = <strong>UPI 123Pay</strong><br>
+        - Small offline payment without PIN = <strong>UPI Light (Max ₹1,000/tx)</strong><br>
+        - High value business/tax payments via UPI = Up to <strong>₹5 Lakhs</strong><br>
+        - Minimum RTGS limit = <strong>₹2 Lakhs</strong> (No upper limit)<br>
+        - Maximum IMPS limit = <strong>₹5 Lakhs</strong></p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. ઇન્ટરનેટ વગરના ફીચર ફોન (Feature Phones) માટે કઈ યુપીઆઈ સેવા સૌથી વધુ ઉપયોગી છે?</p>
+        <ul class="mcq-options">
+            <li>A. UPI Light</li>
+            <li>B. UPI 123Pay</li>
+            <li>C. IMPS</li>
+            <li>D. RTGS</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. UPI 123Pay</strong><br>
+            Explanation: ઇન્ટરનેટ વગરના કીપેડ કે ફીચર ફોન માટે UPI 123Pay (IVR અને મિસ-કોલ બેઝ્ડ) ઉપયોગી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. UPI Light હેઠળ પિન વગર (Without PIN) પ્રતિ ટ્રાન્ઝેક્શન મહત્તમ મર્યાદા કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹500</li>
+            <li>B. ₹1,000</li>
+            <li>C. ₹5,000</li>
+            <li>D. ₹10,000</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. ₹1,000</strong><br>
+            Explanation: UPI Light માં પિન વિના પર ટ્રાન્ઝેક્શન લિમિટ ₹1,000 અને વૉલેટ બેલેન્સ મર્યાદા ₹5,000 છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. આરટીજીએસ (RTGS) દ્વારા નાણાં મોકલવા માટેની ન્યૂનતમ મર્યાદા (Minimum Limit) કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. No minimum limit</li>
+            <li>B. ₹50,000</li>
+            <li>C. ₹2,00,000</li>
+            <li>D. ₹5,00,000</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹2,00,000</strong><br>
+            Explanation: RTGS માટે ન્યૂનતમ રકમ ₹2,00,000 છે, જ્યારે મહત્તમ કોઈ મર્યાદા નથી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. IMPS ની વર્તમાન મહત્તમ પ્રતિ ટ્રાન્ઝેક્શન મર્યાદા (Maximum Limit) કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹1 Lakh</li>
+            <li>B. ₹2 Lakhs</li>
+            <li>C. ₹5 Lakhs</li>
+            <li>D. No limit</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹5 Lakhs</strong><br>
+            Explanation: Immediate Payment Service (IMPS) ની મહત્તમ મર્યાદા ₹5 Lakhs છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. નેશનલ ઇલેક્ટ્રોનિક ફંડ ટ્રાન્સફર (NEFT) સિસ્ટમ એક દિવસમાં કુલ કેટલા બેચ (Batches) પ્રોસેસ કરે છે?</p>
+        <ul class="mcq-options">
+            <li>A. 12 Batches</li>
+            <li>B. 24 Batches</li>
+            <li>C. 48 Batches</li>
+            <li>D. Continuous Real Time</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 48 Batches</strong><br>
+            Explanation: NEFT દર 30 મિનિટે એક બેચ ચલાવે છે, આમ 24 કલાકમાં કુલ 48 બેચ થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. આધાર ઇનેબલ્ડ પેમેન્ટ સિસ્ટમ (AePS) કઈ ઓથેન્ટિકેશન પદ્ધતિનો ઉપયોગ કરે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Debit Card PIN</li>
+            <li>B. Biometric Authentication (Fingerprint / Face ID)</li>
+            <li>C. Net Banking Password</li>
+            <li>D. Credit Card CVV</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Biometric Authentication (Fingerprint / Face ID)</strong><br>
+            Explanation: AePS માં ફિંગરપ્રિન્ટ કે ફેસ સ્કેન જેવા બાયોમેટ્રિક્સનો ઉપયોગ થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. વિદેશી પ્રવાસીઓ (Foreign Tourists) માટે ભારતમાં UPI વાપરવા માટેનું 'UPI One World' માસિક લિમિટ કેટલું છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹10,000</li>
+            <li>B. ₹25,000</li>
+            <li>C. ₹50,000</li>
+            <li>D. ₹1,00,000</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹50,000</strong><br>
+            Explanation: UPI One World હેઠળ વિદેશી પ્રવાસીઓ માટે પ્રતિ ટ્રાન્ઝેક્શન ₹25,000 અને માસિક લિમિટ ₹50,000 છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. કેપિટલ માર્કેટ, ઇન્શ્યોરન્સ અને ટ્રાવેલ પેમેન્ટ્સ માટે UPI ની પર ટ્રાન્ઝેક્શન મર્યાદા કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹1 Lakh</li>
+            <li>B. ₹2 Lakhs</li>
+            <li>C. ₹5 Lakhs</li>
+            <li>D. ₹10 Lakhs</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹5 Lakhs</strong><br>
+            Explanation: કેપિટલ માર્કેટ, ઇન્શ્યોરન્સ અને ટ્રાવેલ પેમેન્ટ્સ માટે UPI પર ટ્રાન્ઝેક્શન લિમિટ ₹5,00,000 છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. યુપીઆઈ સર્કલ (UPI Circle - Delegated Payments) માં પ્રાઇમરી યુઝર મહત્તમ કેટલા સેકેન્ડરી યુઝર્સ ઉમેરી શકે છે?</p>
+        <ul class="mcq-options">
+            <li>A. 2</li>
+            <li>B. 3</li>
+            <li>C. 5</li>
+            <li>D. 10</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 5</strong><br>
+            Explanation: યુપીઆઈ સર્કલ હેઠળ પ્રાઇમરી યુઝર મહત્તમ 5 સેકન્ડરી યુઝર્સને ડેલિગેટ કરી શકે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. USSD આધારિત મોબાઇલ બેન્કિંગ સર્વિસ (Star 99 Hash) નું સંચાલન કઈ સંસ્થા કરે છે?</p>
+        <ul class="mcq-options">
+            <li>A. RBI</li>
+            <li>B. NPCI (National Payments Corporation of India)</li>
+            <li>C. SEBI</li>
+            <li>D. TRAI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. NPCI (National Payments Corporation of India)</strong><br>
+            Explanation: *99# (NUUP) એ NPCI નું પ્રોડક્ટ છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
