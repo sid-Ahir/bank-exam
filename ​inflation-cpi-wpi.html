@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9. Inflation - CPI & WPI</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    9. Inflation - CPI & WPI
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 INFLATION BASIC CONCEPT & ROOT CAUSE</span>
+        <p><strong>Inflation</strong> (ફુગાવો / મોંઘવારી) એટલે અર્થવ્યવસ્થામાં તમામ વસ્તુઓ અને સેવાઓના ભાવમાં લાંબા સમયગાળા દરમિયાન થતો સામાન્ય અને સતત વધારો (General Price Rise over a period of time).</p>
+        <p><strong>Inflation ની મૂળભૂત जड़ (Root Cause):</strong> મોંઘવારી પાછળનું મુખ્ય કારણ બજારમાં <strong>Money Supply</strong> (નાણાંનો પુરવઠો) અતિશય વધવો છે. જ્યારે લોકોના હાથમાં પૈસા આવે છે, ત્યારે ચીજવસ્તુઓની માંગ (Demand) વધે છે. જો સામે પક્ષે પુરવઠો (Supply) મર્યાદિત હોય, તો વસ્તુઓના ભાવ વધવા લાગે છે અને ફુગાવો સર્જાય છે.</p>
+        <p><strong>Value of Money:</strong> મોંઘવારી વધવાથી નાણાંની ખરીદશક્તિ (Value of Money) ઘટી જાય છે. અગાઉ ઓછા પૈસામાં વધુ વસ્તુઓ મળતી હતી, જ્યારે ફુગાવા પછી વધુ પૈસા ખર્ચીને પણ ઓછી વસ્તુઓ મળે છે.</p>
+    </div>
+
+    <h2 class="section-title">Impact on Creditors and Debtors</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Condition / Status</th>
+                <th>During Inflation (ફુગાવા દરમિયાન)</th>
+            </tr>
+            <tr>
+                <td><strong>Debtor (Borrower / લોન લેનાર)</strong></td>
+                <td><strong>Gainers (ફાયદો):</strong> કારણ કે તેણે ફુગાવા અગાઉ લીધેલી લોનની નિશ્ચિત રકમ ચૂકવવાની હોય છે, જ્યારે તેની કમાણી કે ચીજવસ્તુઓના ભાવ વધી ગયા હોય છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Creditor (Lender / લોન આપનાર)</strong></td>
+                <td><strong>Losers (નુકસાન):</strong> કારણ કે જે નાણાં તેને પરત મળે છે તેની ખરીદશક્તિ (Purchasing Power) ઘટી ચૂકી હોય છે.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Types and Variations of Inflation</h2>
+    <div class="card card-concept">
+        <ul>
+            <li><strong>Creeping / Mild Inflation:</strong> ખૂબ જ ધીમો ફુગાવો (1% થી 3% સુધીનો વાર્ષિક વધારો).</li>
+            <li><strong>Walking / Moderate Inflation:</strong> ચાલતો કે મધ્યમ ફુગાવો (4% થી 6%).</li>
+            <li><strong>Running / Galloping Inflation:</strong> દોડતો કે ઊંચો ફુગાવો (ડબલ ડિજિટમાં, જેમ કે 10% થી વધુ).</li>
+            <li><strong>Hyper Inflation:</strong> અતિશય ફુગાવો (થ્રી ડિજિટ અથવા રાતોરાત 100%-3000% સુધીનો વધારો, ઉદાહરણ તરીકે બીજા વિશ્વયુદ્ધ દરમિયાન જર્મનીમાં થયેલો ફુગાવો).</li>
+            <li><strong>Disinflation:</strong> ફુગાવાના દરને ઘટાડવાની અથવા નીચો લાવવાની પ્રક્રિયા (Inflation ઘટવું, નેગેટિવ થવું નહીં).</li>
+            <li><strong>Reflation:</strong> મંદી (Deflation) પછી અર્થવ્યવસ્થાને બેઠી કરવા માટે નિયંત્રિત ધોરણે થોડો ફુગાવો વધારવો.</li>
+            <li><strong>Skewflation:</strong> જ્યારે અમુક ચોક્કસ ચીજવસ્તુઓમાં ફુગાવો હોય અને અન્યમાં ડિફ્લેશન કે સ્થિરતા હોય.</li>
+            <li><strong>Stagflation:</strong> સૌથી ખતરનાક સ્થિતિ - ઊંચો ફુગાવો (High Inflation) + ઊંચી બેરોજગારી (High Unemployment) + નબળો આર્થિક વિકાસ (Low Economic Growth).</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Business Cycle Phases (વ્યાપાર ચક્ર)</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT ECONOMIC PHASES</span>
+        <ul>
+            <li><strong>Expansion:</strong> સામાન્ય સ્તરથી આર્થિક પ્રવૃત્તિઓ અને વિકાસમાં વધારો.</li>
+            <li><strong>Boom:</strong> આર્થિક પ્રવૃત્તિઓ ટોચના સ્તરે પહોંચવી.</li>
+            <li><strong>Contraction:</strong> અર્થવ્યવસ્થામાં ઘટાડો કે સંકોચન.</li>
+            <li><strong>Recession:</strong> સામાન્ય સ્તરથી નીચે જતી આર્થિક મંડી.</li>
+            <li><strong>Depression:</strong> વ્યાપાર ચક્રનો સૌથી નીચલો અને અત્યંત નબળો તબક્કો (Lowest Point).</li>
+            <li><strong>Recovery:</strong> ડિપ્રેશન કે મંદીમાંથી બહાર આવીને ફરી સુધારા તરફ આગળ વધવું.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Comparison: Wholesale Price Index (WPI) vs Consumer Price Index (CPI)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Features</th>
+                <th>WPI (Wholesale Price Index)</th>
+                <th>CPI (Consumer Price Index)</th>
+            </tr>
+            <tr>
+                <td><strong>Definition</strong></td>
+                <td>જ્યારે ઉત્પાદકો કે જથ્થાબંધ વેપારીઓ (Wholesalers) દ્વારા બલ્ક (Bulk) માં ચીજવસ્તુઓ ખરીદાય છે, ત્યારે તેના પ્રાઇસ લેવલને માપે છે.</td>
+                <td>જ્યારે આખરી ઉપભોક્તા (Consumer) દ્વારા રિટેલ માર્કેટમાં ચીજવસ્તુઓ અને સેવાઓ ખરીદાય છે, ત્યારે તેના પ્રાઇસ લેવલને માપે છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Base Year</strong></td>
+                <td><strong>2011 - 2012</strong></td>
+                <td><strong>2012</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Releasing Authority</strong></td>
+                <td>Office of Economic Adviser, <strong>Ministry of Commerce and Industry</strong></td>
+                <td>National Statistical Office (NSO), <strong>MoSPI</strong> (Ministry of Statistics and Programme Implementation)</td>
+            </tr>
+            <tr>
+                <td><strong>Scope / Coverage</strong></td>
+                <td>માત્ર ગુડ્સ (Goods) નો સમાવેશ થાય છે.</td>
+                <td>ગુડ્સ (Goods) અને સર્વિસીઝ (Services) બંનેનો સમાવેશ થાય છે.</td>
+            </tr>
+            <tr>
+                <td><strong>RBI Recognition</strong></td>
+                <td>અગાઉ વપરાતું, પરંતુ હાલ RBI મોદ્રિક નીતિ અને ફુગાવા માટે <strong>CPI (Combined)</strong> ને પ્રાધાન્ય આપે છે.</td>
+                <td>RBI દ્વારા ફુગાવા માપવા માટેનો મુખ્ય સૂચકાંક (Key Measure of Inflation).</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">WPI and CPI Internal Breakdown</h2>
+    
+    <div class="card card-concept">
+        <h3 class="sub-title">WPI Weightage & Components (Total Items: 697)</h3>
+        <ul>
+            <li><strong>Primary Articles:</strong> 22.62% weightage (Items: 117 - Food, Non-food, Minerals)</li>
+            <li><strong>Fuel and Power:</strong> 13.15% weightage (Items: 16 - Electricity, Coal, Petrol, Diesel)</li>
+            <li><strong>Manufactured Products:</strong> 64.23% weightage (Items: 564 - Textles, Food products, Paper, etc.)</li>
+        </ul>
+
+        <h3 class="sub-title">CPI Major Components & Weightage</h3>
+        <ul>
+            <li><strong>Food and Beverages:</strong> Highest weightage around <strong>45.86%</strong></li>
+            <li><strong>Housing:</strong> Around 10.7%</li>
+            <li><strong>Fuel and Light:</strong> Around 6.84%</li>
+            <li><strong>Clothing and Footwear:</strong> Around 6.53%</li>
+            <li><strong>Pan, Tobacco and Intoxicants:</strong> Around 2.38%</li>
+        </ul>
+        <p><strong>Note on CPI Items:</strong> Rural Basket માં 448 आइटम्स અને Urban Basket માં 460 आइटम्स હોય છે.</p>
+    </div>
+
+    <h2 class="section-title">Different Variants of CPI</h2>
+    <div class="card card-important">
+        <span class="tag tag-quick-revision">🟢 REVISION FACTS</span>
+        <ul>
+            <li><strong>CPI (IW - Industrial Workers):</strong> Released by Labour Bureau.</li>
+            <li><strong>CPI (AL - Agricultural Labourers):</strong> Released by Labour Bureau.</li>
+            <li><strong>CPI (RL - Rural Labourers):</strong> Released by Labour Bureau.</li>
+            <li><strong>CPI (Rural / Urban / Combined):</strong> Released by NSO (MoSPI).</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Headline Inflation vs Core Inflation</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Headline Inflation</strong></td>
+                <td>અર્થવ્યવસ્થામાં ઉપલબ્ધ તમામ કોમોડિટીઝ (બધા જ ખાદ્યપદાર્થો, બળતણ, સેવાઓ વગેરે) ના ભાવ વધારાને આવરી લે છે. (Total basket).</td>
+            </tr>
+            <tr>
+                <td><strong>Core Inflation</strong></td>
+                <td>હેડલાઇન ફુગાવામાંથી અસ્થિર (Volatile) ગણાતી વસ્તુઓ જેવી કે <strong>Food Items</strong> (ખાદ્યપદાર્થો) અને <strong>Fuel</strong> (બળતણ / પેટ્રોલ-ડિઝલ) ના ભાવના ફેરફારોને બાદ કરીને ગણવામાં આવે છે.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. મોંઘવારી (Inflation) ના સમયમાં નીચેનામાંથી કોને સૌથી વધુ ફાયદો (Gain) થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Creditor (Lender / લોન આપનાર)</li>
+            <li>B. Debtor (Borrower / લોન લેનાર)</li>
+            <li>C. Fixed Deposit Holder</li>
+            <li>D. Salaried Pensioners</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Debtor (Borrower / લોન લેનાર)</strong><br>
+            Explanation: ફુગાવા દરમિયાન નાણાંની કિંમત ઘટતી હોવાથી લોન લેનાર (Debtor) ને નિશ્ચિત રકમ ચૂકવવામાં ફાયદો થાય છે જ્યારે ધિરાણકર્તાને નુકસાન જાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. વ્યાપાર ચક્ર (Business Cycle) નો સૌથી નીચલો અને અત્યંત નબળો તબક્કો કયો છે?</p>
+        <ul class="mcq-options">
+            <li>A. Boom</li>
+            <li>B. Expansion</li>
+            <li>C. Depression</li>
+            <li>D. Recovery</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Depression</strong><br>
+            Explanation: વ્યાપાર ચક્રમાં રિશેસન પછીનો સૌથી નીચલો પોઈન્ટ ડિપ્રેશન (Depression) કહેવાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. જ્યારે અર્થવ્યવસ્થામાં ઊંચો ફુગાવો અને ઊંચી બેરોજગારી એકસાથે જોવા મળે, ત્યારે તેને શું કહેવાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Deflation</li>
+            <li>B. Stagflation</li>
+            <li>C. Disinflation</li>
+            <li>D. Skewflation</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Stagflation</strong><br>
+            Explanation: સ્ટેગફ્લેશન એ એવી સ્થિતિ છે જ્યાં હાઇ ઇન્ફ્લેશન, હાઇ અનએમ્પ્લોયમેન્ટ અને લો ગ્રોથ એકસાથે હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. Wholesale Price Index (WPI) નો વર્તમાન આધાર વર્ષ (Base Year) કયો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 2004 - 2005</li>
+            <li>B. 2011 - 2012</li>
+            <li>C. 2014 - 2015</li>
+            <li>D. 2012</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 2011 - 2012</strong><br>
+            Explanation: WPI માટે બેઝ યર 2011-2012 છે જ્યારે CPI માટે બેઝ યર 2012 છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. Wholesale Price Index (WPI) કોના દ્વારા પ્રકાશિત કરવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Reserve Bank of India (RBI)</li>
+            <li>B. National Statistical Office (NSO)</li>
+            <li>C. Office of Economic Adviser, Ministry of Commerce and Industry</li>
+            <li>D. Labour Bureau</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Office of Economic Adviser, Ministry of Commerce and Industry</strong><br>
+            Explanation: WPI ને વાણિજ્ય અને ઉદ્યોગ મંત્રાલય હેઠળના આર્થિક સલાહકારની ઓફિસ દ્વારા બહાર પાડવામાં આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. વર્તમાન સમયમાં RBI દ્વારા ફુગાવા (Inflation) ના માપન માટે કયા સૂચકાંકને મુખ્ય માનવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. WPI</li>
+            <li>B. CPI (Combined)</li>
+            <li>C. PPI</li>
+            <li>D. GDP Deflator</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. CPI (Combined)</strong><br>
+            Explanation: RBI મોદ્રિક નીતિ અને ઇન્ફ્લેશન ટાર્ગેટ માટે ગ્રાહક ભાવાંક (CPI Combined) ને અનુસરે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. Consumer Price Index (CPI) માં કઈ બાબતોનો સમાવેશ થાય છે જે WPI માં નથી થતો?</p>
+        <ul class="mcq-options">
+            <li>A. Manufactured Goods</li>
+            <li>B. Services (સેવાઓ)</li>
+            <li>C. Raw Materials</li>
+            <li>D. Minerals</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Services (સેવાઓ)</strong><br>
+            Explanation: WPI માં માત્ર ગુડ્સ (Goods) આવે છે જ્યારે CPI માં ગુડ્સ અને સર્વિસીઝ (Services) બંનેનો સમાવેશ થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. Core Inflation ની ગણતરી કરતી વખતે કઈ બે મુખ્ય વસ્તુઓને બાકાત (Exclude) રાખવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Clothing and Footwear</li>
+            <li>B. Food Items અને Fuel</li>
+            <li>C. Housing અને Electronics</li>
+            <li>D. Manufactured Products અને Services</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Food Items અને Fuel</strong><br>
+            Explanation: કોર ઇન્ફ્લેશનમાં અસ્થિર રહેતી ચીજો જેવી કે ખાદ્યપદાર્થો (Food) અને બળતણ (Fuel) ને બાદ કરવામાં આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. CPI (Industrial Workers) અને CPI (Agricultural Labourers) કઈ સંસ્થા દ્વારા બહાર પાડવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Labour Bureau</li>
+            <li>B. NSO</li>
+            <li>C. RBI</li>
+            <li>D. SEBI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Labour Bureau</strong><br>
+            Explanation: શ્રમ બ્યુરો (Labour Bureau) દ્વારા ઔદ્યોગિક કામદારો અને કૃષિ મજૂરો માટેનો CPI બહાર પાડવામાં આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. WPI બાસ્કેટમાં સૌથી વધુ વેઇટેજ (Weightage) કઈ કેટેગરીનું છે?</p>
+        <ul class="mcq-options">
+            <li>A. Primary Articles</li>
+            <li>B. Fuel and Power</li>
+            <li>C. Manufactured Products</li>
+            <li>D. Services</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Manufactured Products</strong><br>
+            Explanation: WPI માં ઉત્પાદિત પ્રોડક્ટ્સ (Manufactured Products) નું વેઇટેજ સૌથી વધુ એટલે કે 64.23% જેટલું છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
