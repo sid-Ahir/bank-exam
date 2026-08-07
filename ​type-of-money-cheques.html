@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type of Money & Cheques</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    Type of Money & Cheques
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 EVOLUTION & TYPES OF MONEY</span>
+        <p>નાણાં (Money) નો ઇતિહાસ ચીજવસ્તુઓની આપ-લેથી શરૂ થઈને આધુનિક ડિજિટલ યુગ સુધી પહોંચ્યો છે. શરૂઆતના સમયમાં <strong>Barter System</strong> (સામાસામા વસ્તુ વિનિમય પ્રથા) અમલમાં હતી, જેમાં એક વસ્તુના બદલામાં બીજી વસ્તુ આપવામાં આવતી હતી. સમય જતાં મૂલ્યના માપદંડ અને વિનિમયના માધ્યમ તરીકે નાણાંના વિવિધ પ્રકારો વિકસિત થયા.</p>
+    </div>
+
+    <h2 class="section-title">Classification of Money (નાણાંના પ્રકારો)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Money Type</th>
+                <th>Description / Characteristics</th>
+            </tr>
+            <tr>
+                <td><strong>Commodity Money (વસ્તુ મુદ્રા)</strong></td>
+                <td>જ્યારે કોઈ ખાસ વસ્તુ (જેમ કે અનાજ, ચાંદી, તાંબા વગેરે) નો ઉપયોગ વિનિમયના માધ્યમ તરીકે થતો હોય. આનું ખુદનું આંતરિક મૂલ્ય (Intrinsic Value) હોય છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Metallic Money (ધાતુ મુદ્રા)</strong></td>
+                <td>સોના, ચાંદી કે તાંબા જેવા મૂલ્યવાન ધાતુઓમાંથી બનેલા સિક્કા. આનું પણ ઇન્ટ્રિન્સિક વેલ્યુ હોય છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Fiat Money (ફિયાટ મુદ્રા)</strong></td>
+                <td>સરકાર અને સેન્ટ્રલ બેંક દ્વારા માન્યતા પ્રાપ્ત કાગદી મુદ્રા (Paper Currency) કે સિક્કા. આનું કોઈ ઇન્ટ્રિન્સિક વેલ્યુ હોતું નથી, પરંતુ તે સરકારી ગેરંટી (Legal Tender) પર ચાલે છે (દા.ત., INR, USD, Euro).</td>
+            </tr>
+            <tr>
+                <td><strong>Fiduciary Money (ફિડુશિયરી મુદ્રા)</strong></td>
+                <td>જે નાણાં પરસ્પર વિશ્વાસ (Trust) પર આધારિત હોય (દા.ત., Cheques, Drafts). પેઈ કે સેલર તેને સ્વીકારવાની ના પાડી શકે છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Plastic Money (પ્લાસ્ટિક મુદ્રા)</strong></td>
+                <td>ડિજિટલ કે કાર્ડ બેઝ્ડ પેમેન્ટ સિસ્ટમ, જેમ કે <strong>Debit Cards, Credit Cards, ATM Cards</strong>.</td>
+            </tr>
+            <tr>
+                <td><strong>Near Money (નિયર મની)</strong></td>
+                <td>જે મિલકતો કે અસેટ્સ ઝડપથી કેશમાં રૂપાંતરિત થઈ શકે (જેવા કે Treasury Bills, Government Bonds, Fixed Deposits).</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Legal Tender & Money Supply Measures</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT CONCEPTS</span>
+        <ul>
+            <li><strong>Legal Tender:</strong> જે નાણાં કાયદાકીય રીતે લેવડદેવડ માટે માન્ય હોય અને લેણદેણ વખતે કોઈ ના પાડી શકે નહીં (દા.ત., 500 અને 100 ના નોટો અને સિક્કાઓ).</li>
+            <li><strong>M0 (Reserve Money / High Powered Money):</strong> કરન્સી ઇન સર્ક્યુલેશન વિથ પબ્લિક + બેંક ડિપોઝિટ વિથ RBI + અધર ડિપોઝિટ્સ વિથ RBI.</li>
+            <li><strong>M1 (Narrow Money):</strong> કરન્સી વિથ પબ્લિક + ડિમાન્ડ ડિપોઝિટ્સ (Current & Savings Account with Banks) + અધર ડિપોઝિટ્સ વિથ RBI. (સૌથી વધુ લિક્વિડ).</li>
+            <li><strong>M2:</strong> M1 + સેવિંગ્સ ડિપોઝિટ્સ વિથ પોસ્ટ ઓફિસ સેવિંગ બેંક.</li>
+            <li><strong>M3 (Broad Money):</strong> M1 + નેટ ટાઈમ ડિપોઝિટ્સ ઓફ બેંક્સ (FD & RD).</li>
+            <li><strong>M4:</strong> M3 + ટોટલ પોસ્ટ ઓફિસ ડિપોઝિટ્સ.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Negotiable Instruments Act & Cheque Basics</h2>
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 CHEQUE & LEGISLATION CONCEPT</span>
+        <p>ચેક એ <strong>Negotiable Instruments Act, 1881</strong> ના <strong>Section 6</strong> હેઠળ વ્યાખ્યાયિત કરવામાં આવેલ એક લેખિત દસ્તાવેજ છે.</p>
+        <ul>
+            <li><strong>Parties to a Cheque:</strong>
+                <ul>
+                    <li><strong>Drawer (ડ્રોઅર):</strong> ચેક લખનાર કે ખાતાધારક.</li>
+                    <li><strong>Drawee (ડ્રોઈ):</strong> ચેક પર ચૂકવણી કરવાની જવાબદારી જેની હોય તે <strong>સંબંધિત બેંક (Bank)</strong>.</li>
+                    <li><strong>Payee (પેઈ):</strong> જે વ્યક્તિના નામે ચેક લખાયો છે અને નાણાં મેળવનાર છે.</li>
+                </ul>
+            </li>
+            <li><strong>Validity of Cheque:</strong> ચેક ઇશ્યૂ થયાની તારીખથી <strong>3 Months</strong> (ત્રણ મહિના) સુધી વેલિડ રહે છે.</li>
+            <li><strong>Maximum Denominations:</strong>
+                <ul>
+                    <li>કોઈપણ સિક્કો મહત્તમ <strong>₹1,000</strong> ના ડિનોમિનેશનમાં જારી થઈ શકે (Coinage Act, 2011).</li>
+                    <li>રિઝર્વ બેંક દ્વારા મહત્તમ <strong>₹10,000</strong> સુધીની નોટ પ્રિન્ટ કરવાની સત્તા છે (છેલ્લે 1978 માં બંધ થઈ હતી).</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Types of Cheques (ચેકના વિવિધ પ્રકારો)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Cheque Type</th>
+                <th>Features & Characteristics</th>
+            </tr>
+            <tr>
+                <td><strong>Bearer Cheque (બેરર ચેક)</strong></td>
+                <td>સૌથી વધુ જોખમી (Risky). ચેક લઈને બેંક કાઉન્ટર પર જનાર કોઈપણ વ્યક્તિને કેશ ચૂકવી શકાય છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Order Cheque (ઓર્ડર ચેક)</strong></td>
+                <td>જેમાં માત્ર નિશ્ચિત વ્યક્તિ (Payee) અથવા તેના ઓર્ડર મુજબ એન્ડોર્સમેન્ટ દ્વારા અન્યને નાણાં મળી શકે છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Account Payee Cheque (ક્રોસ્ડ ચેક)</strong></td>
+                <td>ચેકની ડાબી બાજુ ટોપ પર બે સમાંતર રેખાઓ (Transverse Parallel Lines) દોરવામાં આવે છે. નાણાં સીધા ખાતામાં જ જમા થાય છે, કેશ કાઉન્ટરથી મળતા નથી.</td>
+            </tr>
+            <tr>
+                <td><strong>Not Negotiable Cheque</strong></td>
+                <td>આ એક પ્રકારનો ક્રોસ્ડ ચેક છે જેમાં ટ્રાન્સફરેબિલિટી પર પ્રતિબંધ હોય છે (આગળ અન્ય વ્યક્તિને ફ્રિલી ટ્રાન્સફર કરી શકાતો નથી).</td>
+            </tr>
+            <tr>
+                <td><strong>Post-Dated Cheque (PDC)</strong></td>
+                <td>ભવિષ્યની તારીખ (Future Date) લખીને આપેલો ચેક. તે તારીખ પહેલા બેંક દ્વારા વટાવી શકાતો નથી.</td>
+            </tr>
+            <tr>
+                <td><strong>Anti-Dated Cheque</strong></td>
+                <td>વર્તમાન તારીખ કરતા અગાઉની તારીખ (Past Date) લખેલો ચેક. ઇશ્યૂ તારીખથી 3 મહિના સુધી તે વેલિડ રહે છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Stale Cheque (સ્ટેલ ચેક)</strong></td>
+                <td>3 મહિનાની વેલિડિટી પૂરી થઈ ગયા પછીનો જૂનો ચેક (Expired / Invalid Cheque).</td>
+            </tr>
+            <tr>
+                <td><strong>Self Cheque</strong></td>
+                <td>ખાતાધારક દ્વારા પોતાના જ ખાતામાંથી સ્વયં નાણાં ઉપાડવા માટે લખાયેલ ચેક.</td>
+            </tr>
+            <tr>
+                <td><strong>Mutilated Cheque (મ્યુટિલેટેડ ચેક)</strong></td>
+                <td>કપાયેલો કે ફાટેલો ચેક, જેની સામાન્ય રીતે બેંક દ્વારા ચુકવણી અસ્વીકાર્ય બને છે (જ્યાં સુધી ડ્રોઅર કન્ફર્મ ન કરે).</td>
+            </tr>
+            <tr>
+                <td><strong>Blank Cheque</strong></td>
+                <td>જે ચેકમાં માત્ર સહી હોય પરંતુ તારીખ કે રકમ ભરેલી ન હોય.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / REVISION BOX</span>
+        <p><strong>Check & Money Quick Rules:</strong><br>
+        - Cheque Validity = 3 Months.<br>
+        - Cheque Defined under = Section 6 of NI Act, 1881.<br>
+        - Most Risky Cheque = Bearer Cheque.<br>
+        - Safest Cheque = Account Payee (Crossed) Cheque.<br>
+        - Narrow Money = M1 | Reserve Money = M0.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. નેગોશીએબલ ઇન્સ્ટ્રુમેન્ટ એક્ટના કયા સેક્શનમાં 'ચેક' (Cheque) ની વ્યાખ્યા આપવામાં આવી છે?</p>
+        <ul class="mcq-options">
+            <li>A. Section 4</li>
+            <li>B. Section 5</li>
+            <li>C. Section 6</li>
+            <li>D. Section 13</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Section 6</strong><br>
+            Explanation: નેગોશીએબલ ઇન્સ્ટ્રુમેન્ટ એક્ટ, 1881 ના સેક્શન 6 માં ચેકનો ઉલ્લેખ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. સામાન્ય સંજોગોમાં ચેક ઇશ્યૂ થયા તારીખથી કેટલા સમય માટે વેલિડ રહે છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1 Month</li>
+            <li>B. 3 Months</li>
+            <li>C. 6 Months</li>
+            <li>D. 1 Year</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 3 Months</strong><br>
+            Explanation: RBI ના નિયમો અનુસાર ચેકની વેલિડિટી 3 મહિનાની હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. નીચેનામાંથી કયો ચેક સૌથી વધુ જોખમી (Risky) ગણવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Account Payee Cheque</li>
+            <li>B. Crossed Cheque</li>
+            <li>C. Bearer Cheque</li>
+            <li>D. Post-Dated Cheque</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Bearer Cheque</strong><br>
+            Explanation: બેરર ચેક કોઈપણ વ્યક્તિ કાઉન્ટર પર જઈને કેશ ઉપાડી શકતી હોવાથી સૌથી વધુ જોખમી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. M1 (Narrow Money) માં નીચેનામાંથી કયા ઘટકનો સમાવેશ થતો નથી?</p>
+        <ul class="mcq-options">
+            <li>A. Currency with Public</li>
+            <li>B. Demand Deposits with Banks</li>
+            <li>C. Fixed Deposits (Time Deposits)</li>
+            <li>D. Other Deposits with RBI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Fixed Deposits (Time Deposits)</strong><br>
+            Explanation: ફિક્સ્ડ ડિપોઝિટ (ટાઈમ ડિપોઝિટ) M3 માં આવે છે, M1 માં નહીં.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. ફિયાટ મિનિ (Fiat Money) વિશે નીચેનામાંથી કયું વિધાન સાચું છે?</p>
+        <ul class="mcq-options">
+            <li>A. It has high intrinsic value like gold</li>
+            <li>B. It is backed by government decree/law without intrinsic value</li>
+            <li>C. It can only be used in barter system</li>
+            <li>D. It is made of precious silver</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. It is backed by government decree/law without intrinsic value</strong><br>
+            Explanation: ફિયાટ મનીનું કોઈ આંતરિક મૂલ્ય હોતું નથી, પરંતુ તે સરકારની કાનૂની માન્યતા (Legal Tender) પર ચાલે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. જે ચેક પર ભવિષ્યની તારીખ લખેલી હોય, તેને શું કહેવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Anti-Dated Cheque</li>
+            <li>B. Post-Dated Cheque</li>
+            <li>C. Stale Cheque</li>
+            <li>D. Mutilated Cheque</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Post-Dated Cheque</strong><br>
+            Explanation: ભવિષ્યની તારીખવાળા ચેકને પોસ્ટ-ડેટેડ ચેક (PDC) કહે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. 3 મહિનાથી વધુ જૂનો થઈ ગયેલો ચેક કે જે હવે અસ્વીકાર્ય છે, તેને શું કહે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Stale Cheque</li>
+            <li>B. Self Cheque</li>
+            <li>C. Blank Cheque</li>
+            <li>D. Order Cheque</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Stale Cheque</strong><br>
+            Explanation: સમય મર્યાદા (3 મહિના) વટાવી ચૂકેલો ચેક સ્ટેલ ચેક (Expired Cheque) બને છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. M0 (Reserve Money) ને બીજા કયા નામથી ઓળખવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Narrow Money</li>
+            <li>B. Broad Money</li>
+            <li>C. High Powered Money / Base Money</li>
+            <li>D. Commodity Money</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. High Powered Money / Base Money</strong><br>
+            Explanation: M0 ને હાઈ પાવર્ડ મની અથવા બેઝ મની કહેવામાં આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. સિક્કાઓ ઉત્પાદન માટેનો વર્તમાન કાયદો કયો છે અને તેમાં મહત્તમ ડિનોમિનેશન કેટલું હોઈ શકે?</p>
+        <ul class="mcq-options">
+            <li>A. Coinage Act 1906, ₹100</li>
+            <li>B. Coinage Act 2011, ₹1,000</li>
+            <li>C. RBI Act 1934, ₹10,000</li>
+            <li>D. NI Act 1881, ₹500</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Coinage Act 2011, ₹1,000</strong><br>
+            Explanation: સિક્કા માટેનો વર્તમાન કાયદો Coinage Act 2011 છે અને મહત્તમ ₹1,000 નો સિક્કો જારી થઈ શકે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. કયા ચેકમાં બે સમાંતર રેખાઓ (Transverse Parallel Lines) દોરવાથી નાણાં સીધા ખાતામાં જ જમા થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Bearer Cheque</li>
+            <li>B. Open Cheque</li>
+            <li>C. Crossed (Account Payee) Cheque</li>
+            <li>D. Blank Cheque</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Crossed (Account Payee) Cheque</strong><br>
+            Explanation: ક્રોસિંગ કરેલા ચેક (Account Payee) ના નાણાં કાઉન્ટર પરથી નહીં પરંતુ ખાતામાં જ જમા થાય છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
