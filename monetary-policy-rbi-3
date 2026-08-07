@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7. Monetary Policy RBI - 3</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0, auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    7. Monetary Policy RBI - 3
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 MONETARY POLICY & INFLATION CONCEPT</span>
+        <p><strong>Monetary Policy</strong> (મોદ્રિક નીતિ) એ Reserve Bank of India (RBI) દ્વારા અર્થવ્યવસ્થામાં નાણાંનો પ્રવાહ (Money Supply), વ્યાજદરો (Interest Rates) અને મોંઘવારી (Inflation) ને નિયંત્રિત કરવા માટે ઘડવામાં આવતી મહત્વપૂર્ણ નીતિ છે.</p>
+        <p><strong>Money Supply</strong> (મની સપ્લાય) વધવાથી બજારમાં લોકોના હાથમાં નાણાં વધે છે, જેનાથી માંગ (Demand) માં વધારો થાય છે અને અંતે વસ્તુઓના ભાવ વધતા <strong>Inflation</strong> (ફુગાવો/મોંઘવારી) સર્જાય છે. તેનાથી વિપરીત, મની સપ્લાય ઘટવાથી માંગ ઘટે છે અને બજારમાં મંદી (Deflection/Recession) આવી શકે છે.</p>
+    </div>
+
+    <h2 class="section-title">Inflation Targeting Range (મોંઘવારી લક્ષ્યાંક)</h2>
+    <div class="card card-important">
+        <span class="tag tag-must-remember">🔴 MUST REMEMBER</span>
+        <ul>
+            <li><strong>Target Rate:</strong> RBI નો મુખ્ય ઇન્ફ્લેશન ટાર્ગેટ <strong>4%</strong> રાખવામાં આવ્યો છે.</li>
+            <li><strong>Lower Tolerance Limit:</strong> <strong>2%</strong> (આનાથી નીચે ફુગાવો ન જવો જોઈએ).</li>
+            <li><strong>Upper Tolerance Limit:</strong> <strong>6%</strong> (આનાથી ઉપર જાય તો તે RBI ની સહનશીલતા મર્યાદા બહાર ગણાય અને પગલાં લેવા પડે).</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Monetary Policy Instruments (મોદ્રિક નીતિના સાધનો)</h2>
+    <p>RBI દ્વારા મોદ્રિક નીતિના સાધનોને મુખ્યત્વે બે ભાગમાં વહેંચવામાં આવે છે: <strong>Quantitative Tools</strong> (જથ્થાત્મક સાધનો) અને <strong>Qualitative Tools</strong> (ગુણાત્મક સાધનો).</p>
+
+    <h3 class="sub-title">1. Repo Rate & Reverse Repo Rate (LAF - Liquidity Adjustment Facility)</h3>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Repo Rate</th>
+                <th>Reverse Repo Rate (RRR)</th>
+            </tr>
+            <tr>
+                <td><strong>Definition</strong></td>
+                <td>જે દરે બેંકો RBI પાસેથી ટૂંકાગાળા (Short-term / Overnight) માટે લોન લે છે.</td>
+                <td>જે દરે શેડ્યુલ કમર્શિયલ બેંકો પોતાનું વધારાનું ફંડ (Excess Funds) RBI પાસે પાર્ક/જમા કરે છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Collateral</strong></td>
+                <td>Government Securities (G-Secs) તરીકે કોલેટરલ રાખવામાં આવે છે.</td>
+                <td>Government Securities સામે જમા થાય છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Current Rate / Role</strong></td>
+                <td>લિક્વિડિટી ઇન્જેક્ટ (Inject) કરવા માટે. (Current Repo Rate: 6%)</td>
+                <td>લિક્વિડિટી એબ્ઝોર્બ (Absorb) કરવા માટે. (Rate: 3.35%)</td>
+            </tr>
+        </table>
+    </div>
+
+    <h3 class="sub-title">2. Bank Rate & Marginal Standing Facility (MSF)</h3>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Bank Rate</th>
+                <th>Marginal Standing Facility (MSF)</th>
+            </tr>
+            <tr>
+                <td><strong>Tenure / Purpose</strong></td>
+                <td>દીર્ઘગાળા માટે (Long-term, > 90 Days) બેંકો દ્વારા RBI પાસેથી બોરોઇંગ.</td>
+                <td>કટોકટીના સમયે ઓવરનાઈટ શોર્ટ-ટર્મ લોન (Overnight Short-term Loan up to 1% of NDTL).</td>
+            </tr>
+            <tr>
+                <td><strong>Collateral / Condition</strong></td>
+                <td>કોઈ સરકારી સિક્યોરિટીઝ કોલેટરલ તરીકે રાખવાની જરૂર નથી હોતી.</td>
+                <td>વધારાની સરકારી સિક્યોરિટીઝ સામે એસએલઆર સિવાયની ગિરવે રાખીને મેળવાય છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Current Rate</strong></td>
+                <td><strong>6.25%</strong> (Repo Rate કરતા 25 bps વધુ)</td>
+                <td><strong>6.25%</strong> (Bank Rate ની સમાન, Repo Rate કરતા વધુ - Penalty Rate)</td>
+            </tr>
+        </table>
+    </div>
+
+    <h3 class="sub-title">3. Standing Deposit Facility (SDF)</h3>
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 CONCEPT</span>
+        <p><strong>Standing Deposit Facility (SDF)</strong> ની શરૂઆત વર્ષ <strong>2022</strong> માં કરવામાં આવી હતી. આ એક એવી ઓવરનાઈટ સુવિધા છે જેના દ્વારા તમામ બેંકો કોઈપણ પ્રકારના કોલેટરલ (Government Securities) વગર પોતાના વધારાના નાણાં RBI પાસે જમા કરાવી શકે છે.</p>
+        <p><strong>SDF Rate:</strong> આ દર સામાન્ય રીતે Repo Rate કરતા 0.25% નીચા એટલે કે <strong>5.75%</strong> જેટલો રાખવામાં આવે છે.</p>
+    </div>
+
+    <h2 class="section-title">Variable Reserve Ratios (CRR & SLR)</h2>
+    
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT RATIOS</span>
+        <p>કોઈપણ બેંક પાસે ઉપલબ્ધ કુલ <strong>NDTL (Net Demand and Time Liabilities)</strong> ના ચોક્કસ ટકાવારી હિસ્સા તરીકે આ રેશિયો જાળવવા પડે છે:</p>
+        <ul>
+            <li><strong>CRR (Cash Reserve Ratio):</strong> બેંકોએ તેમના કુલ NDTL નો અમુક હિસ્સો ફરજિયાતપણે <strong>રોકડ (Cash) સ્વરૂપે RBI પાસે</strong> જ રાખવો પડે છે. (હાલમાં <strong>4%</strong> છે).</li>
+            <li><strong>SLR (Statutory Liquidity Ratio):</strong> બેંકોએ તેમના NDTL નો અમુક હિસ્સો પોતાની પાસે જ <strong>Liquid Assets</strong> (જેવા કે Cash, Gold, Government Securities) સ્વરૂપે જાળવવો પડે છે. (હાલમાં <strong>18%</strong> છે).</li>
+        </ul>
+        <p><strong>ANBC (Adjusted Net Bank Credit):</strong> NDTL માંથી CRR અને SLR ની રકમ બાદ કર્યા પછી જે નાણાં બેંક આગળ ધિરાણ (Lending) માટે વાપરી શકે છે, તેને ANBC કહે છે.</p>
+    </div>
+
+    <h2 class="section-title">Summary of Current Rates & Data</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameter / Tool</th>
+                <th>Current Rate / Limit</th>
+            </tr>
+            <tr>
+                <td><strong>Repo Rate</strong></td>
+                <td>6.00%</td>
+            </tr>
+            <tr>
+                <td><strong>Reverse Repo Rate (RRR)</strong></td>
+                <td>3.35%</td>
+            </tr>
+            <tr>
+                <td><strong>Bank Rate</strong></td>
+                <td>6.25%</td>
+            </tr>
+            <tr>
+                <td><strong>Marginal Standing Facility (MSF)</strong></td>
+                <td>6.25%</td>
+            </tr>
+            <tr>
+                <td><strong>Standing Deposit Facility (SDF)</strong></td>
+                <td>5.75%</td>
+            </tr>
+            <tr>
+                <td><strong>Cash Reserve Ratio (CRR)</strong></td>
+                <td>4.00%</td>
+            </tr>
+            <tr>
+                <td><strong>Statutory Liquidity Ratio (SLR)</strong></td>
+                <td>18.00%</td>
+            </tr>
+            <tr>
+                <td><strong>Inflation Target</strong></td>
+                <td>4% (Tolerance Band: 2% to 6%)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK</span>
+        <p><strong>Rates Hierarchy Trick:</strong><br>
+        સૌથી નીચો દર = <strong>Reverse Repo (3.35%)</strong> <br>
+        તેનાથી ઉપર = <strong>SDF (5.75%)</strong> <br>
+        વચ્ચે મુખ્ય = <strong>Repo Rate (6.00%)</strong> <br>
+        સૌથી ઊંચા દરો = <strong>Bank Rate & MSF ( બંને 6.25%)</strong></p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. RBI ની મોદ્રિક નીતિ (Monetary Policy) હેઠળ ફુગાવા (Inflation) નો મુખ્ય લક્ષ્યાંક કેટલો રાખવામાં આવ્યો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 2%</li>
+            <li>B. 4%</li>
+            <li>C. 6%</li>
+            <li>D. 8%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 4%</strong><br>
+            Explanation: RBI નો મુખ્ય ઇન્ફ્લેશન ટાર્ગેટ 4% છે, જેમાં 2% ની લોઅર અને 6% ની અપર ટોલરન્સ લિમિટ નક્કી કરવામાં આવી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. નીચેનામાંથી કયા દરે બેંકો RBI પાસેથી ઓવરનાઈટ ટૂંકાગાળા માટે કોલેટરલ (Government Securities) મૂકીને લોન લે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Bank Rate</li>
+            <li>B. Repo Rate</li>
+            <li>C. Reverse Repo Rate</li>
+            <li>D. MSF</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Repo Rate</strong><br>
+            Explanation: રેપો રેટ એ દર છે જેની પર બેંકો RBI પાસેથી ટૂંકાગાળા માટે સિક્યોરિટીઝ ગિરવે મૂકીને ધિરાણ મેળવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. Standing Deposit Facility (SDF) કયા વર્ષમાં રજૂ કરવામાં આવી હતી?</p>
+        <ul class="mcq-options">
+            <li>A. 2011</li>
+            <li>B. 2016</li>
+            <li>C. 2022</li>
+            <li>D. 2024</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 2022</strong><br>
+            Explanation: SDF સુવિધા વર્ષ 2022 માં RBI દ્વારા બજારમાંથી લિક્વિડિટી એબ્ઝોર્બ કરવા માટે દાખલ કરવામાં આવી હતી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. CRR (Cash Reserve Ratio) હેઠળ બેંકોએ તેમની NDTL નો કેટલો હિસ્સો કોની પાસે જમા કરાવવો પડે છે?</p>
+        <ul class="mcq-options">
+            <li>A. પોતાની પાસે, Liquid Assets સ્વરૂપે</li>
+            <li>B. RBI પાસે, Cash સ્વરૂપે</li>
+            <li>C. Government પાસે, Securities સ્વરૂપે</li>
+            <li>D. SEBI પાસે</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. RBI પાસે, Cash સ્વરૂપે</strong><br>
+            Explanation: CRR એ કુલ NDTL ના ચોક્કસ ટકા રોકડ સ્વરૂપે ફરજિયાતપણે RBI પાસે રાખવાની રકમ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. વર્તમાન સમયમાં Statutory Liquidity Ratio (SLR) નો દર કેટલો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 4%</li>
+            <li>B. 6%</li>
+            <li>C. 18%</li>
+            <li>D. 25%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 18%</strong><br>
+            Explanation: હાલમાં એસએલઆર (SLR) નો દર 18% અને સીઆરઆર (CRR) નો દર 4% છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. Marginal Standing Facility (MSF) અંતર્ગત બેંકો તેમના NDTL ના મહત્તમ કેટલા ટકા સુધીનો ઓવરનાઈટ લોન મેળવી શકે છે?</p>
+        <ul class="mcq-options">
+            <li>A. 0.5%</li>
+            <li>B. 1%</li>
+            <li>C. 2%</li>
+            <li>D. 4%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 1%</strong><br>
+            Explanation: MSF હેઠળ બેંકો તેમના કુલ NDTL ના 1% સુધીની મર્યાદામાં ઓવરનાઈટ શોર્ટ-ટર્મ લોન મેળવી શકે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. બેંકો દ્વારા રાખવામાં આવતી Net Demand and Time Liabilities નું ટૂંકુંરૂપ (Abbreviation) શું છે?</p>
+        <ul class="mcq-options">
+            <li>A. ANBC</li>
+            <li>B. NDTL</li>
+            <li>C. CRAR</li>
+            <li>D. WMA</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. NDTL</strong><br>
+            Explanation: Net Demand and Time Liabilities ને ટૂંકમાં NDTL કહેવામાં આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. નીચેનામાંથી કયો દર સામાન્ય રીતે Repo Rate કરતા 25 Basis Points (0.25%) વધુ હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Reverse Repo Rate</li>
+            <li>B. SDF Rate</li>
+            <li>C. Bank Rate & MSF</li>
+            <li>D. CRR</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Bank Rate & MSF</strong><br>
+            Explanation: બેંક રેટ અને એમએસએફ (MSF) બંને રેપો રેટ કરતા 25 bps વધુ (એટલે કે 6.25%) હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. મોદ્રિક નીતિના સંદર્ભમાં 'Liquid Adjustment Facility' (LAF) માં કયા બે મુખ્ય દરોનો સમાવેશ થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. CRR અને SLR</li>
+            <li>B. Repo Rate અને Reverse Repo Rate</li>
+            <li>C. Bank Rate અને MSF</li>
+            <li>D. WMA અને Repo Rate</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Repo Rate અને Reverse Repo Rate</strong><br>
+            Explanation: LAF વિન્ડો હેઠળ રેપો રેટ અને રિવર્સ રેપો રેટનો સમાવેશ થાય છે જે દૈનિક લિક્વિડિટી મેનેજ કરે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. જો બજારમાં લિક્વિડિટી સરप्लस (વધુ પડતા નાણાં) હોય, તો RBI કયા સાધન દ્વારા નાણાં શોષી (Absorb) લે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Reverse Repo Rate / SDF</li>
+            <li>B. Bank Rate</li>
+            <li>C. Decreasing CRR</li>
+            <li>D. Decreasing SLR</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Reverse Repo Rate / SDF</strong><br>
+            Explanation: બજારમાં સરપ્લસ લિક્વિડિટી એબ્ઝોર્બ કરવા માટે રિવર્સ રેપો રેટ અને SDF નો ઉપયોગ થાય છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
