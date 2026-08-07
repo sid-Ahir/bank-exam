@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type of NBFCs</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    Type of NBFCs
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 NBFCs OVERVIEW & CLASSIFICATION</span>
+        <p><strong>NBFC (Non-Banking Financial Company)</strong> એટલે કે બિન-બેન્કિંગ નાણાકીય કંપની. એનબીએફસીસ પોતાના નામમાં 'Bank' શબ્દનો ઉપયોગ કરી શકતી નથી અને તે રિઝર્વ બેંક ઓફ ઇન્ડિયા (RBI) દ્વારા નિયંત્રિત થાય છે.</p>
+        <p>એનબીએફસીના પ્રકારોનું વર્ગીકરણ તેમની <strong>Liabilities (દાયિત્વો)</strong>, <strong>Activities (પ્રવૃત્તિઓ)</strong> અને Scale-based Regulation (લેયર્સ) ના આધારે કરવામાં આવે છે.</p>
+    </div>
+
+    <h2 class="section-title">Classification Based on Liabilities</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Liability Type</th>
+                <th>Description / Rules</th>
+            </tr>
+            <tr>
+                <td><strong>Deposit-taking NBFCs</strong></td>
+                <td>જનતાના થાપણો (Public Deposits) સ્વીકારી શકે છે. પરંતુ તે માત્ર <strong>Time Deposits</strong> (જેવા કે Fixed Deposits - FD અને Recurring Deposits - RD) જ સ્વીકારી શકે છે. <strong>Demand Deposits (Savings & Current Accounts) સ્વીકારી શકતી નથી.</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Non-Deposit-taking NBFCs</strong></td>
+                <td>કોઈપણ પ્રકારના પબ્લિક ડિપોઝિટ્સ સ્વીકારતી નથી. આમાં પણ બે પ્રકાર છે: <strong>Systemically Important (SI)</strong> (જેનું એસેટ સાઇઝ ₹500 Crores કે તેથી વધુ હોય) અને Non-Systemically Important (< ₹500 Crores).</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Scale-Based Regulation (SBR) - Four Layers</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 SBR LAYERS</span>
+        <p>RBI દ્વારા સ્કેલ બેઝ્ડ રેગ્યુલેશન (SBR) હેઠળ એનબીએફસીસ ને 4 લેયર્સમાં વહેંચવામાં આવી છે:</p>
+        <ul>
+            <li><strong>Base Layer:</strong> આમાં નાની અને નોન-ડિપોઝિટ ટેકિંગ એનબીએફસીસ આવે છે જેનું એસેટ સાઇઝ <strong>₹1000 Crores થી ઓછું</strong> હોય છે. પબ્લિક ઇન્ટરફેસ નહિવત હોય છે.</li>
+            <li><strong>Middle Layer:</strong> આમાં તમામ ડિપોઝિટ ટેકિંગ એનબીએફસીસ અને ₹1000 Crores કે તેથી વધુ એસેટ સાઇઝ ધરાવતી નોન-ડિપોઝિટ ટેકિંગ એનબીએફસીસનો સમાવેશ થાય છે.</li>
+            <li><strong>Upper Layer:</strong> જે એનબીએફસીસનું સ્કેલ અને રિસ્ક પ્રોફાઇલ ખૂબ મોટું હોય છે (લગભગ 15 જેટલી મોટી એનબીએફસીસ), તેમને અહીં રાખવામાં આવે છે. રેગ્યુલેશન બેંકો જેવા જ કડક હોય છે.</li>
+            <li><strong>Top Layer:</strong> આ લેયર આદર્શ રીતે <strong>Empty (ખાલી)</strong> રહેવી જોઈએ. જો કોઈ એનબીએફસી સિસ્ટમ માટે અત્યંત મોટું જોખમ ઊભું કરે તો જ તેને આમાં મૂકવામાં આવે છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Types of NBFCs Based on Activities</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Type of NBFC</th>
+                <th>Core Function & Specific Criteria</th>
+            </tr>
+            <tr>
+                <td><strong>Investment and Credit Company (ICC)</strong></td>
+                <td>એસેટ ફાઇનાન્સિંગ, લોન આપવી અને સિક્યોરિટીઝમાં રોકાણ કરવું (દા.ત., Bajaj Finance).</td>
+            </tr>
+            <tr>
+                <td><strong>Infrastructure Finance Company (IFC)</strong></td>
+                <td>ઇન્ફ્રાસ્ટ્રક્ચર પ્રોજેક્ટ્સને લોન આપવી. <strong>At least 75%</strong> એસેટ્સ ઇન્ફ્રાસ્ટ્રક્ચર લોનમાં હોવા જોઈએ. Net Owned Fund (NOF) મિનિમમ <strong>₹300 Crores</strong> અને CRAR 15% હોવો જરૂરી છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Infrastructure Debt Fund (IDF-NBFC)</strong></td>
+                <td>ઓપરેશનલ ઇન્ફ્રાસ્ટ્રક્ચર પ્રોજેક્ટ્સ માટે લાંબા ગાળાના ડેબ્ટ ફંડ પૂરું પાડે છે. (NOF મિનિમમ <strong>₹300 Crores</strong>, CRAR 15%).</td>
+            </tr>
+            <tr>
+                <td><strong>Microfinance Institution (MFI-NBFC)</strong></td>
+                <td>નાની આવક ધરાવતા જૂથો (લો ઇન્કમ ગ્રુપ / SHGs) ને લઘુ ધિરાણ પૂરું પાડે છે. <strong>At least 75%</strong> એસેટ્સ માઇક્રોફાઇનાન્સ લોનમાં હોવા જોઈએ. હાઉસહોલ્ડ એન્યુઅલ ઇન્કમ લિમિટ <strong>₹3 Lakhs</strong> કે તેથી ઓછી હોવી જોઈએ.</td>
+            </tr>
+            <tr>
+                <td><strong>NBFC-Factor</strong></td>
+                <td>ફેક્ટરિંગ બિઝનેસ (ઇનવોઇસ/બિલ ડિસ્કાઉન્ટing) કરે છે. <strong>At least 50%</strong> એસેટ્સ અને ઇન્કમ ફેક્ટરિંગ બિઝનેસમાંથી હોવી જોઈએ.</td>
+            </tr>
+            <tr>
+                <td><strong>Mortgage Guarantee Company</strong></td>
+                <td>હાઉસિંગ લોન્સ સામે ગેરંટી પૂરી પાડે છે. મિનિમમ Net Owned Fund <strong>₹100 Crores</strong> હોવું જરૂરી છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Core Investment Company (CIC)</strong></td>
+                <td>પોતાની ગ્રુપ કંપનીઝ (સબસીડિયરીઝ) માં જ રોકાણ કરે છે. <strong>At least 90%</strong> એસેટ્સ ગ્રુપ કંપનીઝના શેર્સ/સિક્યોરિટીઝમાં રોકાયેલા હોવા જોઈએ.</td>
+            </tr>
+            <tr>
+                <td><strong>Peer-to-Peer Lending (NBFC-P2P)</strong></td>
+                <td>ઓનલાઇન પ્લેટફોર્મ પૂરું પાડે છે જે બોરોઅર્સ અને લेंडર્સને સીધા જોડે છે. લेंडર માટે તમામ પ્લેટફોર્મ્સ પર મહત્તમ એક્સપોઝર મર્યાદા <strong>₹50 Lakhs</strong> છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Housing Finance Company (HFC)</strong></td>
+                <td>હાઉસિંગ લોન આપે છે. કુલ એસેટ્સના ઓછામાં ઓછા <strong>60%</strong> એસેટ્સ હાઉસિંગ ફાઇનાન્સમાં હોવા જોઈએ (જેમાંથી 50% વ્યક્તિગત/Individual Housing loans હોવા જોઈએ).</td>
+            </tr>
+            <tr>
+                <td><strong>Account Aggregator (NBFC-AA)</strong></td>
+                <td>ગ્રાહકોની મંજૂરી (Consent) લઈને વિવિધ નાણાકીય સંસ્થાઓ પાસેથી ફાઇનાન્શિયલ ડેટા એકત્ર કરી યુઝર્સને પૂરો પાડે છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Stand-Alone Primary Dealers (SPD)</strong></td>
+                <td>ગવર્મેન્ટ સિક્યોરિટીઝ (G-Secs) માં ટ્રેડિંગ અને અન્ડરરાઇટિંગ કરે છે. મિનિમમ CRAR <strong>15%</strong>.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Net Owned Fund (NOF) Requirements for NBFCs</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Category of NBFC</th>
+                <th>Minimum Net Owned Fund (NOF) Requirement</th>
+            </tr>
+            <tr>
+                <td><strong>ICC, MFI-NBFC, NBFC-Factor</strong></td>
+                <td>₹10 Crores (અપડેટ મુજબ 2027 સુધીમાં તબક્કાવાર વધારવાના લક્ષ્ય સાથે).</td>
+            </tr>
+            <tr>
+                <td><strong>P2P Lending, Account Aggregator, Non-Deposit taking (No Public funds)</strong></td>
+                <td>₹2 Crores</td>
+            </tr>
+            <tr>
+                <td><strong>Infrastructure Finance & Debt Fund (IFC / IDF)</strong></td>
+                <td>₹300 Crores</td>
+            </tr>
+            <tr>
+                <td><strong>Mortgage Guarantee Company</strong></td>
+                <td>₹100 Crores</td>
+            </tr>
+            <tr>
+                <td><strong>Housing Finance Company (HFC)</strong></td>
+                <td>₹20 Crores (આગળ વધારીને ₹50 Crores કરવાનું આયોજન).</td>
+            </tr>
+            <tr>
+                <td><strong>Stand-Alone Primary Dealer (SPD)</strong></td>
+                <td>₹150 Crores (કોર એક્ટિવિટી માટે) / ₹250 Crores (નોન-કોર એક્ટિવિટી સહિત).</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / REVISION BOX</span>
+        <p><strong>NBFC Quick Facts:</strong><br>
+        - Regulator = RBI (Registered under Companies Act, 2013; COR under Section 45-IA of RBI Act, 1934).<br>
+        - Microfinance household income limit = Up to ₹3 Lakhs.<br>
+        - P2P Lender max exposure limit = ₹50 Lakhs.<br>
+        - IFC & IDF Minimum NOF = ₹300 Crores.<br>
+        - MFI & Factor & ICC Minimum NOF = ₹10 Crores.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. હાઉસિંગ ફાઇનાન્સ કંપની (HFC) ના કુલ એસેટ્સના ઓછામાં ઓછા કેટલા ટકા હિસ્સો હાઉસિંગ ફાઇનાન્સમાં હોવો જરૂરી છે?</p>
+        <ul class="mcq-options">
+            <li>A. 50%</li>
+            <li>B. 60%</li>
+            <li>C. 75%</li>
+            <li>D. 90%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 60%</strong><br>
+            Explanation: HFCs માટે ઓછામાં ઓછા 60% એસેટ્સ હાઉસિંગ ફાઇનાન્સમાં હોવા અનિવાર્ય છે (જેમાંથી 50% વ્યક્તિગત મકાન લોન હોવી જોઈએ).
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. માઇક્રોફાઇનાન્સ લોન (Microfinance Loan) માટે ઘરની વાર્ષિક મહત્તમ આવક મર્યાદા (Household Income Limit) કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹1.5 Lakhs</li>
+            <li>B. ₹2.0 Lakhs</li>
+            <li>C. ₹3.0 Lakhs</li>
+            <li>D. ₹5.0 Lakhs</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹3.0 Lakhs</strong><br>
+            Explanation: જે ઘરની વાર્ષિક આવક ₹3 Lakhs કે તેથી ઓછી હોય, તેમને MFI હેઠળ માઇક્રોફાઇનાન્સ લોન આપવામાં આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. ઇન્ફ્રાસ્ટ્રક્ચર ફાઇનાન્સ કંપની (IFC) માટે ન્યૂનતમ Net Owned Fund (NOF) કેટલું હોવું જોઈએ?</p>
+        <ul class="mcq-options">
+            <li>A. ₹10 Crores</li>
+            <li>B. ₹100 Crores</li>
+            <li>C. ₹300 Crores</li>
+            <li>D. ₹500 Crores</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹300 Crores</strong><br>
+            Explanation: IFC અને IDF-NBFC બંને માટે મિનિમમ Net Owned Fund ₹300 Crores છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. પીઅર-ટુ-પીઅર (P2P) લેન્ડિંગ પ્લેટફોર્મ્સ પર કોઈપણ એક લेंडર માટે મહત્તમ એક્સપોઝર લિમિટ કેટલી છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹10 Lakhs</li>
+            <li>B. ₹25 Lakhs</li>
+            <li>C. ₹50 Lakhs</li>
+            <li>D. ₹1 Crore</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. ₹50 Lakhs</strong><br>
+            Explanation: તમામ P2P પ્લેટફોર્મ્સ પર લेंडર માટે મહત્તમ એક્સપોઝર મર્યાદા ₹50 Lakhs છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. કોર ઇન્વેસ્ટમેન્ટ કંપની (CIC) એ પોતાના કુલ એસેટ્સના ઓછામાં ઓછા કેટલા ટકા હિસ્સો ગ્રુપ કંપનીઝમાં રોકવો પડે છે?</p>
+        <ul class="mcq-options">
+            <li>A. 50%</li>
+            <li>B. 75%</li>
+            <li>C. 90%</li>
+            <li>D. 100%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 90%</strong><br>
+            Explanation: CIC એ પોતાના મિનિમમ 90% એસેટ્સ પોતાની ગ્રુપ/સબસીડિયરી કંપનીઝના સિક્યોરિટીઝમાં રોકવા પડે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. સ્કેલ બેઝ્ડ રેગ્યુલેશન (SBR) હેઠળ એનબીએફસીસ ને કેટલી લેયર્સમાં વિભાજિત કરવામાં આવી છે?</p>
+        <ul class="mcq-options">
+            <li>A. 2 Layers</li>
+            <li>B. 3 Layers</li>
+            <li>C. 4 Layers (Base, Middle, Upper, Top)</li>
+            <li>D. 5 Layers</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 4 Layers (Base, Middle, Upper, Top)</strong><br>
+            Explanation: SBR અંતર્ગત એનબીએફસી ને ચાર લેયર્સમાં વહેંચવામાં આવી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. એનબીએફસી ફેક્ટર (NBFC-Factor) માટે તેમના કુલ એસેટ્સ અને ઇન્કમ ફેક્ટરિંગ બિઝનેસમાંથી કેટલા ટકા હોવા જોઈએ?</p>
+        <ul class="mcq-options">
+            <li>A. 25%</li>
+            <li>B. 50%</li>
+            <li>C. 75%</li>
+            <li>D. 100%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 50%</strong><br>
+            Explanation: ફેક્ટર કંપની માટે ઓછામાં ઓછા 50% એસેટ્સ અને ઇન્કમ ફેક્ટરિંગ (બિલ ડિસ્કાઉન્ટિંગ) બિઝનેસમાંથી હોવી જોઈએ.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. પીઅર-ટુ-પીઅર (P2P) અને અકાઉન્ટ એગ્રીગેટર (AA) જેવી એનબીએફસી માટે મિનિમમ Net Owned Fund કેટલું નિર્ધારિત છે?</p>
+        <ul class="mcq-options">
+            <li>A. ₹2 Crores</li>
+            <li>B. ₹10 Crores</li>
+            <li>C. ₹50 Crores</li>
+            <li>D. ₹100 Crores</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. ₹2 Crores</strong><br>
+            Explanation: P2P અને Account Aggregator માટે મિનિમમ NOF ₹2 Crores છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. ઇન્ફ્રાસ્ટ્રક્ચર ફાઇનાન્સ કંપની (IFC) એ પોતાના કુલ એસેટ્સના કેટલા ટકા હિસ્સો ઇન્ફ્રાસ્ટ્રક્ચર લોનમાં આપવો પડે છે?</p>
+        <ul class="mcq-options">
+            <li>A. 50%</li>
+            <li>B. 60%</li>
+            <li>C. 75%</li>
+            <li>D. 90%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 75%</strong><br>
+            Explanation: IFC અને MFI બંને માટે 75% એસેટ્સ સંબંધિત સેક્ટરમાં પ્રયોજવા ફરજિયાત છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. સ્કેલ બેઝ્ડ રેગ્યુલેશન હેઠળ કઈ લેયર આદર્શ રીતે ખાલી (Empty) રહેવી જોઈએ?</p>
+        <ul class="mcq-options">
+            <li>A. Base Layer</li>
+            <li>B. Middle Layer</li>
+            <li>C. Upper Layer</li>
+            <li>D. Top Layer</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: D. Top Layer</strong><br>
+            Explanation: ટોપ લેયર આદર્શ રીતે ખાલી રહેવી જોઈએ, જ્યાં માત્ર અતિશય જોખમી સંસ્થાઓને જ મૂકવામાં આવે છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
