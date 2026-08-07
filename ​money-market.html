@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10. Money Market</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    10. Money Market
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 FINANCIAL MARKET CONCEPT</span>
+        <p><strong>Financial Market</strong> (નાણાકીય બજાર) એ એક એવી જગ્યા છે જ્યાં સરપ્લસ ફંડ્સ (વધારાના નાણાં) ધરાવતા લોકો કે સંસ્થાઓ અને ડેફિસિટ ફંડ્સ (નાણાંની જરૂરિયાત) ધરાવતા બોરોઅર્સ વચ્ચે લેણદેણ થાય છે. નાણાકીય બજારને મુખ્યત્વે બે ભાગમાં વહેંચવામાં આવે છે:</p>
+        <ul>
+            <li><strong>Money Market (મની માર્કેટ):</strong> ટૂંકાગાળાના ભંડોળ (Short-term Funds) માટે.</li>
+            <li><strong>Capital Market (કેપિટલ માર્કેટ):</strong> મધ્યમ અને દીર્ઘગાળાના ભંડોળ (Medium and Long-term Funds) માટે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Tenure Classification of Loans (લોનનો સમયગાળો)</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Loan Category</th>
+                <th>Tenure / Duration</th>
+                <th>Market Type</th>
+            </tr>
+            <tr>
+                <td><strong>Short-term Loans</strong></td>
+                <td>Up to 1 Year (364/365 Days)</td>
+                <td>Money Market</td>
+            </tr>
+            <tr>
+                <td><strong>Medium-term Loans</strong></td>
+                <td>1 Year to 3 Years</td>
+                <td>Capital Market</td>
+            </tr>
+            <tr>
+                <td><strong>Long-term Loans</strong></td>
+                <td>More than 3 Years</td>
+                <td>Capital Market</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Comparison: Money Market vs Capital Market</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameters</th>
+                <th>Money Market</th>
+                <th>Capital Market</th>
+            </tr>
+            <tr>
+                <td><strong>Primary Purpose</strong></td>
+                <td>ટૂંકાગાળાની કાર્યકારી મૂડી (Working Capital) ની જરૂરિયાતો સંતોષવા.</td>
+                <td>દીર્ઘગાળાની મૂડી (Fixed Capital / Business Expansion) માટે.</td>
+            </tr>
+            <tr>
+                <td><strong>Regulator</strong></td>
+                <td><strong>Reserve Bank of India (RBI)</strong></td>
+                <td><strong>SEBI</strong> (Securities and Exchange Board of India)</td>
+            </tr>
+            <tr>
+                <td><strong>Risk Factor</strong></td>
+                <td>Low Risk (ઓછું જોખમ)</td>
+                <td>High Risk (વધુ જોખમ)</td>
+            </tr>
+            <tr>
+                <td><strong>Liquidity</strong></td>
+                <td>High Liquidity (ઊંચી પ્રવાહીતા)</td>
+                <td>Moderate Liquidity</td>
+            </tr>
+            <tr>
+                <td><strong>Key Participants</strong></td>
+                <td>RBI, Commercial Banks, NBFCs, RRBs</td>
+                <td>Stock Exchanges, DFI, Corporates, Public</td>
+            </tr>
+            <tr>
+                <td><strong>Instruments</strong></td>
+                <td>Treasury Bills, Call Money, Commercial Paper, Certificate of Deposit</td>
+                <td>Shares, Stocks, Debentures, Bonds, Derivatives</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Call Money Market & Inter-Bank Transactions</h2>
+    <div class="card card-important">
+        <span class="tag tag-must-remember">🔴 MUST REMEMBER & RECENT UPDATES</span>
+        <p><strong>Call Money Market</strong> એ એક એવી ઇન્ટર-બેંક માર્કેટ છે જ્યાં બેંકો એકબીજા પાસેથી ખૂબ જ ટૂંકાગાળા માટે નાણાં ઉછીના લે કે આપે છે:</p>
+        <ul>
+            <li><strong>Call Money:</strong> ઓવરનાઈટ બેસિસ પર (Single Day / 1 Day) માટે લેવાતા કે અપાતા નાણાં.</li>
+            <li><strong>Notice Money:</strong> 2 થી 14 દિવસ (Up to 14 Days) સુધીના સમયગાળા માટે.</li>
+            <li><strong>Term Money:</strong> 14 દિવસથી વધુ અને 364 દિવસ (1 Year) સુધીના સમયગાળા માટે.</li>
+            <li><strong>Recent Timing Updates (Effective from 1st July 2025):</strong>
+                <ul>
+                    <li>ટ્રેડિંગ સમયગાળો: સવારે <strong>9:00 AM થી 7:00 PM</strong> સુધી.</li>
+                    <li>કેન્સલેશન અને ક્લોઝર સમય: સાંજે <strong>7:30 PM</strong> સુધી.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Capital Market Structure (Primary & Secondary Market)</h2>
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 CAPITAL MARKET SEGMENTS</span>
+        <ul>
+            <li><strong>Primary Market (પ્રાથમિક બજાર):</strong> જ્યાં કંપનીઓ દ્વારા પહેલીવાર નવા શેર્સ જારી કરવામાં આવે છે.
+                <ul>
+                    <li><strong>IPO (Initial Public Offering):</strong> કંપની દ્વારા પબ્લિકમાં પહેલીવાર શેર ઇશ્યૂ કરવાની પ્રક્રિયા.</li>
+                    <li><strong>FPO (Follow on Public Offer):</strong> આઈપીઓ પછી ભવિષ્યમાં ફરીથી નવા શેર જારી કરવા.</li>
+                    <li><strong>Rights Issue:</strong> કંપની દ્વારા પહેલેથી હાજર શેરહોલ્ડર્સને જ નવા શેર ઓફર કરવા.</li>
+                </ul>
+            </li>
+            <li><strong>Secondary Market (માધ્યમિક બજાર / Stock Exchange):</strong> જ્યાં પહેલેથી જારી થયેલા જૂના અને અસ્તિત્વ ધરાવતા શેર્સની (Existing Shares) ખરીદી અને વેચાણ (Trading) થાય છે (જેમ કે BSE અને NSE).</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Security vs Non-Security Markets</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT FACTS</span>
+        <ul>
+            <li><strong>Securities Market:</strong> શેર્સ (Shares), ડિબેન્ચર્સ (Debentures), બોન્ડ્સ (Bonds) અને ડેરિવેટિવ્ઝ (Derivatives) નું ટ્રેડિંગ થાય છે.</li>
+            <li><strong>Non-Securities Market:</strong> મ્યુચ્યુઅલ ફંડ્સ (Mutual Funds), બેંક ડિપોઝિટ્સ (Bank Deposits), પ્રોવિડન્ટ ફંડ (PF) અને પેન્શન ફંડ્સનો સમાવેશ થાય છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. મની માર્કેટ (Money Market) નો મુખ્ય નિયંત્રક (Regulator) કોણ છે?</p>
+        <ul class="mcq-options">
+            <li>A. SEBI</li>
+            <li>B. Reserve Bank of India (RBI)</li>
+            <li>C. Ministry of Finance</li>
+            <li>D. IRDAI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Reserve Bank of India (RBI)</strong><br>
+            Explanation: મની માર્કેટ ટૂંકાગાળાના ભંડોળ સાથે સંકળાયેલું છે અને તેનું નિયંત્રણ RBI કરે છે, જ્યારે કેપિટલ માર્કેટ સેબી (SEBI) દ્વારા નિયંત્રિત થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. મની માર્કેટના સાધનો (Instruments) ની મહત્તમ પરિપક્વતા (Maturity) મર્યાદા સામાન્ય રીતે કેટલી હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Up to 1 Year (364/365 Days)</li>
+            <li>B. 3 Years</li>
+            <li>C. 5 Years</li>
+            <li>D. 10 Years</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Up to 1 Year (364/365 Days)</strong><br>
+            Explanation: મની માર્કેટ ટૂંકાગાળાના ફંડ્સ માટે છે જેની મુદત એક વર્ષથી વધુ હોતી નથી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. કૉલ મની (Call Money) માં ફંડ્સ કયા સમયગાળા માટે લે કે આપવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Overnight / 1 Day</li>
+            <li>B. 14 Days to 1 Year</li>
+            <li>C. 3 Years to 5 Years</li>
+            <li>D. More than 5 Years</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Overnight / 1 Day</strong><br>
+            Explanation: કૉલ મની ઓવરનાઈટ બેસિસ પર એટલે કે એક દિવસ માટેની લેણદેણ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. નોટિસ મની (Notice Money) ની મહત્તમ મુદત કેટલી હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1 Day</li>
+            <li>B. Up to 14 Days</li>
+            <li>C. 90 Days</li>
+            <li>D. 364 Days</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Up to 14 Days</strong><br>
+            Explanation: નોટિસ મની 2 થી 14 દિવસ સુધીના સમયગાળા માટે હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. ટર્મ મની (Term Money) નો સમયગાળો કેટલો હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 1 Day</li>
+            <li>B. More than 14 Days up to 364 Days</li>
+            <li>C. 2 Years to 5 Years</li>
+            <li>D. 10 Years</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. More than 14 Days up to 364 Days</strong><br>
+            Explanation: ટર્મ મની 14 દિવસથી વધુ અને એક વર્ષ (364 દિવસ) સુધીની મુદત માટે હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. પ્રથમ વખત જ્યારે કોઈ કંપની પબ્લિક પાસેથી નાણાં એકત્ર કરવા માટે શેર્સ બહાર પાડે છે, તેને શું કહેવાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. FPO</li>
+            <li>B. IPO (Initial Public Offering)</li>
+            <li>C. Rights Issue</li>
+            <li>D. Debenture Issue</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. IPO (Initial Public Offering)</strong><br>
+            Explanation: કંપની દ્વારા પ્રાઇમરી માર્કેટમાં પહેલીવાર જાહેર જનતા માટે શેર બહાર પાડવાની પ્રક્રિયા IPO કહેવાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. કઈ માર્કેટમાં પહેલેથી જારી થયેલા જૂના શેર્સનું ખરીદ-વેચાણ (Trading) થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Primary Market</li>
+            <li>B. Secondary Market (Stock Exchange)</li>
+            <li>C. Money Market</li>
+            <li>D. Treasury Market</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Secondary Market (Stock Exchange)</strong><br>
+            Explanation: સેકન્ડરી માર્કેટમાં અગાઉ ઇશ્યૂ થયેલા એગ્ઝિસ્ટિંગ શેર્સની લેણદેણ થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. કેપિટલ માર્કેટ (Capital Market) નો મુખ્ય નિયંત્રક (Regulator) કોણ છે?</p>
+        <ul class="mcq-options">
+            <li>A. RBI</li>
+            <li>B. SEBI</li>
+            <li>C. NABARD</li>
+            <li>D. SIDBI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. SEBI</strong><br>
+            Explanation: કેપિટલ માર્કેટ અને સિક્યોરિટીઝ એક્સચેન્જનું નિયમન સેબી (SEBI) દ્વારા થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. મની માર્કેટની સરખામણીમાં કેપિટલ માર્કેટમાં જોખમ (Risk) કેવું હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Lower (ઓછું)</li>
+            <li>B. Higher (વધુ)</li>
+            <li>C. Zero (શૂન્ય)</li>
+            <li>D. Equal</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Higher (વધુ)</strong><br>
+            Explanation: લાંબા સમયગાળા અને બજારના उतार-चढ़ावને કારણે કેપિટલ માર્કેટમાં જોખમ અને વળતર બંને વધુ હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. કૉલ મની માર્કેટના ટ્રેડિંગ ટાઈમિંગમાં તાજેતરના સુધારા મુજબ ટ્રેડિંગનો સમય ક્યારથી ક્યાર સુધીનો કરવામાં આવ્યો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 9:00 AM to 5:00 PM</li>
+            <li>B. 9:00 AM to 7:00 PM</li>
+            <li>C. 10:00 AM to 6:00 PM</li>
+            <li>D. 9:30 AM to 4:30 PM</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 9:00 AM to 7:00 PM</strong><br>
+            Explanation: તાજેતરના નિયમ મુજબ કૉલ મની માર્કેટ ટ્રેડિંગ સમય સવારે 9:00 થી સાંજે 7:00 વાગ્યા સુધીનો છે (ક્લોઝર 7:30 PM).
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
