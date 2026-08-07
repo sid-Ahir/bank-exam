@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15. NPA, ARC, NARCL</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    15. NPA, ARC, NARCL
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 NPA (NON-PERFORMING ASSETS) CONCEPT</span>
+        <p><strong>Non-Performing Assets (NPA)</strong> એટલે કે બિન-પ્રદર્શનકારી સંપત્તિ. બેંક માટે લોન અને એડવાન્સિસ એ એસેટ્સ (સંપત્તિ) છે, કારણ કે તે બેંકને વ્યાજ (Interest) અને અસલ રકમ (Principal) દ્વારા આવક ઉત્પન્ન કરીને આપે છે.</p>
+        <p>જો કોઈ લોન પર વ્યાજ કે અસલ રકમની ચુકવણી <strong>90 Days (90 દિવસ)</strong> કરતાં વધુ સમય માટે અટકી જાય અથવા ડિફોલ્ટ થાય, તો તે એસેટ બેંક માટે <strong>NPA</strong> બની જાય છે.</p>
+    </div>
+
+    <h2 class="section-title">Classification of Assets / NPAs</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Asset Category</th>
+                <th>Description / Time Duration</th>
+            </tr>
+            <tr>
+                <td><strong>Standard Assets</strong></td>
+                <td>સારા અને નિયમિત એસેટ્સ, જેના પર સમયસર વ્યાજ અને અસલ રકમની ચુકવણી થતી હોય (Good / Well Performing Assets).</td>
+            </tr>
+            <tr>
+                <td><strong>Sub-standard Assets</strong></td>
+                <td>જે એસેટ <strong>12 Months</strong> કે તેથી ઓછા સમય માટે NPA તરીકે રહી હોય.</td>
+            </tr>
+            <tr>
+                <td><strong>Doubtful Assets</strong></td>
+                <td>જે એસેટને સબ-standard કેટેગરીમાં 12 મહિનાથી વધુ સમય થઈ ગયો હોય અને નાણાં પાછા મળવાની શક્યતા શંકાસ્પદ હોય.</td>
+            </tr>
+            <tr>
+                <td><strong>Loss Assets</strong></td>
+                <td>જે લોનની રકમ સંપૂર્ણપણે ડૂબી ચૂકી છે અથવા ઓડિટર દ્વારા નુકસાન તરીકે ઓળખવામાં આવી છે, જેની પુનઃપ્રાપ્તિ (Recovery) ની શક્યતા નહિવત હોય.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Special Mention Accounts (SMA Classification)</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 STRESSED ASSETS & SMA CATEGORIES</span>
+        <p>લોન સંપૂર્ણપણે NPA બને તે અગાઉ બેંકોએ સંભવિત જોખમને ઓળખવા માટે <strong>Special Mention Accounts (SMA)</strong> હેઠળ વર્ગીકરણ કરવું પડે છે:</p>
+        <ul>
+            <li><strong>SMA-0:</strong> ઓવરડ્યુ (Overdue) સમય <strong>1 થી 30 Days</strong> સુધીનો હોય.</li>
+            <li><strong>SMA-1:</strong> ઓવરડ્યુ સમય <strong>31 થી 60 Days</strong> સુધીનો હોય.</li>
+            <li><strong>SMA-2:</strong> ઓવરડ્યુ સમય <strong>61 થી 90 Days</strong> સુધીનો હોય.</li>
+            <li><strong>SMA-NF (Non-Financial):</strong> નાણાકીય ડિફોલ્ટ નહીં પરંતુ અન્ય બિન-નાણાકીય અનિયમિતતાઓ (જેવા કે ચેક બાઉન્સ થવા વગેરે).</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Types of Collaterals / Lends</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Collateral Type</th>
+                <th>Nature of Property</th>
+                <th>Possession / Control</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><strong>Mortgage (મોર્ગેજ)</strong></td>
+                <td>Immovable Property (સ્થાવર મિલકત)</td>
+                <td>ઓનર (Owner) પાસે જ રહે છે.</td>
+                <td>Home Loan (જમીન કે મકાનના પેપર્સ ગિરવે રાખવા)</td>
+            </tr>
+            <tr>
+                <td><strong>Pledge (પ્લેજ)</strong></td>
+                <td>Movable Property (જંગમ મિલકત)</td>
+                <td>બેંક (Bank / Lender) ના કબજામાં રહે છે.</td>
+                <td>Gold Loan (સોનું બેંકના લોકરમાં રાખવું)</td>
+            </tr>
+            <tr>
+                <td><strong>Hypothecation (હાયપોથિકેશન)</strong></td>
+                <td>Movable Property (જંગમ મિલકત)</td>
+                <td>ઓનર (Owner) પાસે જ રહે છે.</td>
+                <td>Car Loan / Vehicle Loan / Business Inventory</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Bank Credit Facilities & Advances</h2>
+    <div class="card card-concept">
+        <ul>
+            <li><strong>Credit Card:</strong> ગ્રાહકોને અગાઉથી મંજૂર મર્યાદામાં ખર્ચ કરવાની સુવિધા (Postpaid facility).</li>
+            <li><strong>Overdraft (OD):</strong> બેંક ખાતામાં બેલેન્સ શૂન્ય હોવા છતાં મર્યાદિત રકમ ઉપાડવાની સુવિધા (દા.ત., PMJDY ખાતાઓમાં ઓવરડ્રાફ્ટ સુવિધા).</li>
+            <li><strong>Cash Credit (CC):</strong> વ્યાપારીઓ અને કંપનીઓને બિઝનેસ એક્સપન્શન કે ઇન્વેન્ટરી માટે અપાતી ટૂંકાગાળાની ક્રેડિટ ફેસિલિટી (સામાન્ય રીતે 1 Year ટેન્યોર માટે).</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">SARFAESI Act, 2002</h2>
+    <div class="card card-important">
+        AI <span class="tag tag-must-remember">🔴 MUST REMEMBER ACT</span>
+        <p><strong>SARFAESI Act, 2002</strong> (Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act) એ બેંકો અને નાણાકીય સંસ્થાઓને કોર્ટની હસ્તક્ષેપ વગર સીધા જ ખરાબ લોન (Bad Loans) ની વસૂલાત કરવા માટે કાનૂની સત્તા આપે છે.</p>
+        <ul>
+            <li><strong>Committees:</strong> આ કાયદાની પાછળ <strong>Narasimham Committee (I & II)</strong> અને <strong>Andhyarujina Committee</strong> ની ભલામણો રહેલી છે.</li>
+            <li><strong>Notice Period:</strong> લોન ડિફોલ્ટ થયા બાદ બેંક દ્વારા ડિફોલ્ટરને એસેટ જપ્ત કરતા પહેલા <strong>60 Days Notice</strong> (સેક્શન 13(2) હેઠળ) આપવામાં આવે છે.</li>
+            <li><strong>Powers:</strong> બેંક સિક્યોર્ડ એસેટને સીઝ (Seize) કરી શકે છે, તેનું સેલ (Sale) કે લીઝ (Lease) કરી શકે છે અથવા મેનેજમેન્ટ કોઈ ત્રીજા પક્ષને સોંપી શકે છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Asset Reconstruction Companies (ARCs) & NARCL</h2>
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 BAD BANK & ARC CONCEPT</span>
+        <p><strong>Asset Reconstruction Companies (ARCs):</strong> એ એવી વિશિષ્ટ કંપનીઓ છે જે બેંકો પાસેથી તેમના નોન-પર્ફોર્મિંગ એસેટ્સ (NPAs) અથવા બેડ લોન્સ ખરીદી લે છે અને તેની વસૂલાતની જવાબદારી સંભાળે છે. ભારતની પ્રથમ ARC <strong>ARCIL</strong> (Asset Reconstruction Company of India Limited) હતી.</p>
+        <p><strong>NARCL (National Asset Reconstruction Company Limited):</strong> આ એક સરકારી સહયોગથી બનેલી 'Bad Bank' છે, જેની સ્થાપના <strong>July 2021</strong> માં કરવામાં આવી હતી. તેનો મુખ્ય ઉદ્દેશ્ય બેંકોના <strong>₹500 Crores અને તેથી વધુ</strong> ના મોટા સ્ટ્રેસ્ડ એસેટ્સ/બેડ લોન્સને એક્વાયર કરવાનો છે.</p>
+    </div>
+
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameters</th>
+                <th>NARCL & IDRCL Structure</th>
+            </tr>
+            <tr>
+                <td><strong>Setup Year</strong></td>
+                <td>July 2021</td>
+            </tr>
+            <tr>
+                <td><strong>Threshold Amount</strong></td>
+                <td>₹500 Crores and above Stressed Assets</td>
+            </tr>
+            <tr>
+                <td><strong>NARCL Shareholding</strong></td>
+                <td><strong>Public Sector Banks (PSBs)</strong> hold 51% stake, Private Sector Banks hold 49% stake.</td>
+            </tr>
+            <tr>
+                <td><strong>IDRCL (India Debt Resolution Company Ltd)</strong></td>
+                <td>આ NARCL ની પાર્ટનર કંપની છે જે ડેબ્ટ રિઝોલ્યુશન અને એસેટ સેલિંગનું કામ સંભાળે છે. જેમાં <strong>Private Sector Banks</strong> નો હિસ્સો 51% અને Public Sector Banks નો 49% છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Acquisition Mechanism</strong></td>
+                <td>15% Cash + 85% Security Receipts (SR). બાકીના શોર્ટફોલ કે ગેપ માટે સરકાર દ્વારા ગેરંટી (Government Sovereign Guarantee) પૂરી પાડવામાં આવે છે.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / REVISION BOX</span>
+        <p><strong>Recovery Mechanisms:</strong><br>
+        - SARFAESI Act = Court intervention વગર એસેટ જપ્ત કરવાની સત્તા (60 દિવસની નોટિસ).<br>
+        - ARC = બેંકોના બેડ લોન ખરીદીને વસૂલાત કરતી એજન્સી.<br>
+        - NARCL = ₹500 Cr+ ના મોટા NPA માટેની 'Bad Bank' (51% PSBs).<br>
+        - IDRCL = ડેબ્ટ રિઝોલ્યુશન અને ઓક્શન માટેની પાર્ટનર કંપની (51% Private Banks).</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. બેંક દ્વારા આપવામાં આવેલી લોન પર કેટલા દિવસથી વધુ સમય માટે વ્યાજ કે અસલ રકમની ચુકવણી ન થાય તો તેને NPA જાહેર કરવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. 30 Days</li>
+            <li>B. 60 Days</li>
+            <li>C. 90 Days</li>
+            <li>D. 180 Days</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 90 Days</strong><br>
+            Explanation: 90 દિવસથી વધુ સમય સુધી ડિફોલ્ટ રહે તો એસેટ નોન-પર્ફોર્મિંગ એસેટ (NPA) બને છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. જો કોઈ એસેટ 12 મહિના કે તેથી ઓછા સમય માટે NPA તરીકે રહી હોય, તો તેને કઈ કેટેગરીમાં મૂકવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Standard Asset</li>
+            <li>B. Sub-standard Asset</li>
+            <li>C. Doubtful Asset</li>
+            <li>D. Loss Asset</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Sub-standard Asset</strong><br>
+            Explanation: 12 મહિના કે તેથી ઓછા સમયની NPA સબ-સ્ટાન્ડર્ડ એસેટ ગણાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. ગોલ્ડ લોન (Gold Loan) ના કિસ્સામાં કોલેટરલ તરીકે સોનું ક્યાં રાખવામાં આવે છે અને તેને શું કહેવાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Mortgage (ઓનર પાસે)</li>
+            <li>B. Pledge (બેંકના કબજામાં)</li>
+            <li>C. Hypothecation (ઓનર પાસે)</li>
+            <li>D. Unsecured Loan</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Pledge (બેંકના કબજામાં)</strong><br>
+            Explanation: જંગમ મિલકત જ્યારે લેન્ડર (બેંક) ના કબજામાં હોય ત્યારે તેને પ્લેજ (Pledge) કહે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. કાર લોન અથવા વ્હીકલ લોન કયા પ્રકારના કોલેટરલ અન્ડર આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Mortgage</li>
+            <li>B. Pledge</li>
+            <li>C. Hypothecation</li>
+            <li>D. Unsecured</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Hypothecation</strong><br>
+            Explanation: વ્હીકલ લોન કે બિઝનેસ ઇન્વેન્ટરીમાં કબજો ઓનર પાસે જ રહે છે પરંતુ હાયપોથિકેશન થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. SARFAESI Act કયા વર્ષમાં અમલમાં આવ્યો હતો?</p>
+        <ul class="mcq-options">
+            <li>A. 1991</li>
+            <li>B. 2002</li>
+            <li>C. 2011</li>
+            <li>D. 2021</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 2002</strong><br>
+            Explanation: સરફેસી એક્ટ વર્ષ 2002 માં ઘડવામાં આવ્યો હતો.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. સરફેસી એક્ટ હેઠળ બેંક દ્વારા એસેટ જપ્ત કરતા અગાઉ ડિફોલ્ટરને કેટલા દિવસની નોટિસ આપવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. 30 Days</li>
+            <li>B. 60 Days</li>
+            <li>C. 90 Days</li>
+            <li>D. 120 Days</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 60 Days</strong><br>
+            Explanation: સેક્શન 13(2) મુજબ બેંક 60 દિવસની નોટિસ મોકલે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. ભારતની સૌપ્રથમ એસેટ રીકન્સ્ટ્રક્શન કંપની (ARC) કઈ હતી?</p>
+        <ul class="mcq-options">
+            <li>A. NARCL</li>
+            <li>B. ARCIL</li>
+            <li>C. IDRCL</li>
+            <li>D. SIDBI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. ARCIL</strong><br>
+            Explanation: ARCIL (Asset Reconstruction Company of India Limited) ભારતની પ્રથમ ARC હતી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. NARCL (National Asset Reconstruction Company Ltd) ની સ્થાપના ક્યારે કરવામાં આવી હતી?</p>
+        <ul class="mcq-options">
+            <li>A. July 2021</li>
+            <li>B. August 1947</li>
+            <li>C. April 1935</li>
+            <li>D. January 2002</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. July 2021</strong><br>
+            Explanation: સરકાર દ્વારા બેડ બેંક તરીકે NARCL ની સ્થાપના જુલાઈ 2021 માં થઈ હતી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. NARCL માં પબ્લિક સેક્ટર બેંક્સ (PSBs) નો શેરહોલ્ડિંગ હિસ્સો (Stake) કેટલો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 49%</li>
+            <li>B. 51%</li>
+            <li>C. 74%</li>
+            <li>D. 100%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 51%</strong><br>
+            Explanation: NARCL માં પબ્લિક સેક્ટર બેંકોનો હિસ્સો 51% (મેજોરિટી) છે, જ્યારે પ્રાઇવેટ બેંકોનો 49% છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. IDRCL (India Debt Resolution Company Ltd) માં પ્રાઇવેટ સેક્ટર બેંકોનો હિસ્સો કેટલો છે?</p>
+        <ul class="mcq-options">
+            <li>A. 49%</li>
+            <li>B. 51%</li>
+            <li>C. 26%</li>
+            <li>D. 100%</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 51%</strong><br>
+            Explanation: IDRCL માં પ્રાઇવેટ સેક્ટર બેંકો પાસે 51% હિસ્સો છે અને પબ્લિક સેક્ટર બેંકો પાસે 49% હિસ્સો છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
