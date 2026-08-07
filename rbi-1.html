@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBI -1</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    RBI -1
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 INTRODUCTION & HISTORY</span>
+        <p>ભારતની સેન્ટ્રલ બેંક એટલે કે <strong>Reserve Bank of India (RBI)</strong> ની સ્થાપના પાછળનો ઇતિહાસ ખૂબ જ મહત્વપૂર્ણ છે. વર્ષ 1926 માં આવેલ <strong>Hilton Young Commission</strong> (જેને <strong>Royal Commission on Indian Currency and Finance</strong> તરીકે પણ ઓળખવામાં આવે છે) ના ભલામણ (Recommendations) આધારે ભારતમાં એક સેન્ટ્રલ બેંક હોવી જોઈએ તેવું નક્કી કરવામાં આવ્યું.</p>
+        <p>તે સમયગાળામાં <strong>Imperial Bank of India</strong> (જે પાછળથી State Bank of India બન્યું) અસ્તિત્વમાં હતું અને તે સેન્ટ્રલ બેંકના કેટલાક કાર્યો સંભાળતું હતું. ત્યારબાદ <strong>Central Legislative Assembly</strong> દ્વારા <strong>Reserve Bank of India Act, 1934</strong> પસાર કરવામાં આવ્યો અને તે જ કાયદાના આધારે <strong>1st April 1935</strong> ના રોજ RBI ની સ્થાપના કરવામાં આવી.</p>
+    </div>
+
+    <h2 class="section-title">Establishment & Headquarters Shifts</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Parameters</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td><strong>Establishment Date</strong></td>
+                <td>1st April 1935</td>
+            </tr>
+            <tr>
+                <td><strong>Initial Capital</strong></td>
+                <td>₹5 Crore (બ્રિટિશ સમયમાં ખાનગી/Private Shareholders દ્વારા)</td>
+            </tr>
+            <tr>
+                <td><strong>Initial Headquarters</strong></td>
+                <td>Kolkata (સ્થાપના સમયે)</td>
+            </tr>
+            <tr>
+                <td><strong>Permanent Headquarters</strong></td>
+                <td>Mumbai, Maharashtra (1937 થી આજદિન સુધી કાયમી ધોરણે ખસેડવામાં આવ્યું)</td>
+            </tr>
+            <tr>
+                <td><strong>Historical Milestone</strong></td>
+                <td>India was the first British Colony to have its own Central Bank.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Nationlisation of RBI (રાષ્ટ્રીયકરણ)</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT FACT</span>
+        <p>શરૂઆતમાં RBI ની માલિકી પ્રાઇવેટ શેરહોલ્ડર્સ પાસે હતી. પરંતુ આઝાદી મળ્યા બાદ, <strong>1st January 1949</strong> ના રોજ RBI નું રાષ્ટ્રીયકરણ (Nationalisation) કરવામાં આવ્યું.</p>
+        <p>આ પ્રક્રિયા માટે <strong>RBI Transfer to Public Ownership Act, 1948</strong> લાવવામાં આવ્યો હતો, જેના દ્વારા RBI સંપૂર્ણપણે ભારત સરકારની માલિકીની (Government Owned Entity) સેન્ટ્રલ બેંક બની ગઈ.</p>
+    </div>
+
+    <h2 class="section-title">RBI @ 90 Celebrations</h2>
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🟢 RECENT UPDATE</span>
+        <p>RBI એ તેના સ્થાપનાના <strong>90 વર્ષ (90th Anniversary)</strong> પૂર્ણ કર્યા છે. આ પ્રસંગે <strong>RBI@90</strong> ઉજવણી નેશનલ સેન્ટર ફોર પરફોર્મિંગ આર્ટ્સ, મુંબઈ ખાતે કરવામાં આવી હતી, જેમાં રાષ્ટ્રપતિ <strong>द्रौपदी मुर्मू</strong> ઉપસ્થિત રહીને સ્મારક સ્ટેમ્પ (Commemorative Stamp) જારી કર્યા હતા.</p>
+    </div>
+
+    <h2 class="section-title">Functions of RBI (આરબીઆઈના મુખ્ય કાર્યો)</h2>
+    <div class="card card-concept">
+        <ul>
+            <li><strong>Issuer of Currency:</strong> દેશમાં ચલણી નોટો જારી કરવાનું કાર્ય કરે છે (નોંધ: ₹1 ની નોટ અને સિક્કાઓ સિવાય, જે ભારત સરકાર દ્વારા બહાર પાડવામાં આવે છે).</li>
+            <li><strong>Banker to Banks:</strong> તમામ વ્યાપારી બેંકો (Commercial Banks) માટે બેંકર્સનું કામ કરે છે. બેંકોને લોન અને ડિપોઝિટ માટે સુવિધા આપે છે.</li>
+            <li><strong>Banker to Government:</strong> કેન્દ્ર અને રાજ્ય સરકાર બંને માટે બેંકિંગ એજન્ટ અને ફાઇનાન્શિયલ એડવાઇઝર તરીકે કાર્ય કરે છે. સરકારના ખાતા અને ટ્રેઝરી મેનેજ કરે છે.</li>
+            <li><strong>Lender of Last Resort:</strong> જ્યારે કોઈ બેંક કે નાણાકીય સંસ્થા મુશ્કેલીમાં હોય ત્યારે છેલ્લી આશા તરીકે તેમને લોન અને સહાય પૂરી પાડે છે.</li>
+            <li><strong>Foreign Exchange Management:</strong> વિદેશી હૂંડિયામણ (Foreign Exchange) અને આંતરરાષ્ટ્રીય વેપારને <strong>Foreign Exchange Management Act (FEMA), 1999</strong> હેઠળ નિયંત્રિત કરે છે.</li>
+            <li><strong>Custodian of Gold Reserves:</strong> ભારતના સોનાના ભંડાર (Gold Reserves) ની સુરક્ષા અને જાળવણી કરે છે (જેમાં બેંક ઓફ ઇંગ્લેન્ડ અને બેંક ફોર ઇન્ટરનેશનલ સેલલમેન્ટ પાસે પણ ગોલ્ડ રાખવામાં આવે છે).</li>
+            <li><strong>Controller of Credit & Monetary Policy:</strong> અર્થવ્યવસ્થામાં મોંઘવારી (Inflation) નિયંત્રિત કરવા માટે <strong>Monetary Policy</strong> (મોદ્રિક નીતિ) દ્વારા ક્રેડિટ કંટ્રોલ કરે છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Ways and Means Advances (WMA)</h2>
+    <div class="card card-important">
+        <span class="tag tag-must-remember">🔴 MUST REMEMBER</span>
+        <p>સરકારને ટૂંકાગાળાની નાણાકીય કટોકટી પહોંચી વળવા માટે RBI દ્વારા <strong>WMA (Ways and Means Advances)</strong> ની સુવિધા આપવામાં આવે છે:</p>
+        <ul>
+            <li>પ્રથમાર્ધ માટે WMA લિમિટ <strong>₹1.5 Lakh Crore</strong> નક્કી કરવામાં આવી છે.</li>
+            <li>જો સરકારે આ મર્યાદાથી વધુ રકમ ઉપાડી લીધી, તો તેના પર <strong>Repo Rate</strong> મુજબ વ્યાજ લાગે છે.</li>
+            <li>આ રકમ <strong>90 Days</strong> ની અંદર પરત કરવાની હોય છે. જો સમયસર પરત ન કરવામાં આવે, તો Repo Rate પર વધારાનું <strong>2% Interest Penalty</strong> લાગે છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Offices & Structure of RBI</h2>
+    <div class="card card-concept">
+        <ul>
+            <li><strong>Central Office / Headquarters:</strong> મુંબઈ (મહારાષ્ટ્ર)</li>
+            <li><strong>Zonal Offices:</strong> 4 (New Delhi - North, Chennai - South, Kolkata - East, Mumbai - West)</li>
+            <li><strong>Regional Offices:</strong> કુલ 22</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Central Board of Directors of RBI</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT STRUCTURE</span>
+        <p>RBI નું સંચાલન <strong>Central Board of Directors</strong> દ્વારા થાય છે, જેમાં કુલ <strong>21 Members</strong> હોય છે:</p>
+        <ol>
+            <li><strong>Governor:</strong> 1 (વર્તમાન 26th Governor: <strong>Sanjay Malhotra</strong> - અગાઉ રેવન્યુ સેક્રેટરી હતા).</li>
+            <li><strong>Deputy Governors:</strong> Max 4 (વર્તમાન: M. Rajeshwar Rao, T. Rabi Shankar, J. Swaminathan, Poonam Gupta).</li>
+            <li><strong>Government Officials:</strong> 2 (ફાઇનાન્સ મિનિસ્ટ્રીના પ્રતિનિધિઓ, ભારત સરકાર દ્વારા નામાંકિત).</li>
+            <li><strong>Local Board Directors:</strong> 4 (ચાર જોનલ લોકલ બોર્ડમાંથી એક-એક).</li>
+            <li><strong>Directors from Various Fields:</strong> 10 (વિવિધ ક્ષેત્રોના નિષ્ણાતો, સરકાર દ્વારા નામાંકિત).</li>
+        </ol>
+    </div>
+
+    <h2 class="section-title">Tenure and Appointments of Board Members</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Member Type</th>
+                <th>Tenure (સમયમર્યાદા)</th>
+                <th>Re-appointment Possible?</th>
+            </tr>
+            <tr>
+                <td><strong>Governor & Deputy Governors</strong></td>
+                <td>Not more than 5 Years (সাধারণतया 3-5 વર્ષ)</td>
+                <td>Yes (ફરી નિયુક્ત થઈ શકે છે)</td>
+            </tr>
+            <tr>
+                <td><strong>Government Officials</strong></td>
+                <td>4 Years</td>
+                <td>As per Government discretion</td>
+            </tr>
+            <tr>
+                <td><strong>Local Board Directors</strong></td>
+                <td>4 Years</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td><strong>Directors from Various Fields</strong></td>
+                <td>4 Years</td>
+                <td>No (સામાન્ય રીતે પુનઃનિમણૂક નથી હોતી)</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Important Historical Personalities</h2>
+    <div class="card card-concept">
+        <ul>
+            <li><strong>First Governor of RBI:</strong> <strong>Sir Osborne Smith</strong> (ઓસ્ટ્રેલિયાના, 1935 થી 1937).</li>
+            <li><strong>First Indian Governor of RBI:</strong> <strong>Sir C.D. देशमुख (C.D. Deshmukh)</strong> (1943 થી 1949).</li>
+            <li><strong>Unique Personalities:</strong> <strong>Dr. Manmohan Singh</strong> એવા એકમાત્ર વ્યક્તિ છે જે RBI ના Governor (1982-1985), Finance Minister (1991-1996) અને Prime Minister (2004-2014) તરીકે સેવા આપી ચૂುಕ્યા છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Female Deputy Governors of RBI</h2>
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🟢 REVISION LIST</span>
+        <p> અત્યાર સુધીમાં નિયુક્ત થયેલી મહિલા ડેપ્યુટી ગવર્નરો:</p>
+        <ol>
+            <li><strong>K.J. Udeshi</strong> (2003 - 2005)</li>
+            <li><strong>Shyamala Gopinath</strong> (2004 - 2008)</li>
+            <li><strong>Usha Thorat</strong> (2005 - 2010)</li>
+            <li><strong>Poonam Gupta</strong> (2025 માં નિયુક્ત)</li>
+        </ol>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. RBI ની સ્થાપના કઈ કમિટીના ભલામણ આધારે કરવામાં આવી હતી?</p>
+        <ul class="mcq-options">
+            <li>A. Hilton Young Commission</li>
+            <li>B. Narasimham Committee</li>
+            <li>C. Usha Thorat Committee</li>
+            <li>D. Nachiket Mor Committee</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Hilton Young Commission</strong><br>
+            Explanation: Hilton Young Commission (Royal Commission on Indian Currency and Finance) ની ભલામણથી RBI અસ્તિત્વમાં આવી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. RBI નું રાષ્ટ્રીયકરણ (Nationalisation) કઈ તારીખે થયું હતું?</p>
+        <ul class="mcq-options">
+            <li>A. 1st April 1935</li>
+            <li>B. 15th August 1947</li>
+            <li>C. 1st January 1949</li>
+            <li>D. 26th January 1950</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 1st January 1949</strong><br>
+            Explanation: આઝાદીના થોડા સમય બાદ 1 જાન્યુઆરી 1949 ના રોજ RBI Transfer to Public Ownership Act, 1948 હેઠળ RBI નું રાષ્ટ્રીયકરણ થયું.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. RBI ના સૌપ્રથમ ભારતીય ગવર્નર કોણ હતા?</p>
+        <ul class="mcq-options">
+            <li>A. Sir Osborne Smith</li>
+            <li>B. C.D. Deshmukh</li>
+            <li>C. James Taylor</li>
+            <li>D. Sanjay Malhotra</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. C.D. Deshmukh</strong><br>
+            Explanation: સર સી.ડી. દેશમુખ 1943 થી 1949 દરમિયાન RBI ના પ્રથમ ભારતીય ગવર્નર રહ્યા હતા.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. RBI ના વર્તમાન (Current & 26th) ગવર્નર કોણ છે?</p>
+        <ul class="mcq-options">
+            <li>A. Shaktikanta Das</li>
+            <li>B. Sanjay Malhotra</li>
+            <li>C. Urjit Patel</li>
+            <li>D. M. Rajeshwar Rao</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Sanjay Malhotra</strong><br>
+            Explanation: સંજય મલ્હોત્રા (અગાઉ રેવન્યુ સેક્રેટરી) RBI ના વર્તમાન 26મા ગવર્નર છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. RBI ના સેન્ટ્રલ બોર્ડ ઓફ ડાયરેક્ટર્સમાં કુલ કેટલા સભ્યો હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. 11</li>
+            <li>B. 15</li>
+            <li>C. 21</li>
+            <li>D. 25</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 21</strong><br>
+            Explanation: સેન્ટ્રલ બોર્ડમાં 1 ગવર્નર, 4 ડેપ્યુટી ગવર્નર, 2 સરકારી અધિકારીઓ, 4 લોકલ બોર્ડના ડિરેક્ટર્સ અને 10 વિવિધ ક્ષેત્રોના નિષ્ણાતો મળીને કુલ 21 સભ્યો હોય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. WMA (Ways and Means Advances) ની મર્યાદા વટાવી જવા પર સરકાર પર કેટલા દિવસની અંદર રકમ ન ચૂકવવા પર 2% પેનલ્ટી વ્યાજ લાગે છે?</p>
+        <ul class="mcq-options">
+            <li>A. 30 Days</li>
+            <li>B. 60 Days</li>
+            <li>C. 90 Days</li>
+            <li>D. 180 Days</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 90 Days</strong><br>
+            Explanation: WMA અંતર્ગત લીધેલી રકમ 90 દિવસમાં પરત કરવાની હોય છે, નહિતર રેપો રેટ પર વધારાનું 2% પેનલ્ટી વ્યાજ લાગે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. RBI ના હેડક્વાર્ટર (Headquarters) કયા વર્ષથી કાયમી ધોરણે મુંબઈ ખાતે ખસેડવામાં આવ્યા?</p>
+        <ul class="mcq-options">
+            <li>A. 1935</li>
+            <li>B. 1937</li>
+            <li>C. 1949</li>
+            <li>D. 1955</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 1937</strong><br>
+            Explanation: સ્થાપના 1935માં કોલકાતા ખાતે થઈ હતી, પરંતુ 1937માં તેને કાયમી ધોરણે મુંબઈ ખસેડવામાં આવ્યા.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. ભારતનું વિદેશી હૂંડિયામણ (Foreign Exchange) કયા કાયદા હેઠળ નિયંત્રિત થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. FEMA, 1999</li>
+            <li>B. FERA, 1973</li>
+            <li>C. Banking Regulation Act, 1949</li>
+            <li>D. RBI Act, 1934</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. FEMA, 1999</strong><br>
+            Explanation: ફોરેન એક્સચેન્જ મેનેજમેન્ટ એક્ટ (FEMA), 1999 હેઠળ RBI વિદેશી હૂંડિયામણને નિયંત્રિત કરે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. નીચેનામાંથી કોણે RBI ના ગવર્નર, નાણામંત્રી (Finance Minister) અને વડાપ્રધાન (Prime Minister) ત્રણેય પદ સંભાળ્યા છે?</p>
+        <ul class="mcq-options">
+            <li>A. C.D. Deshmukh</li>
+            <li>B. Manmohan Singh</li>
+            <li>C. Urjit Patel</li>
+            <li>D. Raghuram Rajan</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Manmohan Singh</strong><br>
+            Explanation: ડૉ. મનમોહન સિંહ આ ત્રણેય મહત્વના પદો પર સેવા આપી ચૂક્યા છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. RBI ના ડેપ્યુટી ગવર્નરનો કાર્યકાળ સામાન્ય રીતે કેટલા વર્ષથી વધુ ન હોવો જોઈએ?</p>
+        <ul class="mcq-options">
+            <li>A. 3 Years</li>
+            <li>B. 4 Years</li>
+            <li>C. 5 Years</li>
+            <li>D. 6 Years</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 5 Years</strong><br>
+            Explanation: ગવર્નર અને ડેપ્યુટી ગવર્નરનો કાર્યકાળ 5 વર્ષથી વધુ ન હોવો જોઈએ (સામાન્ય રીતે 3 થી 5 વર્ષ માટે નિમણૂક થાય છે).
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
