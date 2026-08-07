@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. Nostro - Vostro - LORO</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    3. Nostro - Vostro - LORO
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 INTERNATIONAL CORRESPONDENT BANKING CONCEPT</span>
+        <p>આંતરરાષ્ટ્રીય સ્તરે થતી લેવડદેવડ, આયાત (Import) અને નિકાસ (Export) ના સેલમેન્ટ માટે વિદેશી બેંકો સાથે સંબંધો બાંધવા પડે છે. બેંકો વચ્ચે વિદેશી કરન્સી અથવા સ્થાનિક કરન્સીમાં વ્યવહાર કરવા માટે ખાસ પ્રકારના કરન્ટ અકાઉન્ટ્સ (Current Accounts) ખોલવામાં આવે છે, જેને મુખ્યત્વે <strong>Nostro, Vostro અને Loro</strong> અકાઉન્ટ્સ કહેવામાં આવે છે.</p>
+        <p>ભારતીય રૂપિયા (INR) માં આંતરરાષ્ટ્રીય વેપારને પ્રોત્સાહન આપવા માટે RBI દ્વારા વર્ષ <strong>2022</strong> માં <strong>Special Rupee Vostro Accounts (SRVA)</strong> ની શરૂઆત કરવામાં આવી હતી.</p>
+    </div>
+
+    <h2 class="section-title">Detailed Comparison: Nostro, Vostro, and Loro Accounts</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Account Type</th>
+                <th>Meaning & Perspective (કોની દ્રષ્ટિએ?)</th>
+                <th>Description / Example</th>
+            </tr>
+            <tr>
+                <td><strong>Nostro Account (નોસ્ટ્રો અકાઉન્ટ)</strong></td>
+                <td><strong>"Our Money with You"</strong> (આપણું નાણાં તમારી પાસે)</td>
+                <td>જ્યારે ભારતીય બેંક (જેમ કે SBI) વિદેશી બેંક (જેમ કે Bank of America, USA) માં વિદેશી કરન્સી (જેવા કે USD) માં અકાઉન્ટ ખોલાવે છે, ત્યારે તે ભારતીય બેંક માટે <strong>Nostro Account</strong> બને છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Vostro Account (વોસ્ટ્રો અકાઉન્ટ)</strong></td>
+                <td><strong>"Your Money with Us"</strong> (તમારું નાણાં આપણી પાસે)</td>
+                <td>એ જ અકાઉન્ટ જ્યારે તે વિદેશી બેંક (Bank of America) ની દ્રષ્ટિએ જોવામાં આવે, કે જેણે ભારતીય બેંક (SBI) માં પોતાનું અકાઉન્ટ ખોલાવ્યું છે, ત્યારે તે વિદેશી બેંક માટે <strong>Vostro Account</strong> બને છે.</td>
+            </tr>
+            <tr>
+                <td><strong>Loro Account (લોરો અકાઉન્ટ)</strong></td>
+                <td><strong>"Their Money with Them"</strong> (તેઓનું નાણાં તેમની પાસે)</td>
+                <td>જ્યારે ત્રીજી બેંક (જેવા કે Bank of Baroda) એ અકાઉન્ટનો ઉપયોગ અન્ય બેંક (SBI) ના માધ્યમથી વ્યવહાર કરવા માટે કરે છે, ત્યારે તે ત્રીજી બેંક માટે <strong>Loro Account</strong> બને છે.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Special Rupee Vostro Account (SRVA)</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT REGULATORY FACTS</span>
+        <ul>
+            <li><strong>Introduction Year:</strong> <strong>2022</strong> (RBI દ્વારા પ્રસ્તાવિત).</li>
+            <li><strong>Objective:</strong> યુએસ ડોલર (USD) પરની નિર્ભરતા ઘટાડીને ભારતીય રૂપિયા (INR) માં આંતરરાષ્ટ્રીય વ્યાપાર સેટલમેન્ટ (Cross-border Trade Settlement in INR) કરવાનો છે.</li>
+            <li><strong>Surplus Funds Utilization:</strong> જો વિશેષ રૂપી વોસ્ટ્રો અકાઉન્ટમાં વધારાના ભંડોળ (Surplus Funds) વધી જાય, તો તે નાણાંનો ઉપયોગ ગવર્મેન્ટ સિક્યોરિટીઝ (Government Securities), ટ્રેઝરી બિલ્સ વગેરેમાં રોકાણ કરવા માટે કરી શકાય છે.</li>
+        </ul>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / REVISION BOX</span>
+        <p><strong>Nostro vs Vostro Simple Trick:</strong><br>
+        - <strong>Nostro</strong> = Latin word for "Ours" (આપણું અકાઉન્ટ વિદેશમાં).<br>
+        - <strong>Vostro</strong> = Latin word for "Yours" (તમારું અકાઉન્ટ આપણા બેંકમાં).<br>
+        - <strong>Loro</strong> = Latin word for "Theirs" (તેમનું અકાઉન્ટ અન્ય બેંક પાસે).</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. જ્યારે કોઈ ભારતીય બેંક વિદેશી બેંકમાં વિદેશી ચલણમાં અકાઉન્ટ ખોલાવે છે, ત્યારે તે ભારતીય બેંક માટે કયું અકાઉન્ટ કહેવાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Vostro Account</li>
+            <li>B. Nostro Account</li>
+            <li>C. Loro Account</li>
+            <li>D. Savings Account</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Nostro Account</strong><br>
+            Explanation: "Our money with you" - ભારતીય બેંકનું વિદેશી બેંકમાં રહેલું અકાઉન્ટ નોસ્ટ્રો અકાઉન્ટ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. વિદેશી બેંક દ્વારા ભારતીય બેંકમાં ખોલાવવામાં આવેલ અકાઉન્ટને ભારતીય બેંકની દ્રષ્ટિએ શું કહેવાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Nostro Account</li>
+            <li>B. Vostro Account</li>
+            <li>C. Loro Account</li>
+            <li>D. Current Account</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Vostro Account</strong><br>
+            Explanation: "Your money with us" - વિદેશી બેંકનું ભારતીય બેંકમાં રહેલું અકાઉન્ટ વોસ્ટ્રો અકાઉન્ટ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. સ્પેશિયલ રૂપી વોસ્ટ્રો અકાઉન્ટ (SRVA) ની શરૂઆત કયા વર્ષમાં કરવામાં આવી હતી?</p>
+        <ul class="mcq-options">
+            <li>A. 2019</li>
+            <li>B. 2020</li>
+            <li>C. 2022</li>
+            <li>D. 2024</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 2022</strong><br>
+            Explanation: રૂપિયામાં આંતરરાષ્ટ્રીય વેપારને પ્રોત્સાહન આપવા માટે RBI દ્વારા 2022 માં SRVA ની શરૂઆત થઈ હતી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. લોરો અકાઉન્ટ (Loro Account) મુખ્યત્વે ક્યારે સંદર્ભમાં લેવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Individual savings account</li>
+            <li>B. Account of another bank maintained by two other correspondent banks (Third-party perspective)</li>
+            <li>C. Government treasury account</li>
+            <li>D. Rural cooperative account</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Account of another bank maintained by two other correspondent banks (Third-party perspective)</strong><br>
+            Explanation: "Their money with them" - ત્રીજી બેંકના સંદર્ભમાં આ લોરો અકાઉન્ટ બને છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. 'Nostro' શબ્દ કઈ ભાષામાંથી લેવામાં આવ્યો છે અને તેનો શાબ્દિક અર્થ શું થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. French - Theirs</li>
+            <li>B. Latin - Ours</li>
+            <li>C. Greek - Yours</li>
+            <li>D. Latin - Mine</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Latin - Ours</strong><br>
+            Explanation: Nostro એ લેટિન ભાષાનો શબ્દ છે જેનો અર્થ "Ours" (આપણું) થાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. 'Vostro' શબ્દનો શાબ્દિક અર્થ લેટિન ભાષામાં શું થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Ours</li>
+            <li>B. Yours</li>
+            <li>C. Theirs</li>
+            <li>D. Mine</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Yours</strong><br>
+            Explanation: Vostro એટલે લેટિન ભાષામાં "Yours" (તમારું).
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. ભારતીય રૂપિયા (INR) માં આંતરરાષ્ટ્રીય વેપાર સેટલમેન્ટ માટે કયા અકાઉન્ટ્સનો વ્યાપક ઉપયોગ થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Special Rupee Vostro Accounts (SRVA)</li>
+            <li>B. Basic Savings Bank Accounts</li>
+            <li>C. NRE Accounts</li>
+            <li>D. FCNR Accounts</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Special Rupee Vostro Accounts (SRVA)</strong><br>
+            Explanation: રૂપિયામાં ટ્રેડ સેટલમેન્ટ માટે SRVA અકાઉન્ટ્સ ખોલવામાં આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. જો કોઈ ત્રીજી બેંક કોઈ અન્ય બેંકના નોસ્ટ્રો અકાઉન્ટનો ઉપયોગ વ્યવહાર માટે કરે, તો તે ત્રીજી બેંક માટે શું કહેવાય?</p>
+        <ul class="mcq-options">
+            <li>A. Nostro Account</li>
+            <li>B. Vostro Account</li>
+            <li>C. Loro Account</li>
+            <li>D. Current Account</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Loro Account</strong><br>
+            Explanation: ત્રીજી બેંકની દ્રષ્ટિએ તે લોરો અકાઉન્ટ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. નોસ્ટ્રો, વોસ્ટ્રો અને લોરો અકાઉન્ટ્સ સામાન્ય રીતે કયા પ્રકારના અકાઉન્ટ્સ છે?</p>
+        <ul class="mcq-options">
+            <li>A. Savings Accounts for individuals</li>
+            <li>B. Current Accounts maintained by banks for international transactions</li>
+            <li>C. Fixed Deposit Accounts</li>
+            <li>D. Government welfare accounts</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Current Accounts maintained by banks for international transactions</strong><br>
+            Explanation: આંતરરાષ્ટ્રીય બેન્કિંગ અને લેણદેણ માટે બેંકો દ્વારા રાખવામાં આવતા કરન્ટ અકાઉન્ટ્સ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. સ્પેશિયલ રૂપી વોસ્ટ્રો અકાઉન્ટ (SRVA) માં રહેલા સરપ્લસ ફંડ્સનું રોકાણ કયા ક્ષેત્રે કરી શકાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Real estate speculation</li>
+            <li>B. Government Securities and Treasury Bills</li>
+            <li>C. Cryptocurrencies</li>
+            <li>D. Personal loans</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Government Securities and Treasury Bills</strong><br>
+            Explanation: સરપ્લસ ફંડ્સનો ઉપયોગ ગવર્મેન્ટ સિક્યોરિટીઝ અને ટ્રેઝરી બિલ્સમાં રોકાણ માટે થઈ શકે છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
