@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCA Framework</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    PCA Framework
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 PCA FRAMEWORK CONCEPT</span>
+        <p><strong>PCA (Prompt Corrective Action) Framework</strong> એ Reserve Bank of India (RBI) દ્વારા ઉપયોગમાં લેવાતું એક મહત્વપૂર્ણ <strong>Supervisory Tool</strong> (દેખરેખ સાધન) છે. આ ફ્રેમવર્કનો મુખ્ય હેતુ નબળી નાણાકીય સ્થિતિ ધરાવતી બેંકો અને એનબીએફસી (NBFCs) માં વહેલી તકે દખલગીરી (Early Intervention) કરીને સુધારાત્મક પગલાં લેવાનો છે, જેથી બેંકના ડિપોઝિટર્સના હિતોનું રક્ષણ થઈ શકે અને બેંકને નાદારી (Bankruptcy) તરફ જતી અટકાવી શકાય.</p>
+    </div>
+
+    <h2 class="section-title">Evolution and Applicability of PCA Framework</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Year / Timeline</th>
+                <th>Applicability & Scope</th>
+            </tr>
+            <tr>
+                <td><strong>2002</strong></td>
+                <td>Scheduled Commercial Banks માટે સૌપ્રથમ PCA Framework લવાયું. (અપવાદ: RRBs, Cooperative Banks, Payment Banks, Small Finance Banks અને Local Area Banks પર લાગુ પડતું નથી).</td>
+            </tr>
+            <tr>
+                <td><strong>2017 & 2022</strong></td>
+                <td>ફ્રેમવર્કને રિવાઈઝ કરવામાં આવ્યું અને Private NBFCs માટે પણ તેને લંબાવવામાં આવ્યું.</td>
+            </tr>
+            <tr>
+                <td><strong>1st October 2024</strong></td>
+                <td>Government-Owned NBFCs (જેવી કે Power Finance Corporation - PFC, IREDA, REC વગેરે) ને પણ PCA Framework ના दायरेમાં લાવવામાં આવી.</td>
+            </tr>
+            <tr>
+                <td><strong>Urban Cooperative Banks (UCBs)</strong></td>
+                <td>ટિયર-2, ટિયર-3 અને ટિયર-4 ના UCBs માટે સુપરવાઈઝરી એક્શન ફ્રેમવર્ક અંતર્ગત પીસીએ લાગુ કરવામાં આવે છે.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Core Parameters of PCA Framework</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 IMPORTANT PARAMETERS</span>
+        <p>RBI દ્વારા કોઈ બેંક કે એનબીએફસીની સ્થિતિ ચકાસવા માટે મુખ્યત્વે નીચે મુજબના <strong>Three Parameters</strong> ના આધારે ટ્રિગર પોઈન્ટ્સ (Trigger Points) નક્કી કરવામાં આવે છે:</p>
+        <ol>
+            <li><strong>Capital Adequacy (મૂડી પૂરતાપણું):</strong> CAR / CRAR અને Common Equity Tier 1 (CET1) Capital Ratio.</li>
+            <li><strong>Asset Quality (સંપત્તિની ગુણવત્તા):</strong> Net NPA Ratio (શુદ્ધ બિન-પ્રદર્શનકારી સંપત્તિનું પ્રમાણ).</li>
+            <li><strong>Profitability (નફાકારકતા):</strong> Return on Assets (RoA).</li>
+        </ol>
+    </div>
+
+    <h2 class="section-title">Risk Thresholds (જોખમ સપાટી)</h2>
+    <div class="card card-concept">
+        <p>પરિસ્થિતિની ગંભીરતાના આધારે બેંકો અને NBFCs ને ત્રણ અલગ-અલગ <strong>Risk Thresholds (Threshold 1, 2, and 3)</strong> માં વર્ગીકૃત કરવામાં આવે છે:</p>
+        <ul>
+            <li><strong>Risk Threshold 1:</strong> જ્યારે મૂડી કે નેટ એનપીએ પ્રારંભિક મર્યાદા વટાવે ત્યારે ડિવિડન્ડ વિતરણ કે એક્સપન્શન પર નિયંત્રણ આવે છે.</li>
+            <li><strong>Risk Threshold 2:</strong> વધુ ગંભીર શોર્ટફોલના કિસ્સામાં બ્રાન્ચ એક્સપન્શન અટકે છે અને ઓપરેશનલ પ્રતિબંધો વધે છે.</li>
+            <li><strong>Risk Threshold 3:</strong> અત્યંત નાજુક સ્થિતિ, જ્યાં કેપિટલ રેશિયો અને એનપીએની સ્થિતિ ખૂબ જ નબળી હોય છે અને બેંક પર કડક નિયંત્રણો મૂકવામાં આવે છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Exit from PCA Framework</h2>
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🟢 REVISION & EXIT RULE</span>
+        <p>કોઈપણ બેંક કે સંસ્થા PCA Framework માંથી બહાર ત્યારે જ નીકળી શકે જ્યારે તે સતત <strong>Four Consecutive Quarters (સતત ચાર ક્વાર્ટર)</strong> સુધી કોઈપણ Risk Threshold ની મર્યાદાનું ઉલ્લંઘન ન કરે (يعني No Breach of Thresholds).</p>
+        <p><em>ઉદાહરણ તરીકે:</em> Central Bank of India ને 2017 માં PCA માં મૂકવામાં આવી હતી અને તે સતત સુધારા બાદ 2022 માં આ ફ્રેમવર્કમાંથી બહાર આવી હતી.</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. PCA (Prompt Corrective Action) Framework કઈ સંસ્થા દ્વારા સંચાલિત થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. SEBI</li>
+            <li>B. Reserve Bank of India (RBI)</li>
+            <li>C. NABARD</li>
+            <li>D. Ministry of Finance</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Reserve Bank of India (RBI)</strong><br>
+            Explanation: પીએસએલ અને પીસીએ બંને આરબીઆઈ (RBI) ના સુપરવાઈઝરી ટૂલ્સ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. શેડ્યુલ કમર્શિયલ બેંકો માટે સૌપ્રથમ PCA Framework કયા વર્ષમાં લવામાં આવ્યું હતું?</p>
+        <ul class="mcq-options">
+            <li>A. 1991</li>
+            <li>B. 2002</li>
+            <li>C. 2011</li>
+            <li>D. 2022</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 2002</strong><br>
+            Explanation: બેંકો માટે સૌપ્રથમ PCA Framework વર્ષ 2002 માં રજૂ કરવામાં આવ્યું હતું.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. સરકારી માલિકીની એનબીએફસી (Government-Owned NBFCs) ને કઈ તારીખથી PCA Framework ના દાએરામાં લાવવામાં આવી?</p>
+        <ul class="mcq-options">
+            <li>A. 1st April 2022</li>
+            <li>B. 1st October 2024</li>
+            <li>C. 1st January 2025</li>
+            <li>D. 1st July 2021</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 1st October 2024</strong><br>
+            Explanation: 1લી ઓક્ટોબર 2024 થી સરકાર હસ્તકની NBFCs (જેવી કે PFC, IREDA, REC) ને પણ PCA ના નિયમો લાગુ કરવામાં આવ્યા છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. નીચેનામાંથી કયા બેંકો પર PCA Framework લાગુ પડતું નથી?</p>
+        <ul class="mcq-options">
+            <li>A. Public Sector Banks</li>
+            <li>B. Private Sector Banks</li>
+            <li>C. Regional Rural Banks (RRBs)</li>
+            <li>D. Foreign Banks</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. Regional Rural Banks (RRBs)</strong><br>
+            Explanation: RRBs, Cooperative Banks, Payment Banks અને Small Finance Banks પર PCA લાગુ પડતું નથી.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. PCA Framework માં બેંકની સ્થિતિ ચકાસવા માટેના મુખ્ય પરિબળોમાં નીચેનામાંથી કયાનો સમાવેશ થતો નથી?</p>
+        <ul class="mcq-options">
+            <li>A. Capital Adequacy</li>
+            <li>B. Asset Quality (Net NPA)</li>
+            <li>C. Profitability (RoA)</li>
+            <li>D. Number of Employees</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: D. Number of Employees</strong><br>
+            Explanation: કર્મચારીઓની સંખ્યા PCA નો પેરામીટર નથી; કેપિટલ, એસેટ ક્વોલિટી અને પ્રોફિટબિલિટી મુખ્ય ત્રણ પેરામીટર્સ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. કોઈ બેંક PCA Framework માંથી બહાર નીકળવા માટે પાત્ર ક્યારે બને છે?</p>
+        <ul class="mcq-options">
+            <li>A. After 1 Quarter of good performance</li>
+            <li>B. For 2 Consecutive Quarters</li>
+            <li>C. For 4 Consecutive Quarters without breaching thresholds</li>
+            <li>D. Instantly after paying penalty</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. For 4 Consecutive Quarters without breaching thresholds</strong><br>
+            Explanation: જો બેંક સતત ચાર ક્વાર્ટર સુધી કોઈપણ થ્રેશહોલ્ડનું ઉલ્લંઘન ન કરે તો તે પીએસએલ/પીસીએ માંથી બહાર આવી શકે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. ગવર્મેન્ટ ઓન્ડ એનબીએફસી (Government-Owned NBFC) નું એક ઉદાહરણ નીચેનામાંથી કયું છે?</p>
+        <ul class="mcq-options">
+            <li>A. Power Finance Corporation (PFC)</li>
+            <li>B. Bajaj Capital</li>
+            <li>C. Muthoot Finance</li>
+            <li>D. Aditya Birla Capital</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Power Finance Corporation (PFC)</strong><br>
+            Explanation: PFC, IREDA અને REC એ સરકારી માલિકીની પ્રમુખ NBFCs છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. PCA Framework માં ગંભીરતા દર્શાવવા માટે કેટલા Risk Threshold niveles આપવામાં આવ્યા છે?</p>
+        <ul class="mcq-options">
+            <li>A. 2 Thresholds</li>
+            <li>B. 3 Thresholds (1, 2, and 3)</li>
+            <li>C. 4 Thresholds</li>
+            <li>D. 5 Thresholds</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. 3 Thresholds (1, 2, and 3)</strong><br>
+            Explanation: સ્થિતિની ગંભીરતા મુજબ 3 રિસ્ક થ્રેશહોલ્ડ (Threshold 1, 2, 3) નક્કી કરવામાં આવ્યા છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. PCA નો અર્થ (Full Form) શું થાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Primary Credit Association</li>
+            <li>B. Prompt Corrective Action</li>
+            <li>C. Public Credit Agency</li>
+            <li>D. Professional Capital Audit</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Prompt Corrective Action</strong><br>
+            Explanation: PCA એટલે Prompt Corrective Action Framework.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. કયા વર્ષમાં પ્રાઈવેટ એનબીએફસી માટે PCA Framework ની માર્ગદર્શિકા લવાઈ હતી?</p>
+        <ul class="mcq-options">
+            <li>A. 2002</li>
+            <li>B. 2017</li>
+            <li>C. 2022</li>
+            <li>D. 2024</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: C. 2022</strong><br>
+            Explanation: જાન્યુઆરી 2022 થી પ્રાઇવેટ એનબીએફસી માટે પણ PCA ફ્રેમવર્ક અમલમાં આવ્યું.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
