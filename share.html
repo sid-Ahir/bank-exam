@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type of share capital</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #1e3a8a;       /* Deep Blue */
+            --secondary: #059669;     /* Emerald Green */
+            --accent: #ea580c;        /* Orange */
+            --bg-color: #f3f4f6;      /* Light Gray */
+            --card-bg: #ffffff;       /* White */
+            --text-main: #1f2937;     /* Dark Gray */
+            --border-light: #e5e7eb;
+            
+            --tag-red: #fee2e2; --text-red: #b91c1c;
+            --tag-orange: #ffedd5; --text-orange: #c2410c;
+            --tag-green: #d1fae5; --text-green: #047857;
+            --tag-blue: #dbeafe; --text-blue: #1d4ed8;
+            --tag-purple: #f3e8ff; --text-purple: #7e22ce;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 18px;
+            line-height: 1.7;
+            padding: 20px;
+            padding-top: 100px; /* Space for sticky header */
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Typography */
+        h2.section-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: #eff6ff;
+            border-left: 6px solid var(--primary);
+            border-radius: 4px;
+        }
+
+        h3.sub-title {
+            font-size: 22px;
+            color: var(--secondary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        strong { color: #111827; }
+
+        /* Highlight Tags System */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .tag-must-remember { background-color: var(--tag-red); color: var(--text-red); }
+        .tag-important { background-color: var(--tag-orange); color: var(--text-orange); }
+        .tag-quick-revision { background-color: var(--tag-green); color: var(--text-green); }
+        .tag-concept { background-color: var(--tag-blue); color: var(--text-blue); }
+        .tag-exam-trap { background-color: var(--tag-purple); color: var(--text-purple); }
+
+        /* Highlight Boxes / Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            page-break-inside: avoid;
+        }
+
+        .card-concept { border-left: 6px solid var(--primary); background-color: #f8fafc; }
+        .card-important { border-left: 6px solid var(--secondary); background-color: #f0fdf4; }
+        .card-trap { border-left: 6px solid var(--accent); background-color: #fff7ed; }
+        .card-trick { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+            background-color: var(--card-bg);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+
+        /* MCQ Section */
+        .mcq-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .mcq-question { font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .mcq-options { list-style-type: upper-alpha; padding-left: 20px; margin-bottom: 15px; }
+        .mcq-answer { 
+            background-color: #d1fae5; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-size: 17px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .sticky-header { font-size: 20px; padding: 12px; }
+            .container { padding: 20px; border-radius: 0; }
+            h2.section-title { font-size: 24px; }
+            h3.sub-title { font-size: 20px; }
+            body { font-size: 16px; }
+            th, td { padding: 10px; font-size: 15px; }
+        }
+
+        /* PDF Printing Optimization */
+        @media print {
+            body { background-color: #fff; padding-top: 0; }
+            .sticky-header { position: relative; margin-bottom: 20px; }
+            .container { box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
+            .card, table, .mcq-box { page-break-inside: avoid; }
+            h2.section-title { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    Type of share capital
+</header>
+
+<div class="container">
+
+    <div class="card card-concept">
+        <span class="tag tag-concept">🔵 SHARE CAPITAL & EQUITY CONCEPT</span>
+        <p><strong>Equity</strong> એટલે કંપનીમાં ઓનરશિપ (માલિકી). કંપનીને બિઝનેસ વિસ્તારવા માટે ફંડ્સ (Funds) ની જરૂર પડે ત્યારે તે બે મુખ્ય માર્ગો અપનાવે છે: <strong>Debt</strong> (લોન/દેવું, જેના પર વ્યાજ ચૂકવવું પડે છે) અને <strong>Equity</strong> (શેર કેપિટલ જારી કરીને ઓનરશિપ આપવી).</p>
+        <p>કંપનીની શેર કેપિટલ (Share Capital) ને તેના કદ, ઇશ્યૂઅન્સ અને ચુકવણીના આધારે વિવિધ પ્રકારોમાં વિભાજિત કરવામાં આવે છે.</p>
+    </div>
+
+    <h2 class="section-title">Classification of Share Capital</h2>
+    <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Capital Type</th>
+                <th>Description / Meaning</th>
+            </tr>
+            <tr>
+                <td><strong>Authorized Share Capital (સત્તાવાર શેર કેપિટલ)</strong></td>
+                <td>કંપનીના મેમોરેન્ડમ ઓફ એસોસિએશનમાં દર્શાવેલ મહત્તમ મૂડી, જે કંપની તેના જીવનકાળ દરમિયાન શેર્સ જારી કરીને એકત્ર કરી શકે છે (SEBI / Regulators ની મંજૂરી સાથે).</td>
+            </tr>
+            <tr>
+                <td><strong>Issued Share Capital (જારી કરેલ મૂડી)</strong></td>
+                <td>ઓથોરાઇઝ્ડ કેપિટલમાંથી કંપની દ્વારા વાસ્તવમાં પબ્લિક કે રોકાણકારોને વેચાણ માટે જારી કરવામાં આવેલા શેર્સની કુલ રકમ.</td>
+            </tr>
+            <tr>
+                <td><strong>Unissued Share Capital (બિન-જારી મૂડી)</strong></td>
+                <td>ઓથોરાઇઝ્ડ કેપિટલનો બાકીનો ભાગ જે હજુ સુધી પબ્લિકમાં જારી કરવામાં આવ્યો નથી.</td>
+            </tr>
+            <tr>
+                <td><strong>Subscribed Share Capital (સબ્સ્ક્રાઇબ કરેલ મૂડી)</strong></td>
+                <td>ઇશ્યૂ કરેલા શેર્સમાંથી રોકાણકારો દ્વારા વાસ્તવમાં ખરીદવા માટે અરજી કરેલા (Subscribe થયેલા) શેર્સની કુલ રકમ.</td>
+            </tr>
+            <tr>
+                <td><strong>Called-up Capital (કોલ્ડ-અપ મૂડી)</strong></td>
+                <td>સબ્સ્ક્રાઇબ થયેલી મૂડીમાંથી કંપની દ્વારા શેરહોલ્ડર્સ પાસેથી નાણાં ચૂકવવા માટે મંગાવવામાં આવેલી (Call કરેલી) રકમ.</td>
+            </tr>
+            <tr>
+                <td><strong>Paid-up Capital (પેઇડ-અપ મૂડી)</strong></td>
+                <td>કોલ્ડ-અપ મૂડી સામે વાસ્તવમાં શેરહોલ્ડર્સ દ્વારા કંપનીને ચૂકવી દેવામાં આવેલી (Paid) વાસ્તવિક રકમ. (બેંકો માટે લઘુત્તમ પેઇડ-અપ કેપિટલનું ધોરણ ખૂબ મહત્વનું છે).</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="section-title">Types of Shares / Capital</h2>
+    <div class="card card-important">
+        <span class="tag tag-important">🟠 EQUITY VS PREFERENCE SHARES</span>
+        <ul>
+            <li><strong>Equity Shares (Ordinary Shares):</strong> આ કંપનીના સાચા માલિકો છે. તેમને કંપનીના સંચાલનમાં વોટિંગ રાઇટ્સ (Voting Rights) મળે છે. તેમનો નફો (Dividend) ફિક્સ્ડ હોતો નથી, પરંતુ કંપનીના નફા મુજબ વધઘટ થાય છે.</li>
+            <li><strong>Preference Shares:</strong> આને ડિવિડન્ડ મેળવવામાં અને કંપની બંધ થાય ત્યારે મૂડી પરત મેળવવામાં ઓર્ડિનરી શેર્સ કરતા અગ્રતા (Preference) મળે છે. સામાન્ય રીતે તેમને વોટિંગ રાઇટ્સ હોતા નથી અને તેમનું ડિવિડન્ડ નિશ્ચિત (Fixed Dividend) હોય છે.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Unpaid and Uncalled Capital Concepts</h2>
+    <div class="card card-concept">
+        <ul>
+            <li><strong>Unpaid Equity Share Capital:</strong> સબ્સ્ક્રાઇબ થયા પછી પણ શેરહોલ્ડર્સ દ્વારા હજુ સુધી ચૂકવવામાં ન આવેલી રકમ.</li>
+            <li><strong>Uncalled Capital:</strong> જે રકમ કંપનીએ હજુ સુધી શેરહોલ્ડર્સ પાસેથી મંગાવી (Call) નથી.</li>
+        </ul>
+    </div>
+
+    <div class="card card-trick">
+        <span class="tag tag-quick-revision">🧠 MEMORY TRICK / REVISION BOX</span>
+        <p><strong>Capital Hierarchy:</strong><br>
+        Authorized (મહત્તમ મર્યાદા) ➡️ Issued (જારી કરેલ) ➡️ Subscribed (લોકો દ્વારા મંજૂર) ➡️ Called-up (મંગાવેલી) ➡️ Paid-up (ચૂકવાયેલી).</p>
+    </div>
+
+    <h2 class="section-title">🎯 POSSIBLE EXAM QUESTIONS</h2>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q1. કંપની તેના સમગ્ર જીવનકાળ દરમિયાન શેર્સ દ્વારા વધુમાં વધુ જેટલી મૂડી એકત્ર કરી શકે છે, તેને કઈ કેપિટલ કહેવાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Paid-up Capital</li>
+            <li>B. Authorized Share Capital</li>
+            <li>C. Called-up Capital</li>
+            <li>D. Subscribed Capital</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Authorized Share Capital</strong><br>
+            Explanation: ઓથોરાઇઝ્ડ કેપિટલ એ કંપનીની મહત્તમ મંજૂર થયેલી મૂડી છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q2. રોકાણકારો દ્વારા વાસ્તવમાં ખરીદવા માટે અરજી કરવામાં આવેલી મૂડીને શું કહે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Issued Capital</li>
+            <li>B. Subscribed Capital</li>
+            <li>C. Authorized Capital</li>
+            <li>D. Uncalled Capital</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Subscribed Capital</strong><br>
+            Explanation: પબ્લિક દ્વારા સબ્સ્ક્રાઇબ કરાયેલા શેર્સની કુલ રકમ Subscribed Capital બને છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q3. શેરહોલ્ડર્સ દ્વારા વાસ્તવમાં કંપનીને ચૂકવી દેવામાં આવેલી રકમને કઈ કેપિટલ કહે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Paid-up Capital</li>
+            <li>B. Called-up Capital</li>
+            <li>C. Unpaid Capital</li>
+            <li>D. Authorized Capital</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Paid-up Capital</strong><br>
+            Explanation: પેઇડ-અપ કેપિટલ એ વાસ્તવમાં રોકાણકારો દ્વારા ચૂકવાયેલી રકમ છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q4. ઓર્ડિનરી (Equity) શેરહોલ્ડર્સ પાસે કંપનીમાં શું અધિકાર હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Fixed Dividend only</li>
+            <li>B. Voting Rights (મતદાનનો અધિકાર)</li>
+            <li>C. No ownership control</li>
+            <li>D. Guaranteed refund before debentures</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Voting Rights (મતદાનનો અધિકાર)</strong><br>
+            Explanation: ઇક્વિટી શેરધારકો કંપનીના સાચા માલિકો છે અને તેમને વોટિંગ રાઇટ્સ મળે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q5. કયા પ્રકારના શેરહોલ્ડર્સને ડિવિડન્ડ અને લિક્વિડેશન વખતે અગ્રતા (Preference) મળે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Equity Shareholders</li>
+            <li>B. Preference Shareholders</li>
+            <li>C. Debenture Holders</li>
+            <li>D. Creditors</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Preference Shareholders</strong><br>
+            Explanation: પ્રીફરન્સ શેરધારકોને ડિવિડન્ડ ચૂકવણીમાં અગ્રતા મળે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q6. જે મૂડી કંપનીએ હજુ સુધી શેરહોલ્ડર્સ પાસેથી મંગાવી નથી, તેને શું કહેવાય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Called-up Capital</li>
+            <li>B. Uncalled Capital</li>
+            <li>C. Paid-up Capital</li>
+            <li>D. Authorized Capital</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Uncalled Capital</strong><br>
+            Explanation: મંગાવ્યા વગરની મૂડી અનકોલ્ડ કેપિટલ કહેવાય છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q7. ઇશ્યૂ કરેલી કેપિટલ (Issued Capital) હંમેશા કઈ કેપિટલ કરતા ઓછી કે તેના જેટલી હોઈ શકે?</p>
+        <ul class="mcq-options">
+            <li>A. Authorized Share Capital</li>
+            <li>B. Paid-up Capital</li>
+            <li>C. Subscribed Capital</li>
+            <li>D. Working Capital</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Authorized Share Capital</strong><br>
+            Explanation: ઓથોરાઇઝ્ડ કેપિટલ મહત્તમ મર્યાદા હોવાથી જારી કરેલ મૂડી તેનાથી વધુ ન હોઈ શકે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q8. બેંકો માટે લઘુત્તમ મૂડી જરૂરિયાતોમાં મુખ્યત્વે કઈ કેપિટલનું પ્રમાણ જોવામાં આવે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Paid-up Capital</li>
+            <li>B. Uncalled Capital</li>
+            <li>C. Unissued Capital</li>
+            <li>D. Fictitious Capital</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Paid-up Capital</strong><br>
+            Explanation: બેંકો (જેમ કે SFB, Payment Banks) ના લાયસન્સ માટે લઘુત્તમ Paid-up Capital જોવામાં આવે છે.
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q9. ઇક્વિટી શેરહોલ્ડર્સને મળતું ડિવિડન્ડ કેવું હોય છે?</p>
+        <ul class="mcq-options">
+            <li>A. Fixed at all times</li>
+            <li>B. Flexible based on company's profits</li>
+            <li>C. Always zero</li>
+            <li>D. Decided by RBI</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: B. Flexible based on company's profits</strong><br>
+            Explanation: ઇક્વિટી પર મળતું ડિવિડન્ડ કંપનીના નફાના આધારે બદલાતું રહે છે (ફિક્સ હોતું નથી).
+        </div>
+    </div>
+
+    <div class="mcq-box">
+        <p class="mcq-question">Q10. કંપનીના મેમોરેન્ડમ ઓફ એસોસિએશન (Memorandum of Association) માં કઈ કેપિટલ દર્શાવવી પડે છે?</p>
+        <ul class="mcq-options">
+            <li>A. Authorized Capital</li>
+            <li>B. Called-up Capital</li>
+            <li>C. Paid-up Capital</li>
+            <li>D. Reserve Capital</li>
+        </ul>
+        <div class="mcq-answer">
+            <strong>Answer: A. Authorized Capital</strong><br>
+            Explanation: કંપનીના સ્થાપના દસ્તાવેજ (MoA) માં ઓથોરાઇઝ્ડ કેપિટલ દર્શાવવી અનિવાર્ય છે.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
